@@ -1,0 +1,41 @@
+.contacts {
+  &__telephone {
+    font-size: 28px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+  }
+  &__telephoneCode {
+    font-size: 18px;
+  }
+  &__social {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 15px;
+  }
+  &__socialItem {
+    position: relative;
+    padding: 0 0 0 22px;
+  }
+  &__telegram::before {
+    content: "";
+    background: url("../../assets/telegram.png");
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+  }
+  &__whatsapp::before {
+    content: "";
+    background: url("../../assets/whatsapp.png");
+    width: 17px;
+    height: 17px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+  }
+}
