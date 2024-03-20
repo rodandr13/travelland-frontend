@@ -39,3 +39,45 @@
     left: 0;
   }
 }
+
+.pageSettings {
+  &__list {
+    display: flex;
+    gap: 15px;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+  }
+  &__item {
+    position: relative;
+    padding: 0 0 0 22px;
+  }
+}
+
+.language::before {
+  content: "";
+  background: url("../../assets/lang_icon.png");
+  width: 19px;
+  height: 18px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}
+
+.language {
+  padding: 0 0 0 25px;
+}
+.currency {
+  padding: 0 0 0 15px;
+}
+.currency::before {
+  content: "";
+  background: url("../../assets/usd_ircon.png");
+  width: 10px;
+  height: 17px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 0;
+}

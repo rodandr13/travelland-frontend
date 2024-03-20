@@ -27,9 +27,11 @@ export const Navbar = () => {
           </Link>
         ))}
       </div>
-      <div>
-        <span>English</span>
-        <span>USD</span>
+      <div className={styles.pageSettings}>
+        <ul className={styles.pageSettings__list}>
+          <li className={`${styles.pageSettings__item} ${styles.language}`}>English</li>
+          <li className={`${styles.pageSettings__item} ${styles.currency}`}>USD</li>
+        </ul>
       </div>
       <div className={styles.contacts}>
         <div className={styles.contacts__telephone}>
@@ -42,7 +44,11 @@ export const Navbar = () => {
           >
             Telegram
           </li>
-          <li className={`${styles.contacts__socialItem} ${styles.contacts__whatsapp}`}>WhatsApp</li>
+          <li
+            className={`${styles.contacts__socialItem} ${styles.contacts__whatsapp}`}
+          >
+            WhatsApp
+          </li>
         </ul>
       </div>
     </div>
