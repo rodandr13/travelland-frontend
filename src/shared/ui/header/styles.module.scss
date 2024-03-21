@@ -1,0 +1,11 @@
+.header {
+  background: url("../../assets/header.jpg");
+  background-position: bottom center;
+  &__container {
+    max-width: 1440px;
+    min-height: 600px;
+    margin: 0 auto;
+    padding: 25px 0 0 0;
+    box-sizing: border-box;
+  }
+}

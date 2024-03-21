@@ -1,5 +1,6 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Navbar = () => {
   const links = [
@@ -19,18 +20,30 @@ export const Navbar = () => {
 
   return (
     <div className={styles.navbar}>
-      <div>Logo</div>
-      <div>
-        {links.map((link) => (
-          <Link href={link.path} key={link.title}>
-            {link.title}
-          </Link>
-        ))}
+      <div className={styles.navbar__logo}>
+        <Link href="/">
+          <Image src="/logo.png" width={173} height={44} alt="Logo" />
+        </Link>
       </div>
-      <div className={styles.pageSettings}>
+      <div className={`${styles.navbar__menu} ${styles.menu}`}>
+        <ul className={styles.menu__list}>
+          {links.map((link) => (
+            <li className={styles.menu__item} key={link.title}>
+              <Link href={link.path} className={styles.menu__link}>
+                {link.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className={`${styles.navbar__pageSettings} ${styles.pageSettings}`}>
         <ul className={styles.pageSettings__list}>
-          <li className={`${styles.pageSettings__item} ${styles.language}`}>English</li>
-          <li className={`${styles.pageSettings__item} ${styles.currency}`}>USD</li>
+          <li className={`${styles.pageSettings__item} ${styles.language}`}>
+            English
+          </li>
+          <li className={`${styles.pageSettings__item} ${styles.currency}`}>
+            USD
+          </li>
         </ul>
       </div>
       <div className={styles.contacts}>

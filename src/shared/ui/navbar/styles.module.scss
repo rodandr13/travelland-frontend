@@ -1,3 +1,17 @@
+.navbar {
+  display: flex;
+  gap: 80px;
+  &__logo {
+    margin-right: auto;
+  }
+  &__pageSettings {
+    align-self: center;
+  }
+  &__menu {
+    align-self: center;
+  }
+}
+
 .contacts {
   &__telephone {
     font-size: 28px;
@@ -80,4 +94,17 @@
   top: 50%;
   transform: translateY(-50%);
   left: 0;
+}
+
+.menu {
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    gap: 30px;
+  }
+  &__link {
+    text-decoration: none;
+  }
 }
