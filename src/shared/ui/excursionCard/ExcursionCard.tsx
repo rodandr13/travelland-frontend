@@ -1,5 +1,6 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
+import clsx from "clsx";
 export const ExcursionCard = () => {
   return (
     <article className={styles.excursionCard}>
@@ -13,7 +14,21 @@ export const ExcursionCard = () => {
         <div className={styles.excursionCard__favorites}>Like</div>
         <div className={styles.excursionCard__imageIncidator}>Indicator</div>
       </div>
-      <div className={styles.excursionCard__weekDays}>WeekDaysBlock</div>
+      <ul className={clsx(styles.weekDays)}>
+        <li className={clsx(styles.weekDays__day, styles.weekDays__day_active)}>
+          Пн
+        </li>
+        <li className={clsx(styles.weekDays__day)}>Вт</li>
+        <li className={styles.weekDays__day}>Ср</li>
+        <li className={clsx(styles.weekDays__day)}>Чт</li>
+        <li className={styles.weekDays__day}>Пт</li>
+        <li className={clsx(styles.weekDays__day, styles.weekDays__day_active)}>
+          Сб
+        </li>
+        <li className={clsx(styles.weekDays__day, styles.weekDays__day_active)}>
+          Вс
+        </li>
+      </ul>
       <h3 className={styles.excursionCard__header}>
         Kutna Hora and Cesky Sternberk Castle
       </h3>
@@ -21,9 +36,7 @@ export const ExcursionCard = () => {
       <ul className={styles.excursionCard__priceBlock}>
         <li className={styles.excursionCard__price}>35.90 €</li>
         <li className={styles.excursionCard__oldPrice}>45.90 €</li>
-        <li className={styles.excursionCard__discount}>
-          -15%
-        </li>
+        <li className={styles.excursionCard__discount}>-15%</li>
       </ul>
     </article>
   );
