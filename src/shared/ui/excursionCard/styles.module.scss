@@ -105,3 +105,55 @@
     }
   }
 }
+
+.sliderControls {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  &__item {
+    width: 8px;
+    height: 8px;
+    &:nth-child(4) {
+      width: 6px;
+      height: 6px;
+    }
+    &:nth-child(5) {
+      width: 4px;
+      height: 4px;
+    }
+  }
+  &__button {
+    border: none;
+    outline: none;
+    display: block;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+  }
+}
+
+.slideButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &_prev {
+    left: 10px;
+  }
+  &_next {
+    right: 10px;
+  }
+}

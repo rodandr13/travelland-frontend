@@ -1,6 +1,12 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import clsx from "clsx";
+import {
+  NavigateBefore,
+  NavigateNext,
+  NavigateNextTwoTone,
+} from "@mui/icons-material";
+
 export const ExcursionCard = () => {
   return (
     <article className={styles.excursionCard}>
@@ -12,7 +18,34 @@ export const ExcursionCard = () => {
           alt="Card image"
         />
         <div className={styles.excursionCard__favorites}>Like</div>
-        <div className={styles.excursionCard__imageIncidator}>Indicator</div>
+        <ul
+          className={clsx(
+            styles.sliderControls,
+            styles.excursionCard__imageIncidator
+          )}
+        >
+          <li className={styles.sliderControls__item}>
+            <button className={styles.sliderControls__button} />
+          </li>
+          <li className={styles.sliderControls__item}>
+            <button className={styles.sliderControls__button} />
+          </li>
+          <li className={styles.sliderControls__item}>
+            <button className={styles.sliderControls__button} />
+          </li>
+          <li className={styles.sliderControls__item}>
+            <button className={styles.sliderControls__button} />
+          </li>
+          <li className={styles.sliderControls__item}>
+            <button className={styles.sliderControls__button} />
+          </li>
+        </ul>
+        <button className={clsx(styles.slideButton, styles.slideButton_prev)}>
+          <NavigateBefore />
+        </button>
+        <button className={clsx(styles.slideButton, styles.slideButton_next)}>
+          <NavigateNext />
+        </button>
       </div>
       <ul className={clsx(styles.weekDays)}>
         <li className={clsx(styles.weekDays__day, styles.weekDays__day_active)}>
