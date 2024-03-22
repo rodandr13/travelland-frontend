@@ -1,18 +1,12 @@
 .filterItem {
   display: flex;
   user-select: none;
+  margin-bottom: 100px;
   &__input {
     opacity: 0;
     position: absolute;
     width: 0;
     height: 0;
-    &:checked + &__label { // Это не сработает из-за способа компиляции SCSS
-      // Стили для label, когда input отмечен
-      background-color: lightblue; // Пример изменения фона
-      .filterItem__caption {
-        color: darkblue; // Пример изменения цвета текста
-      }
-    }
   }
   &__label {
     display: flex;
@@ -22,11 +16,26 @@
     text-align: center;
     box-sizing: border-box;
     cursor: pointer;
-
+    &:hover {
+      font-weight: 600;
+    }
+    &:hover .filterItem__caption::after {
+      opacity: 0.2;
+      background: #2b2b2b;
+    }
   }
   &__caption {
     font-size: 14px;
     padding: 0 0 5px 0;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      top: calc(100%);
+      left: 0;
+    }
   }
 }
 
@@ -34,6 +43,9 @@
   cursor: initial;
   .filterItem__caption {
     font-weight: 600;
-    border-bottom: 1px solid black;
+    &::after {
+      background: #2b2b2b;
+      opacity: 1;
+    }
   }
 }
