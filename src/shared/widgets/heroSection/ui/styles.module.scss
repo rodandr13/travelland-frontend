@@ -1,11 +1,21 @@
 .hero {
   background: url("../../../assets/header.jpg");
   background-position: bottom center;
+  height: 600px;
+  padding: 25px 0 0 0;
+  box-sizing: border-box;
   &__container {
     max-width: 1440px;
-    min-height: 600px;
     margin: 0 auto;
-    padding: 25px 0 0 0;
     box-sizing: border-box;
+  }
+  &__title {
+    font-size: 48px;
+    font-weight: 700;
+    max-width: 500px;
+    margin: 90px 0 0 0;
+  }
+  &__button {
+    margin: 20px 0 0 0;
   }
 }
