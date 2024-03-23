@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import React from "react";
-import { Header } from "../shared/ui/header";
+import { HeroSection } from "../shared/widgets/heroSection";
 import { Footer } from "../shared/ui/footer";
-import { Navbar } from "@/src/shared/ui/navbar";
+import { Navbar } from "../shared/widgets/navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,9 +21,9 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <Header>
+        <HeroSection>
           <Navbar />
-        </Header>
+        </HeroSection>
         {children}
         <Footer />
       </body>
