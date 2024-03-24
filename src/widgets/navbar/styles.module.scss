@@ -36,7 +36,7 @@
   }
   &__telegram::before {
     content: "";
-    background: url("../../assets/telegram.png");
+    background: url("../../shared/assets/telegram.png");
     width: 17px;
     height: 17px;
     position: absolute;
@@ -46,7 +46,7 @@
   }
   &__whatsapp::before {
     content: "";
-    background: url("../../assets/whatsapp.png");
+    background: url("../../shared/assets/whatsapp.png");
     width: 17px;
     height: 17px;
     position: absolute;
@@ -72,7 +72,7 @@
 
 .language::before {
   content: "";
-  background: url("../../assets/lang_icon.png");
+  background: url("../../shared/assets/lang_icon.png");
   width: 19px;
   height: 18px;
   position: absolute;
@@ -89,7 +89,7 @@
 }
 .currency::before {
   content: "";
-  background: url("../../assets/usd_ircon.png");
+  background: url("../../shared/assets/usd_ircon.png");
   width: 10px;
   height: 17px;
   position: absolute;

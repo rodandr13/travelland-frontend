@@ -15,7 +15,7 @@ export const ExcursionCard = () => {
           className={styles.excursionCard__image}
           src="/excursion-image.jpg"
           fill={true}
-          alt="Card image"
+          alt="ExcursionCard image"
         />
         <div className={styles.excursionCard__favorites}>Like</div>
         <ul

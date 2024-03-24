@@ -43,7 +43,7 @@
   }
 
   &__duration::before {
-    content: url("../../assets/clock_icon.svg");
+    content: url("../../../../shared/assets/clock_icon.svg");
     position: absolute;
     top: 50%;
     left: 0;
@@ -74,7 +74,7 @@
     color: #989898;
     width: 49px;
     height: 21px;
-    background: url("../../assets/discount_icon.svg") no-repeat;
+    background: url("../../../../shared/assets/discount_icon.svg") no-repeat;
     background-position: center center;
     display: flex;
     justify-content: flex-end;
