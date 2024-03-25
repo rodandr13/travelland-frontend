@@ -1,11 +1,8 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import clsx from "clsx";
-import {
-  NavigateBefore,
-  NavigateNext,
-  NavigateNextTwoTone,
-} from "@mui/icons-material";
+import { NavigateBefore, NavigateNext } from "@mui/icons-material";
+import { WeekDays } from "@/src/shared/ui/weekDays";
 
 export const ExcursionCard = () => {
   return (
@@ -47,21 +44,7 @@ export const ExcursionCard = () => {
           <NavigateNext />
         </button>
       </div>
-      <ul className={clsx(styles.weekDays)}>
-        <li className={clsx(styles.weekDays__day, styles.weekDays__day_active)}>
-          Пн
-        </li>
-        <li className={clsx(styles.weekDays__day)}>Вт</li>
-        <li className={styles.weekDays__day}>Ср</li>
-        <li className={clsx(styles.weekDays__day)}>Чт</li>
-        <li className={styles.weekDays__day}>Пт</li>
-        <li className={clsx(styles.weekDays__day, styles.weekDays__day_active)}>
-          Сб
-        </li>
-        <li className={clsx(styles.weekDays__day, styles.weekDays__day_active)}>
-          Вс
-        </li>
-      </ul>
+      <WeekDays />
       <h3 className={styles.excursionCard__header}>
         Kutna Hora and Cesky Sternberk Castle
       </h3>
