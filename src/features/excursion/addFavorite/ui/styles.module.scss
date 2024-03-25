@@ -1,0 +1,15 @@
+.heart {
+  display: block;
+  width:28px;
+  height:28px;
+  transition: all 200ms ease-in-out;
+  fill: rgba(255, 255, 255, 0.5);
+  stroke: #ffffff;
+  stroke-width: 2px;
+  &:hover {
+    transform: scale(110%);
+  }
+  &_active {
+    fill: rgba(242, 40, 76, 1);
+  }
+}

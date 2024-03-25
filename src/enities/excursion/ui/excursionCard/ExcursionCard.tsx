@@ -4,7 +4,10 @@ import clsx from "clsx";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { WeekDays } from "@/src/shared/ui/weekDays";
 
-export const ExcursionCard = () => {
+interface Props {
+  addFavorite: React.ReactNode;
+}
+export const ExcursionCard = ({ addFavorite }: Props) => {
   return (
     <article className={styles.excursionCard}>
       <div className={styles.excursionCard__imageContainer}>
@@ -14,7 +17,7 @@ export const ExcursionCard = () => {
           fill={true}
           alt="ExcursionCard image"
         />
-        <div className={styles.excursionCard__favorites}>Like</div>
+        <div className={styles.excursionCard__favorites}>{addFavorite}</div>
         <ul
           className={clsx(
             styles.sliderControls,
