@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import clsx from "clsx";
 import styles from "./styles.module.scss";
 
-export const SectionHeader = ({
+export const SectionTitle = ({
   children,
   className,
 }: {

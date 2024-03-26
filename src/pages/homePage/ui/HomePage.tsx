@@ -1,14 +1,14 @@
 import styles from "./styles.module.scss";
-import { SectionHeader } from "@/src/shared/ui/sectionHeader";
+import { SectionTitle } from "../../../shared/ui/sectionTitle";
 import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
 
 export const HomePage = () => {
   return (
     <main className={styles.home}>
-      <SectionHeader>Экскурсии</SectionHeader>
+      <SectionTitle>Экскурсии</SectionTitle>
       <ExcursionCatalog />
       <section className={styles.aboutUs}>
-        <SectionHeader>О компании</SectionHeader>
+        <SectionTitle>О компании</SectionTitle>
         <h3 className={styles.aboutUs__subtitle}>У нас большая история!</h3>
         <ol className={styles.timeline}>
           <li className={styles.timeline__item}>
