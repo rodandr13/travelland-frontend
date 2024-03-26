@@ -3,10 +3,12 @@
   display: flex;
   flex-direction: column;
   gap: 25px;
-  height: 100%;
+  height: auto;
   padding: 25px 15px 15px 15px;
   border-radius: 4px;
   width: 340px;
+  box-sizing: border-box;
+
   &__advantages {
     margin: 0;
     padding: 0;

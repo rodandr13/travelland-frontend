@@ -7,6 +7,8 @@ import { Gallery } from "./gallery";
 import { TimeSpending } from "./timeSpending";
 import { Description } from "./description";
 import { PriceSection } from "./priceSection";
+import { AttentionBlock } from "@/src/pages/excursionPage/ui/attentionBlock";
+import { Advantages } from "@/src/pages/excursionPage/ui/advantages";
 
 export const ExcursionPage = () => {
   return (
@@ -26,8 +28,12 @@ export const ExcursionPage = () => {
             <MeetingPoint />
           </div>
           <Conditions />
+          <Advantages />
         </div>
-        <PriceSection />
+        <div className={styles.excursionPage__sideBar}>
+          <PriceSection />
+          <AttentionBlock />
+        </div>
       </div>
     </section>
   );

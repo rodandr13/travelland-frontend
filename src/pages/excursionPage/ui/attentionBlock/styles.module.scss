@@ -1,0 +1,26 @@
+.attentionBlock {
+  position: relative;
+  padding: 0 0 0 35px;
+  margin: 0;
+  &::before {
+    content: url("../../../../shared/assets/attention_icon.svg");
+    position: absolute;
+    width: 16px;
+    height: 65px;
+    left: 0;
+  }
+  &__title {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #aa2a2a;
+  }
+  &__description {
+    margin: 7px 0 0 0;
+    padding: 0;
+    color: #8f8f8f;
+    font-size: 16px;
+    line-height: 1.4;
+  }
+}
