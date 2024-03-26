@@ -1,0 +1,49 @@
+.priceBlock {
+  --base-font-size: 20px;
+  &_size_m {
+    --base-font-size: 28px;
+  }
+  &__list {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    align-items: flex-end;
+  }
+  &__price {
+    font-size: var(--base-font-size);
+    font-weight: 600;
+    color: #972537;
+  }
+  &__oldPrice {
+    font-size: calc(var(--base-font-size) * 0.8);
+    font-weight: 400;
+    color: #7a7a7a;
+    margin: 0 0 0 10px;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      background: #7a7a7a;
+      width: 100%;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &__discount {
+    font-size: 14px;
+    font-weight: 400;
+    color: #989898;
+    width: 49px;
+    height: 21px;
+    background: url("../../assets/discount_icon.svg") no-repeat;
+    background-position: center center;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 5px 0 0;
+    margin: 0 0 0 20px;
+  }
+}

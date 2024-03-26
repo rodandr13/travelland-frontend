@@ -1,13 +1,12 @@
 import styles from "./styles.module.scss";
-import Image from "next/image";
 import { PageTitle } from "@/src/shared/ui/pageTitle/PageTitle";
-import { WeekDays } from "@/src/shared/ui/weekDays";
 import { MeetingPoint } from "./meetingPoint";
 import { Conditions } from "./conditions";
 import { Breadcrumbs } from "./breadcrumbs";
 import { Gallery } from "./gallery";
 import { TimeSpending } from "./timeSpending";
 import { Description } from "./description";
+import { PriceSection } from "./priceSection";
 
 export const ExcursionPage = () => {
   return (
@@ -28,7 +27,7 @@ export const ExcursionPage = () => {
           </div>
           <Conditions />
         </div>
-        <div className={styles.excursionPage__price}>1321312</div>
+        <PriceSection />
       </div>
     </section>
   );

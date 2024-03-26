@@ -49,39 +49,6 @@
     left: 0;
     transform: translateY(-50%);
   }
-
-  &__priceBlock {
-    margin: 16px 0 0 0;
-    padding: 0;
-    list-style-type: none;
-    display: flex;
-    align-items: flex-end;
-  }
-  &__price {
-    font-size: 20px;
-    font-weight: 600;
-    color: #972537;
-  }
-  &__oldPrice {
-    font-size: 18px;
-    font-weight: 400;
-    color: #7a7a7a;
-    margin: 0 0 0 10px;
-  }
-  &__discount {
-    font-size: 14px;
-    font-weight: 400;
-    color: #989898;
-    width: 49px;
-    height: 21px;
-    background: url("../../../../shared/assets/discount_icon.svg") no-repeat;
-    background-position: center center;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 0 5px 0 0;
-    margin: 0 0 0 20px;
-  }
 }
 
 .sliderControls {

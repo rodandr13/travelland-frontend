@@ -3,6 +3,7 @@ import Image from "next/image";
 import clsx from "clsx";
 import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { WeekDays } from "@/src/shared/ui/weekDays";
+import { PriceBlock } from "@/src/shared/ui/priceBlock";
 
 interface Props {
   addFavorite: React.ReactNode;
@@ -52,11 +53,7 @@ export const ExcursionCard = ({ addFavorite }: Props) => {
         Kutna Hora and Cesky Sternberk Castle
       </h3>
       <div className={styles.excursionCard__duration}>12 hours</div>
-      <ul className={styles.excursionCard__priceBlock}>
-        <li className={styles.excursionCard__price}>35.90 €</li>
-        <li className={styles.excursionCard__oldPrice}>45.90 €</li>
-        <li className={styles.excursionCard__discount}>-15%</li>
-      </ul>
+      <PriceBlock price="35.90" oldPrice="45.90" discount="15" />
     </article>
   );
 };
