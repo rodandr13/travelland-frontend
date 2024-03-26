@@ -21,7 +21,7 @@ export const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.navbar__logo}>
-        <Link href="/public">
+        <Link href="/">
           <Image src="/logo.png" width={173} height={44} alt="Logo" />
         </Link>
       </div>
