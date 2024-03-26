@@ -1,0 +1,41 @@
+.timeSpending {
+  display: flex;
+  gap: 70px;
+  &__smallTitle {
+    font-size: 14px;
+    color: #8f8f8f;
+    font-weight: 400;
+    text-align: left;
+    margin: 0;
+    padding: 0 0 10px 0;
+  }
+  &__timeTable {
+    border-collapse: collapse;
+  }
+  &__timeStart {
+    width: 60px;
+    margin: 10px 0 0 0;
+  }
+  &__timeStart span {
+    position: relative;
+    z-index: 1;
+    background: #ffffff;
+    padding: 0 5px 0 0;
+  }
+  &__timeEnd {
+    position: relative;
+    width: 60px;
+    &::before {
+      content: "";
+      position: absolute;
+      border-bottom: 2px dotted #8f8f8f;
+      width: 20px;
+      bottom: 5px;
+      left: -25px;
+    }
+  }
+  &__durationValue {
+    margin: 0;
+    padding: 0;
+  }
+}
