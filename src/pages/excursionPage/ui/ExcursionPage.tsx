@@ -18,18 +18,20 @@ export const ExcursionPage = () => {
       <Gallery />
       <div className={styles.excursionPage__container}>
         <div className={styles.excursionPage__content}>
-          <Breadcrumbs />
-          <PageTitle>
-            Cesky Krumlov and Hluboka Castle over the Vltava
-          </PageTitle>
-          <div className={styles.excursionPage__container}>
-            <div className={styles.excursionPage__containerDescription}>
-              <TimeSpending />
-              <Description />
+          <div className={styles.excursionPage__info}>
+            <Breadcrumbs />
+            <PageTitle>
+              Cesky Krumlov and Hluboka Castle over the Vltava
+            </PageTitle>
+            <div className={styles.excursionPage__mainInfo}>
+              <div className={styles.excursionPage__containerDescription}>
+                <TimeSpending />
+                <Description />
+              </div>
+              <MeetingPoint />
             </div>
-            <MeetingPoint />
+            <Conditions />
           </div>
-          <Conditions />
           <Advantages />
           <ExcursionRoute />
           <Booking />

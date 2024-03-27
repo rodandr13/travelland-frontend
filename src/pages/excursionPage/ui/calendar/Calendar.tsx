@@ -22,7 +22,6 @@ export const Calendar = () => {
         onChange={(date: Date) => setStartDate(date)}
         monthsShown={2}
         inline
-        fixedHeight
         disabledKeyboardNavigation
         renderCustomHeader={CustomHeader}
         renderDayContents={CustomDay}
