@@ -3,9 +3,9 @@ import { useState } from "react";
 import DatePicker from "react-datepicker";
 import { registerLocale } from "react-datepicker";
 import { ru } from "date-fns/locale/ru";
-import { customHeader } from "./utils/customHeader";
+import { CustomHeader } from "./utils/CustomHeader";
 import { isSelectableDate } from "./utils/isSelectableDate";
-import { customDay } from "./utils/customDay";
+import { CustomDay } from "./utils/CustomDay";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 
@@ -24,8 +24,8 @@ export const Calendar = () => {
         inline
         fixedHeight
         disabledKeyboardNavigation
-        renderCustomHeader={customHeader}
-        renderDayContents={customDay}
+        renderCustomHeader={CustomHeader}
+        renderDayContents={CustomDay}
         filterDate={isSelectableDate}
       />
     </section>

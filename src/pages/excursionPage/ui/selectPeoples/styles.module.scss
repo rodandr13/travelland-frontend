@@ -1,0 +1,28 @@
+.selectPeoples {
+  display: flex;
+  gap: 100px;
+  &__sum {
+    font-size: 18px;
+    position: absolute;
+    left: 160px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    position: relative;
+  }
+  &__title {
+    margin: 0 0 5px 0;
+    padding: 0;
+    font-size: 14px;
+    color: #4d4d4d;
+    font-weight: 400;
+  }
+  &__age {
+    color: #a4a4a4;
+  }
+}

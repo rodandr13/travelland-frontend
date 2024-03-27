@@ -1,7 +1,7 @@
 import { getDate } from "date-fns";
 import { isSelectableDate } from "./isSelectableDate";
 
-export const customDay = (day: number, date: Date) => {
+export const CustomDay = (day: number, date: Date) => {
   const tooltipText = `Tooltip for date: ${date}`;
   const showPrice = isSelectableDate(date);
   return (

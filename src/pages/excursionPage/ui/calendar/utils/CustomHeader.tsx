@@ -5,7 +5,7 @@ interface Props {
   increaseMonth: () => void;
 }
 
-export const customHeader = ({
+export const CustomHeader = ({
   monthDate,
   customHeaderCount,
   decreaseMonth,

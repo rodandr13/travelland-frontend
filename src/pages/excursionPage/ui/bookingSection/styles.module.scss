@@ -1,0 +1,66 @@
+.booking {
+  background-image: linear-gradient(to right, #70b177 33%, rgba(0, 0, 0, 0) 0%),
+  linear-gradient(to right, #70b177 33%, rgba(0, 0, 0, 0) 0%);
+  background-position: top, bottom;
+  background-size: 20px 1px;
+  background-repeat: repeat-x;
+  box-sizing: border-box;
+  padding: 30px 0;
+  counter-reset: sectionCounter;
+  &__timeGroup {
+    display: flex;
+    gap: 20px;
+  }
+  &__title {
+    margin: 0 0 40px 0;
+    padding: 0;
+    font-size: 28px;
+    font-weight: 400;
+    &::before {
+      counter-increment: sectionCounter;
+      content: counter(sectionCounter) ". ";
+    }
+  }
+}
+
+.time {
+  box-sizing: border-box;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  width: 95px;
+  gap: 5px;
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background: #f5f5f5;
+  &:hover {
+    background: #f0f0f0;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    &_end {
+      align-self: end;
+    }
+  }
+  &__title {
+    font-size: 10px;
+    color: #a4a4a4;
+    &_end {
+      text-align: right;
+      align-self: end;
+    }
+  }
+  &__value {
+    font-size: 18px;
+    color: #191919;
+    &_end {
+      font-size: 14px;
+      color: #a4a4a4;
+      text-align: right;
+      align-self: end;
+    }
+  }
+}
