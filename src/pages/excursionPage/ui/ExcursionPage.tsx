@@ -7,9 +7,10 @@ import { Gallery } from "./gallery";
 import { TimeSpending } from "./timeSpending";
 import { Description } from "./description";
 import { PriceSection } from "./priceSection";
-import { AttentionBlock } from "@/src/pages/excursionPage/ui/attentionBlock";
-import { Advantages } from "@/src/pages/excursionPage/ui/advantages";
-import { ExcursionRoute } from "@/src/pages/excursionPage/ui/excursionRoute";
+import { AttentionBlock } from "./attentionBlock";
+import { Advantages } from "./advantages";
+import { ExcursionRoute } from "./excursionRoute";
+import { Booking } from "./bookingSection";
 
 export const ExcursionPage = () => {
   return (
@@ -31,6 +32,7 @@ export const ExcursionPage = () => {
           <Conditions />
           <Advantages />
           <ExcursionRoute />
+          <Booking />
         </div>
         <div className={styles.excursionPage__sideBar}>
           <PriceSection />
