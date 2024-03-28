@@ -5,12 +5,8 @@ import Image from "next/image";
 export const Navbar = () => {
   const links = [
     {
-      title: "Главная",
-      path: "/",
-    },
-    {
       title: "Экскурсии",
-      path: "/",
+      path: "/excursion",
     },
     {
       title: "О компании",
@@ -21,7 +17,7 @@ export const Navbar = () => {
   return (
     <div className={styles.navbar}>
       <div className={styles.navbar__logo}>
-        <Link href="/public">
+        <Link href="/">
           <Image src="/logo.png" width={173} height={44} alt="Logo" />
         </Link>
       </div>
