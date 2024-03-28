@@ -1,24 +1,25 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
+import { urlFor } from "@/src/shared/lib/sanity/client";
 
-export const FilterItem = () => {
+interface Props {
+  filter: FilterItem;
+}
+
+export const FilterItem = ({ filter }: Props) => {
+  const imageUrl = urlFor(filter.icon.asset._ref);
   return (
     <div className={styles.filterItem}>
       <input
         className={styles.filterItem__input}
-        id="castle"
+        id={filter._id}
         type="radio"
-        name="filter"
-        value="castle"
+        name="filterGroup"
+        value={filter.title.value}
       />
-      <label htmlFor="castle" className={styles.filterItem__label}>
-        <Image
-          src="/castle_icon.svg"
-          alt="Иконка замка"
-          width="40"
-          height="40"
-        />
-        <span className={styles.filterItem__caption}>Замки</span>
+      <label htmlFor={filter._id} className={styles.filterItem__label}>
+        <Image src={imageUrl} alt="" width="40" height="40" />
+        <span className={styles.filterItem__caption}>{filter.title.value}</span>
       </label>
     </div>
   );

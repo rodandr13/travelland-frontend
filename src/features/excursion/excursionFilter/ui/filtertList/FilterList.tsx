@@ -1,19 +1,19 @@
 import styles from "./styles.module.scss";
 import { FilterItem } from "../filterItem";
 import clsx from "clsx";
-
-const filters = [1, 2, 3, 4, 5, 6];
+import { getFilters } from "@/src/features/excursion/excursionFilter/api/getFilters";
 
 interface Props {
   className: string;
 }
 
-export const FilterList = ({ className }: Props) => {
+export const FilterList = async ({ className }: Props) => {
+  const filters = await getFilters();
   return (
     <section className={clsx(styles.filterList, className)}>
       <form className={styles.filterList__form}>
-        {filters.map((filter) => (
-          <FilterItem key={filter} />
+        {filters.map((filter: FilterItem) => (
+          <FilterItem key={filter._id} filter={filter} />
         ))}
       </form>
     </section>

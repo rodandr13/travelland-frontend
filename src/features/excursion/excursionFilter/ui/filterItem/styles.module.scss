@@ -15,8 +15,11 @@
     text-align: center;
     box-sizing: border-box;
     cursor: pointer;
+    font-weight: 600;
+    opacity: 0.6;
+    transition: opacity 200ms ease-in-out;
     &:hover {
-      font-weight: 600;
+      opacity: 1;
     }
     &:hover .filterItem__caption::after {
       opacity: 0.2;
@@ -40,6 +43,7 @@
 
 .filterItem__input:checked + .filterItem__label {
   cursor: initial;
+  opacity: 1;
   .filterItem__caption {
     font-weight: 600;
     &::after {
