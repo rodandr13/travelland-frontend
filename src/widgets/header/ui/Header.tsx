@@ -12,12 +12,14 @@ export const Header = () => {
 
   return (
     <header className={styles.header}>
-      {isHomePage && (
-        <HeroSection>
-          <Navbar />
-        </HeroSection>
-      )}
-      {!isHomePage && <Navbar />}
+      <div className={styles.header__container}>
+        {isHomePage && (
+          <HeroSection>
+            <Navbar />
+          </HeroSection>
+        )}
+        {!isHomePage && <Navbar />}
+      </div>
     </header>
   );
 };

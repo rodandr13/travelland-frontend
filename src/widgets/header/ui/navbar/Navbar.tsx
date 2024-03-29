@@ -1,6 +1,7 @@
 import styles from "./styles.module.scss";
 import Link from "next/link";
 import Image from "next/image";
+import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
 export const Navbar = () => {
   const links = [
@@ -60,6 +61,7 @@ export const Navbar = () => {
           </li>
         </ul>
       </div>
+      <HamburgerButton />
     </div>
   );
 };

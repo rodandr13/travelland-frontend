@@ -3,13 +3,17 @@
   gap: 80px;
   max-width: 1440px;
   margin: 0 auto;
-  padding: 20px 0 20px 0;
+  padding: 20px 40px;
+  box-sizing: border-box;
+
   &__logo {
     margin-right: auto;
   }
+
   &__pageSettings {
     align-self: center;
   }
+
   &__menu {
     align-self: center;
   }
@@ -21,9 +25,11 @@
     font-weight: 600;
     font-family: "Roboto", sans-serif;
   }
+
   &__telephoneCode {
     font-size: 18px;
   }
+
   &__social {
     margin: 0;
     padding: 0;
@@ -31,10 +37,12 @@
     display: flex;
     gap: 15px;
   }
+
   &__socialItem {
     position: relative;
     padding: 0 0 0 22px;
   }
+
   &__telegram::before {
     content: "";
     background: url("../../../../shared/assets/telegram.png");
@@ -45,6 +53,7 @@
     transform: translateY(-50%);
     left: 0;
   }
+
   &__whatsapp::before {
     content: "";
     background: url("../../../../shared/assets/whatsapp.png");
@@ -65,6 +74,7 @@
     padding: 0;
     list-style-type: none;
   }
+
   &__item {
     position: relative;
     padding: 0 0 0 22px;
@@ -85,9 +95,11 @@
 .language {
   padding: 0 0 0 25px;
 }
+
 .currency {
   padding: 0 0 0 15px;
 }
+
 .currency::before {
   content: "";
   background: url("../../../../shared/assets/usd_ircon.png");
@@ -107,8 +119,23 @@
     display: flex;
     gap: 30px;
   }
+
   &__link {
     text-decoration: none;
     color: inherit;
   }
 }
+
+
+@media screen and (max-width: 1100px) {
+  .navbar {
+    gap: 60px;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .contacts {
+    display: none;
+  }
+}
+
