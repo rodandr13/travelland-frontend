@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { SectionTitle } from "../../../shared/ui/sectionTitle";
+import { SectionTitle } from "@/src/shared/ui/sectionTitle";
 import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
 
 export const HomePage = () => {

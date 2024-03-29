@@ -43,7 +43,7 @@
       );
     }
     &:last-child::after {
-      display: none;
+      bottom: 80px;
     }
     &:nth-child(even) .timeline__description {
       grid-column: 1 / 2;
