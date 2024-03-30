@@ -19,8 +19,15 @@ export const ExcursionRoute = () => {
               «iTRAVEX»
             </p>
           </div>
-          <div>
-            <Image src="/img_start.jpg" alt="" width="195" height={125} />
+          <div className={styles.route__gallery}>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/img_start.jpg"
+                alt=""
+                fill
+              />
+            </div>
           </div>
         </li>
         <li className={clsx(styles.route__item)}>
@@ -40,12 +47,54 @@ export const ExcursionRoute = () => {
             </p>
           </div>
           <div className={styles.route__gallery}>
-            <Image src="/rout1.jpg" alt="" width="195" height={125} />
-            <Image src="/rout2.jpg" alt="" width="195" height={125} />
-            <Image src="/rout3.jpg" alt="" width="195" height={125} />
-            <Image src="/rout4.jpg" alt="" width="195" height={125} />
-            <Image src="/rout5.jpg" alt="" width="195" height={125} />
-            <Image src="/rout6.jpg" alt="" width="195" height={125} />
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout1.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout2.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout3.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout4.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout5.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout6.jpg"
+                alt=""
+                fill
+              />
+            </div>
           </div>
         </li>
         <li className={clsx(styles.route__item)}>
@@ -65,10 +114,38 @@ export const ExcursionRoute = () => {
             </p>
           </div>
           <div className={styles.route__gallery}>
-            <Image src="/rout2.jpg" alt="" width="195" height={125} />
-            <Image src="/rout4.jpg" alt="" width="195" height={125} />
-            <Image src="/rout5.jpg" alt="" width="195" height={125} />
-            <Image src="/rout6.jpg" alt="" width="195" height={125} />
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout3.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout4.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout5.jpg"
+                alt=""
+                fill
+              />
+            </div>
+            <div className={styles.route__imageContainer}>
+              <Image
+                className={styles.route__image}
+                src="/rout6.jpg"
+                alt=""
+                fill
+              />
+            </div>
           </div>
         </li>
         <li className={clsx(styles.route__item, styles.route__item_type_end)}>

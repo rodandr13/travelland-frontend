@@ -7,7 +7,7 @@
     left: 160px;
     top: 50%;
     transform: translateY(-50%);
-    width: 100%;
+    width: 120px;
   }
   &__container {
     display: flex;
@@ -24,5 +24,16 @@
   }
   &__age {
     color: #a4a4a4;
+  }
+}
+@media screen and (max-width: 700px) {
+  .selectPeoples {
+    gap: 60px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .selectPeoples {
+    flex-direction: column;
   }
 }

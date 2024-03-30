@@ -4,14 +4,20 @@
 }
 
 .excursionPage {
+  display: flex;
+  flex-direction: column;
   &__container {
     max-width: 1440px;
-    margin: 0 auto;
     padding: 30px 40px 80px 40px;
     display: flex;
     gap: 40px;
+    box-sizing: border-box;
+    align-self: center;
+    outline: 1px solid #4bb662;
   }
+  &__content {
 
+  }
   &__mainInfo {
     display: flex;
     gap: 40px;
