@@ -10,7 +10,14 @@ export const MeetingPoint = () => {
         места встречи: Vaclavske nam. 791/32,110 00 Praha. На месте сбора вас
         будет ждать наш представитель с табличкой «iTRAVEX».
       </p>
-      <Image src="/map.jpg" width={310} height={110} alt="" />
+      <div className={styles.meetingPoint__imageContainer}>
+        <Image
+          className={styles.meetingPoint__image}
+          src="/map.jpg"
+          fill
+          alt=""
+        />
+      </div>
     </section>
   );
 };
