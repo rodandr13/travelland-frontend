@@ -1,5 +1,24 @@
 .excursionList {
-  display: flex;
-  gap: 52px 26px;
-  flex-wrap: wrap;
+  display: grid;
+  gap: 48px 24px;
+  grid-template-columns: repeat(4, 1fr);
 }
+
+@media screen and (max-width: 1050px) {
+  .excursionList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .excursionList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .excursionList {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
