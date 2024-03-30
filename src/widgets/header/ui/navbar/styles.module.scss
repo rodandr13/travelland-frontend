@@ -169,7 +169,7 @@
     }
     &__containerMenu {
       visibility: hidden;
-      transition: transform 200ms ease-in;
+      transition: transform, visibility 200ms ease-in;
       &_mobile {
         background: #ffffff;
         flex-direction: column;
@@ -185,6 +185,7 @@
       &_isOpen {
         visibility: visible;
         transform: translateX(0%);
+        transition: transform 200ms ease-in;
       }
     }
   }
@@ -192,5 +193,11 @@
     &__list {
       flex-direction: column;
     }
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .navbar {
+    padding: 20px 20px;
   }
 }

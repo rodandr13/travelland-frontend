@@ -1,5 +1,18 @@
-.sectionHeader {
+.sectionTitle {
   font-size: 48px;
   margin: 0;
   padding: 0;
 }
+
+@media screen and (max-width: 600px){
+  .sectionTitle {
+    font-size: 38px;
+  }
+}
+
+@media screen and (max-width: 500px){
+  .sectionTitle {
+    font-size: 28px;
+  }
+}
+

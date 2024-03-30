@@ -50,10 +50,11 @@
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 600px) {
   .hamburger {
+    right: 20px;
     &__button_type_close {
-      right: 15px;
+      right: 20px;
     }
   }
 }

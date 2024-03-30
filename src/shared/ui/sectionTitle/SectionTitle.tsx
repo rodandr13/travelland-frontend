@@ -9,5 +9,5 @@ export const SectionTitle = ({
   children: ReactNode;
   className?: string;
 }) => {
-  return <h2 className={clsx(styles.sectionHeader, className)}>{children}</h2>;
+  return <h2 className={clsx(styles.sectionTitle, className)}>{children}</h2>;
 };

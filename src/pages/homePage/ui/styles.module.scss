@@ -69,3 +69,54 @@
     line-height: 1.4;
   }
 }
+
+@media screen and (max-width: 750px) {
+  .timeline {
+    align-items: start;
+    &__item {
+      grid-template-columns: 150px 1fr;
+      min-height: 100px;
+      &:nth-child(even) .timeline__description {
+        grid-column: 2 / 3;
+        grid-row: 1;
+        text-align: left;
+      }
+      &:last-child {
+        min-height: 200px;
+      }
+      &::after {
+        left: 60px;
+      }
+    }
+    &__year {
+      grid-column: 1 / 2;
+      justify-self: start;
+    }
+    &__description {
+      padding-bottom: 40px;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .home {
+    padding: 40px 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .timeline {
+    &__item {
+      grid-template-columns: 1fr;
+      &::after {
+        display: none;
+      }
+      &:nth-child(even) .timeline__description {
+        grid-column: 1 / 2;
+        grid-row: 2;
+        text-align: left;
+      }
+    }
+  }
+
+}
