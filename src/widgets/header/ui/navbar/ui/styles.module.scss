@@ -1,6 +1,6 @@
 .hamburger {
-
-  position: relative;
+  display: none;
+  position: fixed;
   width: 28px;
   height: 22px;
   cursor: pointer;
@@ -11,6 +11,8 @@
   outline: none;
   z-index: 2;
   align-self: center;
+  right: 40px;
+  top: 32px;
 
   &__button {
     margin: 0 0 0 auto;
@@ -30,9 +32,6 @@
   }
 
   &__button_type_close {
-    position: fixed;
-    right: 40px;
-    top: 32px;
 
 
     .hamburger__buttonLine {

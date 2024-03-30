@@ -13,7 +13,6 @@ const menuSlice = createSlice({
   initialState,
   reducers: {
     toggleMenu: (state) => {
-      console.log(state);
       state.isOpen = !state.isOpen;
     },
   },
