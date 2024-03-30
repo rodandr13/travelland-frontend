@@ -24,3 +24,10 @@
     line-height: 1.4;
   }
 }
+
+
+@media screen and (max-width: 900px) {
+  .attentionBlock {
+    display: none;
+  }
+}

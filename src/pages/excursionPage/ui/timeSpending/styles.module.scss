@@ -1,6 +1,7 @@
 .timeSpending {
   display: flex;
   gap: 70px;
+
   &__smallTitle {
     font-size: 14px;
     color: #8f8f8f;
@@ -11,6 +12,7 @@
   }
   &__timeTable {
     border-collapse: collapse;
+    min-width: 120px;
   }
   &__timeStart {
     width: 60px;
@@ -37,5 +39,14 @@
   &__durationValue {
     margin: 0;
     padding: 0;
+    white-space: nowrap;
   }
 }
+
+@media screen and (max-width: 1000px) {
+  .timeSpending {
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+}
+

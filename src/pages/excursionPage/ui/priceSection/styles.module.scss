@@ -8,6 +8,9 @@
   border-radius: 4px;
   width: 340px;
   box-sizing: border-box;
+  position: sticky;
+  top: 40px;
+  z-index: 2;
 
   &__advantages {
     margin: 0;
@@ -36,4 +39,25 @@
     width: 100%;
     text-transform: none;
   }
+}
+
+@media screen and (max-width: 1350px) {
+  .priceSection {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .priceSection {
+    width: 100%;
+    flex-direction: row;
+    justify-content: end;
+    &__advantages {
+      display: none;
+    }
+    .priceSection &__button {
+      width: initial;
+    }
+  }
+
 }
