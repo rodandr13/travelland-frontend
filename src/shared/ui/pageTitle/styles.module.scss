@@ -4,3 +4,15 @@
   margin: 0;
   padding: 0;
 }
+
+@media screen and (max-width: 900px) {
+  .pageHeader {
+    font-size: 35px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .pageHeader {
+    font-size: 30px;
+  }
+}

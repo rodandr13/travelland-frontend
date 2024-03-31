@@ -1,9 +1,8 @@
 "use client";
 
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
-import InputNumber from "rc-input-number";
+import { SelectNumber } from "./ui/SelectNumber";
 import styles from "./styles.module.scss";
-import "./selectPeoples.scss";
 
 export const SelectPeoples = () => {
   return (
@@ -17,13 +16,7 @@ export const SelectPeoples = () => {
           <PriceBlock price="25.90" oldPrice="35.90" discount="15" />
         </div>
         <div className={styles.selectPeoples__container}>
-          <InputNumber
-            min={0}
-            max={20}
-            defaultValue={1}
-            changeOnBlur={false}
-            changeOnWheel
-          />
+          <SelectNumber />
           <span className={styles.selectPeoples__sum}>= € 25.90</span>
         </div>
       </div>
@@ -36,13 +29,7 @@ export const SelectPeoples = () => {
           <PriceBlock price="17.90" oldPrice="27.90" discount="15" />
         </div>
         <div className={styles.selectPeoples__container}>
-          <InputNumber
-            min={0}
-            max={20}
-            defaultValue={0}
-            changeOnBlur={false}
-            changeOnWheel
-          />
+          <SelectNumber />
           <span className={styles.selectPeoples__sum}>= € 0</span>
         </div>
       </div>
