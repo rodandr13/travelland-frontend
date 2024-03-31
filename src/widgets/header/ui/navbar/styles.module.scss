@@ -5,10 +5,13 @@
   margin: 0 auto;
   padding: 20px 40px;
   box-sizing: border-box;
+
   &__container {
     display: flex;
   }
+
   &__containerMenu {
+    min-width: 320px;
     display: flex;
     gap: 80px;
   }
@@ -155,7 +158,14 @@
   .contacts {
     display: block;
   }
+  .menu {
+    &__list {
+      align-items: center;
+    }
+  }
   .navbar {
+    padding: 20px 20px;
+
     &__container_isOpen {
       width: 100%;
       background: rgba(43, 43, 43, 0.7);
@@ -167,13 +177,15 @@
       z-index: 2;
       transition: background 200ms ease-in;
     }
+
     &__containerMenu {
       visibility: hidden;
       transition: transform, visibility 200ms ease-in;
+
       &_mobile {
         background: #ffffff;
         flex-direction: column;
-        width: 350px;
+        max-width: 350px;
         height: 100vh;
         position: fixed;
         right: 0;
@@ -182,6 +194,7 @@
         padding: 200px 0 0 0;
         transform: translateX(100%);
       }
+
       &_isOpen {
         visibility: visible;
         transform: translateX(0%);
@@ -196,8 +209,10 @@
   }
 }
 
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 500px) {
   .navbar {
-    padding: 20px 20px;
+    &__containerMenu {
+      width: 100%;
+    }
   }
 }

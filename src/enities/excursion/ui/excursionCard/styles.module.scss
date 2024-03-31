@@ -8,6 +8,7 @@
     text-decoration: none;
     color: inherit;
     position: relative;
+    display: block;
     z-index: 0;
     &:hover .slideButton{
       opacity: 1;

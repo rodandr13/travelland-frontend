@@ -2,6 +2,9 @@
   display: flex;
   user-select: none;
   scroll-snap-align: start;
+  &:active {
+    transform: scale(0.98);
+  }
   &__input {
     opacity: 0;
     position: absolute;
