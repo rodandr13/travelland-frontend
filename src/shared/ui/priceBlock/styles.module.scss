@@ -1,8 +1,10 @@
 .priceBlock {
   --base-font-size: 20px;
+
   &_size_m {
     --base-font-size: 28px;
   }
+
   &__list {
     margin: 0;
     padding: 0;
@@ -10,17 +12,20 @@
     display: flex;
     align-items: flex-end;
   }
+
   &__price {
     font-size: var(--base-font-size);
     font-weight: 600;
     color: #972537;
   }
+
   &__oldPrice {
     font-size: calc(var(--base-font-size) * 0.8);
     font-weight: 400;
     color: #7a7a7a;
     margin: 0 0 0 10px;
     position: relative;
+
     &::after {
       content: "";
       position: absolute;
@@ -32,6 +37,7 @@
       transform: translateY(-50%);
     }
   }
+
   &__discount {
     font-size: 14px;
     font-weight: 400;
@@ -45,5 +51,37 @@
     align-items: center;
     padding: 0 5px 0 0;
     margin: 0 0 0 20px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .priceBlock_priceSection {
+    &__discount {
+      display: none;
+    }
+    &__price {
+      font-size: calc(var(--base-font-size) * 0.8);
+      order: 1;
+    }
+    &__list {
+      flex-direction: column;
+    }
+    &__oldPrice {
+      font-size: calc(var(--base-font-size) * 0.6);
+    }
+  }
+}
+
+@media screen and (max-width: 370px) {
+  .priceBlock_priceSection {
+    &__discount {
+      display: none;
+    }
+    &__price {
+      font-size: calc(var(--base-font-size) * 0.7);
+    }
+    &__oldPrice {
+      font-size: calc(var(--base-font-size) * 0.5);
+    }
   }
 }

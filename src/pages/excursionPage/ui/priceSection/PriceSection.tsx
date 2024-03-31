@@ -6,7 +6,13 @@ export const PriceSection = () => {
   return (
     <section className={styles.priceSection}>
       <div>
-        <PriceBlock price="35.90" oldPrice="45.90" discount="15" size="m" />
+        <PriceBlock
+          parent="priceSection"
+          price="35.90"
+          oldPrice="45.90"
+          discount="15"
+          size="m"
+        />
         <p className={styles.priceSection__caption}>за 1 взрослого</p>
       </div>
       <ul className={styles.priceSection__advantages}>
@@ -20,10 +26,7 @@ export const PriceSection = () => {
           Скидка 5% при оплате картой
         </li>
       </ul>
-      <Button
-        title="Перейти к оформлению"
-        className={styles.priceSection__button}
-      />
+      <Button title="Забронировать" />
     </section>
   );
 };

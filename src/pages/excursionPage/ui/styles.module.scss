@@ -55,13 +55,6 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-  .excursionPage {
-    &__container {
-      padding: 30px 20px 80px 20px;
-    }
-  }
-}
 @media screen and (max-width: 900px) {
   .excursionPage {
     &__sideBar {
@@ -74,4 +67,20 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .excursionPage {
+    &__container {
+      padding: 30px 20px 80px 20px;
+    }
+  }
+}
+@media screen and (max-width: 400px) {
+  .excursionPage {
+    &__container {
+      padding: 30px 15px 80px 15px;
+    }
+  }
+}
+
 
