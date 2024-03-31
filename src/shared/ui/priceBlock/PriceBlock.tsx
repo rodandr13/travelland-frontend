@@ -16,7 +16,6 @@ export const PriceBlock = ({
   size,
   parent,
 }: Props) => {
-  console.log(`priceBlock_${parent}`);
   return (
     <section
       className={clsx(styles.priceBlock, {
