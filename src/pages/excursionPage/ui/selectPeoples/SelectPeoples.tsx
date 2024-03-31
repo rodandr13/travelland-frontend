@@ -1,7 +1,7 @@
 "use client";
 
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
-import { SelectNumber } from "./ui/SelectNumber";
+import { SelectNumber } from "./ui/";
 import styles from "./styles.module.scss";
 
 export const SelectPeoples = () => {

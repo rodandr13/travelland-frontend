@@ -1,1 +1,1 @@
-export { selectPeoples } from "./SelectNumber";
+export { SelectNumber } from "./SelectNumber";
