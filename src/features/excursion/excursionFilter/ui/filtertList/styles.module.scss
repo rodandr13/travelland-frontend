@@ -1,7 +1,15 @@
 .filterList {
+  position: relative;
   overflow: hidden;
+  overflow-x: scroll;
+  overscroll-behavior: contain;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  padding: 0 0 5px 0;
   &__form {
+    position: relative;
     display: flex;
     gap: 40px;
+    width: 100%;
   }
 }

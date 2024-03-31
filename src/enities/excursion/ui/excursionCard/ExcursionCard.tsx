@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import clsx from "clsx";
@@ -5,10 +7,15 @@ import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import { WeekDays } from "@/src/shared/ui/weekDays";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import Link from "next/link";
+import React from "react";
 
 interface Props {
   addFavorite: React.ReactNode;
 }
+const handleClick = (e: React.MouseEvent<HTMLElement>) => {
+  e.preventDefault();
+};
+
 export const ExcursionCard = ({ addFavorite }: Props) => {
   return (
     <article className={styles.excursionCard}>
@@ -43,10 +50,16 @@ export const ExcursionCard = ({ addFavorite }: Props) => {
               <button className={styles.sliderControls__button} />
             </li>
           </ul>
-          <button className={clsx(styles.slideButton, styles.slideButton_prev)}>
+          <button
+            onClick={handleClick}
+            className={clsx(styles.slideButton, styles.slideButton_prev)}
+          >
             <NavigateBefore />
           </button>
-          <button className={clsx(styles.slideButton, styles.slideButton_next)}>
+          <button
+            onClick={handleClick}
+            className={clsx(styles.slideButton, styles.slideButton_next)}
+          >
             <NavigateNext />
           </button>
         </div>
