@@ -22,6 +22,7 @@ export const Calendar = () => {
       <DatePicker
         locale="ru"
         selected={startDate}
+        calendarClassName="calendar"
         onChange={(date: Date) => setStartDate(date)}
         monthsShown={monthsShown}
         inline
