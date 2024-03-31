@@ -1,8 +1,7 @@
-.react-datepicker {
-  border: none;
-  display: flex;
-  gap: 50px;
-
+.react-datepicker .react-datepicker {
+  border: none !important;
+  display: flex !important;
+  gap: 50px !important;
   &__navigation-icon::before {
     border: none;
     background: url("../../../../shared/assets/arrow-next.svg");
@@ -100,14 +99,15 @@
 }
 
 
-.react-datepicker__day--outside-month {
+.react-datepicker .react-datepicker__day--outside-month {
   visibility: hidden;
 }
 
 @media screen and (max-width: 1500px) {
   .react-datepicker {
     gap: 30px;
-
+  }
+  .react-datepicker .react-datepicker {
     &__day {
       width: 50px;
       height: 50px;
@@ -132,7 +132,8 @@
 @media screen and (max-width: 1300px) {
   .react-datepicker {
     gap: 20px;
-
+  }
+  .react-datepicker .react-datepicker {
     &__day {
       width: 45px;
       height: 45px;
@@ -163,7 +164,8 @@
   }
   .react-datepicker {
     gap: 0;
-
+  }
+  .react-datepicker .react-datepicker {
     &__day {
       width: 60px;
       height: 60px;
@@ -195,6 +197,9 @@
 
 @media screen and (max-width: 600px) {
   .react-datepicker {
+    width: 100%;
+  }
+  .react-datepicker .react-datepicker {
     &__month-container {
       width: 100%;
     }
@@ -234,19 +239,15 @@
       width: 100%;
       height: 100%;
     }
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .react-datepicker {
     &__price {
       font-size: 11px;
     }
   }
 }
 
+
 @media screen and (max-width: 400px) {
-  .react-datepicker {
+  .react-datepicker .react-datepicker {
     &__price {
       font-size: 10px;
     }
@@ -265,7 +266,7 @@
 }
 
 @media screen and (max-width: 350px) {
-  .react-datepicker {
+  .react-datepicker .react-datepicker {
     &__price {
       font-size: 9px;
     }

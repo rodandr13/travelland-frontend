@@ -7,6 +7,7 @@ import { isSelectableDate } from "./utils/isSelectableDate";
 import { CustomDay } from "./utils/CustomDay";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
+import styles from "./styles.module.scss";
 import { useWindowWidth } from "@/src/shared/lib/hooks/useWindowWidth";
 
 registerLocale("ru", ru);
@@ -17,7 +18,7 @@ export const Calendar = () => {
   const monthsShown = 2;
 
   return (
-    <section>
+    <section className={styles.calendar}>
       <DatePicker
         locale="ru"
         selected={startDate}
