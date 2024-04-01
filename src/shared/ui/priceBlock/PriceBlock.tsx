@@ -3,8 +3,8 @@ import clsx from "clsx";
 
 interface Props {
   price: string;
-  oldPrice: string;
-  discount: string;
+  oldPrice?: string;
+  discount?: string;
   size?: "s" | "m";
   parent?: string;
 }
@@ -34,20 +34,24 @@ export const PriceBlock = ({
         >
           {price}€
         </li>
-        <li
-          className={clsx(styles.priceBlock__oldPrice, {
-            [styles[`priceBlock_${parent}__oldPrice`]]: parent,
-          })}
-        >
-          {oldPrice} €
-        </li>
-        <li
-          className={clsx(styles.priceBlock__discount, {
-            [styles[`priceBlock_${parent}__discount`]]: parent,
-          })}
-        >
-          -{discount}%
-        </li>
+        {oldPrice && (
+          <li
+            className={clsx(styles.priceBlock__oldPrice, {
+              [styles[`priceBlock_${parent}__oldPrice`]]: parent,
+            })}
+          >
+            {oldPrice} €
+          </li>
+        )}
+        {discount && (
+          <li
+            className={clsx(styles.priceBlock__discount, {
+              [styles[`priceBlock_${parent}__discount`]]: parent,
+            })}
+          >
+            -{discount}%
+          </li>
+        )}
       </ul>
     </section>
   );

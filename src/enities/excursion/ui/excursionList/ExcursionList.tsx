@@ -1,17 +1,18 @@
 import styles from "./styles.module.scss";
 import { ExcursionCard } from "@/src/enities/excursion/ui";
-
-const cards = [1, 2, 3, 4, 5, 6];
+import { getExcursionCards } from "@/src/enities/excursion/api/getExcursionCards";
 
 interface Props {
   addFavorite: React.ReactNode;
 }
 
-export const ExcursionList = ({ addFavorite }: Props) => {
+export const ExcursionList = async ({ addFavorite }: Props) => {
+  const excursionCards = await getExcursionCards();
+  console.log(excursionCards);
   return (
     <section className={styles.excursionList}>
-      {cards.map((card) => (
-        <ExcursionCard key={card} addFavorite={addFavorite} />
+      {excursionCards.map((card) => (
+        <ExcursionCard key={card._id} addFavorite={addFavorite} card={card} />
       ))}
     </section>
   );

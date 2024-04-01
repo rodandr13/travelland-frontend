@@ -6,6 +6,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
 const apiVersion = process.env.NEXT_PUBLIC_SANITY_API_VERSION;
 
 export const client = createClient({
+  perspective: "published",
   projectId,
   dataset,
   apiVersion,
