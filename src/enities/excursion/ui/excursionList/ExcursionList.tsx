@@ -8,7 +8,6 @@ interface Props {
 
 export const ExcursionList = async ({ addFavorite }: Props) => {
   const excursionCards = await getExcursionCards();
-  console.log(excursionCards);
   return (
     <section className={styles.excursionList}>
       {excursionCards.map((card) => (

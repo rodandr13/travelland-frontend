@@ -1,9 +1,10 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { IFilterItem } from "@/src/features/excursion/excursionFilter/model/types/FiltersType";
 
 interface Props {
-  filter: FilterItem;
+  filter: IFilterItem;
 }
 
 export const FilterItem = ({ filter }: Props) => {

@@ -23,6 +23,7 @@
   }
   &__image {
     border-radius: 4px;
+    object-fit: cover;
   }
   &__favorites {
     position: absolute;

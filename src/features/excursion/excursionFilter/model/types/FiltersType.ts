@@ -12,10 +12,10 @@ interface Title {
   value: string;
 }
 
-interface FilterItem {
+export interface IFilterItem {
   _id: string;
   icon: Image;
   title: Title;
 }
 
-type Filters = FilterItem[];
+export type FiltersType = IFilterItem[];

@@ -8,10 +8,9 @@ interface Props {
 const daysOfWeek = ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"];
 
 export const WeekDays = ({ days }: Props) => {
-  console.log(days);
   return (
     <ul className={clsx(styles.weekDays)}>
-      {days.map((day, i) => (
+      {days?.map((day, i) => (
         <li
           key={day + i}
           className={clsx(styles.weekDays__day, {
