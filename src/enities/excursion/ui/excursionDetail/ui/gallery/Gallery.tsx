@@ -1,49 +1,24 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
+import { urlFor } from "@/src/shared/lib/sanity/client";
 
-export const Gallery = () => {
+interface Props {
+  images: string[];
+}
+
+export const Gallery = ({ images }: Props) => {
   return (
     <section className={styles.gallery}>
-      <div className={styles.gallery__item}>
-        <Image
-          className={styles.gallery__image}
-          fill={true}
-          src="/img1.jpg"
-          alt=""
-        />
-      </div>
-      <div className={styles.gallery__item}>
-        <Image
-          className={styles.gallery__image}
-          fill={true}
-          src="/img2.jpg"
-          alt=""
-        />
-      </div>
-      <div className={styles.gallery__item}>
-        <Image
-          className={styles.gallery__image}
-          fill={true}
-          src="/img3.jpg"
-          alt=""
-        />
-      </div>
-      <div className={styles.gallery__item}>
-        <Image
-          className={styles.gallery__image}
-          fill={true}
-          src="/img4.jpg"
-          alt=""
-        />
-      </div>
-      <div className={styles.gallery__item}>
-        <Image
-          className={styles.gallery__image}
-          fill={true}
-          src="/img5.jpg"
-          alt=""
-        />
-      </div>
+      {images.map((image, i) => (
+        <div key={i} className={styles.gallery__item}>
+          <Image
+            className={styles.gallery__image}
+            fill={true}
+            src={urlFor(image)}
+            alt=""
+          />
+        </div>
+      ))}
     </section>
   );
 };

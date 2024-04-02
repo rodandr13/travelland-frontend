@@ -17,7 +17,7 @@ export const ExcursionDetail = async () => {
   const excursion = await getExcursionDetail();
   return (
     <section className={styles.excursionDetail}>
-      <Gallery />
+      <Gallery images={excursion.gallery} />
       <div className={styles.excursionDetail__container}>
         <div className={styles.excursionDetail__content}>
           <div className={styles.excursionDetail__info}>
@@ -40,7 +40,7 @@ export const ExcursionDetail = async () => {
           <Booking />
         </div>
         <div className={styles.excursionDetail__sideBar}>
-          <PriceSection />
+          <PriceSection schedule={excursion.schedule} />
           <AttentionBlock />
         </div>
       </div>

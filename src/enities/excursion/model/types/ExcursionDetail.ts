@@ -12,7 +12,7 @@ interface Location {
 export interface ScheduleItem {
   weekdays: string[];
   duration: number;
-  prices: Price[] | null;
+  prices: Price[];
   dates: Dates;
   startTime: string;
 }
@@ -22,7 +22,7 @@ interface Dates {
   dateFrom: string;
 }
 
-interface Price {
+export interface Price {
   price: number;
   category: Category;
 }
