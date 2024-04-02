@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { ExcursionCard } from "@/src/enities/excursion/ui";
+import { ExcursionCard } from "@/src/enities/excursion";
 import { getExcursionCards } from "@/src/enities/excursion/api/getExcursionCards";
 
 interface Props {

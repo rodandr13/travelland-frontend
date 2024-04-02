@@ -1,0 +1,1 @@
+export { ExcursionDetail } from "./ExcursionDetail";

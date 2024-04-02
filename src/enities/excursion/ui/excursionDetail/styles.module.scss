@@ -1,0 +1,83 @@
+.flexContainer {
+  display: flex;
+  gap: 70px;
+}
+
+.excursionDetail {
+  display: flex;
+  flex-direction: column;
+  &__container {
+    max-width: 1440px;
+    padding: 30px 40px 80px 40px;
+    display: flex;
+    gap: 40px;
+    box-sizing: border-box;
+    align-self: center;
+  }
+  &__content {
+
+  }
+  &__mainInfo {
+    display: flex;
+    gap: 40px;
+    padding: 30px 0 80px 0;
+  }
+
+  &__info {
+    padding: 0 0 80px 0;
+  }
+
+  &__containerDescription {
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    flex: 1;
+  }
+
+  &__sideBar {
+    max-width: 340px;
+    padding: 30px 0 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width: 1300px) {
+  .excursionPage {
+    &__mainInfo {
+      flex-direction: column;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .excursionDetail {
+    &__sideBar {
+      position: fixed;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      max-width: 100%;
+      z-index: 1;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .excursionDetail {
+    &__container {
+      padding: 30px 20px 80px 20px;
+    }
+  }
+}
+@media screen and (max-width: 400px) {
+  .excursionDetail {
+    &__container {
+      padding: 30px 15px 80px 15px;
+    }
+  }
+}
+
+

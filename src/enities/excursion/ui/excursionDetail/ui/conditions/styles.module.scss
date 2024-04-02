@@ -20,21 +20,21 @@
       &::before {
         position: absolute;
         left: -25px;
-        content: url("../../../../shared/assets/inc.svg");
+        content: url("../../../../../../shared/assets/inc.svg");
       }
     }
     &_notIncluded {
       &::before {
         position: absolute;
         left: -25px;
-        content: url("../../../../shared/assets/not-inc.svg");
+        content: url("../../../../../../shared/assets/not-inc.svg");
       }
     }
     &_additional {
       &::before {
         position: absolute;
         left: -15px;
-        content: url("../../../../shared/assets/inf.svg");
+        content: url("../../../../../../shared/assets/inf.svg");
       }
     }
   }

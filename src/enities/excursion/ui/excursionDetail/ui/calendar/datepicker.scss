@@ -6,14 +6,14 @@ div.react-datepicker {
   gap: 50px;
   .react-datepicker__navigation-icon::before {
     border: none;
-    background: url("../../../../shared/assets/arrow-next.svg");
+    background: url("../../../../../../shared/assets/arrow-next.svg");
     width: 23px;
     height: 15px;
     transform: none;
   }
 
   .react-datepicker__navigation-icon--previous::before {
-    background: url("../../../../shared/assets/arrow-prev.svg");
+    background: url("../../../../../../shared/assets/arrow-prev.svg");
   }
 
   .react-datepicker &__month-container:first-child {

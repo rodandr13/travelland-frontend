@@ -1,7 +1,12 @@
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 
-export const Conditions = () => {
+interface Props {
+  surcharge: Array<{ title: string }>;
+  included: Array<{ title: string }>;
+}
+
+export const Conditions = ({ surcharge, included }: Props) => {
   return (
     <section className={styles.conditions}>
       <div className={styles.options}>
@@ -14,12 +19,11 @@ export const Conditions = () => {
           Что включено
         </h3>
         <ul className={styles.options__list}>
-          <li className={styles.options__item}>Транспорт</li>
-          <li className={styles.options__item}>
-            Обслуживание лицензированного гида
-          </li>
-          <li className={styles.options__item}>Свободное время</li>
-          <li className={styles.options__item}>Наушники</li>
+          {included.map((item, i) => (
+            <li key={i} className={styles.options__item}>
+              {item.title}
+            </li>
+          ))}
         </ul>
       </div>
       <div className={styles.options}>
@@ -32,7 +36,11 @@ export const Conditions = () => {
           Доплаты
         </h3>
         <ul className={styles.options__list}>
-          <li className={styles.options__item}>Билеты в замки</li>
+          {surcharge.map((item, i) => (
+            <li key={i} className={styles.options__item}>
+              {item.title}
+            </li>
+          ))}
         </ul>
       </div>
       <div className={styles.options}>
@@ -45,7 +53,7 @@ export const Conditions = () => {
           Дополнительные условия
         </h3>
         <ul className={styles.options__list}>
-          <li className={styles.options__item}>Дополнительных условий нет</li>
+          <li className={styles.options__item}>Добавить блок в админку</li>
         </ul>
       </div>
     </section>

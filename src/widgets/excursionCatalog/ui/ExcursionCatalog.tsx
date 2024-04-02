@@ -1,5 +1,5 @@
 import styles from "./styles.module.scss";
-import { ExcursionList } from "@/src/enities/excursion/ui";
+import { ExcursionList } from "@/src/enities/excursion";
 import { ExcursionFilter } from "../../../features/excursion/excursionFilter";
 import { AddFavorite } from "@/src/features/excursion/addFavorite";
 
