@@ -1,5 +1,3 @@
-
-
 .excursionCard {
   position: relative;
   z-index: 0;
@@ -10,34 +8,20 @@
     position: relative;
     display: block;
     z-index: 0;
-    &:hover .slideButton{
-      opacity: 1;
-    }
+
   }
   &__imageContainer {
     position: relative;
     max-width: 100%;
-    overflow: hidden;
-    padding: 0 0 100% 0;
+    //overflow: hidden;
     margin: 0 0 14px 0;
   }
-  &__image {
-    border-radius: 4px;
-    object-fit: cover;
-  }
+
   &__favorites {
     position: absolute;
     z-index: 2;
     top: 15px;
     right: 15px;
-    color: #ffffff;
-  }
-  &__imageIncidator {
-    position: absolute;
-    z-index: 1;
-    bottom: 15px;
-    left: 50%;
-    transform: translateX(-50%);
     color: #ffffff;
   }
   &__header {
@@ -61,67 +45,5 @@
     top: 50%;
     left: 0;
     transform: translateY(-50%);
-  }
-}
-
-.sliderControls {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  &__item {
-    width: 8px;
-    height: 8px;
-    &:nth-child(4) {
-      width: 6px;
-      height: 6px;
-    }
-    &:nth-child(5) {
-      width: 4px;
-      height: 4px;
-    }
-  }
-  &__button {
-    border: none;
-    outline: none;
-    display: block;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-  }
-}
-
-.slideButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transform-origin: center;
-  transition: opacity 100ms ease-in, background-color 100ms ease-in, transform 100ms ease-in;
-  border: none;
-  outline: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  will-change: transform, opacity;
-  &:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: scale(1.1) translateY(-45%);
-  }
-
-  &_prev {
-    left: 10px;
-  }
-
-  &_next {
-    right: 10px;
   }
 }
