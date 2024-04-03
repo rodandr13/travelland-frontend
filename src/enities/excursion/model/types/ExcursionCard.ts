@@ -18,11 +18,12 @@ interface Schedule {
   prices: Price[];
 }
 
-export interface ExcursionCard {
+export interface IExcursionCard {
   _id: string;
   title: string;
+  slug: string;
   gallery: string[];
   schedule: Schedule[];
 }
 
-export type ExcursionCardsType = ExcursionCard[];
+export type ExcursionCardsType = IExcursionCard[];

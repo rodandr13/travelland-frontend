@@ -6,10 +6,11 @@ import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import Link from "next/link";
 import React from "react";
 import { ImageSlider } from "@/src/shared/ui/slider";
+import { IExcursionCard } from "@/src/enities/excursion/model/types/ExcursionCard";
 
 interface Props {
   addFavorite: React.ReactNode;
-  card: any;
+  card: IExcursionCard;
 }
 
 const daysOfWeek = [
@@ -23,7 +24,7 @@ const daysOfWeek = [
 ];
 
 export const ExcursionCard = ({ addFavorite, card }: Props) => {
-  const price = card.schedule[1].prices[0].price;
+  const price = card.schedule[1].prices[0].price.toString();
   const duration = card.schedule[1].duration.hours;
   const weekdays = card.schedule[1].weekdays;
   const filledDays = daysOfWeek.map((day) =>
@@ -31,7 +32,10 @@ export const ExcursionCard = ({ addFavorite, card }: Props) => {
   );
   return (
     <article className={styles.excursionCard}>
-      <Link href="/excursion" className={styles.excursionCard__link}>
+      <Link
+        href={`excursion/${card.slug}`}
+        className={styles.excursionCard__link}
+      >
         <div className={styles.excursionCard__imageContainer}>
           <div className={styles.excursionCard__favorites}>{addFavorite}</div>
           <ImageSlider images={card.gallery} />

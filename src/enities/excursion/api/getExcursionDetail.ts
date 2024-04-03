@@ -1,9 +1,13 @@
 import { client } from "@/src/shared/lib/sanity/client";
 import { ExcursionType } from "@/src/enities/excursion/model/types/ExcursionDetail";
 
-export const getExcursionDetail = async () => {
+interface Props {
+  slug: string;
+}
+
+export const getExcursionDetail = async ({ slug }: Props) => {
   const query = `
-  *[_type == "excursion" && slug.current == "town-of-cesky-krumlov-and-hluboka-nad-vltavou-castle" ]{
+  *[_type == "excursion" && slug.current == "${slug}" ]{
     excursionSubcategory[]->{"title":title[_key == "ru"][0].value, "icon":icon.asset._ref},
   _id,
   title,
@@ -31,5 +35,6 @@ export const getExcursionDetail = async () => {
   }
 }[0]
 `;
+  console.log(query);
   return await client.fetch<ExcursionType>(query);
 };

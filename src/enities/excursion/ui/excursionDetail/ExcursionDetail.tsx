@@ -13,8 +13,12 @@ import { PriceSection } from "./ui/priceSection";
 import { AttentionBlock } from "./ui/attentionBlock";
 import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
 
-export const ExcursionDetail = async () => {
-  const excursion = await getExcursionDetail();
+interface Props {
+  slug: string;
+}
+
+export const ExcursionDetail = async ({ slug }: Props) => {
+  const excursion = await getExcursionDetail({ slug });
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={excursion.gallery} />
