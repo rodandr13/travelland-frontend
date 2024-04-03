@@ -35,6 +35,5 @@ export const getExcursionDetail = async ({ slug }: Props) => {
   }
 }[0]
 `;
-  console.log(query);
   return await client.fetch<ExcursionType>(query);
 };
