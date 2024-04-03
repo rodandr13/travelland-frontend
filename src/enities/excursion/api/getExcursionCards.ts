@@ -7,6 +7,7 @@ export const getExcursionCards = async () => {
   _id,
   title,
   "gallery": gallery[].asset._ref,
+  "slug": slug.current,
   "schedule": schedule[] {
     weekdays,
     duration -> {

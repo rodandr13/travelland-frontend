@@ -11,13 +11,8 @@ interface Props {
 }
 
 export const ImageSlider = ({ images }: Props) => {
-  const imageUrl = urlFor(images[1]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const slideRefs = useRef<HTMLElement[]>([]);
-  const handleClick = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    console.log("lick");
-  };
   const goToSlide = (index: number) => {
     if (index < 0 || index >= images.length) return;
     setCurrentIndex(index);
@@ -52,28 +47,6 @@ export const ImageSlider = ({ images }: Props) => {
             </li>
           ))}
         </ul>
-        <ul
-          className={clsx(
-            styles.sliderControls,
-            styles.imageSlider__imageIncidator
-          )}
-        >
-          <li className={styles.sliderControls__item}>
-            <button className={styles.sliderControls__button} />
-          </li>
-          <li className={styles.sliderControls__item}>
-            <button className={styles.sliderControls__button} />
-          </li>
-          <li className={styles.sliderControls__item}>
-            <button className={styles.sliderControls__button} />
-          </li>
-          <li className={styles.sliderControls__item}>
-            <button className={styles.sliderControls__button} />
-          </li>
-          <li className={styles.sliderControls__item}>
-            <button className={styles.sliderControls__button} />
-          </li>
-        </ul>
       </section>
       <button
         onClick={(e) => {
@@ -93,6 +66,28 @@ export const ImageSlider = ({ images }: Props) => {
       >
         <NavigateNext />
       </button>
+      <ul
+        className={clsx(
+          styles.sliderControls,
+          styles.imageSlider__imageIncidator
+        )}
+      >
+        <li className={styles.sliderControls__item}>
+          <button className={styles.sliderControls__button} />
+        </li>
+        <li className={styles.sliderControls__item}>
+          <button className={styles.sliderControls__button} />
+        </li>
+        <li className={styles.sliderControls__item}>
+          <button className={styles.sliderControls__button} />
+        </li>
+        <li className={styles.sliderControls__item}>
+          <button className={styles.sliderControls__button} />
+        </li>
+        <li className={styles.sliderControls__item}>
+          <button className={styles.sliderControls__button} />
+        </li>
+      </ul>
     </div>
   );
 };

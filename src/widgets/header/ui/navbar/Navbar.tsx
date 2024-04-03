@@ -10,11 +10,11 @@ export const Navbar = () => {
   const links = [
     {
       title: "Экскурсии",
-      path: "/excursion",
+      path: "/#excursion",
     },
     {
       title: "О компании",
-      path: "/",
+      path: "/#aboutUs",
     },
   ];
 
@@ -40,15 +40,15 @@ export const Navbar = () => {
           )}
         >
           <div className={`${styles.navbar__menu} ${styles.menu}`}>
-            <ul className={styles.menu__list}>
-              {links.map((link) => (
-                <li className={styles.menu__item} key={link.title}>
-                  <Link href={link.path} className={styles.menu__link}>
-                    {link.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            {/*<ul className={styles.menu__list}>*/}
+            {/*  {links.map((link) => (*/}
+            {/*    <li className={styles.menu__item} key={link.title}>*/}
+            {/*      <Link href={link.path} className={styles.menu__link}>*/}
+            {/*        {link.title}*/}
+            {/*      </Link>*/}
+            {/*    </li>*/}
+            {/*  ))}*/}
+            {/*</ul>*/}
           </div>
           <div
             className={`${styles.navbar__pageSettings} ${styles.pageSettings}`}
