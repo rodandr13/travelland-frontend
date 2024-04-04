@@ -1,11 +1,11 @@
-interface Category {
+interface PriceCategory {
   title: string;
   description: string;
 }
 
 interface Price {
   price: number;
-  category: Category;
+  category: PriceCategory;
 }
 
 interface Duration {
@@ -18,10 +18,20 @@ interface Schedule {
   prices: Price[];
 }
 
+interface Category {
+  title: string;
+}
+
+interface Subcategory {
+  title: string;
+}
+
 export interface IExcursionCard {
   _id: string;
   title: string;
   slug: string;
+  excursionCategory: Category;
+  excursionSubcategory: Subcategory[];
   gallery: string[];
   schedule: Schedule[];
 }

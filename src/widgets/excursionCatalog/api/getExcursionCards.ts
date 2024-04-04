@@ -6,6 +6,8 @@ export const getExcursionCards = async () => {
   *[_type == "excursion"]{
   _id,
   title,
+  excursionCategory->{"title":title[_key == "ru"][0].value},
+  excursionSubcategory[]->{"title":title[_key == "ru"][0].value},
   "gallery": gallery[].asset._ref,
   "slug": slug.current,
   "schedule": schedule[] {

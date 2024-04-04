@@ -13,7 +13,6 @@ export const HamburgerButton = () => {
 
   const handleResize = () => {
     if (window.innerWidth >= 750 && isOpen) {
-      console.log("test");
       dispatch(toggleMenu());
       document.body.classList.remove(sharedStyles.disableScroll);
       const pagePosition = parseInt(document.body.dataset.position || "0", 10);
