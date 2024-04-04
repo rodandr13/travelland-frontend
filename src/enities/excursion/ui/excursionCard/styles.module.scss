@@ -13,8 +13,9 @@
   &__imageContainer {
     position: relative;
     max-width: 100%;
-    //overflow: hidden;
+    overflow: hidden;
     margin: 0 0 14px 0;
+    border-radius: 4px;
   }
 
   &__favorites {

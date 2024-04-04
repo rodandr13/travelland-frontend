@@ -43,23 +43,23 @@
 }
 
 .sliderControls {
-  padding: 0;
-  margin: 0;
-  list-style-type: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
+  overflow: hidden;
+  width: 50px;
+
+  &__list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transform: translateX(0);
+    transition: transform 200ms ease-in;
+  }
   &__item {
-    width: 8px;
-    height: 8px;
-    &:nth-child(4) {
-      width: 6px;
-      height: 6px;
-    }
-    &:nth-child(5) {
-      width: 4px;
-      height: 4px;
-    }
+    height: 6px;
+    width: 6px;
+    min-width: 6px;
   }
   &__button {
     border: none;
@@ -70,6 +70,10 @@
     width: 100%;
     height: 100%;
     border-radius: 50%;
+    opacity: 0.6;
+    &_active {
+      opacity: 1;
+    }
   }
 }
 
@@ -93,6 +97,10 @@
   &:hover {
     background: rgba(255, 255, 255, 1);
     transform: scale(1.1) translateY(-45%);
+  }
+  &:disabled:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-50%);
   }
 
   &_prev {

@@ -12,7 +12,9 @@ interface Props {
 
 export const ImageSlider = ({ images }: Props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [controlsTranslateX, setControlsTranslateX] = useState(0);
   const slideRefs = useRef<HTMLElement[]>([]);
+  const sliderControlsRef = useRef<HTMLUListElement>(null);
   const goToSlide = (index: number) => {
     if (index < 0 || index >= images.length) return;
     setCurrentIndex(index);
@@ -23,9 +25,37 @@ export const ImageSlider = ({ images }: Props) => {
       behavior: "smooth",
     });
   };
-
   const setSlideRef = (ref: HTMLLIElement | null, index: number) => {
     if (ref) slideRefs.current[index] = ref;
+  };
+
+  const transform = {
+    transform: `translateX(${controlsTranslateX}px)`,
+  };
+
+  const getScaleStyle = (index: number) => {
+    let scale = 0.66; // Базовое значение масштаба
+
+    // Проверяем, находится ли индекс в начале или конце массива, и применяем условия
+    const isStart = currentIndex < 3;
+    const isEnd = currentIndex >= images.length - 3;
+    const distanceFromCurrent = Math.abs(currentIndex - index);
+
+    if (isStart) {
+      if (index <= 2) scale = 1;
+      else if (index === 3) scale = 0.83;
+    } else if (isEnd) {
+      if (images.length - index <= 3)
+        scale = 1; // Последние 3 элемента
+      else if (images.length - index <= 5 && images.length - index > 3)
+        scale = 0.83; // Предпоследние 2 перед последними тремя
+    } else {
+      // Средние индексы массива
+      if (distanceFromCurrent <= 1) scale = 1;
+      else if (distanceFromCurrent === 2) scale = 0.83;
+    }
+
+    return { transform: `scale(${scale})` };
   };
 
   return (
@@ -49,45 +79,57 @@ export const ImageSlider = ({ images }: Props) => {
         </ul>
       </section>
       <button
+        disabled={currentIndex <= 0}
         onClick={(e) => {
           e.preventDefault();
           goToSlide(currentIndex - 1);
+          if (currentIndex >= 3 && currentIndex < images.length - 2) {
+            setControlsTranslateX((current) => current + 10);
+          }
         }}
         className={clsx(styles.slideButton, styles.slideButton_prev)}
       >
         <NavigateBefore />
       </button>
       <button
+        disabled={currentIndex >= images.length - 1}
         onClick={(e) => {
           e.preventDefault();
           goToSlide(currentIndex + 1);
+          if (currentIndex >= 2 && currentIndex < images.length - 3) {
+            setControlsTranslateX((current) => current - 10);
+          }
         }}
         className={clsx(styles.slideButton, styles.slideButton_next)}
       >
         <NavigateNext />
       </button>
-      <ul
+      <div
         className={clsx(
           styles.sliderControls,
           styles.imageSlider__imageIncidator
         )}
       >
-        <li className={styles.sliderControls__item}>
-          <button className={styles.sliderControls__button} />
-        </li>
-        <li className={styles.sliderControls__item}>
-          <button className={styles.sliderControls__button} />
-        </li>
-        <li className={styles.sliderControls__item}>
-          <button className={styles.sliderControls__button} />
-        </li>
-        <li className={styles.sliderControls__item}>
-          <button className={styles.sliderControls__button} />
-        </li>
-        <li className={styles.sliderControls__item}>
-          <button className={styles.sliderControls__button} />
-        </li>
-      </ul>
+        <ul
+          className={clsx(styles.sliderControls__list)}
+          ref={sliderControlsRef}
+          style={transform}
+        >
+          {Array.from({ length: images.length }, (_, i) => (
+            <li
+              key={i}
+              className={styles.sliderControls__item}
+              style={getScaleStyle(i)}
+            >
+              <button
+                className={clsx(styles.sliderControls__button, {
+                  [styles.sliderControls__button_active]: i === currentIndex,
+                })}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
