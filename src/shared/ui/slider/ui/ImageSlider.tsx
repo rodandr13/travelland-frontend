@@ -70,8 +70,9 @@ export const ImageSlider = ({ images }: Props) => {
             >
               <Image
                 className={styles.imageSlider__image}
-                src={urlFor(image)}
+                src={urlFor(image, { width: 700 })}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 alt="ExcursionCard image"
               />
             </li>

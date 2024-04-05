@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "analyze": "next build && next bundle-analyzer"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
@@ -30,6 +31,7 @@
     "scroll-into-view-if-needed": "^3.1.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^14.1.4",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

@@ -11,7 +11,9 @@
   overscroll-behavior: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
-
+  &::-webkit-scrollbar {
+    display: none;
+  }
   &__list {
     margin: 0;
     padding: 0;
