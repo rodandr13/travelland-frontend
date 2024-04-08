@@ -7,32 +7,26 @@ interface Props {
 
 export const getExcursionDetail = async ({ slug }: Props) => {
   const query = `
-  *[_type == "excursion" && slug.current == "${slug}" ]{
-    excursionSubcategory[]->{"title":title[_key == "ru"][0].value, "icon":icon.asset._ref},
+*[_type == "excursion" ]{
   _id,
-  title,
-  "slug":slug.current,
-  description,
-  city->{"title":title[_key == "ru"][0].value, "country":country->{"title":title[_key == "ru"][0].value}},
-  excursionCategory->{"title":title[_key == "ru"][0].value},
-  included[]->{"title":title[_key == "ru"][0].value},
-  surcharge[]->{"title":title[_key == "ru"][0].value},
-  meetingPoint->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, location{lng, lat} },
-  route[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[].asset._ref},
+  "title": title,
+  "slug": slug.current,
+  "description": description,
+  "weekdays": weekdays,
+  "startTime":startTime[]->time,
+  "duration": duration[]->hours,
+  "dates": dates,
+  "basePrices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value},
+  "promotionalPrices": promotionalPrices[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}},
+  "city": city->title[_key == "ru"][0].value,
+  "country": city->country->title[_key == "ru"][0].value,
+  "category": excursionCategory->title[_key == "ru"][0].value,
+  "subcategory": excursionSubcategory[]->title[0].value,
+  "included": included[]->title[_key == "ru"][0].value,
+  "surcharge": surcharge[]->title[_key == "ru"][0].value,
+  "meetingPoint": meetingPoint->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, location{lng, lat} },
+  "route": route[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[].asset._ref},
   "gallery": gallery[].asset._ref,
-  "schedule": schedule[] {
-    weekdays,
-    dates,
-    "startTime":startTime->time,
-    "duration": duration->hours,
-    "prices": prices[] {
-      price,
-      "category": category -> {
-        "title": title[_key == "ru"][0].value,
-        "description": description[_key == "ru"][0].value
-      }
-    }
-  }
 }[0]
 `;
   return await client.fetch<ExcursionType>(query);

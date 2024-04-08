@@ -29,7 +29,11 @@ export const ExcursionDetail = async ({ slug }: Props) => {
             <PageTitle>{excursion.title}</PageTitle>
             <div className={styles.excursionDetail__mainInfo}>
               <div className={styles.excursionDetail__containerDescription}>
-                <TimeSpending schedule={excursion.schedule} />
+                <TimeSpending
+                  startTime={excursion.startTime}
+                  weekdays={excursion.weekdays}
+                  duration={excursion.duration}
+                />
                 <Description description={excursion.description} />
               </div>
               <MeetingPoint meetingPoint={excursion.meetingPoint} />
@@ -44,7 +48,10 @@ export const ExcursionDetail = async ({ slug }: Props) => {
           <Booking />
         </div>
         <div className={styles.excursionDetail__sideBar}>
-          <PriceSection schedule={excursion.schedule} />
+          <PriceSection
+            basePrices={excursion.basePrices}
+            promoPrices={excursion.promotionalPrices}
+          />
           <AttentionBlock />
         </div>
       </div>

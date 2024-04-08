@@ -1,9 +1,13 @@
 import styles from "./styles.module.scss";
 import clsx from "clsx";
+import {
+  Included,
+  Surcharge,
+} from "@/src/enities/excursion/model/types/ExcursionDetail";
 
 interface Props {
-  surcharge: Array<{ title: string }>;
-  included: Array<{ title: string }>;
+  surcharge: Surcharge;
+  included: Included;
 }
 
 export const Conditions = ({ surcharge, included }: Props) => {
@@ -21,7 +25,7 @@ export const Conditions = ({ surcharge, included }: Props) => {
         <ul className={styles.options__list}>
           {included.map((item, i) => (
             <li key={i} className={styles.options__item}>
-              {item.title}
+              {item}
             </li>
           ))}
         </ul>
@@ -38,7 +42,7 @@ export const Conditions = ({ surcharge, included }: Props) => {
         <ul className={styles.options__list}>
           {surcharge.map((item, i) => (
             <li key={i} className={styles.options__item}>
-              {item.title}
+              {item}
             </li>
           ))}
         </ul>

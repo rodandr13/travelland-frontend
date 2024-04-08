@@ -24,12 +24,15 @@ interface Dates {
 
 export interface Price {
   price: number;
-  category: Category;
-}
-
-interface Category {
   title: string;
   description: string;
+}
+
+export interface PromotionalPrice {
+  weekdays: string[];
+  title: string;
+  dates: Dates;
+  prices: Price[];
 }
 
 export interface RouteItem {
@@ -37,32 +40,29 @@ export interface RouteItem {
   description: string;
   gallery: string[];
 }
-
-interface ExcursionSubcategoryItem {
-  title: string;
-  icon: string;
-}
-
-interface City {
-  title: string;
-  country: Country;
-}
-
-interface Country {
-  title: string;
-}
+export type Included = string[];
+export type Surcharge = string[];
+export type Weekdays = string[];
+export type Duration = number[];
+export type StartTime = string[];
 
 export type ExcursionType = {
+  _id: string;
   title: string;
-  included: Array<{ title: string }>;
-  surcharge: Array<{ title: string }>;
+  city: string;
+  country: string;
+  description: string;
+  weekdays: Weekdays;
+  duration: Duration;
+  startTime: StartTime;
+  dates: Dates;
+  included: Included;
+  surcharge: Surcharge;
   meetingPoint: IMeetingPoint;
-  schedule: ScheduleItem[];
+  basePrices: Price[];
+  promotionalPrices: PromotionalPrice[];
   route: RouteItem[];
   gallery: string[];
-  excursionSubcategory: ExcursionSubcategoryItem[];
-  _id: string;
-  description: string;
-  city: City;
-  excursionCategory: { title: string };
+  subcategory: string[];
+  category: string;
 };

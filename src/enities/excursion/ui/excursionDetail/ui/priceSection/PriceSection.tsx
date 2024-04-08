@@ -1,20 +1,24 @@
 import styles from "./styles.module.scss";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { Button } from "@/src/shared/ui/button";
-import { ScheduleItem } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import {
+  Price,
+  PromotionalPrice,
+} from "@/src/enities/excursion/model/types/ExcursionDetail";
 
 interface Props {
-  schedule: ScheduleItem[];
+  basePrices: Price[];
+  promoPrices?: PromotionalPrice[];
 }
 
-export const PriceSection = ({ schedule }: Props) => {
-  const prices = schedule[0].prices;
+export const PriceSection = ({ basePrices, promoPrices }: Props) => {
+  const oneAdultPrice = basePrices[0].price;
   return (
     <section className={styles.priceSection}>
       <div>
         <PriceBlock
           parent="priceSection"
-          price={prices[0].price.toString()}
+          price={oneAdultPrice.toString()}
           size="m"
         />
         <p className={styles.priceSection__caption}>за 1 взрослого</p>
