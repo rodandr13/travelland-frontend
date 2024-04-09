@@ -12,15 +12,15 @@ interface Props {
 
 export const ExcursionList = ({ addFavorite, excursionCards }: Props) => {
   const { activeFilter } = useAppSelector((state) => state.filter);
+
   const filteredExcursions = activeFilter
     ? excursionCards.filter(
         (excursion) =>
-          excursion.excursionCategory.title === activeFilter ||
-          excursion.excursionSubcategory.some(
-            (subcategory) => subcategory.title === activeFilter
-          )
+          excursion.category === activeFilter ||
+          excursion.subcategory.some((item) => item === activeFilter)
       )
     : excursionCards;
+
   return (
     <section className={styles.excursionList}>
       {filteredExcursions.length > 0 ? (

@@ -12,13 +12,12 @@ interface Props {
 }
 export const PriceSection = ({ basePrices, promoPrices }: Props) => {
   const baseAdultPrice = basePrices[0].price;
-  // Задаём начальные значения для newPrice и oldPrice
   let newPrice = baseAdultPrice;
-  let oldPrice = baseAdultPrice; // Значение по умолчанию, если нет promoPrices
+  let oldPrice = baseAdultPrice;
 
   if (promoPrices && promoPrices.length > 0) {
     newPrice = promoPrices[0].prices[0].price;
-    oldPrice = baseAdultPrice; // Установить старую цену, если есть промо-цены
+    oldPrice = baseAdultPrice;
   }
 
   return (

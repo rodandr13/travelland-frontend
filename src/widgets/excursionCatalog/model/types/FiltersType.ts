@@ -14,8 +14,8 @@ interface Title {
 
 export interface IFilterItem {
   _id: string;
-  icon: Image;
-  title: Title;
+  icon: string;
+  title: string;
 }
 
 export type FiltersType = IFilterItem[];

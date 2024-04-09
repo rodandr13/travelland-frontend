@@ -18,8 +18,8 @@ export const ExcursionCatalog = async () => {
         filters={filters}
       />
       <ExcursionList
-        excursionCards={excursionCards}
         addFavorite={<AddFavorite />}
+        excursionCards={excursionCards}
       />
     </section>
   );

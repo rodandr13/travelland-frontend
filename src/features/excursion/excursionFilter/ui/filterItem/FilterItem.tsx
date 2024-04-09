@@ -12,7 +12,7 @@ interface Props {
 }
 
 export const FilterItem = ({ filter }: Props) => {
-  const imageUrl = urlFor(filter.icon.asset._ref);
+  const imageUrl = urlFor(filter.icon);
   const dispatch = useAppDispatch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,12 +26,12 @@ export const FilterItem = ({ filter }: Props) => {
         id={filter._id}
         type="radio"
         name="filterGroup"
-        value={filter.title.value}
+        value={filter.title}
         onChange={handleChange}
       />
       <label htmlFor={filter._id} className={styles.filterItem__label}>
         <Image src={imageUrl} alt="" width="40" height="40" />
-        <span className={styles.filterItem__caption}>{filter.title.value}</span>
+        <span className={styles.filterItem__caption}>{filter.title}</span>
       </label>
     </div>
   );

@@ -1,39 +1,23 @@
-interface PriceCategory {
-  title: string;
-  description: string;
-}
-
-interface Price {
-  price: number;
-  category: PriceCategory;
-}
-
-interface Duration {
-  hours: number;
-}
-
-interface Schedule {
-  weekdays: string[];
-  duration: Duration;
-  prices: Price[];
-}
-
-interface Category {
-  title: string;
-}
-
-interface Subcategory {
-  title: string;
-}
+import {
+  Category,
+  Duration,
+  Price,
+  PromotionalPrice,
+  Subcategory,
+  Weekdays,
+} from "@/src/enities/excursion/model/types/ExcursionDetail";
 
 export interface IExcursionCard {
   _id: string;
   title: string;
   slug: string;
-  excursionCategory: Category;
-  excursionSubcategory: Subcategory[];
   gallery: string[];
-  schedule: Schedule[];
+  weekdays: Weekdays;
+  category: Category;
+  duration: Duration;
+  subcategory: Subcategory;
+  basePrices: Price[];
+  promotionalPrices: PromotionalPrice[];
 }
 
 export type ExcursionCardsType = IExcursionCard[];

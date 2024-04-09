@@ -24,11 +24,16 @@ const daysOfWeek = [
 ];
 
 export const ExcursionCard = ({ addFavorite, card }: Props) => {
-  const price = card.schedule[1].prices[0].price.toString();
-  const duration = card.schedule[1].duration.hours;
-  const weekdays = card.schedule[1].weekdays;
+  const baseAdultPrice = card.basePrices[0].price;
+  let newPrice = baseAdultPrice;
+  let oldPrice = baseAdultPrice;
+
+  if (card.promotionalPrices && card.promotionalPrices.length > 0) {
+    newPrice = card.promotionalPrices[0].prices[0].price;
+    oldPrice = baseAdultPrice;
+  }
   const filledDays = daysOfWeek.map((day) =>
-    weekdays.includes(day) ? day : ""
+    card.weekdays.includes(day) ? day : ""
   );
   return (
     <article className={styles.excursionCard}>
@@ -42,8 +47,13 @@ export const ExcursionCard = ({ addFavorite, card }: Props) => {
         </div>
         <WeekDays days={filledDays} />
         <h3 className={styles.excursionCard__header}>{card.title}</h3>
-        <div className={styles.excursionCard__duration}>{duration} hours</div>
-        <PriceBlock price={price} />
+        <div className={styles.excursionCard__duration}>
+          {card.duration.join(", ")} hours
+        </div>
+        <PriceBlock
+          price={newPrice.toString()}
+          oldPrice={oldPrice.toString()}
+        />
       </Link>
     </article>
   );

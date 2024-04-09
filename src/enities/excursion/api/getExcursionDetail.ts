@@ -7,7 +7,7 @@ interface Props {
 
 export const getExcursionDetail = async ({ slug }: Props) => {
   const query = `
-*[_type == "excursion" ]{
+*[_type == "excursion" && slug.current == "${slug}"]{
   _id,
   "title": title,
   "slug": slug.current,

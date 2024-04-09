@@ -9,14 +9,6 @@ interface Location {
   lat: number;
 }
 
-export interface ScheduleItem {
-  weekdays: string[];
-  duration: number;
-  prices: Price[];
-  dates: Dates;
-  startTime: string;
-}
-
 export interface Dates {
   dateTo: string;
   dateFrom: string;
@@ -45,6 +37,8 @@ export type Surcharge = string[];
 export type Weekdays = string[];
 export type Duration = number[];
 export type StartTime = string[];
+export type Subcategory = string[];
+export type Category = string;
 
 export type ExcursionType = {
   _id: string;
@@ -63,6 +57,6 @@ export type ExcursionType = {
   promotionalPrices: PromotionalPrice[];
   route: RouteItem[];
   gallery: string[];
-  subcategory: string[];
-  category: string;
+  subcategory: Subcategory;
+  category: Category;
 };
