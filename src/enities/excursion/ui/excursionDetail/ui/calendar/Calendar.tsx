@@ -29,6 +29,7 @@ export const Calendar = ({ dates, weekdays, basePrices }: Props) => {
     <section className={styles.calendar}>
       <DatePicker
         locale="ru"
+        selected={startDate}
         calendarClassName="calendar"
         onChange={(date: Date) => setStartDate(date)}
         monthsShown={monthsShown}
@@ -37,7 +38,7 @@ export const Calendar = ({ dates, weekdays, basePrices }: Props) => {
         renderCustomHeader={(props) => (
           <CustomHeader {...props} {...{ monthShown: monthsShown }} />
         )}
-        renderDayContents={(dayNumber, day) =>
+        renderDayContents={(dayNumber, day: Date) =>
           CustomDay({ dayNumber, day, dates, weekdays, basePrices })
         }
         filterDate={(day) => isSelectableDate({ day, dates, weekdays })}
