@@ -16,5 +16,13 @@ export const getExcursionCards = async () => {
   "promotionalPrices": promotionalPrices[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}},
 }
 `;
-  return await client.fetch<ExcursionCardsType>(query);
+  return await client.fetch<ExcursionCardsType>(
+    query,
+    {},
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 };

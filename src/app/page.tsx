@@ -5,6 +5,5 @@ export default function Home({
 }: {
   searchParams: { [key: string]: string | string[] | undefined };
 }) {
-  console.log("server render");
   return <HomePage />;
 }

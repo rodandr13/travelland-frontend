@@ -23,7 +23,7 @@ interface Props {
   basePrices: Price[];
 }
 export const Calendar = ({ dates, weekdays, basePrices }: Props) => {
-  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [startDate, setStartDate] = useState<Date | null>(null);
   const monthsShown = 2;
   return (
     <section className={styles.calendar}>

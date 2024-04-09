@@ -29,5 +29,13 @@ export const getExcursionDetail = async ({ slug }: Props) => {
   "gallery": gallery[].asset._ref,
 }[0]
 `;
-  return await client.fetch<ExcursionType>(query);
+  return await client.fetch<ExcursionType>(
+    query,
+    {},
+    {
+      next: {
+        revalidate: 60,
+      },
+    }
+  );
 };
