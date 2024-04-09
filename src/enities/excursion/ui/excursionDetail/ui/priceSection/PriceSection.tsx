@@ -12,13 +12,23 @@ interface Props {
 }
 
 export const PriceSection = ({ basePrices, promoPrices }: Props) => {
-  const oneAdultPrice = basePrices[0].price;
+  const baseAdultPrice = basePrices[0].price;
+  const promoAdultPrice = promoPrices[0].prices[0].price;
+  let newPrice, oldPrice;
+  if (promoPrices && promoPrices.length > 0) {
+    newPrice = promoPrices[0].prices[0].price;
+    oldPrice = basePrices[0].price;
+  } else {
+    newPrice = basePrices[0].price;
+    oldPrice = promoPrices[0].prices[0].price;
+  }
   return (
     <section className={styles.priceSection}>
       <div>
         <PriceBlock
           parent="priceSection"
-          price={oneAdultPrice.toString()}
+          price={newPrice.toString()}
+          oldPrice={oldPrice.toString()}
           size="m"
         />
         <p className={styles.priceSection__caption}>за 1 взрослого</p>

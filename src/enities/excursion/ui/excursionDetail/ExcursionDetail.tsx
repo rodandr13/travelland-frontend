@@ -45,7 +45,14 @@ export const ExcursionDetail = async ({ slug }: Props) => {
           </div>
           <Advantages />
           <ExcursionRoute routes={excursion.route} />
-          <Booking />
+          <Booking
+            dates={excursion.dates}
+            startTime={excursion.startTime}
+            weekdays={excursion.weekdays}
+            duration={excursion.duration}
+            basePrices={excursion.basePrices}
+            promoPrices={excursion.promotionalPrices}
+          />
         </div>
         <div className={styles.excursionDetail__sideBar}>
           <PriceSection

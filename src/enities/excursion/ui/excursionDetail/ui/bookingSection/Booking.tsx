@@ -2,13 +2,37 @@ import styles from "./styles.module.scss";
 import { Calendar } from "../calendar";
 import clsx from "clsx";
 import { SelectPeoples } from "../selectPeoples";
+import {
+  Dates,
+  Duration,
+  Price,
+  PromotionalPrice,
+  StartTime,
+  Weekdays,
+} from "@/src/enities/excursion/model/types/ExcursionDetail";
 
-export const Booking = () => {
+interface Props {
+  duration: Duration;
+  weekdays: Weekdays;
+  startTime: StartTime;
+  basePrices: Price[];
+  promoPrices?: PromotionalPrice[];
+  dates: Dates;
+}
+
+export const Booking = ({
+  duration,
+  basePrices,
+  promoPrices,
+  weekdays,
+  startTime,
+  dates,
+}: Props) => {
   return (
     <section className={styles.booking}>
       <div>
         <h2 className={styles.booking__title}>Выберите дату</h2>
-        <Calendar />
+        <Calendar basePrices={basePrices} weekdays={weekdays} dates={dates} />
       </div>
       <div>
         <h2 className={styles.booking__title}>Время</h2>

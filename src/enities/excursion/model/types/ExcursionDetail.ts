@@ -17,7 +17,7 @@ export interface ScheduleItem {
   startTime: string;
 }
 
-interface Dates {
+export interface Dates {
   dateTo: string;
   dateFrom: string;
 }
