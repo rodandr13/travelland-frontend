@@ -4,7 +4,7 @@ type Price = {
   description: string;
 };
 
-type PricesValue = {
+export type PricesValue = {
   prices: Price[];
 };
 
