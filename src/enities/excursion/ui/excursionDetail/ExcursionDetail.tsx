@@ -29,6 +29,8 @@ export const ExcursionDetail = async ({ slug }: Props) => {
     weekdays: excursion.weekdays,
   });
 
+  const todayPriceForAdult = basePrices[0].price;
+
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={excursion.gallery} />
@@ -66,10 +68,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
           />
         </div>
         <div className={styles.excursionDetail__sideBar}>
-          <PriceSection
-            basePrices={excursion.basePrices}
-            promoPrices={excursion.promotionalPrices}
-          />
+          <PriceSection todayPriceForAdult={todayPriceForAdult} />
           <AttentionBlock />
         </div>
       </div>

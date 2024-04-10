@@ -48,7 +48,7 @@ export const ExcursionCard = ({ addFavorite, card }: Props) => {
         <WeekDays days={filledDays} />
         <h3 className={styles.excursionCard__header}>{card.title}</h3>
         <div className={styles.excursionCard__duration}>
-          {card.duration.join(", ")} hours
+          {card.duration} hours
         </div>
         <PriceBlock
           price={newPrice.toString()}

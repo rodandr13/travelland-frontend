@@ -1,17 +1,14 @@
 import styles from "./styles.module.scss";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { Button } from "@/src/shared/ui/button";
-import {
-  Price,
-  PromotionalPrice,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { PromotionalPrice } from "@/src/enities/excursion/model/types/ExcursionDetail";
 
 interface Props {
-  basePrices: Price[];
+  todayPriceForAdult: number;
   promoPrices?: PromotionalPrice[];
 }
-export const PriceSection = ({ basePrices, promoPrices }: Props) => {
-  const baseAdultPrice = basePrices[0].price;
+export const PriceSection = ({ todayPriceForAdult, promoPrices }: Props) => {
+  const baseAdultPrice = todayPriceForAdult;
   let newPrice = baseAdultPrice;
   let oldPrice = baseAdultPrice;
 
@@ -25,8 +22,7 @@ export const PriceSection = ({ basePrices, promoPrices }: Props) => {
       <div>
         <PriceBlock
           parent="priceSection"
-          price={newPrice.toString()}
-          oldPrice={oldPrice.toString()}
+          price={baseAdultPrice.toString()}
           size="m"
         />
         <p className={styles.priceSection__caption}>за 1 взрослого</p>
