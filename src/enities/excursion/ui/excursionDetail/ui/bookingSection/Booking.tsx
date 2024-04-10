@@ -10,6 +10,7 @@ import {
   StartTime,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { PricesMap } from "@/src/shared/types/excursion";
 
 interface Props {
   duration: Duration;
@@ -18,6 +19,7 @@ interface Props {
   basePrices: Price[];
   promoPrices?: PromotionalPrice[];
   dates: Dates;
+  prices: PricesMap;
 }
 
 export const Booking = ({
@@ -27,12 +29,18 @@ export const Booking = ({
   weekdays,
   startTime,
   dates,
+  prices,
 }: Props) => {
   return (
     <section className={styles.booking}>
       <div>
         <h2 className={styles.booking__title}>Выберите дату</h2>
-        <Calendar basePrices={basePrices} weekdays={weekdays} dates={dates} />
+        <Calendar
+          prices={prices}
+          basePrices={basePrices}
+          weekdays={weekdays}
+          dates={dates}
+        />
       </div>
       <div>
         <h2 className={styles.booking__title}>Время</h2>

@@ -12,6 +12,7 @@ import { Booking } from "./ui/bookingSection";
 import { PriceSection } from "./ui/priceSection";
 import { AttentionBlock } from "./ui/attentionBlock";
 import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
+import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
 
 interface Props {
   slug: string;
@@ -19,6 +20,15 @@ interface Props {
 
 export const ExcursionDetail = async ({ slug }: Props) => {
   const excursion = await getExcursionDetail({ slug });
+  const { basePrices, promotionalPrices, priceCorrections } = excursion;
+
+  const prices = generatePriceMap({
+    basePrices: basePrices,
+    priceCorrections: priceCorrections,
+    baseDates: excursion.dates,
+    weekdays: excursion.weekdays,
+  });
+
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={excursion.gallery} />
@@ -52,6 +62,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
             duration={excursion.duration}
             basePrices={excursion.basePrices}
             promoPrices={excursion.promotionalPrices}
+            prices={prices}
           />
         </div>
         <div className={styles.excursionDetail__sideBar}>

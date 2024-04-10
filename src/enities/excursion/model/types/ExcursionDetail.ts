@@ -55,6 +55,7 @@ export type ExcursionType = {
   meetingPoint: IMeetingPoint;
   basePrices: Price[];
   promotionalPrices: PromotionalPrice[];
+  priceCorrections: PromotionalPrice[];
   route: RouteItem[];
   gallery: string[];
   subcategory: Subcategory;
