@@ -3,36 +3,34 @@
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { SelectNumber } from "./ui/";
 import styles from "./styles.module.scss";
+import { PricesValue } from "@/src/shared/types/excursion";
 
-export const SelectPeoples = () => {
+interface Props {
+  prices: PricesValue | undefined;
+}
+export const SelectPeoples = ({ prices }: Props) => {
   return (
     <section className={styles.selectPeoples}>
-      <div className={styles.selectPeoples__container}>
-        <div>
-          <h4 className={styles.selectPeoples__title}>
-            Взрослые
-            <span className={styles.selectPeoples__age}> (18 - 65 лет)</span>
-          </h4>
-          <PriceBlock price="25.90" oldPrice="35.90" discount="15" />
-        </div>
-        <div className={styles.selectPeoples__container}>
-          <SelectNumber />
-          <span className={styles.selectPeoples__sum}>= € 25.90</span>
-        </div>
-      </div>
-      <div className={styles.selectPeoples__container}>
-        <div>
-          <h4 className={styles.selectPeoples__title}>
-            Дети
-            <span className={styles.selectPeoples__age}> (до 13 лет)</span>
-          </h4>
-          <PriceBlock price="17.90" oldPrice="27.90" discount="15" />
-        </div>
-        <div className={styles.selectPeoples__container}>
-          <SelectNumber />
-          <span className={styles.selectPeoples__sum}>= € 0</span>
-        </div>
-      </div>
+      {prices &&
+        prices.prices.map((price, i) => (
+          <div key={i} className={styles.selectPeoples__container}>
+            <div>
+              <h4 className={styles.selectPeoples__title}>
+                {price.title}
+                <span className={styles.selectPeoples__age}>
+                  &nbsp;{price.description}
+                </span>
+              </h4>
+              <PriceBlock price={price.price.toString()} />
+            </div>
+            <div className={styles.selectPeoples__container}>
+              <SelectNumber />
+              <span className={styles.selectPeoples__sum}>
+                = € {price.price}
+              </span>
+            </div>
+          </div>
+        ))}
     </section>
   );
 };

@@ -11,7 +11,7 @@ export const getExcursionCards = async () => {
   "gallery": gallery[].asset._ref,
   "slug": slug.current,
   "weekdays": weekdays,
-  "duration": duration[]->hours,
+  "duration": duration->hours,
   "basePrices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value},
   "promotionalPrices": promotionalPrices[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}},
 }

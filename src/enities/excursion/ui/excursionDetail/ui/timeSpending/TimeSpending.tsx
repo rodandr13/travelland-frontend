@@ -5,6 +5,7 @@ import {
   StartTime,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { getEndTime } from "@/src/shared/lib/getEndTime";
 
 const daysOfWeek = [
   "Monday",
@@ -23,10 +24,7 @@ interface Props {
 }
 
 export const TimeSpending = ({ duration, weekdays, startTime }: Props) => {
-  const endTime = (startTime: string, duration: number) => {
-    const [hour, minute] = startTime.split(":");
-    return `${parseInt(hour, 10) + duration}:${minute}`;
-  };
+  const endTimes = getEndTime(startTime, duration);
   const filledDays = (weekdays: string[]) => {
     return daysOfWeek.map((day) => (weekdays.includes(day) ? day : ""));
   };
@@ -50,9 +48,7 @@ export const TimeSpending = ({ duration, weekdays, startTime }: Props) => {
                 <td className={styles.timeSpending__timeStart}>
                   <span>{item}</span>
                 </td>
-                <td className={styles.timeSpending__timeEnd}>
-                  {endTime(item, duration[0])}
-                </td>
+                <td className={styles.timeSpending__timeEnd}>{endTimes[i]}</td>
               </tr>
             ))}
           </tbody>
@@ -60,9 +56,7 @@ export const TimeSpending = ({ duration, weekdays, startTime }: Props) => {
       </div>
       <div className={styles.timeSpending__duration}>
         <h3 className={styles.timeSpending__smallTitle}>Duration</h3>
-        <p className={styles.timeSpending__durationValue}>
-          {duration.join(", ")} hours
-        </p>
+        <p className={styles.timeSpending__durationValue}>{duration} hours</p>
       </div>
     </div>
   );
