@@ -11,6 +11,7 @@ interface Props {
   baseDates: Dates;
   basePrices: Price[];
   weekdays: Weekdays;
+  promoPrices?: PromotionalPrice[];
   priceCorrections?: PromotionalPrice[];
 }
 
@@ -18,6 +19,7 @@ export const generatePriceMap = ({
   baseDates,
   basePrices,
   weekdays,
+  promoPrices,
   priceCorrections,
 }: Props): PricesMap => {
   const pricesMap: PricesMap = new Map();
@@ -26,33 +28,42 @@ export const generatePriceMap = ({
   startDate = startDate >= currentDate ? startDate : currentDate;
   const weekdaySet = new Set(weekdays);
 
+  const dayFormatCache = new Map(); // Cache for day formats
+
   eachDayOfInterval({
     start: parseISO(startDate),
     end: parseISO(baseDates.dateTo),
   }).forEach((day) => {
     const formattedDay = formatISO(day, { representation: "date" });
-    const formattedWeekday = day.toLocaleDateString("en-US", {
-      weekday: "long",
-    });
-    if (!weekdaySet.has(formattedWeekday)) return;
-
-    let dayPrices = basePrices;
-
-    if (priceCorrections && priceCorrections.length > 0) {
-      const correction = priceCorrections.find(
-        (correction) =>
-          formattedDay >= correction.dates.dateFrom &&
-          formattedDay <= correction.dates.dateTo &&
-          correction.weekdays.includes(formattedWeekday)
-      );
-
-      if (correction) {
-        dayPrices = correction.prices;
-      }
+    let formattedWeekday = dayFormatCache.get(formattedDay);
+    if (!formattedWeekday) {
+      formattedWeekday = day.toLocaleDateString("en-US", { weekday: "long" });
+      dayFormatCache.set(formattedDay, formattedWeekday); // Cache formatted weekday
     }
 
+    if (!weekdaySet.has(formattedWeekday)) return;
+
+    const promo = promoPrices?.find(
+      (p) =>
+        formattedDay >= p.dates.dateFrom &&
+        formattedDay <= p.dates.dateTo &&
+        p.weekdays.includes(formattedWeekday)
+    );
+    const correction =
+      !promo &&
+      priceCorrections?.find(
+        (c) =>
+          formattedDay >= c.dates.dateFrom &&
+          formattedDay <= c.dates.dateTo &&
+          c.weekdays.includes(formattedWeekday)
+      );
+
     pricesMap.set(formattedDay, {
-      prices: dayPrices,
+      prices: promo
+        ? promo.prices
+        : correction
+          ? correction.prices
+          : basePrices,
     });
   });
 

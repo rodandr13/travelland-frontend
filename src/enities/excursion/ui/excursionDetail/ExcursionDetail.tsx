@@ -26,6 +26,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
     priceCorrections: priceCorrections,
     baseDates: excursion.dates,
     weekdays: excursion.weekdays,
+    promoPrices: excursion.promotionalPrices,
   });
 
   const todayPriceForAdult = basePrices[0].price;
