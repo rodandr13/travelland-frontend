@@ -21,7 +21,6 @@ interface Props {
 export const ExcursionDetail = async ({ slug }: Props) => {
   const excursion = await getExcursionDetail({ slug });
   const { basePrices, promotionalPrices, priceCorrections } = excursion;
-
   const prices = generatePriceMap({
     basePrices: basePrices,
     priceCorrections: priceCorrections,
@@ -51,6 +50,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
               <MeetingPoint meetingPoint={excursion.meetingPoint} />
             </div>
             <Conditions
+              additionalTerms={excursion.additionalTerms}
               surcharge={excursion.surcharge}
               included={excursion.included}
             />

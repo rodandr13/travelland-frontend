@@ -32,7 +32,7 @@ export const PriceBlock = ({
             [styles[`priceBlock_${parent}__price`]]: parent,
           })}
         >
-          от <span className={clsx(styles.priceBlock__price)}>{price}€</span>
+          от <span className={clsx(styles.priceBlock__price)}>{price} €</span>
         </li>
         {oldPrice && (
           <li

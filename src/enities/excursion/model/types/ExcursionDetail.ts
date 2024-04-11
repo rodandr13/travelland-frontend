@@ -32,6 +32,8 @@ export interface RouteItem {
   description: string;
   gallery: string[];
 }
+
+export type AdditionalTerms = string[];
 export type Included = string[];
 export type Surcharge = string[];
 export type Weekdays = string[];
@@ -52,6 +54,7 @@ export type ExcursionType = {
   dates: Dates;
   included: Included;
   surcharge: Surcharge;
+  additionalTerms: AdditionalTerms;
   meetingPoint: IMeetingPoint;
   basePrices: Price[];
   promotionalPrices: PromotionalPrice[];

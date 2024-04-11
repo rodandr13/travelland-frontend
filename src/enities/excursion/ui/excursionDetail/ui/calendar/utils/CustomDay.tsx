@@ -30,7 +30,9 @@ export const CustomDay = ({ dayNumber, day, basePrices, prices }: Props) => {
     >
       <span className="react-datepicker__dayValue">{dayNumber}</span>
       {showPrice && (
-        <span className="react-datepicker__price">€ {adultPrice}</span>
+        <span className="react-datepicker__price">
+          € {adultPrice.toFixed(2)}
+        </span>
       )}
     </div>
   );

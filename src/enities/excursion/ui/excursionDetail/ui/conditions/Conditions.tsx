@@ -1,6 +1,7 @@
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 import {
+  AdditionalTerms,
   Included,
   Surcharge,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
@@ -8,9 +9,10 @@ import {
 interface Props {
   surcharge: Surcharge;
   included: Included;
+  additionalTerms: AdditionalTerms;
 }
 
-export const Conditions = ({ surcharge, included }: Props) => {
+export const Conditions = ({ surcharge, included, additionalTerms }: Props) => {
   return (
     <section className={styles.conditions}>
       <div className={styles.options}>
@@ -23,7 +25,7 @@ export const Conditions = ({ surcharge, included }: Props) => {
           Что включено
         </h3>
         <ul className={styles.options__list}>
-          {included.map((item, i) => (
+          {included?.map((item, i) => (
             <li key={i} className={styles.options__item}>
               {item}
             </li>
@@ -40,7 +42,7 @@ export const Conditions = ({ surcharge, included }: Props) => {
           Доплаты
         </h3>
         <ul className={styles.options__list}>
-          {surcharge.map((item, i) => (
+          {surcharge?.map((item, i) => (
             <li key={i} className={styles.options__item}>
               {item}
             </li>
@@ -57,7 +59,11 @@ export const Conditions = ({ surcharge, included }: Props) => {
           Дополнительные условия
         </h3>
         <ul className={styles.options__list}>
-          <li className={styles.options__item}>Добавить блок в админку</li>
+          {additionalTerms?.map((item, i) => (
+            <li key={i} className={styles.options__item}>
+              {item}
+            </li>
+          ))}
         </ul>
       </div>
     </section>
