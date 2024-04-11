@@ -1,26 +1,29 @@
-import { format } from "date-fns";
 import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import clsx from "clsx";
+import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
+import { PricesMap } from "@/src/shared/types/excursion";
 
 interface Props {
   dayNumber: number;
   day: Date;
   basePrices: Price[];
-  prices: any;
+  prices: PricesMap;
 }
 
 export const CustomDay = ({ dayNumber, day, basePrices, prices }: Props) => {
-  // const showPrice = isSelectableDate({ day, dates, weekdays });
-  const showPrice = prices.has(format(day, "dd-MM-yyyy"));
+  const dayKey = getFormattedDate(day);
+  const showPrice = prices.has(dayKey);
   const baseAdultPrice = basePrices ? basePrices[0].price : 0;
 
-  const adultPrice = showPrice
-    ? prices.get(format(day, "dd-MM-yyyy")).prices[0].price
-    : 0;
+  const adultPriceData = showPrice ? prices.get(dayKey) : null;
+  const adultPrice =
+    adultPriceData && adultPriceData.prices && adultPriceData.prices[0]
+      ? adultPriceData.prices[0].price
+      : 0;
+
   const isIncreased = baseAdultPrice < adultPrice;
   const isReduction =
     baseAdultPrice !== 0 && adultPrice !== 0 && baseAdultPrice > adultPrice;
-
   return (
     <div
       className={clsx(`react-datepicker__priceContainer`, {

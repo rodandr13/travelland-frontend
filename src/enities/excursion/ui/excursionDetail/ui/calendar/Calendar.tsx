@@ -13,8 +13,8 @@ import {
   Price,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
-import { format } from "date-fns";
 import { PricesMap } from "@/src/shared/types/excursion";
+import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 
 registerLocale("ru", ru);
 
@@ -43,7 +43,7 @@ export const Calendar = ({ dates, weekdays, basePrices, prices }: Props) => {
         renderDayContents={(dayNumber, day: Date) =>
           CustomDay({ dayNumber, day, basePrices, prices })
         }
-        filterDate={(day) => prices.has(format(day, "dd-MM-yyyy"))}
+        filterDate={(day) => prices.has(getFormattedDate(day))}
       />
     </section>
   );

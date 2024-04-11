@@ -1,5 +1,4 @@
-import { eachDayOfInterval, format } from "date-fns";
-import { enUS } from "date-fns/locale";
+import { eachDayOfInterval, formatISO, parseISO } from "date-fns";
 import {
   Dates,
   Price,
@@ -12,7 +11,7 @@ interface Props {
   baseDates: Dates;
   basePrices: Price[];
   weekdays: Weekdays;
-  priceCorrections: PromotionalPrice[];
+  priceCorrections?: PromotionalPrice[];
 }
 
 export const generatePriceMap = ({
@@ -20,38 +19,42 @@ export const generatePriceMap = ({
   basePrices,
   weekdays,
   priceCorrections,
-}: Props) => {
+}: Props): PricesMap => {
   const pricesMap: PricesMap = new Map();
-  let startDate = new Date(baseDates.dateFrom);
-  const currentDate = new Date();
+  let startDate = baseDates.dateFrom;
+  const currentDate = new Date().toISOString().slice(0, 10);
   startDate = startDate >= currentDate ? startDate : currentDate;
-  const hasPriceCorrections = priceCorrections && priceCorrections.length > 0;
+  const weekdaySet = new Set(weekdays);
 
   eachDayOfInterval({
-    start: startDate,
-    end: baseDates.dateTo,
+    start: parseISO(startDate),
+    end: parseISO(baseDates.dateTo),
   }).forEach((day) => {
-    if (weekdays.includes(format(day, "EEEE", { locale: enUS }))) {
-      pricesMap.set(format(day, "dd-MM-yyyy"), {
-        prices: basePrices,
-      });
-      if (hasPriceCorrections) {
-        for (let i = 0; i < priceCorrections.length; i++) {
-          if (
-            day >= new Date(priceCorrections[i].dates.dateFrom) &&
-            day <= new Date(priceCorrections[i].dates.dateTo) &&
-            priceCorrections[i].weekdays.includes(
-              format(day, "EEEE", { locale: enUS })
-            )
-          ) {
-            pricesMap.set(format(day, "dd-MM-yyyy"), {
-              prices: priceCorrections[i].prices,
-            });
-            break;
-          }
-        }
+    const formattedDay = formatISO(day, { representation: "date" });
+    const formattedWeekday = day.toLocaleDateString("en-US", {
+      weekday: "long",
+    });
+    if (!weekdaySet.has(formattedWeekday)) return;
+
+    let dayPrices = basePrices;
+
+    if (priceCorrections && priceCorrections.length > 0) {
+      const correction = priceCorrections.find(
+        (correction) =>
+          formattedDay >= correction.dates.dateFrom &&
+          formattedDay <= correction.dates.dateTo &&
+          correction.weekdays.includes(formattedWeekday)
+      );
+
+      if (correction) {
+        dayPrices = correction.prices;
       }
     }
+
+    pricesMap.set(formattedDay, {
+      prices: dayPrices,
+    });
   });
+
   return pricesMap;
 };
