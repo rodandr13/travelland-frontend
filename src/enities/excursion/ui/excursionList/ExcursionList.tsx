@@ -22,8 +22,8 @@ export const ExcursionList = ({ addFavorite, excursionCards }: Props) => {
   const filteredExcursions = activeFilter
     ? excursionCards.filter(
         (excursion) =>
-          excursion.category === activeFilter ||
-          excursion.subcategory.some((item) => item === activeFilter)
+          excursion.category.title === activeFilter ||
+          excursion.subcategory.some((item) => item.title === activeFilter)
       )
     : excursionCards;
 

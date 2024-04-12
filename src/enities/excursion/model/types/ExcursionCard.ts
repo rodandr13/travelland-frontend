@@ -15,7 +15,7 @@ export interface IExcursionCard {
   weekdays: Weekdays;
   category: Category;
   duration: Duration;
-  subcategory: Subcategory;
+  subcategory: Subcategory[];
   basePrices: Price[];
   promotionalPrices: PromotionalPrice[];
 }

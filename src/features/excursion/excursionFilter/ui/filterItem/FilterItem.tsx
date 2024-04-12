@@ -30,7 +30,14 @@ export const FilterItem = ({ filter }: Props) => {
         onChange={handleChange}
       />
       <label htmlFor={filter._id} className={styles.filterItem__label}>
-        <Image src={imageUrl} alt="" width="40" height="40" />
+        <div className={styles.filterItem__imageContainer}>
+          <Image
+            className={styles.filterItem__image}
+            src={imageUrl}
+            alt=""
+            fill
+          />
+        </div>
         <span className={styles.filterItem__caption}>{filter.title}</span>
       </label>
     </div>

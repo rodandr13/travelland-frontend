@@ -71,7 +71,7 @@ export type ExcursionType = {
   priceCorrections: PromotionalPrice[];
   route: RouteItem[];
   gallery: string[];
-  subcategory: Subcategory;
+  subcategory: Subcategory[];
   category: Category;
   parameters: Parameter[];
 };
