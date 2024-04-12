@@ -21,10 +21,17 @@ export const getExcursionDetail = async ({ slug }: Props) => {
   "priceCorrections": priceCorrections[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}},
   "city": city->title[_key == "ru"][0].value,
   "country": city->country->title[_key == "ru"][0].value,
-  "category": excursionCategory->title[_key == "ru"][0].value,
-  "subcategory": excursionSubcategory[]->title[0].value,
+  "category": excursionCategory->{
+    "title": title[_key == "ru"][0].value,
+    "icon": icon.asset._ref
+  },
+  "subcategory": excursionSubcategory[]->{
+    "title": title[0].value,
+    "icon": icon.asset._ref
+  },
   "included": included[]->title[_key == "ru"][0].value,
   "surcharge": surcharge[]->title[_key == "ru"][0].value,
+  "parameters": excursionParameters[]->{"title": title[_key == "ru"][0].value, "value": value[_key == "ru"][0].value,"icon": icon.asset._ref},
   "additionalTerms": additionalTerms[]->title[_key == "ru"][0].value,
   "meetingPoint": meetingPoint->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, location{lng, lat} },
   "route": route[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[].asset._ref},

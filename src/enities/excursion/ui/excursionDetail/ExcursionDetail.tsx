@@ -13,6 +13,7 @@ import { PriceSection } from "./ui/priceSection";
 import { AttentionBlock } from "./ui/attentionBlock";
 import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
 import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
+import { Parameters } from "@/src/enities/excursion/ui/excursionDetail/ui/parameters";
 
 interface Props {
   slug: string;
@@ -46,6 +47,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
                   weekdays={excursion.weekdays}
                   duration={excursion.duration}
                 />
+                <Parameters parameters={excursion.parameters} />
                 <Description description={excursion.description} />
               </div>
               <MeetingPoint meetingPoint={excursion.meetingPoint} />

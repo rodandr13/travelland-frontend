@@ -39,9 +39,19 @@ export type Surcharge = string[];
 export type Weekdays = string[];
 export type Duration = number;
 export type StartTime = string[];
-export type Subcategory = string[];
-export type Category = string;
-
+export type Subcategory = {
+  title: string;
+  icon: string;
+};
+export type Category = {
+  title: string;
+  icon: string;
+};
+export type Parameter = {
+  title: string;
+  value: string;
+  icon: string;
+};
 export type ExcursionType = {
   _id: string;
   title: string;
@@ -63,4 +73,5 @@ export type ExcursionType = {
   gallery: string[];
   subcategory: Subcategory;
   category: Category;
+  parameters: Parameter[];
 };
