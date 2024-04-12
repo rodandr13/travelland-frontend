@@ -28,7 +28,7 @@ export const generatePriceMap = ({
   startDate = startDate >= currentDate ? startDate : currentDate;
   const weekdaySet = new Set(weekdays);
 
-  const dayFormatCache = new Map(); // Cache for day formats
+  const dayFormatCache = new Map();
 
   eachDayOfInterval({
     start: parseISO(startDate),
@@ -38,7 +38,7 @@ export const generatePriceMap = ({
     let formattedWeekday = dayFormatCache.get(formattedDay);
     if (!formattedWeekday) {
       formattedWeekday = day.toLocaleDateString("en-US", { weekday: "long" });
-      dayFormatCache.set(formattedDay, formattedWeekday); // Cache formatted weekday
+      dayFormatCache.set(formattedDay, formattedWeekday);
     }
 
     if (!weekdaySet.has(formattedWeekday)) return;
