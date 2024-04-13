@@ -13,6 +13,7 @@
   &__timeGroup {
     display: flex;
     gap: 20px;
+    flex-wrap: wrap;
   }
   &__title {
     margin: 0 0 40px 0;

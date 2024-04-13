@@ -25,7 +25,6 @@ export const ExcursionList = ({ addFavorite, excursionCards }: Props) => {
           excursion.subcategory.some((item) => item === activeFilter)
       )
     : excursionCards;
-  console.log(excursionCards);
   return (
     <section className={styles.excursionList}>
       {filteredExcursions.length > 0 ? (

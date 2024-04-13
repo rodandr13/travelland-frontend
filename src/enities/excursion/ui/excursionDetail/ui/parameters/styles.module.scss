@@ -9,12 +9,13 @@
     display: flex;
     list-style-type: none;
     flex-wrap: wrap;
-    gap: 30px 30px;
+    gap: 30px 15px;
   }
   &__imageContainer {
     position: relative;
     width: 35px;
     height: 35px;
+    min-width: 35px;
   }
   &__image {
     object-fit: contain;
@@ -23,7 +24,7 @@
     display: flex;
     gap: 15px;
     box-sizing: border-box;
-    width: calc(50% - 30px);
+    width: calc(50% - 15px);
   }
   &__title {
     margin: 0;
@@ -40,4 +41,40 @@
     line-height: 1.5;
   }
 
+}
+
+@media screen and (max-width: 1300px){
+  .parameters {
+    &__item {
+      width: calc(33.3% - 15px);
+    }
+  }
+}
+@media screen and (max-width: 1100px){
+  .parameters {
+    &__item {
+      width: calc(50% - 15px);
+    }
+  }
+}
+@media screen and (max-width: 900px){
+  .parameters {
+    &__item {
+      width: calc(33.3% - 15px);
+    }
+  }
+}
+@media screen and (max-width: 700px){
+  .parameters {
+    &__item {
+      width: calc(50% - 15px);
+    }
+  }
+}
+@media screen and (max-width: 500px){
+  .parameters {
+    &__item {
+      width: 100%;
+    }
+  }
 }

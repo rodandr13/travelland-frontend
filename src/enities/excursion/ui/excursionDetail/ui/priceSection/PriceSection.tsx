@@ -31,7 +31,7 @@ export const PriceSection = ({ minPrice, basePrice }: Props) => {
           Скидка 5% при оплате картой
         </li>
       </ul>
-      <Button title="Забронировать" />
+      <Button title="Бронировать" />
     </section>
   );
 };
