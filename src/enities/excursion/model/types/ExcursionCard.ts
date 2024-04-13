@@ -1,7 +1,5 @@
 import {
-  Category,
   Duration,
-  Subcategory,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
 
@@ -11,9 +9,9 @@ export interface IExcursionCard {
   slug: string;
   gallery: string[];
   weekdays: Weekdays;
-  category: Category;
+  category: string;
   duration: Duration;
-  subcategory: Subcategory[];
+  subcategory: string[];
   basePrices: number;
   promotionalPrices: number[];
   priceCorrections: number[];

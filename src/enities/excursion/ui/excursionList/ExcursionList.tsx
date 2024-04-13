@@ -18,15 +18,14 @@ export const ExcursionList = ({ addFavorite, excursionCards }: Props) => {
   useEffect(() => {
     dispatch(setFilter(""));
   }, [dispatch]);
-
   const filteredExcursions = activeFilter
     ? excursionCards.filter(
         (excursion) =>
-          excursion.category.title === activeFilter ||
-          excursion.subcategory.some((item) => item.title === activeFilter)
+          excursion.category === activeFilter ||
+          excursion.subcategory.some((item) => item === activeFilter)
       )
     : excursionCards;
-
+  console.log(excursionCards);
   return (
     <section className={styles.excursionList}>
       {filteredExcursions.length > 0 ? (
