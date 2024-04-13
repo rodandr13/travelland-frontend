@@ -4,11 +4,11 @@ import styles from "./styles.module.scss";
 import { ExcursionCard } from "@/src/enities/excursion";
 import { ExcursionCardsType } from "@/src/enities/excursion/model/types/ExcursionCard";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 import { setFilter } from "@/src/features/excursion/excursionFilter/model/filtetSlice";
 
 interface Props {
-  addFavorite: React.ReactNode;
+  addFavorite: ReactNode;
   excursionCards: ExcursionCardsType;
 }
 

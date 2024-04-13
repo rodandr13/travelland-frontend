@@ -9,10 +9,18 @@ interface Props {
 }
 
 export const PriceBlock = ({ price, basePrice, size, parent }: Props) => {
-  let discount;
+  let discount: number | undefined = undefined;
+  let showBasePrice = true;
+
   if (price !== undefined && basePrice !== undefined && basePrice > 0) {
-    discount = Math.round(((basePrice - price) / basePrice) * 100);
+    if (price !== basePrice) {
+      discount = Math.round(((basePrice - price) / basePrice) * 100);
+    } else {
+      showBasePrice = false;
+      discount = undefined;
+    }
   }
+
   return (
     <section
       className={clsx(styles.priceBlock, {
@@ -29,18 +37,21 @@ export const PriceBlock = ({ price, basePrice, size, parent }: Props) => {
             [styles[`priceBlock_${parent}__price`]]: parent,
           })}
         >
-          от <span className={clsx(styles.priceBlock__price)}>{price} €</span>
+          от{" "}
+          <span className={clsx(styles.priceBlock__price)}>
+            {price !== undefined ? price.toFixed(2) : ""} €
+          </span>
         </li>
-        {basePrice && (
+        {showBasePrice && basePrice && (
           <li
             className={clsx(styles.priceBlock__oldPrice, {
               [styles[`priceBlock_${parent}__oldPrice`]]: parent,
             })}
           >
-            {basePrice} €
+            {basePrice.toFixed(2)} €
           </li>
         )}
-        {discount && (
+        {discount !== undefined && discount > 0 && (
           <li
             className={clsx(styles.priceBlock__discount, {
               [styles[`priceBlock_${parent}__discount`]]: parent,
