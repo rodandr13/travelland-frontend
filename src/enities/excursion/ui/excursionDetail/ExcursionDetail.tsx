@@ -15,6 +15,8 @@ import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDeta
 import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
 import { Parameters } from "@/src/enities/excursion/ui/excursionDetail/ui/parameters";
 import { Categories } from "@/src/enities/excursion/ui/excursionDetail/ui/categories";
+import { findAdultMinPrice } from "@/src/shared/lib/findAdultMinPrice";
+import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
 
 interface Props {
   slug: string;
@@ -31,7 +33,8 @@ export const ExcursionDetail = async ({ slug }: Props) => {
     promoPrices: excursion.promotionalPrices,
   });
 
-  const todayPriceForAdult = basePrices[0].price;
+  const baseAdultPrice = findAdultBasePrice(basePrices);
+  const minPrice = findAdultMinPrice(prices);
 
   return (
     <section className={styles.excursionDetail}>
@@ -78,7 +81,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
           />
         </div>
         <div className={styles.excursionDetail__sideBar}>
-          <PriceSection todayPriceForAdult={todayPriceForAdult} />
+          <PriceSection minPrice={minPrice} basePrice={baseAdultPrice} />
           <AttentionBlock />
         </div>
       </div>

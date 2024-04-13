@@ -21,7 +21,7 @@ export const SelectPeoples = ({ prices }: Props) => {
                   &nbsp;{price.description}
                 </span>
               </h4>
-              <PriceBlock price={price.price.toString()} />
+              <PriceBlock price={price.price} />
             </div>
             <div className={styles.selectPeoples__container}>
               <SelectNumber />

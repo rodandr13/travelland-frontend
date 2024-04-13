@@ -2,20 +2,17 @@ import styles from "./styles.module.scss";
 import clsx from "clsx";
 
 interface Props {
-  price: string;
-  oldPrice?: string;
-  discount?: string;
+  price?: number;
+  basePrice?: number;
   size?: "s" | "m";
   parent?: string;
 }
 
-export const PriceBlock = ({
-  price,
-  oldPrice,
-  discount,
-  size,
-  parent,
-}: Props) => {
+export const PriceBlock = ({ price, basePrice, size, parent }: Props) => {
+  let discount;
+  if (price !== undefined && basePrice !== undefined && basePrice > 0) {
+    discount = Math.round(((basePrice - price) / basePrice) * 100);
+  }
   return (
     <section
       className={clsx(styles.priceBlock, {
@@ -34,13 +31,13 @@ export const PriceBlock = ({
         >
           от <span className={clsx(styles.priceBlock__price)}>{price} €</span>
         </li>
-        {oldPrice && (
+        {basePrice && (
           <li
             className={clsx(styles.priceBlock__oldPrice, {
               [styles[`priceBlock_${parent}__oldPrice`]]: parent,
             })}
           >
-            {oldPrice} €
+            {basePrice} €
           </li>
         )}
         {discount && (

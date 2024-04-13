@@ -50,10 +50,7 @@ export const ExcursionCard = ({ addFavorite, card }: Props) => {
         <div className={styles.excursionCard__duration}>
           {card.duration} hours
         </div>
-        <PriceBlock
-          price={newPrice.toString()}
-          oldPrice={oldPrice.toString()}
-        />
+        <PriceBlock price={newPrice} basePrice={oldPrice} />
       </Link>
     </article>
   );
