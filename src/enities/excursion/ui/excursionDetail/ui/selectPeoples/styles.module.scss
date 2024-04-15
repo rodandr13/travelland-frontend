@@ -1,6 +1,9 @@
 .selectPeoples {
   display: flex;
-  gap: 100px;
+  gap: 60px;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding: 0 40px 0 0;
   &__sum {
     font-size: 18px;
     position: absolute;
@@ -24,16 +27,5 @@
   }
   &__age {
     color: #a4a4a4;
-  }
-}
-@media screen and (max-width: 700px) {
-  .selectPeoples {
-    gap: 60px;
-  }
-}
-
-@media screen and (max-width: 650px) {
-  .selectPeoples {
-    flex-direction: column;
   }
 }

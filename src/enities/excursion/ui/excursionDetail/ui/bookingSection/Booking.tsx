@@ -8,19 +8,21 @@ import {
   Dates,
   Duration,
   Price,
-  PromotionalPrice,
   StartTime,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { PricesMap } from "@/src/shared/types/excursion";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
+import { useEffect, useRef } from "react";
+import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
+import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
+import { setVisible } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
 
 interface Props {
   duration: Duration;
   weekdays: Weekdays;
   startTime: StartTime;
   basePrices: Price[];
-  promoPrices?: PromotionalPrice[];
   dates: Dates;
   prices: PricesMap;
 }
@@ -28,15 +30,20 @@ interface Props {
 export const Booking = ({
   duration,
   basePrices,
-  promoPrices,
   weekdays,
   startTime,
   dates,
   prices,
 }: Props) => {
+  const bookingRef = useRef<HTMLDivElement | null>(null);
+  const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(setVisible(isVisible));
+  }, [isVisible]);
   return (
-    <section className={styles.booking}>
+    <section className={styles.booking} ref={bookingRef}>
       <div>
         <h2 className={styles.booking__title}>Выберите дату</h2>
         <Calendar
@@ -79,7 +86,7 @@ export const Booking = ({
       </div>
       <div>
         <h2 className={styles.booking__title}>Количество человек</h2>
-        <SelectPeoples prices={prices.get("20-05-2024")} />
+        <SelectPeoples prices={prices} />
       </div>
     </section>
   );

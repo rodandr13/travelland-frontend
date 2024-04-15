@@ -64,6 +64,7 @@ export const generatePriceMap = ({
         : correction
           ? correction.prices
           : basePrices,
+      basePrice: basePrices,
     });
   });
 

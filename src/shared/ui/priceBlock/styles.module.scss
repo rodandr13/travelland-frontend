@@ -2,7 +2,7 @@
   --base-font-size: 20px;
 
   &_size_m {
-    --base-font-size: 26px;
+    --base-font-size: 25px;
   }
 
   &__list {
@@ -17,14 +17,16 @@
     font-size: var(--base-font-size);
     font-weight: 600;
     color: #972537;
+    white-space: nowrap;
   }
 
   &__oldPrice {
-    font-size: calc(var(--base-font-size) * 0.6);
+    font-size: calc(var(--base-font-size) * 0.8);
     font-weight: 400;
     color: #7a7a7a;
     margin: 0 0 0 10px;
     position: relative;
+    white-space: nowrap;
 
     &::after {
       content: "";
@@ -74,6 +76,11 @@
 }
 
 @media screen and (max-width: 370px) {
+  .priceBlock {
+    &__price {
+      font-size: calc(var(--base-font-size) * 0.9);
+    }
+  }
   .priceBlock_priceSection {
     &__discount {
       display: none;

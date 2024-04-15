@@ -6,9 +6,16 @@ interface Props {
   basePrice?: number;
   size?: "s" | "m";
   parent?: string;
+  actualPrice?: boolean | undefined;
 }
 
-export const PriceBlock = ({ price, basePrice, size, parent }: Props) => {
+export const PriceBlock = ({
+  price,
+  basePrice,
+  size,
+  parent,
+  actualPrice,
+}: Props) => {
   let discount: number | undefined = undefined;
   let showBasePrice = true;
 
@@ -37,7 +44,7 @@ export const PriceBlock = ({ price, basePrice, size, parent }: Props) => {
             [styles[`priceBlock_${parent}__price`]]: parent,
           })}
         >
-          от{" "}
+          {!actualPrice && `от `}
           <span className={clsx(styles.priceBlock__price)}>
             {price !== undefined ? price.toFixed(2) : ""} €
           </span>

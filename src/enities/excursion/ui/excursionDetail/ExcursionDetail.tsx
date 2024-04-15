@@ -76,7 +76,6 @@ export const ExcursionDetail = async ({ slug }: Props) => {
             weekdays={excursion.weekdays}
             duration={excursion.duration}
             basePrices={excursion.basePrices}
-            promoPrices={excursion.promotionalPrices}
             prices={prices}
           />
         </div>
