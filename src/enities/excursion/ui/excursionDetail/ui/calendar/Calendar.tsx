@@ -7,11 +7,7 @@ import { CustomDay } from "./utils/CustomDay";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 import styles from "./styles.module.scss";
-import {
-  Dates,
-  Price,
-  Weekdays,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { PricesMap } from "@/src/shared/types/excursion";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
@@ -22,16 +18,13 @@ import { selectDateByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/b
 registerLocale("ru", ru);
 
 interface Props {
-  dates: Dates;
-  weekdays: Weekdays;
   basePrices: Price[];
   prices: PricesMap;
 }
-export const Calendar = ({ dates, weekdays, basePrices, prices }: Props) => {
+export const Calendar = ({ basePrices, prices }: Props) => {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const monthsShown = 2;
-
   const selectedDate = useAppSelector(selectDateByKey(pathname as string));
 
   const handleChange = (date: Date) => {
@@ -39,7 +32,10 @@ export const Calendar = ({ dates, weekdays, basePrices, prices }: Props) => {
       dispatch(
         setDetails({
           key: pathname,
-          details: { selectedDate: date.toString() },
+          details: {
+            selectedDate: date.toString(),
+            prices: prices.get(getFormattedDate(date)),
+          },
         })
       );
     }

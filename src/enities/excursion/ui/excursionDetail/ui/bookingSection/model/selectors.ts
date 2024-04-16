@@ -11,12 +11,7 @@ export const selectVisibility = createSelector(
 export const selectDetailsByKey = (key: string) =>
   createSelector(
     [selectBookingState],
-    (bookingState) =>
-      bookingState.details[key] || {
-        selectedDate: null,
-        participants: [],
-        time: null,
-      }
+    (bookingState) => bookingState.details[key]
   );
 
 export const selectParticipantsByKey = (key: string) =>
@@ -32,4 +27,9 @@ export const selectTimeByKey = (key: string) =>
 export const selectDateByKey = (key: string) =>
   createSelector([selectDetailsByKey(key)], (details) =>
     details ? details.selectedDate : null
+  );
+
+export const selectPricesByKey = (key: string) =>
+  createSelector([selectDetailsByKey(key)], (details) =>
+    details ? details.prices : null
   );

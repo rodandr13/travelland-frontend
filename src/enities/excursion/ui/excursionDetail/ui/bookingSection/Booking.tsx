@@ -45,7 +45,6 @@ export const Booking = ({
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
-
   const selectedTime = useAppSelector(selectTimeByKey(pathname as string));
   useEffect(() => {
     dispatch(setVisible(isVisible));
@@ -61,12 +60,7 @@ export const Booking = ({
     <section className={styles.booking} ref={bookingRef}>
       <div>
         <h2 className={styles.booking__title}>Выберите дату</h2>
-        <Calendar
-          prices={prices}
-          basePrices={basePrices}
-          weekdays={weekdays}
-          dates={dates}
-        />
+        <Calendar prices={prices} basePrices={basePrices} />
       </div>
       <div>
         <h2 className={styles.booking__title}>Время</h2>
