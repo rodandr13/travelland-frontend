@@ -21,7 +21,7 @@ import {
   setVisible,
 } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
 import { usePathname } from "next/navigation";
-import { selectTimeByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
+import { selectDetailsByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
 
 interface Props {
   duration: Duration;
@@ -32,20 +32,13 @@ interface Props {
   prices: PricesMap;
 }
 
-export const Booking = ({
-  duration,
-  basePrices,
-  weekdays,
-  startTime,
-  dates,
-  prices,
-}: Props) => {
+export const Booking = ({ duration, basePrices, startTime, prices }: Props) => {
   const bookingRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const selectedTime = useAppSelector(selectTimeByKey(pathname as string));
+  const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
   useEffect(() => {
     dispatch(setVisible(isVisible));
   }, [dispatch, isVisible]);
@@ -62,47 +55,57 @@ export const Booking = ({
         <h2 className={styles.booking__title}>Выберите дату</h2>
         <Calendar prices={prices} basePrices={basePrices} />
       </div>
-      <div>
-        <h2 className={styles.booking__title}>Время</h2>
-        <div className={styles.booking__timeGroup}>
-          {startTime &&
-            startTime.map((time, i) => (
-              <div
-                key={i}
-                className={clsx(styles.time, {
-                  [styles.time_active]: selectedTime === time,
-                })}
-                onClick={() => handleClick(time)}
-              >
-                <div className={styles.time__container}>
-                  <span className={styles.time__title}>Начало</span>
-                  <span className={styles.time__value}>{time}</span>
-                </div>
+      {bookingDetails?.selectedDate && (
+        <div>
+          <h2 className={styles.booking__title}>Время</h2>
+          <div className={styles.booking__timeGroup}>
+            {startTime &&
+              startTime.map((time, i) => (
                 <div
-                  className={clsx(
-                    styles.time__container,
-                    styles.time__container_end
-                  )}
+                  key={i}
+                  className={clsx(styles.time, {
+                    [styles.time_active]: bookingDetails?.time === time,
+                  })}
+                  onClick={() => handleClick(time)}
                 >
-                  <span
-                    className={clsx(styles.time__title, styles.time__title_end)}
+                  <div className={styles.time__container}>
+                    <span className={styles.time__title}>Начало</span>
+                    <span className={styles.time__value}>{time}</span>
+                  </div>
+                  <div
+                    className={clsx(
+                      styles.time__container,
+                      styles.time__container_end
+                    )}
                   >
-                    Конец
-                  </span>
-                  <span
-                    className={clsx(styles.time__value, styles.time__value_end)}
-                  >
-                    ≈{endTimes[i]}
-                  </span>
+                    <span
+                      className={clsx(
+                        styles.time__title,
+                        styles.time__title_end
+                      )}
+                    >
+                      Конец
+                    </span>
+                    <span
+                      className={clsx(
+                        styles.time__value,
+                        styles.time__value_end
+                      )}
+                    >
+                      ≈{endTimes[i]}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+          </div>
         </div>
-      </div>
-      <div>
-        <h2 className={styles.booking__title}>Количество человек</h2>
-        <SelectPeoples prices={prices} />
-      </div>
+      )}
+      {bookingDetails?.time && (
+        <div>
+          <h2 className={styles.booking__title}>Количество человек</h2>
+          <SelectPeoples prices={prices} />
+        </div>
+      )}
     </section>
   );
 };

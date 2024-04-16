@@ -18,9 +18,10 @@ import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 interface Props {
   minPrice: number | undefined;
   basePrice: number | undefined;
+  title?: string;
 }
 
-export const PriceSection = ({ minPrice, basePrice }: Props) => {
+export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
   const pathname = usePathname();
   const bookingIsVisible = useAppSelector(selectVisibility);
   const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
@@ -92,9 +93,13 @@ export const PriceSection = ({ minPrice, basePrice }: Props) => {
           )}
         >
           <div>
+            <span className={styles.priceSection__caption}>Экскурсия</span>
+            <h3 className={styles.priceSection__title}>{title}</h3>
+          </div>
+          <div>
             {bookingDetails?.selectedDate && (
               <h3 className={styles.priceSection__title}>
-                {format(new Date(bookingDetails.selectedDate), "dd MMMM yyyy", {
+                {format(new Date(bookingDetails.selectedDate), "d MMMM yyyy", {
                   locale: ru,
                 })}
               </h3>
