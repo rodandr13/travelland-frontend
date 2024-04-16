@@ -15,8 +15,12 @@ import { PricesMap } from "@/src/shared/types/excursion";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useEffect, useRef } from "react";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-import { setVisible } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
+import {
+  setDetails,
+  setVisible,
+} from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
+import { usePathname } from "next/navigation";
 
 interface Props {
   duration: Duration;
@@ -39,9 +43,22 @@ export const Booking = ({
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
+  const pathname = usePathname();
+  const details = useAppSelector(
+    (state) =>
+      state.booking.details[pathname as string] || { selectedDate: null }
+  );
+  const selectedTime = details.time;
   useEffect(() => {
     dispatch(setVisible(isVisible));
-  }, [isVisible]);
+  }, [dispatch, isVisible]);
+
+  const handleClick = (time: string) => {
+    if (pathname) {
+      dispatch(setDetails({ key: pathname, details: { time: time } }));
+    }
+  };
+
   return (
     <section className={styles.booking} ref={bookingRef}>
       <div>
@@ -58,7 +75,13 @@ export const Booking = ({
         <div className={styles.booking__timeGroup}>
           {startTime &&
             startTime.map((time, i) => (
-              <button key={i} className={styles.time}>
+              <div
+                key={i}
+                className={clsx(styles.time, {
+                  [styles.time_active]: selectedTime === time,
+                })}
+                onClick={() => handleClick(time)}
+              >
                 <div className={styles.time__container}>
                   <span className={styles.time__title}>Начало</span>
                   <span className={styles.time__value}>{time}</span>
@@ -80,7 +103,7 @@ export const Booking = ({
                     ≈{endTimes[i]}
                   </span>
                 </div>
-              </button>
+              </div>
             ))}
         </div>
       </div>

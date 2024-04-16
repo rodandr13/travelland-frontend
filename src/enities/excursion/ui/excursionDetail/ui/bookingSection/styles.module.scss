@@ -39,8 +39,18 @@
   outline: none;
   cursor: pointer;
   background: #f5f5f5;
+
   &:hover {
     background: #f0f0f0;
+  }
+  &_active {
+    background: #70b177;
+    &:hover {
+      background: #5da465;
+    }
+  }
+  &_active &__title, &_active &__value{
+    color: #ffffff;
   }
   &__container {
     display: flex;

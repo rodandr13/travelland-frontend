@@ -73,7 +73,12 @@ export const PriceSection = ({ minPrice, basePrice }: Props) => {
       {showBlockPrice && (
         <section className={clsx(styles.priceSection, animationClassPrice)}>
           <div>
-            <PriceBlock parent="priceSection" {...priceProps} size="m" />
+            <PriceBlock
+              parent="priceSection"
+              {...priceProps}
+              size="m"
+              actualPrice
+            />
           </div>
           <Button title="Выберите дату" disabled={true} />
         </section>

@@ -4,14 +4,22 @@ import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { SelectNumber } from "./ui/";
 import styles from "./styles.module.scss";
 import { PricesMap } from "@/src/shared/types/excursion";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { usePathname } from "next/navigation";
+import { setDetails } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
 
 interface Props {
   prices: PricesMap;
 }
 export const SelectPeoples = ({ prices }: Props) => {
+  const dispatch = useAppDispatch();
+  const pathname = usePathname();
   const tempPrice = prices.get("2024-05-20");
   const basePrice = prices.get("2024-05-20")?.basePrice;
+  const details = useAppSelector(
+    (state) => state.booking.details[pathname as string] || { participants: [] }
+  );
+  const participants = details.participants;
   let values: number[] = [];
   if (tempPrice && tempPrice.prices) {
     const valuesLength = tempPrice.prices.length;
@@ -20,11 +28,19 @@ export const SelectPeoples = ({ prices }: Props) => {
       values[0] = 2;
     }
   }
-  const [selectedValues, setSelectedValues] = useState<number[]>(values);
-  const handleNumberChange = (index: number, newValue: number) => {
-    const updatedValues = [...selectedValues];
-    updatedValues[index] = newValue;
-    setSelectedValues(updatedValues);
+
+  const handleChange = (index: number) => (newValue: number) => {
+    const updatedParticipants = [...participants];
+    updatedParticipants[index] = newValue;
+
+    if (pathname) {
+      dispatch(
+        setDetails({
+          key: pathname,
+          details: { participants: updatedParticipants },
+        })
+      );
+    }
   };
 
   return (
@@ -47,11 +63,11 @@ export const SelectPeoples = ({ prices }: Props) => {
             </div>
             <div className={styles.selectPeoples__container}>
               <SelectNumber
-                value={selectedValues[i]}
-                onNumberChange={(newValue) => handleNumberChange(i, newValue)}
+                value={participants[i] || 0}
+                onNumberChange={handleChange(i)}
               />
               <span className={styles.selectPeoples__sum}>
-                = {(price.price * selectedValues[i]).toFixed(2)} €
+                = {price.price.toFixed(2)} €
               </span>
             </div>
           </div>

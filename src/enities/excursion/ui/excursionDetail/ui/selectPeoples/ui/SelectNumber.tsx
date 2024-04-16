@@ -6,9 +6,6 @@ interface Props {
 }
 
 export const SelectNumber = ({ value, onNumberChange }: Props) => {
-  const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    console.log(e.target.value);
-  };
   return (
     <div className={styles.selectNumber}>
       <select
