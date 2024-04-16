@@ -7,6 +7,7 @@ import { PricesMap } from "@/src/shared/types/excursion";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { usePathname } from "next/navigation";
 import { setDetails } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
+import { selectParticipantsByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
 
 interface Props {
   prices: PricesMap;
@@ -16,10 +17,9 @@ export const SelectPeoples = ({ prices }: Props) => {
   const pathname = usePathname();
   const tempPrice = prices.get("2024-05-20");
   const basePrice = prices.get("2024-05-20")?.basePrice;
-  const details = useAppSelector(
-    (state) => state.booking.details[pathname as string] || { participants: [] }
+  const participants = useAppSelector(
+    selectParticipantsByKey(pathname as string)
   );
-  const participants = details.participants;
   let values: number[] = [];
   if (tempPrice && tempPrice.prices) {
     const valuesLength = tempPrice.prices.length;

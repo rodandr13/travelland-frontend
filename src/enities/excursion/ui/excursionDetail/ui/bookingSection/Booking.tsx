@@ -21,6 +21,7 @@ import {
   setVisible,
 } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
 import { usePathname } from "next/navigation";
+import { selectTimeByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
 
 interface Props {
   duration: Duration;
@@ -44,11 +45,8 @@ export const Booking = ({
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
-  const details = useAppSelector(
-    (state) =>
-      state.booking.details[pathname as string] || { selectedDate: null }
-  );
-  const selectedTime = details.time;
+
+  const selectedTime = useAppSelector(selectTimeByKey(pathname as string));
   useEffect(() => {
     dispatch(setVisible(isVisible));
   }, [dispatch, isVisible]);

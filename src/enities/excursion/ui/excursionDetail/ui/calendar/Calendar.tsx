@@ -17,6 +17,7 @@ import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { usePathname } from "next/navigation";
 import { setDetails } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
+import { selectDateByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
 
 registerLocale("ru", ru);
 
@@ -31,13 +32,7 @@ export const Calendar = ({ dates, weekdays, basePrices, prices }: Props) => {
   const dispatch = useAppDispatch();
   const monthsShown = 2;
 
-  const details = useAppSelector(
-    (state) =>
-      state.booking.details[pathname as string] || { selectedDate: null }
-  );
-  const selectedDate = details.selectedDate
-    ? new Date(details.selectedDate)
-    : null;
+  const selectedDate = useAppSelector(selectDateByKey(pathname as string));
 
   const handleChange = (date: Date) => {
     if (pathname) {
@@ -49,12 +44,15 @@ export const Calendar = ({ dates, weekdays, basePrices, prices }: Props) => {
       );
     }
   };
+  const parsedDate = selectedDate ? new Date(selectedDate) : null;
+  const validDate =
+    parsedDate && !isNaN(parsedDate.getTime()) ? parsedDate : null;
 
   return (
     <section className={styles.calendar}>
       <DatePicker
         locale="ru"
-        selected={selectedDate}
+        selected={validDate}
         calendarClassName="calendar"
         onChange={handleChange}
         monthsShown={monthsShown}

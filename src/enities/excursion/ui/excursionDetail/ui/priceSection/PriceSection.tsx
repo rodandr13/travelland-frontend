@@ -6,6 +6,7 @@ import { Button } from "@/src/shared/ui/button";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { selectVisibility } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
 
 interface Props {
   minPrice: number | undefined;
@@ -13,7 +14,7 @@ interface Props {
 }
 
 export const PriceSection = ({ minPrice, basePrice }: Props) => {
-  const bookingIsVisible = useAppSelector((state) => state.booking.visible);
+  const bookingIsVisible = useAppSelector(selectVisibility);
 
   const [showBlockPreview, setShowBlockA] = useState(true);
   const [showBlockPrice, setShowBlockB] = useState(false);
