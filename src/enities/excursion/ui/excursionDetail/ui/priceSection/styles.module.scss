@@ -122,9 +122,7 @@
 @media screen and (max-width: 900px) {
   .priceSection {
     width: 100%;
-    flex-direction: row;
     justify-content: end;
-    border-radius: unset;
     min-width: unset;
     &__advantages {
       display: none;

@@ -31,25 +31,41 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
   const [animationClassPrice, setAnimationClassPrice] = useState("");
 
   useEffect(() => {
-    if (bookingIsVisible) {
-      if (showBlockPreview) {
-        setAnimationClassPreview(styles.fadeOut);
-        setTimeout(() => {
-          setShowBlockPreview(false);
-          setShowBlockPrice(true);
-          setAnimationClassPrice(styles.fadeIn);
-        }, 200);
+    const mediaQuery = window.matchMedia("(max-width: 900px)");
+
+    const handleResize = (event?: MediaQueryListEvent) => {
+      const matches = event ? event.matches : mediaQuery.matches;
+
+      if (!matches) {
+        if (bookingIsVisible) {
+          if (showBlockPreview) {
+            setAnimationClassPreview(styles.fadeOut);
+            setTimeout(() => {
+              setShowBlockPreview(false);
+              setShowBlockPrice(true);
+              setAnimationClassPrice(styles.fadeIn);
+            }, 200);
+          }
+        } else {
+          if (showBlockPrice) {
+            setAnimationClassPrice(styles.fadeOut);
+            setTimeout(() => {
+              setShowBlockPrice(false);
+              setShowBlockPreview(true);
+              setAnimationClassPreview(styles.fadeIn);
+            }, 200);
+          }
+        }
+      } else {
+        setShowBlockPreview(false);
+        setShowBlockPrice(true);
       }
-    } else {
-      if (showBlockPrice) {
-        setAnimationClassPrice(styles.fadeOut);
-        setTimeout(() => {
-          setShowBlockPrice(false);
-          setShowBlockPreview(true);
-          setAnimationClassPreview(styles.fadeIn);
-        }, 200);
-      }
-    }
+    };
+
+    mediaQuery.addEventListener("change", handleResize);
+
+    handleResize();
+    return () => mediaQuery.removeEventListener("change", handleResize);
   }, [bookingIsVisible, showBlockPreview, showBlockPrice]);
 
   const priceProps =

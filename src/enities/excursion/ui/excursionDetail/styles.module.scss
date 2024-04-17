@@ -54,10 +54,11 @@
 
 @media screen and (max-width: 900px) {
   .excursionDetail {
+    &__container {
+      flex-direction: column;
+    }
     &__sideBar {
-      position: fixed;
-      left: 0;
-      bottom: 0;
+      position: relative;
       width: 100%;
       max-width: 100%;
       z-index: 1;

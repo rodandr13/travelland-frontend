@@ -59,15 +59,9 @@
 
 @media screen and (max-width: 550px) {
   .priceBlock_priceSection {
-    &__discount {
-      display: none;
-    }
     &__price {
       font-size: calc(var(--base-font-size) * 0.7);
       order: 1;
-    }
-    &__list {
-      flex-direction: column;
     }
     &__oldPrice {
       font-size: calc(var(--base-font-size) * 0.5);
