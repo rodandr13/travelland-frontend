@@ -14,9 +14,14 @@ export const Gallery = ({ images }: Props) => {
           <Image
             className={styles.gallery__image}
             fill
-            src={urlFor(image, { width: 800 })}
+            src={urlFor(image, { width: i === 0 ? 850 : 450 })}
             alt=""
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            loading={i === 0 ? "eager" : "lazy"}
+            sizes={
+              i === 0
+                ? "(max-width: 500px) 50vw, (max-width: 800px) 33vw, (max-width: 1200px) 50vw"
+                : "(max-width: 400px) 12vw, (max-width: 500px) 18vw, (max-width: 1300px) 15vw"
+            }
           />
         </div>
       ))}

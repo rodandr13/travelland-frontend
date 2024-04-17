@@ -6,7 +6,11 @@ import { Footer } from "../shared/ui/footer";
 import { Header } from "@/src/widgets/header";
 import { StoreProvider } from "@/src/app/providers/StoreProvider";
 
-const inter = Inter({ subsets: ["latin", "cyrillic"] });
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  display: "swap",
+  weight: ["400", "500", "600"],
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",

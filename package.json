@@ -11,10 +11,6 @@
     "analyze": "next build && next bundle-analyzer"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
-    "@mui/icons-material": "^5.15.15",
-    "@portabletext/react": "^3.0.18",
     "@reduxjs/toolkit": "^2.2.3",
     "@sanity/client": "^6.15.14",
     "@sanity/image-url": "^1.0.2",

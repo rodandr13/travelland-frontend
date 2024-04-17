@@ -1,7 +1,6 @@
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
-import { NavigateBefore, NavigateNext } from "@mui/icons-material";
 import React, { useRef, useState } from "react";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import scrollIntoView from "scroll-into-view-if-needed";
@@ -90,7 +89,7 @@ export const ImageSlider = ({ images }: Props) => {
         }}
         className={clsx(styles.slideButton, styles.slideButton_prev)}
       >
-        <NavigateBefore />
+        &lt;
       </button>
       <button
         disabled={currentIndex >= images.length - 1}
@@ -103,7 +102,7 @@ export const ImageSlider = ({ images }: Props) => {
         }}
         className={clsx(styles.slideButton, styles.slideButton_next)}
       >
-        <NavigateNext />
+        &gt;
       </button>
       <div
         className={clsx(

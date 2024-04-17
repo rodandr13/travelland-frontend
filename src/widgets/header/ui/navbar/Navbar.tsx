@@ -22,7 +22,13 @@ export const Navbar = () => {
     <div className={styles.navbar}>
       <div className={styles.navbar__logo}>
         <Link href="/">
-          <Image src="/logo.png" width={173} height={44} alt="Logo" />
+          <Image
+            src="/logo.png"
+            width={173}
+            height={44}
+            alt="Logo"
+            loading="eager"
+          />
         </Link>
       </div>
       <div
