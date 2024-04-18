@@ -35,7 +35,7 @@ export const getExcursionDetail = async ({ slug }: Props) => {
   "additionalTerms": additionalTerms[]->title[_key == "ru"][0].value,
   "meetingPoint": meetingPoint->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, location{lng, lat} },
   "route": route[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[].asset._ref},
-  "gallery": gallery[].asset._ref,
+  "gallery": gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip},
 }[0]
 `;
   return await client.fetch<ExcursionType>(

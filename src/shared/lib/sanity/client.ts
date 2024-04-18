@@ -20,18 +20,26 @@ export const client = createClient({
 
 const builder = imageUrlBuilder(client);
 
+interface UrlForParams {
+  width?: number;
+  height?: number;
+  blur?: number;
+}
+
 export const urlFor = (
   source: string,
-  { width, height }: UrlForParams = {}
+  { width, height, blur }: UrlForParams = {}
 ) => {
   let imageBuilder = builder.image(source);
 
-  // Применяем ширину и высоту, если они указаны
   if (width) {
     imageBuilder = imageBuilder.width(width);
   }
   if (height) {
     imageBuilder = imageBuilder.height(height);
+  }
+  if (blur) {
+    imageBuilder = imageBuilder.blur(blur);
   }
 
   return imageBuilder.url();

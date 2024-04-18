@@ -52,6 +52,12 @@ export type Parameter = {
   value: string;
   icon: string;
 };
+
+export type GalleryImage = {
+  src: string;
+  lqip: string;
+};
+
 export type ExcursionType = {
   _id: string;
   title: string;
@@ -70,7 +76,7 @@ export type ExcursionType = {
   promotionalPrices: PromotionalPrice[];
   priceCorrections: PromotionalPrice[];
   route: RouteItem[];
-  gallery: string[];
+  gallery: GalleryImage[];
   subcategory: Subcategory[];
   category: Category;
   parameters: Parameter[];

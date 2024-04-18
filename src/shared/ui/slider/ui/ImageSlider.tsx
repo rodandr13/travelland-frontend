@@ -4,9 +4,10 @@ import clsx from "clsx";
 import React, { useRef, useState } from "react";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import scrollIntoView from "scroll-into-view-if-needed";
+import { GalleryImage } from "@/src/enities/excursion/model/types/ExcursionDetail";
 
 interface Props {
-  images: string[];
+  images: GalleryImage[];
 }
 
 export const ImageSlider = ({ images }: Props) => {
@@ -69,7 +70,9 @@ export const ImageSlider = ({ images }: Props) => {
             >
               <Image
                 className={styles.imageSlider__image}
-                src={urlFor(image, { width: 700 })}
+                src={urlFor(image.src, { width: 500 })}
+                placeholder="blur"
+                blurDataURL={image.lqip}
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 alt="ExcursionCard image"

@@ -1,9 +1,10 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { GalleryImage } from "@/src/enities/excursion/model/types/ExcursionDetail";
 
 interface Props {
-  images: string[];
+  images: GalleryImage[];
 }
 
 export const Gallery = ({ images }: Props) => {
@@ -14,9 +15,11 @@ export const Gallery = ({ images }: Props) => {
           <Image
             className={styles.gallery__image}
             fill
-            src={urlFor(image, { width: i === 0 ? 850 : 450 })}
+            src={urlFor(image.src, { width: i === 0 ? 850 : 450 })}
             alt=""
-            loading={i === 0 ? "eager" : "lazy"}
+            placeholder="blur"
+            loading="eager"
+            blurDataURL={image.lqip}
             sizes={
               i === 0
                 ? "(max-width: 500px) 50vw, (max-width: 800px) 33vw, (max-width: 1200px) 50vw"

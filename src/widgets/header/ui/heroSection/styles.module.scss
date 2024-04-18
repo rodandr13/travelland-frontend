@@ -1,7 +1,7 @@
 .hero {
   background: url("../../../../shared/assets/header.jpg");
   background-position: bottom center;
-  height: 600px;
+  height: 700px;
   box-sizing: border-box;
   &__container {
     max-width: 1440px;
@@ -36,7 +36,6 @@
 
 @media screen and (max-width: 500px){
   .hero {
-    height: 400px;
     &__title {
       font-size: 28px;
     }
