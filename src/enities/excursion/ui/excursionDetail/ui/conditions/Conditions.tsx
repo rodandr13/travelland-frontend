@@ -49,23 +49,25 @@ export const Conditions = ({ surcharge, included, additionalTerms }: Props) => {
           ))}
         </ul>
       </div>
-      <div className={styles.options}>
-        <h3
-          className={clsx(
-            styles.options__title,
-            styles.options__title_additional
-          )}
-        >
-          Дополнительные условия
-        </h3>
-        <ul className={styles.options__list}>
-          {additionalTerms?.map((item, i) => (
-            <li key={i} className={styles.options__item}>
-              {item}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {additionalTerms && (
+        <div className={styles.options}>
+          <h3
+            className={clsx(
+              styles.options__title,
+              styles.options__title_additional
+            )}
+          >
+            Дополнительные условия
+          </h3>
+          <ul className={styles.options__list}>
+            {additionalTerms.map((item, i) => (
+              <li key={i} className={styles.options__item}>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </section>
   );
 };

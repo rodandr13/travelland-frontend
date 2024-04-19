@@ -31,15 +31,15 @@ export const TimeSpending = ({ duration, weekdays, startTime }: Props) => {
   return (
     <div className={styles.timeSpending}>
       <div className={styles.timeSpending__weekdays}>
-        <h3 className={styles.timeSpending__smallTitle}>Days of the event</h3>
+        <h3 className={styles.timeSpending__smallTitle}>Дни проведения</h3>
         <WeekDays days={filledDays(weekdays)} />
       </div>
       <div className={styles.timeSpending__time}>
         <table className={styles.timeSpending__timeTable}>
           <thead>
             <tr>
-              <th className={styles.timeSpending__smallTitle}>Start</th>
-              <th className={styles.timeSpending__smallTitle}>End</th>
+              <th className={styles.timeSpending__smallTitle}>Начало</th>
+              <th className={styles.timeSpending__smallTitle}>Окончание</th>
             </tr>
           </thead>
           <tbody>
@@ -55,8 +55,8 @@ export const TimeSpending = ({ duration, weekdays, startTime }: Props) => {
         </table>
       </div>
       <div className={styles.timeSpending__duration}>
-        <h3 className={styles.timeSpending__smallTitle}>Duration</h3>
-        <p className={styles.timeSpending__durationValue}>{duration} hours</p>
+        <h3 className={styles.timeSpending__smallTitle}>Длительность</h3>
+        <p className={styles.timeSpending__durationValue}>{duration} часов</p>
       </div>
     </div>
   );

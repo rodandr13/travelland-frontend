@@ -43,12 +43,21 @@ export const generatePriceMap = ({
 
     if (!weekdaySet.has(formattedWeekday)) return;
 
+    const dailyPrices = new Map(basePrices.map((p) => [p.title, p]));
+
+    const applyPrices = (prices: Price[]) => {
+      prices.forEach((p) => {
+        dailyPrices.set(p.title, p);
+      });
+    };
+
     const promo = promoPrices?.find(
       (p) =>
         formattedDay >= p.dates.dateFrom &&
         formattedDay <= p.dates.dateTo &&
         p.weekdays.includes(formattedWeekday)
     );
+
     const correction =
       !promo &&
       priceCorrections?.find(
@@ -58,12 +67,14 @@ export const generatePriceMap = ({
           c.weekdays.includes(formattedWeekday)
       );
 
+    if (promo) {
+      applyPrices(promo.prices);
+    } else if (correction) {
+      applyPrices(correction.prices);
+    }
+
     pricesMap.set(formattedDay, {
-      prices: promo
-        ? promo.prices
-        : correction
-          ? correction.prices
-          : basePrices,
+      prices: Array.from(dailyPrices.values()),
       basePrice: basePrices,
     });
   });

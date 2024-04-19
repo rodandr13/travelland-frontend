@@ -39,6 +39,7 @@ export const Booking = ({ duration, basePrices, startTime, prices }: Props) => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
+
   useEffect(() => {
     dispatch(setVisible(isVisible));
   }, [dispatch, isVisible]);
@@ -100,6 +101,7 @@ export const Booking = ({ duration, basePrices, startTime, prices }: Props) => {
           </div>
         </div>
       )}
+
       {bookingDetails?.time && (
         <div>
           <h2 className={styles.booking__title}>Количество человек</h2>

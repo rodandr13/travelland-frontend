@@ -42,7 +42,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
       <div className={styles.excursionDetail__container}>
         <div className={styles.excursionDetail__content}>
           <div className={styles.excursionDetail__info}>
-            <Breadcrumbs />
+            <Breadcrumbs title={excursion.title} />
             <PageTitle>{excursion.title}</PageTitle>
             <Categories
               category={excursion.category}
