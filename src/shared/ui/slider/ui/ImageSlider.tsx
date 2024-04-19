@@ -92,7 +92,16 @@ export const ImageSlider = ({ images }: Props) => {
         }}
         className={clsx(styles.slideButton, styles.slideButton_prev)}
       >
-        &lt;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          aria-hidden="true"
+          role="presentation"
+          focusable="false"
+          className={styles.slideButton__prevIcon}
+        >
+          <path fill="none" d="M20 28 8.7 16.7a1 1 0 0 1 0-1.4L20 4"></path>
+        </svg>
       </button>
       <button
         disabled={currentIndex >= images.length - 1}
@@ -105,7 +114,16 @@ export const ImageSlider = ({ images }: Props) => {
         }}
         className={clsx(styles.slideButton, styles.slideButton_next)}
       >
-        &gt;
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 32 32"
+          aria-hidden="true"
+          role="presentation"
+          focusable="false"
+          className={styles.slideButton__nextIcon}
+        >
+          <path fill="none" d="M20 28 8.7 16.7a1 1 0 0 1 0-1.4L20 4"></path>
+        </svg>
       </button>
       <div
         className={clsx(

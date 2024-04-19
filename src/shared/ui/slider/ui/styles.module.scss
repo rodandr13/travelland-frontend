@@ -124,6 +124,26 @@
     right: 10px;
     position: absolute;
   }
+  &__prevIcon {
+    display: block;
+    fill: none;
+    height: 12px;
+    width: 12px;
+    stroke: #191919;
+    stroke-width: 4;
+    overflow: visible;
+  }
+  &__nextIcon {
+    display: block;
+    fill: none;
+    height:12px;
+    width: 12px;
+    stroke: #191919;
+    stroke-width: 4;
+    overflow: visible;
+    transform: rotate(180deg);
+  }
+
 }
 
 @media screen and (max-width: 950px) {
