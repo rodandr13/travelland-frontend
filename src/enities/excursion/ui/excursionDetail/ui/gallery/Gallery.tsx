@@ -15,15 +15,16 @@ export const Gallery = ({ images }: Props) => {
           <Image
             className={styles.gallery__image}
             fill
-            src={urlFor(image.src, { width: i === 0 ? 850 : 450 })}
+            src={urlFor(image.src)}
             alt=""
             placeholder="blur"
             loading="eager"
             blurDataURL={image.lqip}
+            quality={60}
             sizes={
               i === 0
-                ? "(max-width: 500px) 50vw, (max-width: 800px) 33vw, (max-width: 1200px) 50vw"
-                : "(max-width: 400px) 12vw, (max-width: 500px) 18vw, (max-width: 1300px) 15vw"
+                ? "(max-width: 500px) 70vw, (max-width: 800px) 50vw, (max-width: 1200px) 35vw, 33vw"
+                : "(max-width: 400px) 20vw, (max-width: 500px) 25vw, (max-width: 1300px) 20vw, 20vw"
             }
           />
         </div>

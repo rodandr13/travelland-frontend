@@ -70,11 +70,11 @@ export const ImageSlider = ({ images }: Props) => {
             >
               <Image
                 className={styles.imageSlider__image}
-                src={urlFor(image.src, { width: 500 })}
+                src={urlFor(image.src)}
                 placeholder="blur"
                 blurDataURL={image.lqip}
                 fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                sizes="(max-width: 500px) 70vw, (max-width: 768px) 50vw, (max-width: 1200px) 30vw, 20vw"
                 alt="ExcursionCard image"
               />
             </li>
