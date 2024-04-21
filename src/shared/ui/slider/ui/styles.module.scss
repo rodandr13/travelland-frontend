@@ -1,7 +1,6 @@
 .container {
   position: relative;
-
-  &:hover .slideButton {
+  &:hover .imageSlider__buttonsContainer {
     opacity: 1;
   }
 }
@@ -15,6 +14,9 @@
 
   &::-webkit-scrollbar {
     display: none;
+  }
+  &__buttonsContainer {
+    opacity: 0;
   }
 
   &__list {
@@ -86,64 +88,6 @@
       opacity: 1;
     }
   }
-}
-
-.slideButton {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  transform-origin: center;
-  transition: opacity 100ms ease-in, background-color 100ms ease-in, transform 100ms ease-in;
-  border: none;
-  outline: none;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  background: rgba(255, 255, 255, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  opacity: 0;
-  will-change: transform, opacity;
-
-  &:hover {
-    background: rgba(255, 255, 255, 1);
-    transform: scale(1.1) translateY(-45%);
-  }
-
-  &:disabled:hover {
-    background: rgba(255, 255, 255, 0.8);
-    transform: translateY(-50%);
-  }
-
-  &_prev {
-    left: 10px;
-  }
-
-  &_next {
-    right: 10px;
-    position: absolute;
-  }
-  &__prevIcon {
-    display: block;
-    fill: none;
-    height: 12px;
-    width: 12px;
-    stroke: #191919;
-    stroke-width: 4;
-    overflow: visible;
-  }
-  &__nextIcon {
-    display: block;
-    fill: none;
-    height:12px;
-    width: 12px;
-    stroke: #191919;
-    stroke-width: 4;
-    overflow: visible;
-    transform: rotate(180deg);
-  }
-
 }
 
 @media screen and (max-width: 950px) {

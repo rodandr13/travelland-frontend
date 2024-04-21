@@ -54,6 +54,20 @@ export const HeroSection = ({ children }: { children: ReactNode }) => {
                 fill
               />
             </li>
+            <li className={styles.services__item}>
+              <div className={styles.services__containerText}>
+                <span className={styles.services__caption}>Трансферы</span>
+                <h3 className={styles.services__title}>
+                  Быстро и с комфортом из аэропорта
+                </h3>
+              </div>
+              <Image
+                className={styles.services__image}
+                src="/ser3.jpg"
+                alt=""
+                fill
+              />
+            </li>
           </ul>
         </section>
       </div>

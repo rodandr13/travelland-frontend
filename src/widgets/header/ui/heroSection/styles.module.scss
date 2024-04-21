@@ -4,37 +4,36 @@
   overflow: hidden;
 
   &__container {
-    max-width: 1440px;
-    margin: 0 auto;
-    box-sizing: border-box;
-    padding: 40px 40px 40px 40px;
+    //max-width: 1440px;
+    //box-sizing: border-box;
+    //padding: 40px 40px 40px 40px;
   }
   &__title {
     font-size: 38px;
     font-weight: 700;
-    max-width: 70%;
-    margin: 0;
-    padding: 0;
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px 40px;
+    box-sizing: border-box;
   }
 
 }
 .services {
-  padding: 30px 0 40px 0;
-  width: calc(100% + 40px);
-  overflow-x: scroll;
-  overscroll-behavior: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  padding: 20px 0 40px 0;
+  box-sizing: border-box;
+
   &__list {
-    //display: grid;
-    //grid-template-columns: repeat(3, 1fr);
+    overflow-x: auto;
+    overscroll-behavior: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
     gap: 24px;
     display: flex;
     list-style-type: none;
-    margin: 0;
-    padding: 0 40px 0 0;
-    width: 1800px;
-    position: relative;
+    scroll-padding: 0 0 0 max(40px, calc((100vw - 1360px) / 2));
+    padding-left: max(40px, calc((100vw - 1360px) / 2));
+    padding-right: 40px;
   }
   &__image {
     z-index: 0;
@@ -43,8 +42,10 @@
   &__item {
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    flex: 1;
+    flex-shrink: 0;
+    flex-grow: 1;
     height: 350px;
+    width: 500px;
     position: relative;
     overflow: hidden;
     background: #fff;
@@ -52,6 +53,10 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    &:first-child {
+      //max-width: calc(600px + max(40px, calc((100vw - 1360px) / 2)));
+
+    }
     &::after {
       content: "";
       position: absolute;
@@ -87,9 +92,6 @@
 
 @media screen and (max-width: 1300px){
   .services {
-    &__list {
-      width: 1500px;
-    }
     &__item {
       height: 300px;
     }
