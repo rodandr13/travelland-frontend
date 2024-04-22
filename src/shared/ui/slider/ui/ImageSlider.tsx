@@ -18,13 +18,13 @@ export const ImageSlider = ({ images }: Props) => {
   const [controlsTranslateX, setControlsTranslateX] = useState(0);
   const slideRefs = useRef<HTMLElement[]>([]);
   const sliderControlsRef = useRef<HTMLUListElement>(null);
-
+  const slidesLength = images.length;
   const transform = {
     transform: `translateX(${controlsTranslateX}px)`,
   };
 
   const handleGoToSlide = (index: number) => {
-    goToSlide(index, images, setCurrentIndex, slideRefs);
+    goToSlide(index, slidesLength, setCurrentIndex, slideRefs);
   };
 
   return (
@@ -58,9 +58,6 @@ export const ImageSlider = ({ images }: Props) => {
           onClick={(e) => {
             e.preventDefault();
             handleGoToSlide(currentIndex - 1);
-            if (currentIndex >= 3 && currentIndex < images.length - 2) {
-              setControlsTranslateX((current) => current + 10);
-            }
           }}
         />
 

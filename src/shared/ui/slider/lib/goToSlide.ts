@@ -2,16 +2,16 @@ import scrollIntoView from "scroll-into-view-if-needed";
 
 export const goToSlide = (
   index: number,
-  images: any[],
+  slidesLength: number,
   setCurrentIndex: React.Dispatch<React.SetStateAction<number>>,
   slideRefs: React.MutableRefObject<HTMLElement[]>
 ) => {
-  if (index < 0 || index >= images.length) return;
+  if (index < 0 || index >= slidesLength) return;
   setCurrentIndex(index);
   scrollIntoView(slideRefs.current[index], {
-    scrollMode: "if-needed",
+    scrollMode: "always",
     block: "nearest",
-    inline: "nearest",
+    inline: "start",
     behavior: "smooth",
   });
 };
