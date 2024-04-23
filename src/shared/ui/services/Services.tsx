@@ -8,6 +8,7 @@ import React, { useRef, useState } from "react";
 import { goToSlide } from "@/src/shared/ui/slider/lib/goToSlide";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Service } from "@/src/shared/types/service";
+import { SectionTitle } from "@/src/shared/ui/sectionTitle";
 
 interface Props {
   services: Service[];
@@ -22,6 +23,9 @@ export const Services = ({ services }: Props) => {
   };
   return (
     <section className={styles.services}>
+      <div className={styles.services__containerHeader}>
+        <SectionTitle>Экскурсионное обслуживание в Праге</SectionTitle>
+      </div>
       <div className={styles.services__container}>
         <div className={styles.services__buttonsContainer}>
           <SlideButton

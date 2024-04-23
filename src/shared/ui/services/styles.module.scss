@@ -6,6 +6,12 @@
   &__container {
     overflow: hidden;
   }
+  &__containerHeader {
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 1440px;
+    box-sizing: border-box;
+  }
   &__list {
     overflow-x: auto;
     overscroll-behavior: auto;
