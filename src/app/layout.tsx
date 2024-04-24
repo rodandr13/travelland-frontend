@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.scss";
 import React from "react";
 import { Footer } from "../shared/ui/footer";
 import { Header } from "@/src/widgets/header";
 import { StoreProvider } from "@/src/app/providers/StoreProvider";
 
-const inter = Inter({
+const roboto = Roboto({
   subsets: ["latin", "cyrillic"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500"],
 });
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru">
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <StoreProvider>
           <Header />
           {children}

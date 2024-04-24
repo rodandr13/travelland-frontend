@@ -32,9 +32,16 @@ export const Search = () => {
       </div>
       <div className={styles.search__selectContainer}>
         <span className={styles.search__caption}>Где</span>
-        <Select options={options} placeholder="" isSearchable />
+        <Select
+          options={options}
+          placeholder=""
+          isSearchable
+          instanceId="test"
+        />
       </div>
-      <Button title="Найти" />
+      <div className={styles.search__buttonContainer}>
+        <Button title="Найти" color="green" />
+      </div>
     </section>
   );
 };

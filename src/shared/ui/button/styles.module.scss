@@ -1,7 +1,6 @@
 .button {
   font-size: 14px;
   color: #ffffff;
-  text-transform: uppercase;
   margin: 0;
   padding: 12px 24px;
   background: #115590;
@@ -13,5 +12,8 @@
     background: #d9d9d9;
     color: #8f8f8f;
     cursor: initial;
+  }
+  &_green {
+    background: #5da465;
   }
 }

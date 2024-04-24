@@ -24,7 +24,12 @@ export const Services = ({ services }: Props) => {
   return (
     <section className={styles.services}>
       <div className={styles.services__containerHeader}>
-        <SectionTitle>Экскурсионное обслуживание в Праге</SectionTitle>
+        <SectionTitle>Экскурсионное сопровождение в Европе</SectionTitle>
+        <p className={styles.services__subheader}>
+          Полноценный экскурсионный сервис для комфортного пребывания в странах
+          Европы: экскурсии, туры, трансферы, билеты на мероприятия и много
+          другое
+        </p>
       </div>
       <div className={styles.services__container}>
         <div className={styles.services__buttonsContainer}>
@@ -38,7 +43,7 @@ export const Services = ({ services }: Props) => {
           />
           <SlideButton
             direction="next"
-            disabled={currentIndex >= slidesLength - 1}
+            disabled={currentIndex >= slidesLength - 2}
             onClick={(e) => {
               e.preventDefault();
               handleGoToSlide(currentIndex + 1);
@@ -64,6 +69,8 @@ export const Services = ({ services }: Props) => {
                 className={styles.services__image}
                 src={urlFor(service.image.src)}
                 alt=""
+                placeholder="blur"
+                blurDataURL={service.image.lqip}
                 fill
               />
             </li>

@@ -13,7 +13,13 @@ export const HeroSection = ({ children }: { children: ReactNode }) => {
         <Search />
       </div>
       <div className={styles.hero__imageContainer}>
-        <Image className={styles.hero__image} src="/header.jpg" alt="" fill />
+        <Image
+          className={styles.hero__image}
+          src="/header.jpg"
+          alt=""
+          fill
+          sizes="(max-width: 500px) 100vw, (max-width: 768px) 100vw, (max-width: 1200px) 100vw, 100vw"
+        />
       </div>
     </section>
   );

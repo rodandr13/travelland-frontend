@@ -1,13 +1,14 @@
 .search {
   background: #fff;
   width: 360px;
-  border-radius: 14px;
+  border-radius: 5px;
   padding: 20px;
   margin: 100px 0 0 0;
   display: flex;
   flex-direction: column;
   gap: 30px;
   box-sizing: border-box;
+  box-shadow: 0 5px 15px rgba(25, 25, 25, 0.3);
 
   &__title {
     font-size: 24px;
@@ -19,7 +20,9 @@
     z-index: 2;
     line-height: 1.2;
   }
-
+  &__buttonContainer {
+    align-self: flex-end;
+  }
   &__list {
     margin: 0;
     padding: 0;
@@ -37,7 +40,7 @@
     padding: 7px 14px;
 
     &_active {
-      background: #115590;
+      background: rgba(17, 85, 144, 0.8);
       border-radius: 15px;
       color: #fff;
     }
@@ -50,9 +53,15 @@
   }
 }
 
-@media screen and (max-width: 800px){
+@media screen and (max-width: 1200px){
   .search {
     margin: 50px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 800px){
+  .search {
+    margin: 30px 0 0 0;
   }
 }
 
