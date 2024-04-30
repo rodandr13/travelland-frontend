@@ -8,7 +8,7 @@ export const Search = () => {
   return (
     <section className={styles.search}>
       <h1 className={styles.search__title}>
-        Забронируйте уникальные места для отдыха и развлечения
+        Забронируйте ваши яркие впечатления
       </h1>
       <div className={styles.search__services}>
         <ul className={styles.search__list}>

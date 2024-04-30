@@ -1,1 +1,0 @@
-export { SelectPeoples } from "./SelectPeoples";

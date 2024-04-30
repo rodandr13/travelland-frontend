@@ -1,9 +1,9 @@
 "use client";
 
 import styles from "./styles.module.scss";
-import { Calendar } from "../calendar";
+import { Calendar } from "../calendar/Calendar";
 import clsx from "clsx";
-import { SelectPeoples } from "../selectPeoples";
+import { SelectPeoples } from "../selectPeoples/SelectPeoples";
 import {
   Dates,
   Duration,

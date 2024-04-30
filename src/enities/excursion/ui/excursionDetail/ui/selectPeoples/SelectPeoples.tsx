@@ -1,7 +1,7 @@
 "use client";
 
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
-import { SelectNumber } from "./ui/";
+import { SelectNumber } from "./ui/SelectNumber";
 import styles from "./styles.module.scss";
 import { PricesMap } from "@/src/shared/types/excursion";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";

@@ -26,9 +26,9 @@ export const Services = ({ services }: Props) => {
       <div className={styles.services__containerHeader}>
         <SectionTitle>Экскурсионное сопровождение в Европе</SectionTitle>
         <p className={styles.services__subheader}>
-          Полноценный экскурсионный сервис для комфортного пребывания в странах
-          Европы: экскурсии, туры, трансферы, билеты на мероприятия и много
-          другое
+          Экскурсии и другой разнообразный сервис от лицензированной компании.
+          Гарантия качества на все виды услуг: экскурсии, туры, трансферы,
+          билеты на мероприятия и много другое
         </p>
       </div>
       <div className={styles.services__container}>

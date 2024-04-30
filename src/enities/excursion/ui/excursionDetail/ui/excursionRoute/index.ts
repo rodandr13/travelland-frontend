@@ -1,1 +1,0 @@
-export { ExcursionRoute } from "./ExcursionRoute";

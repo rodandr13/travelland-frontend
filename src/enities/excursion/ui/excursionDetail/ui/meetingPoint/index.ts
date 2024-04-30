@@ -1,1 +1,0 @@
-export { MeetingPoint } from "./MeetingPoint";

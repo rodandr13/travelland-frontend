@@ -3,11 +3,13 @@ import { SectionTitle } from "@/src/shared/ui/sectionTitle";
 import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
 import { Services } from "@/src/shared/ui";
 import { getServices } from "@/src/pages/homePage/api/getServices";
+import { HeroSection } from "@/src/widgets/heroSection";
 
 export const HomePage = async () => {
   const services = await getServices();
   return (
     <>
+      <HeroSection />
       <Services services={services} />
       <main className={styles.home}>
         <SectionTitle>Экскурсии</SectionTitle>
