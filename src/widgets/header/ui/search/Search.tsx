@@ -1,15 +1,19 @@
+"use client";
+
 import styles from "./styles.module.scss";
 import Select from "react-select";
 import { Button } from "@/src/shared/ui/button";
 import clsx from "clsx";
 
-export const Search = () => {
+interface Props {
+  title: string;
+}
+
+export const Search = ({ title }: Props) => {
   const options = [{ value: "prague", label: "Прага" }];
   return (
     <section className={styles.search}>
-      <h1 className={styles.search__title}>
-        Забронируйте ваши яркие впечатления
-      </h1>
+      <h1 className={styles.search__title}>{title}</h1>
       <div className={styles.search__services}>
         <ul className={styles.search__list}>
           <li className={styles.search__item}>
