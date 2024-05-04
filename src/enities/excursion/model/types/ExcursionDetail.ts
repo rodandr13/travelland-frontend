@@ -1,6 +1,6 @@
 export interface IMeetingPoint {
-  title: string;
   description: string;
+  image: GalleryImage;
   location: Location;
 }
 
@@ -30,7 +30,7 @@ export interface PromotionalPrice {
 export interface RouteItem {
   title: string;
   description: string;
-  gallery: string[];
+  gallery: GalleryImage[];
 }
 
 export type AdditionalTerms = string[];
@@ -71,7 +71,8 @@ export type ExcursionType = {
   included: Included;
   surcharge: Surcharge;
   additionalTerms: AdditionalTerms;
-  meetingPoint: IMeetingPoint;
+  startingPlace: IMeetingPoint;
+  endingPlace: IMeetingPoint;
   basePrices: Price[];
   promotionalPrices: PromotionalPrice[];
   priceCorrections: PromotionalPrice[];

@@ -1,40 +1,30 @@
 import styles from "./styles.module.scss";
 import clsx from "clsx";
 import Image from "next/image";
-import { RouteItem } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import {
+  IMeetingPoint,
+  RouteItem,
+} from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { MeetingPoint } from "@/src/shared/ui";
 
 interface Props {
   routes: RouteItem[];
+  startingPlace: IMeetingPoint;
+  endingPlace: IMeetingPoint;
 }
 
-export const ExcursionRoute = ({ routes }: Props) => {
+export const ExcursionRoute = ({
+  routes,
+  startingPlace,
+  endingPlace,
+}: Props) => {
   return (
     <section className={styles.route}>
       <h2 className={styles.route__title}>Маршрут экскурсии</h2>
       <ol className={styles.route__list}>
         <li className={clsx(styles.route__item, styles.route__item_type_start)}>
-          <div className={styles.route__container}>
-            <h3 className={styles.route__subheader}>Место сбора</h3>
-            <p className={styles.route__description}>
-              Станция мето Мустек, выход в сторону улиц Йиндржишска и Водичкова.
-              Адрес места встречи: Vaclavske nam. 791/32,110 00 Praha.
-            </p>
-            <p className={styles.route__caption}>
-              На месте сбора вас будет ждать наш представитель с табличкой
-              «iTRAVEX»
-            </p>
-          </div>
-          <div className={styles.route__gallery}>
-            <div className={styles.route__imageContainer}>
-              <Image
-                className={styles.route__image}
-                src="/img_start.jpg"
-                alt=""
-                fill
-              />
-            </div>
-          </div>
+          <MeetingPoint meetingPlace={startingPlace} isStart />
         </li>
         {routes.map((route, i) => (
           <li key={i} className={clsx(styles.route__item)}>
@@ -48,7 +38,10 @@ export const ExcursionRoute = ({ routes }: Props) => {
                   <Image
                     key={i}
                     className={styles.route__image}
-                    src={urlFor(image)}
+                    src={urlFor(image.src)}
+                    placeholder="blur"
+                    blurDataURL={image.lqip}
+                    sizes="10vw"
                     alt=""
                     fill
                   />
@@ -58,13 +51,7 @@ export const ExcursionRoute = ({ routes }: Props) => {
           </li>
         ))}
         <li className={clsx(styles.route__item, styles.route__item_type_end)}>
-          <div className={styles.route__container}>
-            <h3 className={styles.route__subheader}>Место окончания</h3>
-            <p className={styles.route__description}>
-              Станция мето Мустек, выход в сторону улиц Йиндржишска и Водичкова.
-              Адрес места встречи: Vaclavske nam. 791/32,110 00 Praha.
-            </p>
-          </div>
+          <MeetingPoint meetingPlace={endingPlace} />
         </li>
       </ol>
     </section>

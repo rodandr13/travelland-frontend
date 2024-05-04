@@ -60,7 +60,7 @@ export const ExcursionDetail = async ({ slug }: Props) => {
                 )}
                 <Description description={excursion.description} />
               </div>
-              <MeetingPoint meetingPoint={excursion.meetingPoint} />
+              <MeetingPoint meetingPoint={excursion.startingPlace} />
             </div>
             <Conditions
               additionalTerms={excursion.additionalTerms}
@@ -69,7 +69,11 @@ export const ExcursionDetail = async ({ slug }: Props) => {
             />
           </div>
           <Advantages />
-          <ExcursionRoute routes={excursion.route} />
+          <ExcursionRoute
+            routes={excursion.route}
+            startingPlace={excursion.startingPlace}
+            endingPlace={excursion.endingPlace}
+          />
           <Booking
             dates={excursion.dates}
             startTime={excursion.startTime}

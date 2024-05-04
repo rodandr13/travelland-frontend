@@ -33,8 +33,17 @@ export const getExcursionDetail = async ({ slug }: Props) => {
   "surcharge": surcharge[]->title[_key == "ru"][0].value,
   "parameters": excursionParameters[]->{"title": title[_key == "ru"][0].value, "value": value[_key == "ru"][0].value,"icon": icon.asset._ref},
   "additionalTerms": additionalTerms[]->title[_key == "ru"][0].value,
-  "meetingPoint": meetingPoint->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, location{lng, lat} },
-  "route": route[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[].asset._ref},
+    "startingPlace": startingPlace->{
+    "description":description[_key == "ru"][0].value,
+    location{lng, lat},
+    image{"src": asset._ref, "lqip": asset->metadata.lqip},
+  },
+  "endingPlace": startingPlace->{
+    "description":description[_key == "ru"][0].value,
+    location{lng, lat},
+    image{"src": asset._ref, "lqip": asset->metadata.lqip},
+  },
+  "route": route[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip}},
   "gallery": gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip},
 }[0]
 `;
