@@ -1,6 +1,6 @@
 import styles from "./styles.module.scss";
-import Image from "next/image";
 import { IMeetingPoint } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { Map } from "@/src/shared/ui/";
 
 interface Props {
   meetingPoint: IMeetingPoint;
@@ -15,14 +15,9 @@ export const MeetingPoint = ({ meetingPoint }: Props) => {
           {meetingPoint.description}
         </p>
       </div>
-      <div className={styles.meetingPoint__imageContainer}>
-        <Image
-          className={styles.meetingPoint__image}
-          src="/map.jpg"
-          fill
-          alt=""
-        />
-      </div>
+      {meetingPoint.location && (
+        <Map lat={meetingPoint.location.lat} lng={meetingPoint.location.lng} />
+      )}
     </section>
   );
 };
