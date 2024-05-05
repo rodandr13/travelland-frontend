@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import styles from "./styles.module.scss";
 import { Loader } from "@googlemaps/js-api-loader";
 
 interface Props {
@@ -17,15 +18,22 @@ export const Map = ({ lng, lat }: Props) => {
         version: "weekly",
       });
 
+      const { AdvancedMarkerElement } = await loader.importLibrary("marker");
+
       const { Map } = await loader.importLibrary("maps");
       const map = new Map(ref.current as HTMLDivElement, {
         center: { lng, lat },
         zoom: 15,
+        mapId: "map",
+      });
+      const marker = new AdvancedMarkerElement({
+        map: map,
+        position: { lng, lat },
       });
     };
 
     initMap();
   }, [ref]);
 
-  return <div ref={ref} style={{ width: "300px", height: "300px" }}></div>;
+  return <div ref={ref} className={styles.map}></div>;
 };
