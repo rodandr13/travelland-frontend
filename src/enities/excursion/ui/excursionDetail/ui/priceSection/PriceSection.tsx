@@ -183,7 +183,7 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
                   : !bookingDetails?.participants ||
                       bookingDetails.participants.length === 0
                     ? "Укажите количество человек"
-                    : "Бронировать"
+                    : "Добавить в корзину"
             }
             disabled={
               !bookingDetails?.selectedDate ||

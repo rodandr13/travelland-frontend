@@ -6,6 +6,7 @@ interface BookingDetails {
   participants: number[];
   time: string | null;
   prices: PricesValue | null;
+  totalPrice: number | null;
 }
 
 interface BookingState {
@@ -36,12 +37,28 @@ const bookingSlice = createSlice({
           participants: [],
           time: "",
           prices: null,
+          totalPrice: null,
         };
       }
       state.details[key] = {
         ...state.details[key],
         ...details,
       };
+      if (state.details[key].participants && state.details[key].prices) {
+        const prices = state.details[key].prices?.prices;
+        const participants = state.details[key].participants;
+        for (let i = 0; i < participants.length; i++) {
+          if (prices && state.details[key].participants) {
+            let totalPrice = 0;
+            for (let i = 0; i < state.details[key].participants.length; i++) {
+              const participantCount = state.details[key].participants[i] || 0;
+              const price = prices[i]?.price || 0;
+              totalPrice += participantCount * price;
+            }
+            state.details[key].totalPrice = totalPrice;
+          }
+        }
+      }
     },
   },
 });
