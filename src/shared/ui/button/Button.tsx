@@ -5,9 +5,10 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   disabled?: boolean;
   color?: "green" | "blue";
+  onClick?: () => void;
 }
 
-export const Button = ({ title, type, color, disabled }: Props) => {
+export const Button = ({ title, type, color, disabled, onClick }: Props) => {
   return (
     <button
       className={clsx(styles.button, {
@@ -15,6 +16,7 @@ export const Button = ({ title, type, color, disabled }: Props) => {
       })}
       type={type}
       disabled={disabled}
+      onClick={onClick}
     >
       {title}
     </button>

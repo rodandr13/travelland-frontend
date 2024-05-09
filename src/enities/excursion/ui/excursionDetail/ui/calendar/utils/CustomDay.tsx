@@ -1,7 +1,7 @@
 import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import clsx from "clsx";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
-import { PricesMap } from "@/src/shared/types/excursion";
+import { PricesMap } from "@/src/shared/types/booking";
 
 interface Props {
   dayNumber: number;

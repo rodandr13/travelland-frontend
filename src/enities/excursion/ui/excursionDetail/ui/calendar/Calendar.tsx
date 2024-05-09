@@ -8,12 +8,12 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 import styles from "./styles.module.scss";
 import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
-import { PricesMap } from "@/src/shared/types/excursion";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { usePathname } from "next/navigation";
 import { setDetails } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
 import { selectDateByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
+import { PricesMap } from "@/src/shared/types/booking";
 
 registerLocale("ru", ru);
 

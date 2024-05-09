@@ -5,7 +5,7 @@ import {
   PromotionalPrice,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
-import { PricesMap } from "@/src/shared/types/excursion";
+import { PricesMap } from "@/src/shared/types/booking";
 
 interface Props {
   baseDates: Dates;

@@ -15,6 +15,8 @@ import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 
+import { AddToCart } from "@/src/features/cart/addToCart";
+
 interface Props {
   minPrice: number | undefined;
   basePrice: number | undefined;
@@ -174,24 +176,7 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
               actualPrice
             />
           </div>
-          <Button
-            title={
-              !bookingDetails?.selectedDate
-                ? "Выберите дату"
-                : !bookingDetails?.time
-                  ? "Выберите время"
-                  : !bookingDetails?.participants ||
-                      bookingDetails.participants.length === 0
-                    ? "Укажите количество человек"
-                    : "Добавить в корзину"
-            }
-            disabled={
-              !bookingDetails?.selectedDate ||
-              !bookingDetails?.time ||
-              !bookingDetails?.participants ||
-              bookingDetails.participants.length === 0
-            }
-          />
+          <AddToCart bookingDetails={bookingDetails} />
         </section>
       )}
     </>

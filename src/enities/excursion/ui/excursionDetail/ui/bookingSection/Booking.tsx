@@ -11,7 +11,6 @@ import {
   StartTime,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
-import { PricesMap } from "@/src/shared/types/excursion";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useEffect, useRef } from "react";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
@@ -22,6 +21,7 @@ import {
 } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
 import { usePathname } from "next/navigation";
 import { selectDetailsByKey } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
+import { PricesMap } from "@/src/shared/types/booking";
 
 interface Props {
   duration: Duration;

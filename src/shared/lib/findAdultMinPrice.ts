@@ -1,4 +1,4 @@
-import { PricesMap } from "@/src/shared/types/excursion";
+import { PricesMap } from "@/src/shared/types/booking";
 
 export const findAdultMinPrice = (priceMap: PricesMap) => {
   let minPrice = Infinity;

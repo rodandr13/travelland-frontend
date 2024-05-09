@@ -3,7 +3,6 @@
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { SelectNumber } from "./ui/SelectNumber";
 import styles from "./styles.module.scss";
-import { PricesMap } from "@/src/shared/types/excursion";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { usePathname } from "next/navigation";
 import { setDetails } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/bookingSlice";
@@ -12,10 +11,12 @@ import {
   selectParticipantsByKey,
 } from "@/src/enities/excursion/ui/excursionDetail/ui/bookingSection/model/selectors";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
+import { PricesMap } from "@/src/shared/types/booking";
 
 interface Props {
   prices: PricesMap;
 }
+
 export const SelectPeoples = ({ prices }: Props) => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
