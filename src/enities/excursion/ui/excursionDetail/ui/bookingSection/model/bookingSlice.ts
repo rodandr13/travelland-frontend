@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { PricesValue } from "@/src/shared/types/excursion";
+import { PricesValue } from "@/src/shared/types/booking";
 
 interface BookingDetails {
   selectedDate: string | null;

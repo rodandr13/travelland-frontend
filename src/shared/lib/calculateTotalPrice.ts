@@ -1,4 +1,4 @@
-import { PricesValue } from "@/src/shared/types/excursion";
+import { PricesValue } from "@/src/shared/types/booking";
 
 export const calculateTotalPrice = (
   prices: PricesValue,

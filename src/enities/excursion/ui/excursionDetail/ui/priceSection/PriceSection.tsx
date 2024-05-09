@@ -16,6 +16,7 @@ import { ru } from "date-fns/locale/ru";
 import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 
 import { AddToCart } from "@/src/features/cart/addToCart";
+import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 
 interface Props {
   minPrice: number | undefined;
@@ -134,36 +135,38 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
               bookingDetails.prices.prices.length > 0 &&
               bookingDetails.participants.length > 0 && (
                 <ul className={styles.priceSection__list}>
-                  {bookingDetails.prices.prices.map((price, i) => {
-                    if (bookingDetails.participants[i]) {
-                      return (
-                        <li className={styles.priceSection__item} key={i}>
-                          <div className={styles.priceSection__priceLine}>
-                            <span>
-                              {bookingDetails.participants[i]}&nbsp;x&nbsp;
+                  {bookingDetails.prices.prices.map(
+                    (price: Price, i: number) => {
+                      if (bookingDetails.participants[i]) {
+                        return (
+                          <li className={styles.priceSection__item} key={i}>
+                            <div className={styles.priceSection__priceLine}>
+                              <span>
+                                {bookingDetails.participants[i]}&nbsp;x&nbsp;
+                              </span>
+                              <span>
+                                {price.title}&nbsp;({price.price.toFixed(2)}
+                                &nbsp;€)&nbsp;
+                              </span>
+                              <span
+                                className={styles.priceSection__dottedLine}
+                              ></span>
+                              <span className={styles.priceSection__priceSum}>
+                                {(
+                                  price.price * bookingDetails.participants[i]
+                                ).toFixed(2)}
+                                &nbsp;€
+                              </span>
+                            </div>
+                            <span className={styles.priceSection__caption}>
+                              ({price.description})
                             </span>
-                            <span>
-                              {price.title}&nbsp;({price.price.toFixed(2)}
-                              &nbsp;€)&nbsp;
-                            </span>
-                            <span
-                              className={styles.priceSection__dottedLine}
-                            ></span>
-                            <span className={styles.priceSection__priceSum}>
-                              {(
-                                price.price * bookingDetails.participants[i]
-                              ).toFixed(2)}
-                              &nbsp;€
-                            </span>
-                          </div>
-                          <span className={styles.priceSection__caption}>
-                            ({price.description})
-                          </span>
-                        </li>
-                      );
+                          </li>
+                        );
+                      }
+                      return null;
                     }
-                    return null;
-                  })}
+                  )}
                 </ul>
               )}
           </ul>
