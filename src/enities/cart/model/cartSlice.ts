@@ -22,19 +22,17 @@ const cartSlice = createSlice({
       action: PayloadAction<{ key: string; details: Partial<BookingDetails> }>
     ) => {
       const { key, details } = action.payload;
-      if (state.items[key]) {
-        state.items[key] = { ...state.items[key], ...details };
-        if (state.items[key].prices) {
-          const prices = state.items[key].prices?.prices;
-          const participants = state.items[key].participants;
-          if (prices && participants) {
-            for (let i = 0; i < participants.length; i++) {
-              state.totalPrice += participants[i] * (prices[i].price || 0);
-            }
+      state.items[key] = { ...state.items[key], ...details };
+      if (state.items[key].prices) {
+        const prices = state.items[key].prices?.prices;
+        const participants = state.items[key].participants;
+        if (prices && participants) {
+          for (let i = 0; i < participants.length; i++) {
+            state.totalPrice += participants[i] * (prices[i].price || 0);
           }
         }
-        state.totalQuantity++;
       }
+      state.totalQuantity++;
     },
     removeItem: (state, action: PayloadAction<string>) => {
       const key = action.payload;
