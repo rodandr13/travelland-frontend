@@ -1,9 +1,10 @@
-import { Button } from "@/src/shared/ui/button";
-import { addItem } from "@/src/enities/cart/model/cartSlice";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { usePathname } from "next/navigation";
-import { BookingDetails } from "@/src/shared/types/booking";
+
+import { addItem } from "@/src/enities/cart/model/cartSlice";
 import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { BookingDetails } from "@/src/shared/types/booking";
+import { Button } from "@/src/shared/ui/button";
 
 interface Props {
   bookingDetails: BookingDetails;

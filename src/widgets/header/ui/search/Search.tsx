@@ -1,10 +1,13 @@
 "use client";
 
-import styles from "./styles.module.scss";
-import Select from "react-select";
-import { Button } from "@/src/shared/ui/button";
-import clsx from "clsx";
 import { useState } from "react";
+
+import clsx from "clsx";
+import Select from "react-select";
+
+import { Button } from "@/src/shared/ui/button";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   title: string;

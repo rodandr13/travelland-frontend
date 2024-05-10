@@ -1,5 +1,6 @@
 import { client } from "@/src/shared/lib/sanity/client";
-import { FiltersType } from "@/src/widgets/excursionCatalog/model/types/FiltersType";
+
+import { FiltersType } from "../model/types/FiltersType";
 
 export const getFilters = async () => {
   const query = `

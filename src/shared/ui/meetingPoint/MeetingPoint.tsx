@@ -1,7 +1,9 @@
-import styles from "./styles.module.scss";
 import Image from "next/image";
+
 import { IMeetingPoint } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   meetingPlace: IMeetingPoint;

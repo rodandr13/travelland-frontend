@@ -1,11 +1,14 @@
 "use client";
 
-import clsx from "clsx";
-import styles from "./styles.module.scss";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { toggleMenu } from "@/src/widgets/header/model/menuSlice";
-import sharedStyles from "@/src/shared/styles/styles.module.scss";
 import { useEffect } from "react";
+
+import clsx from "clsx";
+
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
+import sharedStyles from "@/src/shared/styles/styles.module.scss";
+import { toggleMenu } from "@/src/widgets/header/model/menuSlice";
+
+import styles from "./styles.module.scss";
 
 export const HamburgerButton = () => {
   const dispatch = useAppDispatch();

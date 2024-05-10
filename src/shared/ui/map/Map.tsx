@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import styles from "./styles.module.scss";
+
 import { Loader } from "@googlemaps/js-api-loader";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   lng: number;

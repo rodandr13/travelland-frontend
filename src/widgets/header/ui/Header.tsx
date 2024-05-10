@@ -1,6 +1,7 @@
-import styles from "./styles.module.scss";
-import { Navbar } from "./navbar/";
 import React from "react";
+
+import { Navbar } from "./navbar/";
+import styles from "./styles.module.scss";
 
 export const Header = () => {
   return (

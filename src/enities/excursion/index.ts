@@ -1,3 +1,3 @@
-export { ExcursionCard } from "./ui/excursionCard/ExcursionCard";
-export { ExcursionList } from "./ui/excursionList/ExcursionList";
-export { ExcursionDetail } from "./ui/excursionDetail/ExcursionDetail";
+export { Card } from "@/src/enities/excursion/ui/card/Card";
+export { Cards } from "@/src/enities/excursion/ui/cards/Cards";
+export { Detail } from "./ui/detail/Detail";

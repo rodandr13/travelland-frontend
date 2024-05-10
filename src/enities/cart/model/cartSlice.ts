@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+
 import { BookingDetails } from "@/src/shared/types/booking";
 
 interface CartState {

@@ -1,9 +1,10 @@
-import styles from "./styles.module.scss";
+import { getServices } from "@/src/pages/homePage/api/getServices";
+import { Services } from "@/src/shared/ui";
 import { SectionTitle } from "@/src/shared/ui/sectionTitle";
 import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
-import { Services } from "@/src/shared/ui";
-import { getServices } from "@/src/pages/homePage/api/getServices";
 import { HeroSection } from "@/src/widgets/heroSection";
+
+import styles from "./styles.module.scss";
 
 export const HomePage = async () => {
   const services = await getServices();

@@ -1,5 +1,5 @@
-import { client } from "@/src/shared/lib/sanity/client";
 import { ExcursionCardsType } from "@/src/enities/excursion/model/types/ExcursionCard";
+import { client } from "@/src/shared/lib/sanity/client";
 
 export const getExcursionCards = async () => {
   const query = `

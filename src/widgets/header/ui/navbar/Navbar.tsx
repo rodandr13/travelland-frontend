@@ -1,11 +1,13 @@
 "use client";
 
-import styles from "./styles.module.scss";
-import Link from "next/link";
-import Image from "next/image";
-import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 import clsx from "clsx";
+import Image from "next/image";
+import Link from "next/link";
+
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
+
+import styles from "./styles.module.scss";
 
 export const Navbar = () => {
   const isOpen = useAppSelector((state) => state.menu.isOpen);

@@ -1,13 +1,16 @@
-import Image from "next/image";
-import styles from "./styles.module.scss";
-import clsx from "clsx";
 import React, { useRef, useState } from "react";
-import { urlFor } from "@/src/shared/lib/sanity/client";
+
+import clsx from "clsx";
+import Image from "next/image";
+
 import { GalleryImage } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { urlFor } from "@/src/shared/lib/sanity/client";
 import { SlideButton } from "@/src/shared/ui/";
 import { getScaleStyle } from "@/src/shared/ui/slider/lib/getScaleStyle";
 import { goToSlide } from "@/src/shared/ui/slider/lib/goToSlide";
 import { setSlideRef } from "@/src/shared/ui/slider/lib/setSlideRef";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   images: GalleryImage[];
@@ -44,7 +47,7 @@ export const ImageSlider = ({ images }: Props) => {
                 blurDataURL={image.lqip}
                 fill
                 sizes="(max-width: 500px) 70vw, (max-width: 768px) 50vw, (max-width: 1200px) 30vw, 20vw"
-                alt="ExcursionCard image"
+                alt="Card image"
               />
             </li>
           ))}

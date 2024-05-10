@@ -1,1 +1,1 @@
-export { ExcursionCatalog } from "./ui";
+export { ExcursionCatalog } from "./ui/ExcursionCatalog";

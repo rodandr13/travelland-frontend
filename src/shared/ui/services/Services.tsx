@@ -1,14 +1,17 @@
 "use client";
 
-import styles from "./styles.module.scss";
-import { SlideButton } from "@/src/shared/ui";
-import { setSlideRef } from "@/src/shared/ui/slider/lib/setSlideRef";
-import Image from "next/image";
 import React, { useRef, useState } from "react";
-import { goToSlide } from "@/src/shared/ui/slider/lib/goToSlide";
+
+import Image from "next/image";
+
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Service } from "@/src/shared/types/service";
+import { SlideButton } from "@/src/shared/ui";
 import { SectionTitle } from "@/src/shared/ui/sectionTitle";
+import { goToSlide } from "@/src/shared/ui/slider/lib/goToSlide";
+import { setSlideRef } from "@/src/shared/ui/slider/lib/setSlideRef";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   services: Service[];
