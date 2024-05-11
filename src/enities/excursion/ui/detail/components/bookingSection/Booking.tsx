@@ -15,8 +15,8 @@ import {
 import {
   setDetails,
   setVisible,
-} from "@/src/enities/excursion/ui/detail/ui/bookingSection/model/bookingSlice";
-import { selectDetailsByKey } from "@/src/enities/excursion/ui/detail/ui/bookingSection/model/selectors";
+} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
+import { selectDetailsByKey } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";

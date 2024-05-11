@@ -30,6 +30,7 @@ export const Card = ({ addFavorite, card }: Props) => {
   const filledDays = daysOfWeek.map((day) =>
     card.weekdays.includes(day) ? day : ""
   );
+
   const allPrices = [
     card.basePrices,
     ...(card.promotionalPrices || []),

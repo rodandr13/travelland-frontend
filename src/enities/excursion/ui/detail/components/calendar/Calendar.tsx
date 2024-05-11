@@ -8,8 +8,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 
 import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
-import { setDetails } from "@/src/enities/excursion/ui/detail/ui/bookingSection/model/bookingSlice";
-import { selectDateByKey } from "@/src/enities/excursion/ui/detail/ui/bookingSection/model/selectors";
+import { setDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
+import { selectDateByKey } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { PricesMap } from "@/src/shared/types/booking";

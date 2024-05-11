@@ -4,20 +4,20 @@ import { findAdultMinPrice } from "@/src/shared/lib/findAdultMinPrice";
 import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
 import { PageTitle } from "@/src/shared/ui/pageTitle/PageTitle";
 
+import { Advantages } from "./components/advantages/Advantages";
+import { AttentionBlock } from "./components/attentionBlock/AttentionBlock";
+import { Booking } from "./components/bookingSection/Booking";
+import { Breadcrumbs } from "./components/breadcrumbs/Breadcrumbs";
+import { Categories } from "./components/categories/Categories";
+import { Conditions } from "./components/conditions/Conditions";
+import { Description } from "./components/description/Description";
+import { ExcursionRoute } from "./components/excursionRoute/ExcursionRoute";
+import { Gallery } from "./components/gallery/Gallery";
+import { MeetingPoint } from "./components/meetingPoint/MeetingPoint";
+import { Parameters } from "./components/parameters/Parameters";
+import { PriceSection } from "./components/priceSection/PriceSection";
+import { TimeSpending } from "./components/timeSpending/TimeSpending";
 import styles from "./styles.module.scss";
-import { Advantages } from "./ui/advantages/Advantages";
-import { AttentionBlock } from "./ui/attentionBlock/AttentionBlock";
-import { Booking } from "./ui/bookingSection/Booking";
-import { Breadcrumbs } from "./ui/breadcrumbs/Breadcrumbs";
-import { Categories } from "./ui/categories/Categories";
-import { Conditions } from "./ui/conditions/Conditions";
-import { Description } from "./ui/description/Description";
-import { ExcursionRoute } from "./ui/excursionRoute/ExcursionRoute";
-import { Gallery } from "./ui/gallery/Gallery";
-import { MeetingPoint } from "./ui/meetingPoint/MeetingPoint";
-import { Parameters } from "./ui/parameters/Parameters";
-import { PriceSection } from "./ui/priceSection/PriceSection";
-import { TimeSpending } from "./ui/timeSpending/TimeSpending";
 
 interface Props {
   slug: string;

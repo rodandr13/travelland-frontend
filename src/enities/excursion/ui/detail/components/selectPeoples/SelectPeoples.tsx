@@ -2,11 +2,11 @@
 
 import { usePathname } from "next/navigation";
 
-import { setDetails } from "@/src/enities/excursion/ui/detail/ui/bookingSection/model/bookingSlice";
+import { setDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import {
   selectDateByKey,
   selectParticipantsByKey,
-} from "@/src/enities/excursion/ui/detail/ui/bookingSection/model/selectors";
+} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { PricesMap } from "@/src/shared/types/booking";

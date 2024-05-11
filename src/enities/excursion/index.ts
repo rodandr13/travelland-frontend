@@ -1,3 +1,3 @@
-export { Card } from "@/src/enities/excursion/ui/card/Card";
-export { Cards } from "@/src/enities/excursion/ui/cards/Cards";
+export { Card } from "./ui/card/Card";
+export { Cards } from "./ui/cards/Cards";
 export { Detail } from "./ui/detail/Detail";

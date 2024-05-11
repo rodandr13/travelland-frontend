@@ -1,15 +1,16 @@
 import clsx from "clsx";
 
+import { getFilters } from "@/src/widgets/excursionCatalog/api/getFilters";
+
 import styles from "./styles.module.scss";
-import { FiltersType } from "../../model/types/FiltersType";
 import { FilterItem } from "../filterItem/FilterItem";
 
 interface Props {
   className: string;
-  filters: FiltersType;
 }
 
-export const FilterList = ({ className, filters }: Props) => {
+export const FilterList = async ({ className }: Props) => {
+  const filters = await getFilters();
   return (
     <section className={clsx(styles.filterList, className)}>
       <form className={styles.filterList__form}>

@@ -11,7 +11,7 @@ import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import {
   selectDetailsByKey,
   selectVisibility,
-} from "@/src/enities/excursion/ui/detail/ui/bookingSection/model/selectors";
+} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/cart/addToCart";
 import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
