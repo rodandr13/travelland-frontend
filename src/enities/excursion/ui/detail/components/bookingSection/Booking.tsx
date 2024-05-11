@@ -27,21 +27,39 @@ import { Calendar } from "../calendar/Calendar";
 import { SelectPeoples } from "../selectPeoples/SelectPeoples";
 
 interface Props {
+  image: string;
   duration: Duration;
   weekdays: Weekdays;
   startTime: StartTime;
   basePrices: Price[];
   dates: Dates;
   prices: PricesMap;
+  title: string;
 }
 
-export const Booking = ({ duration, basePrices, startTime, prices }: Props) => {
+export const Booking = ({
+  duration,
+  basePrices,
+  startTime,
+  prices,
+  title,
+  image,
+}: Props) => {
   const bookingRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const pathname = usePathname();
   const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
+
+  useEffect(() => {
+    dispatch(
+      setDetails({
+        key: pathname as string,
+        details: { title: title, image: image },
+      })
+    );
+  }, []);
 
   useEffect(() => {
     dispatch(setVisible(isVisible));

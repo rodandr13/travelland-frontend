@@ -3,11 +3,13 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { PricesValue } from "@/src/shared/types/booking";
 
 interface BookingDetails {
-  selectedDate: string | null;
+  title: string | null;
+  image: string | null;
+  selectedDate: string;
   participants: number[];
   time: string | null;
   prices: PricesValue | null;
-  totalPrice: number | null;
+  totalPrice: number;
 }
 
 interface BookingState {
@@ -34,11 +36,13 @@ const bookingSlice = createSlice({
       const { key, details } = action.payload;
       if (!state.details[key]) {
         state.details[key] = {
-          selectedDate: null,
+          image: "",
+          title: "",
+          selectedDate: "",
           participants: [],
           time: "",
           prices: null,
-          totalPrice: null,
+          totalPrice: 0,
         };
       }
       state.details[key] = {

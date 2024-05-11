@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
+import { CompactCart } from "@/src/enities/cart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
@@ -60,17 +61,20 @@ export const Navbar = () => {
             {/*  ))}*/}
             {/*</ul>*/}
           </div>
-          <div
-            className={`${styles.navbar__pageSettings} ${styles.pageSettings}`}
-          >
-            <ul className={styles.pageSettings__list}>
-              <li className={`${styles.pageSettings__item} ${styles.language}`}>
-                English
-              </li>
-              <li className={`${styles.pageSettings__item} ${styles.currency}`}>
-                USD
-              </li>
-            </ul>
+          {/*<div*/}
+          {/*  className={`${styles.navbar__pageSettings} ${styles.pageSettings}`}*/}
+          {/*>*/}
+          {/*  <ul className={styles.pageSettings__list}>*/}
+          {/*    <li className={`${styles.pageSettings__item} ${styles.language}`}>*/}
+          {/*      English*/}
+          {/*    </li>*/}
+          {/*    <li className={`${styles.pageSettings__item} ${styles.currency}`}>*/}
+          {/*      USD*/}
+          {/*    </li>*/}
+          {/*  </ul>*/}
+          {/*</div>*/}
+          <div className={styles.navbar__cart}>
+            <CompactCart />
           </div>
           <div className={styles.contacts}>
             <div className={styles.contacts__telephone}>

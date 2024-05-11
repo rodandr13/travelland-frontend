@@ -1,0 +1,97 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
+import { format } from "date-fns";
+import { ru } from "date-fns/locale/ru";
+import Image from "next/image";
+
+import {
+  getTotalPrice,
+  getTotalQuantity,
+  selectCart,
+} from "@/src/enities/cart/model/selectors";
+import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { urlFor } from "@/src/shared/lib/sanity/client";
+
+import styles from "./styles.module.scss";
+
+export const CompactCart = () => {
+  const totalQuantity = useAppSelector(getTotalQuantity);
+  const totalPrice = useAppSelector(getTotalPrice);
+  const cart = useAppSelector(selectCart);
+  const [isDetailsVisible, setDetailsVisible] = useState(false);
+  const detailsVisibilityTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (detailsVisibilityTimer.current !== null) {
+        clearTimeout(detailsVisibilityTimer.current);
+      }
+    };
+  }, []);
+
+  const handleMouseLeave = () => {
+    const timer = window.setTimeout(() => {
+      setDetailsVisible(false);
+    }, 500);
+    detailsVisibilityTimer.current = timer;
+  };
+
+  const handleMouseEnter = () => {
+    if (detailsVisibilityTimer.current !== null) {
+      clearTimeout(detailsVisibilityTimer.current);
+    }
+    const timer = window.setTimeout(() => {
+      setDetailsVisible(true);
+    }, 100);
+    detailsVisibilityTimer.current = timer;
+  };
+
+  return (
+    <section
+      className={styles.cart}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      <p className={styles.cart__title}>
+        Корзина <span>({totalPrice} €)</span>
+      </p>
+      <div className={styles.cart__totalQuantity}>{totalQuantity}</div>
+      {Object.keys(cart.items).length > 0 && isDetailsVisible && (
+        <div className={styles.cart__details}>
+          <ul className={styles.cart__list}>
+            {Object.entries(cart.items).map(([key, value], index) => (
+              <li key={index} className={styles.cart__item}>
+                <Image
+                  className={styles.cart__image}
+                  src={urlFor(value.image)}
+                  alt=""
+                  width={50}
+                  height={40}
+                />
+                <div className={styles.cart__textContainer}>
+                  <h3 className={styles.cart__title}>{value.title}</h3>
+                  <div className={styles.cart__dateContainer}>
+                    <p className={styles.cart__date}>
+                      {value.selectedDate &&
+                        format(value.selectedDate, "d MMMM yyyy", {
+                          locale: ru,
+                        })}{" "}
+                      в {value.time}
+                    </p>
+                    <p className={styles.cart__price}>{value.totalPrice} €</p>
+                  </div>
+                </div>
+                <button className={styles.cart__deleteItem}>
+                  <span>Удалить</span>
+                </button>
+              </li>
+            ))}
+          </ul>
+          <div className={styles.cart__totalPrice}>Итого: {totalPrice} €</div>
+        </div>
+      )}
+    </section>
+  );
+};
