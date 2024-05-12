@@ -31,7 +31,10 @@ const bookingSlice = createSlice({
           selectedDate: "",
           participants: [],
           time: "",
-          prices: null,
+          prices: {
+            prices: [],
+            basePrice: [],
+          },
           totalPrice: 0,
         };
       }

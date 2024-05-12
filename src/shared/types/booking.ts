@@ -19,9 +19,9 @@ export type PricesMap = Map<string, PricesValue>;
 export type BookingDetails = {
   title: string;
   image: string;
-  selectedDate: string | null;
+  selectedDate: string;
   participants: Participants[];
-  time: string | null;
-  prices: PricesValue | null;
-  totalPrice: number | null;
+  time: string;
+  prices: PricesValue;
+  totalPrice: number;
 };

@@ -86,9 +86,6 @@ export const CompactCart = () => {
                     <p className={styles.cart__price}>{value.totalPrice} €</p>
                   </div>
                 </div>
-                <button className={styles.cart__deleteItem}>
-                  <span>Удалить</span>
-                </button>
               </li>
             ))}
           </ul>
