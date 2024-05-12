@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   getTotalPrice,
@@ -34,7 +35,7 @@ export const CompactCart = () => {
   const handleMouseLeave = () => {
     const timer = window.setTimeout(() => {
       setDetailsVisible(false);
-    }, 500);
+    }, 200);
     detailsVisibilityTimer.current = timer;
   };
 
@@ -54,9 +55,11 @@ export const CompactCart = () => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <p className={styles.cart__title}>
-        Корзина <span>({totalPrice} €)</span>
-      </p>
+      <Link href="/cart" className={styles.cart__link}>
+        <p className={styles.cart__title}>
+          Корзина <span>({totalPrice} €)</span>
+        </p>
+      </Link>
       <div className={styles.cart__totalQuantity}>{totalQuantity}</div>
       {Object.keys(cart.items).length > 0 && isDetailsVisible && (
         <div className={styles.cart__details}>

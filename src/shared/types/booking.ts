@@ -9,13 +9,18 @@ export type PricesValue = {
   basePrice: Price[];
 };
 
+export type Participants = {
+  category: string;
+  count: number;
+};
+
 export type PricesMap = Map<string, PricesValue>;
 
 export type BookingDetails = {
   title: string;
   image: string;
   selectedDate: string | null;
-  participants: number[];
+  participants: Participants[];
   time: string | null;
   prices: PricesValue | null;
   totalPrice: number | null;

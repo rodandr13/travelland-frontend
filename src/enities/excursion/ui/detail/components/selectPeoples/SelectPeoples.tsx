@@ -19,6 +19,8 @@ interface Props {
   prices: PricesMap;
 }
 
+export type Participants = { category: string; count: number };
+
 export const SelectPeoples = ({ prices }: Props) => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
@@ -29,28 +31,26 @@ export const SelectPeoples = ({ prices }: Props) => {
   const participants = useAppSelector(
     selectParticipantsByKey(pathname as string)
   );
-  let values: number[] = [];
-  if (tempPrice) {
-    const valuesLength = tempPrice.length;
-    values = new Array(valuesLength).fill(0);
-    if (values.length > 0) {
-      values[0] = 2;
-    }
-  }
-
-  const handleChange = (index: number) => (newValue: number) => {
-    const updatedParticipants = [...participants];
-    updatedParticipants[index] = newValue;
-
-    if (pathname) {
-      dispatch(
-        setDetails({
-          key: pathname,
-          details: { participants: updatedParticipants },
-        })
-      );
-    }
-  };
+  const handleChange =
+    (index: number, category: string) => (newValue: number) => {
+      const updatedParticipants = [...participants];
+      console.log("updatedParticipants", updatedParticipants);
+      updatedParticipants[index] = {
+        ...updatedParticipants[index],
+        count: newValue,
+        category: category,
+      };
+      if (pathname) {
+        dispatch(
+          setDetails({
+            key: pathname,
+            details: {
+              participants: updatedParticipants,
+            },
+          })
+        );
+      }
+    };
 
   return (
     <section className={styles.selectPeoples}>
@@ -72,11 +72,11 @@ export const SelectPeoples = ({ prices }: Props) => {
             </div>
             <div className={styles.selectPeoples__container}>
               <SelectNumber
-                value={participants[i] || 0}
-                onNumberChange={handleChange(i)}
+                value={participants[i]?.count || 0}
+                onNumberChange={handleChange(i, price.title)}
               />
               <span className={styles.selectPeoples__sum}>
-                = {(price.price * (participants[i] || 0)).toFixed(2)} €
+                = {(price.price * (participants[i]?.count || 0)).toFixed(2)} €
               </span>
             </div>
           </div>

@@ -29,7 +29,7 @@ const cartSlice = createSlice({
         const participants = state.items[key].participants;
         if (prices && participants) {
           for (let i = 0; i < participants.length; i++) {
-            state.totalPrice += participants[i] * (prices[i].price || 0);
+            state.totalPrice += participants[i].count * (prices[i].price || 0);
           }
         }
       }
@@ -42,7 +42,7 @@ const cartSlice = createSlice({
         const participants = state.items[key].participants;
         if (prices && participants) {
           for (let i = 0; i < participants.length; i++) {
-            state.totalPrice -= participants[i] * prices[i].price;
+            state.totalPrice -= participants[i].count * prices[i].price;
           }
         }
         state.totalQuantity--;

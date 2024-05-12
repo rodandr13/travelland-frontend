@@ -1,16 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { PricesValue } from "@/src/shared/types/booking";
-
-interface BookingDetails {
-  title: string | null;
-  image: string | null;
-  selectedDate: string;
-  participants: number[];
-  time: string | null;
-  prices: PricesValue | null;
-  totalPrice: number;
-}
+import { BookingDetails } from "@/src/shared/types/booking";
 
 interface BookingState {
   visible: boolean;
@@ -56,7 +46,8 @@ const bookingSlice = createSlice({
           if (prices && state.details[key].participants) {
             let totalPrice = 0;
             for (let i = 0; i < state.details[key].participants.length; i++) {
-              const participantCount = state.details[key].participants[i] || 0;
+              const participantCount =
+                state.details[key].participants[i].count || 0;
               const price = prices[i]?.price || 0;
               totalPrice += participantCount * price;
             }

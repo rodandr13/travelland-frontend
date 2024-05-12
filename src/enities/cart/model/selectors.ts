@@ -6,6 +6,11 @@ export const selectCartState = (state: TypeRootState) => state.cart;
 
 export const selectCart = createSelector([selectCartState], (cart) => cart);
 
+export const selectCartItems = createSelector(
+  [selectCartState],
+  (cart) => cart.items
+);
+
 export const getTotalQuantity = createSelector(
   [selectCartState],
   (cart) => cart.totalQuantity

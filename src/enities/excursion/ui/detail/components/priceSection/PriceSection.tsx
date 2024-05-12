@@ -13,7 +13,6 @@ import {
   selectVisibility,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/cart/addToCart";
-import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
@@ -78,10 +77,10 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
       ? { price: minPrice }
       : { price: minPrice, basePrice: basePrice };
 
-  const totalPrice =
-    bookingDetails?.prices && bookingDetails?.participants
-      ? calculateTotalPrice(bookingDetails.prices, bookingDetails.participants)
-      : 0;
+  const totalPrice = 0;
+  // bookingDetails?.prices && bookingDetails?.participants
+  //   ? calculateTotalPrice(bookingDetails.prices, bookingDetails.participants)
+  //   : 0;
 
   return (
     <>
@@ -144,7 +143,8 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
                           <li className={styles.priceSection__item} key={i}>
                             <div className={styles.priceSection__priceLine}>
                               <span>
-                                {bookingDetails.participants[i]}&nbsp;x&nbsp;
+                                {bookingDetails.participants[i].count}
+                                &nbsp;x&nbsp;
                               </span>
                               <span>
                                 {price.title}&nbsp;({price.price.toFixed(2)}
@@ -155,7 +155,8 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
                               ></span>
                               <span className={styles.priceSection__priceSum}>
                                 {(
-                                  price.price * bookingDetails.participants[i]
+                                  price.price *
+                                  bookingDetails.participants[i].count
                                 ).toFixed(2)}
                                 &nbsp;€
                               </span>
