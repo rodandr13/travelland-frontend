@@ -43,20 +43,18 @@ const bookingSlice = createSlice({
         ...details,
       };
       if (state.details[key].participants && state.details[key].prices) {
-        const prices = state.details[key].prices?.prices;
+        const { prices } = state.details[key].prices;
         const participants = state.details[key].participants;
-        for (let i = 0; i < participants.length; i++) {
-          if (prices && state.details[key].participants) {
-            let totalPrice = 0;
-            for (let i = 0; i < state.details[key].participants.length; i++) {
-              const participantCount =
-                state.details[key].participants[i].count || 0;
-              const price = prices[i]?.price || 0;
-              totalPrice += participantCount * price;
-            }
-            state.details[key].totalPrice = totalPrice;
+        let totalPrice = 0;
+
+        participants.forEach((participant, index) => {
+          if (participant && prices && prices.length > index) {
+            const participantCount = participant.count || 0;
+            const price = prices[index]?.price || 0;
+            totalPrice += participantCount * price;
           }
-        }
+        });
+        state.details[key].totalPrice = totalPrice;
       }
     },
   },

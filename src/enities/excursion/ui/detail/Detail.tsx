@@ -13,7 +13,6 @@ import { Conditions } from "./components/conditions/Conditions";
 import { Description } from "./components/description/Description";
 import { ExcursionRoute } from "./components/excursionRoute/ExcursionRoute";
 import { Gallery } from "./components/gallery/Gallery";
-import { MeetingPoint } from "./components/meetingPoint/MeetingPoint";
 import { Parameters } from "./components/parameters/Parameters";
 import { PriceSection } from "./components/priceSection/PriceSection";
 import { TimeSpending } from "./components/timeSpending/TimeSpending";
@@ -61,7 +60,6 @@ export const Detail = async ({ slug }: Props) => {
                 )}
                 <Description description={excursion.description} />
               </div>
-              <MeetingPoint meetingPoint={excursion.startingPlace} />
             </div>
             <Conditions
               additionalTerms={excursion.additionalTerms}

@@ -80,6 +80,19 @@
     width: 100%;
     text-transform: none;
   }
+
+  &__link_cart {
+    display: block;
+    background: rgba(93, 164, 101, 0.2);
+    color: #191919;
+    border: 1px solid rgba(54, 133, 63, 0.7);
+    text-decoration: none;
+    text-align: center;
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 3px;
+  }
+
 }
 
 @keyframes fadeIn {

@@ -5,14 +5,17 @@ import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
 import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import {
   selectDetailsByKey,
   selectVisibility,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/cart/addToCart";
+import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
@@ -29,6 +32,7 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
   const pathname = usePathname();
   const bookingIsVisible = useAppSelector(selectVisibility);
   const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
+  const itemExists = useAppSelector(selectCartItemExists(pathname as string));
   const [showBlockPreview, setShowBlockPreview] = useState(true);
   const [showBlockPrice, setShowBlockPrice] = useState(false);
   const [animationClassPreview, setAnimationClassPreview] = useState("");
@@ -77,10 +81,10 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
       ? { price: minPrice }
       : { price: minPrice, basePrice: basePrice };
 
-  const totalPrice = 0;
-  // bookingDetails?.prices && bookingDetails?.participants
-  //   ? calculateTotalPrice(bookingDetails.prices, bookingDetails.participants)
-  //   : 0;
+  const totalPrice =
+    bookingDetails?.prices && bookingDetails?.participants
+      ? calculateTotalPrice(bookingDetails.prices, bookingDetails.participants)
+      : 0;
 
   return (
     <>
@@ -182,7 +186,13 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
               actualPrice
             />
           </div>
-          <AddToCart bookingDetails={bookingDetails} />
+          {!itemExists ? (
+            <AddToCart bookingDetails={bookingDetails} />
+          ) : (
+            <Link href="/cart" className={styles.priceSection__link_cart}>
+              Перейти в корзину
+            </Link>
+          )}
         </section>
       )}
     </>

@@ -34,7 +34,6 @@ export const SelectPeoples = ({ prices }: Props) => {
   const handleChange =
     (index: number, category: string) => (newValue: number) => {
       const updatedParticipants = [...participants];
-      console.log("updatedParticipants", updatedParticipants);
       updatedParticipants[index] = {
         ...updatedParticipants[index],
         count: newValue,

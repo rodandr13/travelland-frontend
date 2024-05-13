@@ -1,14 +1,14 @@
-import { PricesValue } from "@/src/shared/types/booking";
+import { Participants, PricesValue } from "@/src/shared/types/booking";
 
 export const calculateTotalPrice = (
   prices: PricesValue,
-  participants: number[]
+  participants: Participants[]
 ) => {
   if (!prices || !participants || !prices.prices || participants.length === 0)
     return 0;
   return prices.prices.reduce((total, price, i) => {
     if (participants[i]) {
-      total += price.price * participants[i];
+      total += price.price * participants[i].count;
     }
     return total;
   }, 0);

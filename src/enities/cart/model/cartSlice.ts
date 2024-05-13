@@ -24,15 +24,18 @@ const cartSlice = createSlice({
     ) => {
       const { key, details } = action.payload;
       state.items[key] = { ...state.items[key], ...details };
-      if (state.items[key].prices) {
-        const prices = state.items[key].prices?.prices;
-        const participants = state.items[key].participants;
-        if (prices && participants) {
-          for (let i = 0; i < participants.length; i++) {
-            state.totalPrice += participants[i].count * (prices[i].price || 0);
+
+      const prices = state.items[key].prices?.prices;
+      const participants = state.items[key].participants;
+
+      if (prices && participants) {
+        participants.forEach((participant, index) => {
+          if (prices.length > index) {
+            state.totalPrice += participant.count * (prices[index]?.price || 0);
           }
-        }
+        });
       }
+
       state.totalQuantity++;
     },
     removeItem: (state, action: PayloadAction<string>) => {
@@ -40,11 +43,16 @@ const cartSlice = createSlice({
       if (state.items[key]) {
         const prices = state.items[key].prices?.prices;
         const participants = state.items[key].participants;
+
         if (prices && participants) {
-          for (let i = 0; i < participants.length; i++) {
-            state.totalPrice -= participants[i].count * prices[i].price;
-          }
+          participants.forEach((participant, index) => {
+            if (prices.length > index) {
+              state.totalPrice -=
+                participant.count * (prices[index]?.price || 0);
+            }
+          });
         }
+
         state.totalQuantity--;
         delete state.items[key];
       }
