@@ -26,7 +26,10 @@ const bookingSlice = createSlice({
       const { key, details } = action.payload;
       if (!state.details[key]) {
         state.details[key] = {
-          image: "",
+          image: {
+            src: "",
+            lqip: "",
+          },
           title: "",
           selectedDate: "",
           participants: [],

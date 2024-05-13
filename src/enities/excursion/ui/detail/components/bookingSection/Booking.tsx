@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 import {
   Dates,
   Duration,
+  GalleryImage,
   Price,
   StartTime,
   Weekdays,
@@ -27,7 +28,7 @@ import { Calendar } from "../calendar/Calendar";
 import { SelectPeoples } from "../selectPeoples/SelectPeoples";
 
 interface Props {
-  image: string;
+  image: GalleryImage;
   duration: Duration;
   weekdays: Weekdays;
   startTime: StartTime;
@@ -56,7 +57,7 @@ export const Booking = ({
     dispatch(
       setDetails({
         key: pathname as string,
-        details: { title: title, image: image },
+        details: { title: title, image: { src: image.src, lqip: image.lqip } },
       })
     );
   }, []);

@@ -10,7 +10,7 @@ import Link from "next/link";
 import {
   getTotalPrice,
   getTotalQuantity,
-  selectCart,
+  selectCartState,
 } from "@/src/enities/cart/model/selectors";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
@@ -20,7 +20,7 @@ import styles from "./styles.module.scss";
 export const CompactCart = () => {
   const totalQuantity = useAppSelector(getTotalQuantity);
   const totalPrice = useAppSelector(getTotalPrice);
-  const cart = useAppSelector(selectCart);
+  const cart = useAppSelector(selectCartState);
   const [isDetailsVisible, setDetailsVisible] = useState(false);
   const detailsVisibilityTimer = useRef<number | null>(null);
 
@@ -68,8 +68,12 @@ export const CompactCart = () => {
               <li key={index} className={styles.cart__item}>
                 <Image
                   className={styles.cart__image}
-                  src={urlFor(value.image)}
+                  src={urlFor(value.image.src)}
+                  blurDataURL={value.image.lqip}
                   alt=""
+                  placeholder="blur"
+                  loading="lazy"
+                  quality={60}
                   width={50}
                   height={40}
                 />

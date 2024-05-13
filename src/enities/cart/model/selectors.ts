@@ -4,8 +4,6 @@ import { TypeRootState } from "@/src/app/appStore";
 
 export const selectCartState = (state: TypeRootState) => state.cart;
 
-export const selectCart = createSelector([selectCartState], (cart) => cart);
-
 export const selectCartItems = createSelector(
   [selectCartState],
   (cart) => cart.items
@@ -22,6 +20,4 @@ export const getTotalPrice = createSelector(
 );
 
 export const selectCartItemExists = (key: string) =>
-  createSelector([selectCartState], (cart) =>
-    Boolean(cart.items && cart.items[key])
-  );
+  createSelector([selectCartItems], (items) => Boolean(items[key]));

@@ -29,9 +29,14 @@ export const DetailedCart = () => {
                 <div className={styles.detailedCart__imageContainer}>
                   <Image
                     className={styles.detailedCart__image}
-                    src={urlFor(value.image)}
+                    src={urlFor(value.image.src)}
+                    blurDataURL={value.image.lqip}
                     alt=""
-                    fill
+                    placeholder="blur"
+                    loading="lazy"
+                    quality={60}
+                    width={180}
+                    height={120}
                   />
                 </div>
                 <div className={styles.detailedCart__textContainer}>

@@ -1,3 +1,5 @@
+import { GalleryImage } from "@/src/enities/excursion/model/types/ExcursionDetail";
+
 type Price = {
   price: number;
   title: string;
@@ -18,7 +20,7 @@ export type PricesMap = Map<string, PricesValue>;
 
 export type BookingDetails = {
   title: string;
-  image: string;
+  image: GalleryImage;
   selectedDate: string;
   participants: Participants[];
   time: string;

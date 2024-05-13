@@ -74,7 +74,7 @@ export const Detail = async ({ slug }: Props) => {
             endingPlace={excursion.endingPlace}
           />
           <Booking
-            image={excursion.gallery[0].src}
+            image={excursion.gallery[0]}
             title={excursion.title}
             dates={excursion.dates}
             startTime={excursion.startTime}
