@@ -5,11 +5,20 @@ import {
 
 export const getEndTime = (startTime: StartTime, duration: Duration) => {
   const endTimes = [];
-  // const durationInMinutes =
-  //   duration.days * 24 * 60 + duration.hours + duration.minutes;
   for (let start of startTime) {
-    const [hour, minute] = start.split(":");
-    const endTime = `${parseInt(hour, 10) + Math.floor(100 / 60)}:${minute}`;
+    let [hour, minute] = start.split(":").map(Number);
+    hour += duration.hours;
+    minute += duration.minutes;
+
+    if (minute >= 60) {
+      hour += Math.floor(minute / 60);
+      minute = minute % 60;
+    }
+
+    const formattedHour = String(hour).padStart(2, "0");
+    const formattedMinute = String(minute).padStart(2, "0");
+
+    const endTime = `${formattedHour}:${formattedMinute}`;
     endTimes.push(endTime);
   }
   return endTimes;
