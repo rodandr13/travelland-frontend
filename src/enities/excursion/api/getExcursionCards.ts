@@ -11,7 +11,7 @@ export const getExcursionCards = async () => {
   "gallery": gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip},
   "slug": slug.current,
   "weekdays": weekdays,
-  "duration": duration->hours,
+  "duration": durationObject{days, hours, minutes},
   "basePrices": prices[category->{title[_key == "ru"]}.title[0].value == "Взрослые"][0].price,
   "promotionalPrices": promotionalPrices[].prices[category->{title[_key == "ru"]}.title[0].value == "Взрослые"][0].price,
   "priceCorrections": priceCorrections[].prices[category->{title[_key == "ru"]}.title[0].value == "Взрослые"][0].price,

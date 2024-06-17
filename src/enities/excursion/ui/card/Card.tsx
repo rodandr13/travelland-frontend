@@ -10,6 +10,7 @@ import { ImageSlider } from "@/src/shared/ui/slider";
 import { WeekDays } from "@/src/shared/ui/weekDays";
 
 import styles from "./styles.module.scss";
+import { formatDuration } from "../../lib/formatDuration";
 
 interface Props {
   addFavorite: React.ReactNode;
@@ -30,6 +31,8 @@ export const Card = ({ addFavorite, card }: Props) => {
   const filledDays = daysOfWeek.map((day) =>
     card.weekdays.includes(day) ? day : ""
   );
+  console.log(card.duration);
+  const formattedDuration = formatDuration(card.duration);
 
   const allPrices = [
     card.basePrices,
@@ -50,7 +53,7 @@ export const Card = ({ addFavorite, card }: Props) => {
         <WeekDays days={filledDays} />
         <h3 className={styles.excursionCard__header}>{card.title}</h3>
         <div className={styles.excursionCard__duration}>
-          {card.duration} hours
+          {formattedDuration}
         </div>
         <PriceBlock price={minPrice} basePrice={card.basePrices} />
       </Link>

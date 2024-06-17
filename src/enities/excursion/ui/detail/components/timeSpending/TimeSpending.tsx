@@ -7,6 +7,7 @@ import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { WeekDays } from "@/src/shared/ui/weekDays";
 
 import styles from "./styles.module.scss";
+import { formatDuration } from "../../../../lib/formatDuration";
 
 const daysOfWeek = [
   "Monday",
@@ -25,6 +26,7 @@ interface Props {
 }
 
 export const TimeSpending = ({ duration, weekdays, startTime }: Props) => {
+  const formattedDuration = formatDuration(duration);
   const endTimes = getEndTime(startTime, duration);
   const filledDays = (weekdays: string[]) => {
     return daysOfWeek.map((day) => (weekdays.includes(day) ? day : ""));
@@ -57,7 +59,9 @@ export const TimeSpending = ({ duration, weekdays, startTime }: Props) => {
       </div>
       <div className={styles.timeSpending__duration}>
         <h3 className={styles.timeSpending__smallTitle}>Длительность</h3>
-        <p className={styles.timeSpending__durationValue}>{duration} часов</p>
+        <p className={styles.timeSpending__durationValue}>
+          {formattedDuration}
+        </p>
       </div>
     </div>
   );

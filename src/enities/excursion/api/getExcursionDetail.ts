@@ -14,7 +14,7 @@ export const getExcursionDetail = async ({ slug }: Props) => {
   "description": description,
   "weekdays": weekdays,
   "startTime":startTime[]->time,
-  "duration": duration->hours,
+  "duration": durationObject{days, hours, minutes},
   "dates": dates,
   "basePrices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value},
   "promotionalPrices": promotionalPrices[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}},

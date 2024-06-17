@@ -37,7 +37,11 @@ export type AdditionalTerms = string[];
 export type Included = string[];
 export type Surcharge = string[];
 export type Weekdays = string[];
-export type Duration = string;
+export type Duration = {
+  days: number;
+  hours: number;
+  minutes: number;
+};
 export type StartTime = string[];
 export type Subcategory = {
   title: string;
