@@ -47,7 +47,7 @@ export const PriceBlock = ({
         >
           {!actualPrice && `от `}
           <span className={clsx(styles.priceBlock__price)}>
-            {price !== undefined ? price.toFixed(2) : ""} €
+            {price !== undefined ? price : ""} €
           </span>
         </li>
         {showBasePrice && basePrice && (
@@ -56,7 +56,7 @@ export const PriceBlock = ({
               [styles[`priceBlock_${parent}__oldPrice`]]: parent,
             })}
           >
-            {basePrice.toFixed(2)} €
+            {basePrice} €
           </li>
         )}
         {discount !== undefined && discount > 0 && (

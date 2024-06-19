@@ -1,6 +1,7 @@
 import {
   Duration,
   GalleryImage,
+  PromotionalPrice,
   Weekdays,
 } from "@/src/enities/excursion/model/types/ExcursionDetail";
 
@@ -14,8 +15,8 @@ export interface IExcursionCard {
   duration: Duration;
   subcategory: string[];
   basePrices: number;
-  promotionalPrices: number[];
-  priceCorrections: number[];
+  promotionalPrices: PromotionalPrice[];
+  priceCorrections: PromotionalPrice[];
 }
 
 export type ExcursionCardsType = IExcursionCard[];

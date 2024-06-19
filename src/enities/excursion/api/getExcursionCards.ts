@@ -12,9 +12,9 @@ export const getExcursionCards = async () => {
   "slug": slug.current,
   "weekdays": weekdays,
   "duration": durationObject{days, hours, minutes},
-  "basePrices": prices[category->{title[_key == "ru"]}.title[0].value == "Взрослые"][0].price,
-  "promotionalPrices": promotionalPrices[].prices[category->{title[_key == "ru"]}.title[0].value == "Взрослые"][0].price,
-  "priceCorrections": priceCorrections[].prices[category->{title[_key == "ru"]}.title[0].value == "Взрослые"][0].price,
+  "basePrices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value},
+  "promotionalPrices": promotionalPrices[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}}[dates.dateFrom <= now() && dates.dateTo >= now()],
+  "priceCorrections": priceCorrections[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}}[dates.dateFrom <= now() && dates.dateTo >= now()],
   }
 `;
   return await client.fetch<ExcursionCardsType>(

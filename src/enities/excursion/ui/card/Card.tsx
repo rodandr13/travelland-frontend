@@ -31,15 +31,19 @@ export const Card = ({ addFavorite, card }: Props) => {
   const filledDays = daysOfWeek.map((day) =>
     card.weekdays.includes(day) ? day : ""
   );
-  console.log(card.duration);
   const formattedDuration = formatDuration(card.duration);
 
-  const allPrices = [
-    card.basePrices,
-    ...(card.promotionalPrices || []),
-    ...(card.priceCorrections || []),
-  ];
-  const minPrice = Math.min(...allPrices);
+  const priceCorrections =
+    card.priceCorrections?.flatMap((pricesObj) =>
+      pricesObj.prices.flatMap((price) => price.price)
+    ) || [];
+  const promotionalPrices =
+    card.promotionalPrices?.flatMap((pricesObj) =>
+      pricesObj.prices.flatMap((price) => price.price)
+    ) || [];
+  const basePrices = card.basePrices.map((priceObj) => priceObj.price)[0] || [];
+  const allPrices = [basePrices, ...priceCorrections, ...promotionalPrices];
+  const minPrice = allPrices.length > 0 ? Math.min(...allPrices) : basePrices;
   return (
     <article className={styles.excursionCard}>
       <Link
@@ -55,7 +59,7 @@ export const Card = ({ addFavorite, card }: Props) => {
         <div className={styles.excursionCard__duration}>
           {formattedDuration}
         </div>
-        <PriceBlock price={minPrice} basePrice={card.basePrices} />
+        <PriceBlock price={minPrice} basePrice={basePrices} />
       </Link>
     </article>
   );
