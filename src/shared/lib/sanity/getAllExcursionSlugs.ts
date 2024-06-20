@@ -1,5 +1,5 @@
-import { ExcursionCardsType } from "@/src/enities/excursion/model/types/ExcursionCard";
 import { client } from "@/src/shared/lib/sanity/client";
+import { ExcursionCards } from "@/src/shared/types/excursion";
 
 export const getAllExcursionSlugs = async () => {
   const query = `
@@ -7,5 +7,5 @@ export const getAllExcursionSlugs = async () => {
   "slug": slug.current,
 }
   `;
-  return await client.fetch<ExcursionCardsType>(query);
+  return await client.fetch<ExcursionCards>(query);
 };

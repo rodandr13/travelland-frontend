@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { GalleryImage } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { GalleryImage } from "@/src/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

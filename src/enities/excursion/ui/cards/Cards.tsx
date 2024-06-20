@@ -1,11 +1,11 @@
 import { getExcursionCards } from "@/src/enities/excursion/api/getExcursionCards";
-import { ExcursionCardsType } from "@/src/enities/excursion/model/types/ExcursionCard";
 import { CardsList } from "@/src/enities/excursion/ui/cardsList/CardsList";
+import { ExcursionCards } from "@/src/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 
 export const Cards = async () => {
-  const excursionCards: ExcursionCardsType = await getExcursionCards();
+  const excursionCards: ExcursionCards = await getExcursionCards();
 
   return (
     <section className={styles.excursionList}>

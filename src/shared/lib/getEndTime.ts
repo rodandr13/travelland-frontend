@@ -1,7 +1,4 @@
-import {
-  Duration,
-  StartTime,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { Duration, StartTime } from "@/src/shared/types/excursion";
 
 export const getEndTime = (startTime: StartTime, duration: Duration) => {
   const endTimes = [];

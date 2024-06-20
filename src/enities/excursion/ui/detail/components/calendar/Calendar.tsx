@@ -7,12 +7,11 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 
-import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { setDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import { selectDateByKey } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { PricesMap } from "@/src/shared/types/booking";
+import { Price, PricesMap } from "@/src/shared/types/booking";
 
 import styles from "./styles.module.scss";
 import { CustomDay } from "./utils/CustomDay";
@@ -30,8 +29,8 @@ export const Calendar = ({ basePrices, prices }: Props) => {
   const monthsShown = 2;
   const selectedDate = useAppSelector(selectDateByKey(pathname as string));
 
-  const handleChange = (date: Date) => {
-    if (pathname) {
+  const handleChange = (date: Date | null) => {
+    if (pathname && date) {
       dispatch(
         setDetails({
           key: pathname,
@@ -43,6 +42,7 @@ export const Calendar = ({ basePrices, prices }: Props) => {
       );
     }
   };
+
   const parsedDate = selectedDate ? new Date(selectedDate) : null;
   const validDate =
     parsedDate && !isNaN(parsedDate.getTime()) ? parsedDate : null;

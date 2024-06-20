@@ -4,7 +4,7 @@ import React from "react";
 
 import Link from "next/link";
 
-import { IExcursionCard } from "@/src/enities/excursion/model/types/ExcursionCard";
+import { ExcursionCard } from "@/src/shared/types/excursion";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { ImageSlider } from "@/src/shared/ui/slider";
 import { WeekDays } from "@/src/shared/ui/weekDays";
@@ -14,7 +14,7 @@ import { formatDuration } from "../../lib/formatDuration";
 
 interface Props {
   addFavorite: React.ReactNode;
-  card: IExcursionCard;
+  card: ExcursionCard;
 }
 
 const daysOfWeek = [

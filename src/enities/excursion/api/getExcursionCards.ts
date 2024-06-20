@@ -1,5 +1,5 @@
-import { ExcursionCardsType } from "@/src/enities/excursion/model/types/ExcursionCard";
 import { client } from "@/src/shared/lib/sanity/client";
+import { ExcursionCards } from "@/src/shared/types/excursion";
 
 export const getExcursionCards = async () => {
   const query = `
@@ -17,7 +17,7 @@ export const getExcursionCards = async () => {
   "priceCorrections": priceCorrections[]{weekdays, title, dates, "prices": prices[]{price, "title":category->{title[_key == "ru"]}.title[0].value, "description":category->{description[_key == "ru"]}.description[0].value}}[dates.dateFrom <= now() && dates.dateTo >= now()],
   }
 `;
-  return await client.fetch<ExcursionCardsType>(
+  return await client.fetch<ExcursionCards>(
     query,
     {},
     {

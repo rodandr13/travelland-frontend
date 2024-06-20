@@ -6,14 +6,6 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 import {
-  Dates,
-  Duration,
-  GalleryImage,
-  Price,
-  StartTime,
-  Weekdays,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
-import {
   setDetails,
   setVisible,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
@@ -21,7 +13,14 @@ import { selectDetailsByKey } from "@/src/enities/excursion/ui/detail/components
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { PricesMap } from "@/src/shared/types/booking";
+import { Price, PricesMap } from "@/src/shared/types/booking";
+import {
+  Dates,
+  Duration,
+  GalleryImage,
+  StartTime,
+  Weekdays,
+} from "@/src/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 import { Calendar } from "../calendar/Calendar";

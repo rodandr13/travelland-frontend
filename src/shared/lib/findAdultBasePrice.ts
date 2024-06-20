@@ -1,4 +1,4 @@
-import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { Price } from "@/src/shared/types/booking";
 
 export const findAdultBasePrice = (prices: Price[]) => {
   const adultPrice = prices.find((price) => {

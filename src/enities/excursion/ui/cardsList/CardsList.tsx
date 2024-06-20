@@ -3,13 +3,13 @@
 import { useEffect } from "react";
 
 import { Card } from "@/src/enities/excursion";
-import { ExcursionCardsType } from "@/src/enities/excursion/model/types/ExcursionCard";
 import { AddToFavorite } from "@/src/features/addToFavorite";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { ExcursionCards } from "@/src/shared/types/excursion";
 import { setFilter } from "@/src/widgets/excursionCatalog/model/filterSlice";
 
 interface Props {
-  excursionCards: ExcursionCardsType;
+  excursionCards: ExcursionCards;
 }
 
 export const CardsList = ({ excursionCards }: Props) => {

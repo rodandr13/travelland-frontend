@@ -3,8 +3,8 @@ import React, { useRef, useState } from "react";
 import clsx from "clsx";
 import Image from "next/image";
 
-import { GalleryImage } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { GalleryImage } from "@/src/shared/types/excursion";
 import { SlideButton } from "@/src/shared/ui/";
 import { getScaleStyle } from "@/src/shared/ui/slider/lib/getScaleStyle";
 import { goToSlide } from "@/src/shared/ui/slider/lib/goToSlide";

@@ -4,7 +4,7 @@ import {
   AdditionalTerms,
   Included,
   Surcharge,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
+} from "@/src/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

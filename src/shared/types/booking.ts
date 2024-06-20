@@ -1,6 +1,6 @@
-import { GalleryImage } from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { GalleryImage } from "@/src/shared/types/excursion";
 
-type Price = {
+export type Price = {
   price: number;
   title: string;
   description: string;

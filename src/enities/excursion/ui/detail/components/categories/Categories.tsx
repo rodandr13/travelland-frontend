@@ -1,10 +1,7 @@
 import Image from "next/image";
 
-import {
-  Category,
-  Subcategory,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { Category, Subcategory } from "@/src/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

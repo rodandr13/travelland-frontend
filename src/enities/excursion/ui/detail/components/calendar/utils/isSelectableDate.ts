@@ -1,10 +1,7 @@
 import { format } from "date-fns";
 import { enUS } from "date-fns/locale";
 
-import {
-  Dates,
-  Weekdays,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
+import { Dates, Weekdays } from "@/src/shared/types/excursion";
 
 interface Props {
   dates: Dates;

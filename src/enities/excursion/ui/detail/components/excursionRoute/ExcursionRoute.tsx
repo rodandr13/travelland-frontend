@@ -1,19 +1,19 @@
 import clsx from "clsx";
 import Image from "next/image";
 
-import {
-  IMeetingPoint,
-  RouteItem,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import {
+  MeetingPoint as TMeetingPoint,
+  RouteItem,
+} from "@/src/shared/types/excursion";
 import { MeetingPoint } from "@/src/shared/ui";
 
 import styles from "./styles.module.scss";
 
 interface Props {
   routes: RouteItem[];
-  startingPlace: IMeetingPoint;
-  endingPlace: IMeetingPoint;
+  startingPlace: TMeetingPoint;
+  endingPlace: TMeetingPoint;
 }
 
 export const ExcursionRoute = ({

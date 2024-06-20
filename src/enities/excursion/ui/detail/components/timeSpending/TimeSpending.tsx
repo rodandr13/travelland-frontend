@@ -1,9 +1,5 @@
-import {
-  Duration,
-  StartTime,
-  Weekdays,
-} from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
+import { Duration, StartTime, Weekdays } from "@/src/shared/types/excursion";
 import { WeekDays } from "@/src/shared/ui/weekDays";
 
 import styles from "./styles.module.scss";

@@ -1,4 +1,4 @@
-import { Duration } from "../model/types/ExcursionDetail";
+import { Duration } from "@/src/shared/types/excursion";
 
 export const formatDuration = (duration: Duration): String => {
   const parts = [];

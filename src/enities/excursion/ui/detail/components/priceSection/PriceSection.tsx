@@ -9,7 +9,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
-import { Price } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import {
   selectDetailsByKey,
   selectVisibility,
@@ -17,6 +16,7 @@ import {
 import { AddToCart } from "@/src/features/addToCart";
 import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { Price } from "@/src/shared/types/booking";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 

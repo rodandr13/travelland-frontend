@@ -1,12 +1,12 @@
 import Image from "next/image";
 
-import { IMeetingPoint } from "@/src/enities/excursion/model/types/ExcursionDetail";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { MeetingPoint as TMeetingPoint } from "@/src/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 
 interface Props {
-  meetingPlace: IMeetingPoint;
+  meetingPlace: TMeetingPoint;
   isStart?: boolean;
 }
 
