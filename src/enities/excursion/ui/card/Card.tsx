@@ -41,8 +41,13 @@ export const Card = ({ addFavorite, card }: Props) => {
     card.promotionalPrices?.flatMap((pricesObj) =>
       pricesObj.prices.flatMap((price) => price.price)
     ) || [];
-  const basePrices = card.basePrices.map((priceObj) => priceObj.price)[0] || [];
-  const allPrices = [basePrices, ...priceCorrections, ...promotionalPrices];
+  const basePrices =
+    card.basePrices.map((priceObj) => priceObj.price)[0] ?? null;
+  const allPrices = [
+    basePrices,
+    ...priceCorrections,
+    ...promotionalPrices,
+  ].filter((price) => price != null);
   const minPrice = allPrices.length > 0 ? Math.min(...allPrices) : basePrices;
   return (
     <article className={styles.excursionCard}>
