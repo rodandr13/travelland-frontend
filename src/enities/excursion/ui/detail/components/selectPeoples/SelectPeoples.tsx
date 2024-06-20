@@ -19,8 +19,6 @@ interface Props {
   prices: PricesMap;
 }
 
-export type Participants = { category: string; count: number };
-
 export const SelectPeoples = ({ prices }: Props) => {
   const dispatch = useAppDispatch();
   const pathname = usePathname();
