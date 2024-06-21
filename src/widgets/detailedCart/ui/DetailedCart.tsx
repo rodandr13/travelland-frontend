@@ -3,7 +3,6 @@
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
-import Link from "next/link";
 
 import {
   getTotalPrice,
@@ -12,7 +11,9 @@ import {
 import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
+import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
 
 import styles from "./styles.module.scss";
 
@@ -89,13 +90,12 @@ export const DetailedCart = () => {
                 – 123 &nbsp;€
               </span>
             </div>
+            <PromotionalCode />
             <div className={styles.detailedCart__totalPriceBlock}>
               <h3 className={styles.detailedCart__title}>Общая стоимость:</h3>
               <PriceBlock actualPrice price={totalPrice} />
             </div>
-            <Link href="/cart" className={styles.priceSection__link_cart}>
-              Заказать
-            </Link>
+            <Button title="Заказать" color="green" />
           </div>
         </section>
       ) : (
