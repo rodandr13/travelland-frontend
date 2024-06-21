@@ -3,6 +3,7 @@
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
+import Link from "next/link";
 
 import {
   getTotalPrice,
@@ -62,19 +63,39 @@ export const DetailedCart = () => {
                       ))}
                     </ul>
                   </div>
-                  <RemoveFromCart itemKey={key} />
                 </div>
-                <div>
+                <div className={styles.detailedCart__rightSection}>
                   <div className={styles.detailedCart__price}>
                     <PriceBlock actualPrice price={value.totalPrice} />
                   </div>
+                  <RemoveFromCart itemKey={key} />
                 </div>
               </li>
             ))}
           </ul>
-          <div className={styles.detailedCart__totalPrice}>
-            <h3 className={styles.detailedCart__title}>Итого:</h3>
-            <PriceBlock actualPrice price={totalPrice} />
+          <div className={styles.detailedCart__sammary}>
+            <h2>Ваш заказ</h2>
+            <div className={styles.detailedCart__priceLine}>
+              <span>Услуги (2)</span>
+              <span className={styles.detailedCart__dottedLine}></span>
+              <span className={styles.detailedCart__priceSum}>
+                4124 &nbsp;€
+              </span>
+            </div>
+            <div className={styles.detailedCart__priceLine}>
+              <span>Скидка</span>
+              <span className={styles.detailedCart__dottedLine}></span>
+              <span className={styles.detailedCart__priceSum}>
+                – 123 &nbsp;€
+              </span>
+            </div>
+            <div className={styles.detailedCart__totalPriceBlock}>
+              <h3 className={styles.detailedCart__title}>Общая стоимость:</h3>
+              <PriceBlock actualPrice price={totalPrice} />
+            </div>
+            <Link href="/cart" className={styles.priceSection__link_cart}>
+              Заказать
+            </Link>
           </div>
         </section>
       ) : (

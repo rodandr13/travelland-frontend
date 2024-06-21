@@ -1,8 +1,6 @@
 .detailedCart {
   padding: 40px 0;
   display: flex;
-  flex-direction: column;
-  max-width: 800px;
   gap: 40px;
   &__list {
     margin: 0;
@@ -10,6 +8,7 @@
     list-style-type: none;
     display: flex;
     flex-direction: column;
+    flex: 1;
   }
   &__item {
     display: flex;
@@ -56,9 +55,35 @@
   &__participantsItem {
     font-size: 16px;
   }
-  &__totalPrice {
+  &__sammary {
     display: flex;
+    flex-direction: column;
     gap: 15px;
-    align-self: flex-end;
+    width: 340px;
+  }
+  &__dottedLine {
+    border-bottom: 2px dotted #8f8f8f;
+    width: 100%;
+    margin: 0 5px 3px;
+    flex: 1;
+  }
+  &__priceLine {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__priceSum {
+    color: #9F0B2F;
+  }
+  &__totalPriceBlock {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__rightSection {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    min-width: 200px;
+    flex: 1 1;
+    gap: 15px;
   }
 }
