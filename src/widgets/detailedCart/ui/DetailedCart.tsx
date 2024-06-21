@@ -25,77 +25,122 @@ export const DetailedCart = () => {
     <>
       {cartItemEntries.length > 0 ? (
         <section className={styles.detailedCart}>
-          <ul className={styles.detailedCart__list}>
-            {cartItemEntries.map(([key, value], index) => (
-              <li key={index} className={styles.detailedCart__item}>
-                <div className={styles.detailedCart__imageContainer}>
-                  <Image
-                    className={styles.detailedCart__image}
-                    src={urlFor(value.image.src)}
-                    blurDataURL={value.image.lqip}
-                    alt=""
-                    placeholder="blur"
-                    loading="lazy"
-                    quality={60}
-                    width={180}
-                    height={120}
-                  />
-                </div>
-                <div className={styles.detailedCart__textContainer}>
-                  <h3 className={styles.detailedCart__title}>{value.title}</h3>
-                  <div className={styles.detailedCart__dateContainer}>
-                    <p className={styles.detailedCart__date}>
-                      {value.selectedDate &&
-                        format(value.selectedDate, "d MMMM yyyy", {
-                          locale: ru,
-                        })}{" "}
-                      в {value.time}
-                    </p>
+          <div>
+            <ul className={styles.detailedCart__list}>
+              {cartItemEntries.map(([key, value], index) => (
+                <li key={index} className={styles.detailedCart__item}>
+                  <div className={styles.detailedCart__imageContainer}>
+                    <Image
+                      className={styles.detailedCart__image}
+                      src={urlFor(value.image.src)}
+                      blurDataURL={value.image.lqip}
+                      alt=""
+                      placeholder="blur"
+                      loading="lazy"
+                      quality={60}
+                      width={180}
+                      height={120}
+                    />
                   </div>
-                  <div className={styles.detailedCart__participantsContainer}>
-                    <ul className={styles.detailedCart__participantsList}>
-                      {value.participants.map((participant, index) => (
-                        <li
-                          key={index}
-                          className={styles.detailedCart__participantsItem}
-                        >
-                          {participant.category} {participant.count}
-                        </li>
-                      ))}
-                    </ul>
+                  <div className={styles.detailedCart__textContainer}>
+                    <h3 className={styles.detailedCart__title}>
+                      {value.title}
+                    </h3>
+                    <div className={styles.detailedCart__dateContainer}>
+                      <p className={styles.detailedCart__date}>
+                        {value.selectedDate &&
+                          format(value.selectedDate, "d MMMM yyyy", {
+                            locale: ru,
+                          })}{" "}
+                        в {value.time}
+                      </p>
+                    </div>
+                    <div className={styles.detailedCart__participantsContainer}>
+                      <ul className={styles.detailedCart__participantsList}>
+                        {value.participants.map((participant, index) => (
+                          <li
+                            key={index}
+                            className={styles.detailedCart__participantsItem}
+                          >
+                            {participant.category} {participant.count}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </div>
-                </div>
-                <div className={styles.detailedCart__rightSection}>
-                  <div className={styles.detailedCart__price}>
-                    <PriceBlock actualPrice price={value.totalPrice} />
+                  <div className={styles.detailedCart__rightSection}>
+                    <div className={styles.detailedCart__price}>
+                      <PriceBlock actualPrice price={value.totalPrice} />
+                    </div>
+                    <RemoveFromCart itemKey={key} />
                   </div>
-                  <RemoveFromCart itemKey={key} />
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+            <section className={styles.contacts}>
+              <h2>Заполните информацию о себе</h2>
+              <form action="#" className={styles.contacts__form}>
+                <input type="text" placeholder="Имя" />
+                <input type="text" placeholder="Телефон" />
+                <input type="text" placeholder="Почта" />
+              </form>
+            </section>
+            <section className={styles.paymentMethods}>
+              <h2>Выберите способ оплаты</h2>
+              <ul className={styles.paymentMethods__list}>
+                <li className={styles.paymentMethods__item}>
+                  <label className={styles.paymentMethod}>
+                    <input type="radio" name="payment" value="cash" />
+                    Наличными
+                  </label>
+                </li>
+                <li className={styles.paymentMethods__item}>
+                  <label className={styles.paymentMethod}>
+                    <input type="radio" name="payment" value="card" />
+                    Оплата картой онлайн или через СБП
+                  </label>
+                </li>
+                <li className={styles.paymentMethods__item}>
+                  <label className={styles.paymentMethod}>
+                    <input type="radio" name="payment" value="split" />
+                    Оплата частями
+                  </label>
+                </li>
+              </ul>
+            </section>
+          </div>
           <div className={styles.detailedCart__sammary}>
-            <h2>Ваш заказ</h2>
-            <div className={styles.detailedCart__priceLine}>
-              <span>Услуги (2)</span>
-              <span className={styles.detailedCart__dottedLine}></span>
-              <span className={styles.detailedCart__priceSum}>
-                4124 &nbsp;€
-              </span>
-            </div>
-            <div className={styles.detailedCart__priceLine}>
-              <span>Скидка</span>
-              <span className={styles.detailedCart__dottedLine}></span>
-              <span className={styles.detailedCart__priceSum}>
-                – 123 &nbsp;€
-              </span>
-            </div>
+            <h2 className={styles.detailedCart__title}>Ваш заказ</h2>
+            <ul className={styles.detailedCart__priceList}>
+              <div className={styles.detailedCart__priceLine}>
+                <span>Услуги (2)</span>
+                <span className={styles.detailedCart__dottedLine}></span>
+                <span className={styles.detailedCart__priceSum}>
+                  4124 &nbsp;€
+                </span>
+              </div>
+              <div className={styles.detailedCart__priceLine}>
+                <span>Скидка</span>
+                <span className={styles.detailedCart__dottedLine}></span>
+                <span className={styles.detailedCart__priceSum}>
+                  – 123 &nbsp;€
+                </span>
+              </div>
+            </ul>
             <PromotionalCode />
             <div className={styles.detailedCart__totalPriceBlock}>
               <h3 className={styles.detailedCart__title}>Общая стоимость:</h3>
               <PriceBlock actualPrice price={totalPrice} />
             </div>
             <Button title="Заказать" color="green" />
+            <p className={styles.detailedCart__consentOffer}>
+              Нажимая кнопку &quot;Заказать&quot;, Вы принимаете условия
+              соответствующей оферты: <a href="#">Оферты для физических</a> лиц
+              или <a href="#">Оферты для юридических лиц и ИП</a>,{" "}
+              <a href="#">Политики конфиденциальности</a>, а также даете{" "}
+              <a href="#">Согласие на обработку</a> Ваших персональных данных и
+              их передачу.
+            </p>
           </div>
         </section>
       ) : (
