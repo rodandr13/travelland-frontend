@@ -14,12 +14,12 @@
     padding: 0;
     font-size: 18px;
     font-weight: 600;
-    color: #aa2a2a;
+    color: var(--color-red-light);
   }
   &__description {
     margin: 7px 0 0 0;
     padding: 0;
-    color: #8f8f8f;
+    color: var(--color-gray-dark);
     font-size: 16px;
     line-height: 1.4;
   }

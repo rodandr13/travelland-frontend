@@ -38,8 +38,8 @@
       width: 2px;
       background: repeating-linear-gradient(
                       to bottom,
-                      #4bb662,
-                      #4bb662 15px,
+                      var(--color-green),
+                      var(--color-green) 15px,
                       transparent 10px,
                       transparent 30px
       );
@@ -57,7 +57,7 @@
   &__year {
     font-size: 48px;
     font-weight: 400;
-    color: #9F0B2F;
+    color: var(--color-red);
     justify-self: center;
     grid-column: 2 / 3;
   }
@@ -65,7 +65,7 @@
     max-width: 400px;
     margin: 0;
     padding: 0;
-    color: #797979;
+    color: var(--color-gray-dark-2);
     font-size: 16px;
     line-height: 1.4;
   }

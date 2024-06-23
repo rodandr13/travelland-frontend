@@ -16,14 +16,14 @@
   &__price {
     font-size: var(--base-font-size);
     font-weight: 500;
-    color: #972537;
+    color: var(--color-red);
     white-space: nowrap;
   }
 
   &__oldPrice {
     font-size: calc(var(--base-font-size) * 0.8);
     font-weight: 400;
-    color: #7a7a7a;
+    color: var(--color-gray-dark-2);
     margin: 0 0 0 10px;
     position: relative;
     white-space: nowrap;
@@ -32,7 +32,7 @@
       content: "";
       position: absolute;
       height: 1px;
-      background: #7a7a7a;
+      background: var(--color-gray-dark-2);
       width: 100%;
       left: 0;
       top: 50%;
@@ -43,7 +43,7 @@
   &__discount {
     font-size: 14px;
     font-weight: 400;
-    color: #989898;
+    color: var(--color-gray-dark);
     width: 49px;
     height: 21px;
     background: url("../../assets/discount_icon.svg") no-repeat;

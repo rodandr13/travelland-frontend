@@ -1,5 +1,5 @@
 .search {
-  background: #fff;
+  background: var(--color-white);
   width: 360px;
   border-radius: 5px;
   padding: 20px;
@@ -41,9 +41,9 @@
     padding: 7px 14px;
 
     &_active {
-      background: rgba(17, 85, 144, 0.8);
+      background: var(--color-blue-light);
       border-radius: 15px;
-      color: #fff;
+      color: var(--color-white);
     }
   }
 

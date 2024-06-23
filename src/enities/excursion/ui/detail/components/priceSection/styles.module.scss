@@ -1,5 +1,5 @@
 .priceSection {
-  background: #f5f5f5;
+  background: var(--color-gray-light);
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -25,7 +25,7 @@
     line-height: 1.5;
   }
   &__priceSum {
-    color: #9F0B2F;
+    color: var(--color-red);
   }
   &__list {
     margin: 0;
@@ -44,7 +44,7 @@
     display: flex;
   }
   &__dottedLine {
-    border-bottom: 2px dotted #8f8f8f;
+    border-bottom: 2px dotted var(--color-gray-dark);
     width: 100%;
     margin: 0 5px 3px;
   }
@@ -62,7 +62,7 @@
     margin: 0;
     padding: 0;
     font-size: 12px;
-    color: #8f8f8f;
+    color: var(--color-gray-dark);
   }
 
   &__advantagesItem {
@@ -83,9 +83,9 @@
 
   &__link_cart {
     display: block;
-    background: rgba(93, 164, 101, 0.2);
-    color: #191919;
-    border: 1px solid rgba(54, 133, 63, 0.7);
+    background: var(--color-link-cart-bg);
+    border: 1px solid var(--color-link-cart-border);
+    color: var(--color-black);
     text-decoration: none;
     text-align: center;
     padding: 12px 24px;

@@ -1,6 +1,6 @@
 .advantages {
-  background-image: linear-gradient(to right, #70b177 33%, rgba(0, 0, 0, 0) 0%),
-  linear-gradient(to right, #70b177 33%, rgba(0, 0, 0, 0) 0%);
+  background-image: linear-gradient(to right, var(--color-green-light) 33%, rgba(0, 0, 0, 0) 0%),
+  linear-gradient(to right, var(--color-green-light) 33%, rgba(0, 0, 0, 0) 0%);
   background-position: top, bottom;
   background-size: 20px 1px;
   background-repeat: repeat-x;
@@ -52,6 +52,6 @@
     margin: 0;
     padding: 0;
     font-size: 16px;
-    color: #8f8f8f;
+    color: var(--color-gray-dark);
   }
 }

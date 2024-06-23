@@ -4,7 +4,7 @@
   height:28px;
   transition: all 200ms ease-in-out;
   fill: rgba(255, 255, 255, 0.5);
-  stroke: #ffffff;
+  stroke: var(--color-white);
   stroke-width: 2px;
   will-change: transform;
   transform-origin: center;
@@ -12,6 +12,6 @@
     transform: scale(1.1);
   }
   &_active {
-    fill: rgba(242, 40, 76, 1);
+    fill: var(--color-red-light);
   }
 }

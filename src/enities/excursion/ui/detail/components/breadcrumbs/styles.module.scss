@@ -6,7 +6,7 @@
     list-style-type: none;
     display: flex;
     gap: 25px;
-    color: #8f8f8f;
+    color: var(--color-gray-dark);
     font-size: 14px;
   }
   &__item {
