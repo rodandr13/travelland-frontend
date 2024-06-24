@@ -12,6 +12,7 @@ import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Button } from "@/src/shared/ui/button";
+import { Contacts } from "@/src/shared/ui/contacts/Contacts";
 import { PaymentMethods } from "@/src/shared/ui/paymentMethods/PaymentMethods";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
@@ -78,14 +79,7 @@ export const DetailedCart = () => {
                 </li>
               ))}
             </ul>
-            <section className={styles.contacts}>
-              <h2>Заполните информацию о себе</h2>
-              <form action="#" className={styles.contacts__form}>
-                <input type="text" placeholder="Имя" />
-                <input type="text" placeholder="Телефон" />
-                <input type="text" placeholder="Почта" />
-              </form>
-            </section>
+            <Contacts />
             <PaymentMethods />
           </div>
           <div className={styles.detailedCart__sammary}>
