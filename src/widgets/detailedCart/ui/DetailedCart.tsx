@@ -12,6 +12,7 @@ import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Button } from "@/src/shared/ui/button";
+import { PaymentMethods } from "@/src/shared/ui/paymentMethods/PaymentMethods";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
 
@@ -25,7 +26,7 @@ export const DetailedCart = () => {
     <>
       {cartItemEntries.length > 0 ? (
         <section className={styles.detailedCart}>
-          <div>
+          <div className={styles.detailedCart__container}>
             <ul className={styles.detailedCart__list}>
               {cartItemEntries.map(([key, value], index) => (
                 <li key={index} className={styles.detailedCart__item}>
@@ -85,29 +86,7 @@ export const DetailedCart = () => {
                 <input type="text" placeholder="Почта" />
               </form>
             </section>
-            <section className={styles.paymentMethods}>
-              <h2>Выберите способ оплаты</h2>
-              <ul className={styles.paymentMethods__list}>
-                <li className={styles.paymentMethods__item}>
-                  <label className={styles.paymentMethod}>
-                    <input type="radio" name="payment" value="cash" />
-                    Наличными
-                  </label>
-                </li>
-                <li className={styles.paymentMethods__item}>
-                  <label className={styles.paymentMethod}>
-                    <input type="radio" name="payment" value="card" />
-                    Оплата картой онлайн или через СБП
-                  </label>
-                </li>
-                <li className={styles.paymentMethods__item}>
-                  <label className={styles.paymentMethod}>
-                    <input type="radio" name="payment" value="split" />
-                    Оплата частями
-                  </label>
-                </li>
-              </ul>
-            </section>
+            <PaymentMethods />
           </div>
           <div className={styles.detailedCart__sammary}>
             <h2 className={styles.detailedCart__title}>Ваш заказ</h2>
