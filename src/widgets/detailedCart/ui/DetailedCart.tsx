@@ -12,10 +12,10 @@ import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Button } from "@/src/shared/ui/button";
-import { Contacts } from "@/src/shared/ui/contacts/Contacts";
-import { PaymentMethods } from "@/src/shared/ui/paymentMethods/PaymentMethods";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
+import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
+import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
 
 import styles from "./styles.module.scss";
 
