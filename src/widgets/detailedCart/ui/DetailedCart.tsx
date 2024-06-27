@@ -82,7 +82,7 @@ export const DetailedCart = () => {
             <Contacts />
             <PaymentMethods />
           </div>
-          <div className={styles.detailedCart__sammary}>
+          <div className={styles.detailedCart__summary}>
             <h2 className={styles.detailedCart__title}>Ваш заказ</h2>
             <ul className={styles.detailedCart__priceList}>
               <div className={styles.detailedCart__priceLine}>

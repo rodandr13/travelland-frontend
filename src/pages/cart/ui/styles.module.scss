@@ -1,6 +1,12 @@
 .page {
   margin: 0 auto;
-  width: 1440px;
+  max-width: 1440px;
   box-sizing: border-box;
   padding: 100px 40px 40px 40px;
+}
+
+@media screen and (max-width: 800px) {
+  .page {
+    padding: 100px 20px 40px 20px;
+  }
 }
