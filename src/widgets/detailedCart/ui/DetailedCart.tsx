@@ -40,8 +40,8 @@ export const DetailedCart = () => {
                       placeholder="blur"
                       loading="lazy"
                       quality={60}
-                      width={180}
-                      height={120}
+                      fill
+                      objectFit="cover"
                     />
                   </div>
                   <div className={styles.detailedCart__textContainer}>

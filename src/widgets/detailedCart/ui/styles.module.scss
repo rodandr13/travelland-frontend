@@ -2,12 +2,14 @@
   padding: 20px 0;
   display: flex;
   gap: 40px;
+
   &__container {
     display: flex;
     flex-direction: column;
     gap: 3rem;
     flex: 1;
   }
+
   &__list {
     margin: 0;
     padding: 0;
@@ -16,39 +18,48 @@
     flex-direction: column;
     flex: 1;
   }
+
   &__item {
     display: flex;
     gap: 20px;
     border-bottom: 1px solid var(--color-gray);
     padding: 20px 0;
   }
+
   &__textContainer {
     display: flex;
     flex-direction: column;
     gap: 10px;
     flex: 1;
+    min-width: 250px;
   }
+
   &__title {
     margin: 0;
     padding: 0;
     font-weight: 500;
     font-size: 20px;
   }
+
   &__dateContainer {
   }
+
   &__date {
     margin: 0;
     padding: 0;
     font-weight: 400;
     font-size: 16px;
   }
+
   &__imageContainer {
     position: relative;
     min-width: 180px;
+    width: 180px;
     height: 120px;
     border-radius: 15px;
     overflow: hidden;
   }
+
   &__participantsList {
     margin: 0;
     padding: 0;
@@ -56,11 +67,11 @@
     display: flex;
     gap: 15px;
   }
-  &__participantsContainer {
-  }
+
   &__participantsItem {
     font-size: 16px;
   }
+
   &__priceList {
     list-style-type: none;
     margin: 0;
@@ -69,6 +80,7 @@
     flex-direction: column;
     gap: 8px;
   }
+
   &__summary {
     display: flex;
     flex-direction: column;
@@ -83,24 +95,28 @@
     margin: 0 5px 3px;
     flex: 1;
   }
+
   &__priceLine {
     display: flex;
     justify-content: space-between;
   }
+
   &__priceSum {
     color: var(--color-red);
   }
+
   &__totalPriceBlock {
     display: flex;
     justify-content: space-between;
   }
+
   &__rightSection {
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     min-width: 160px;
     gap: 15px;
   }
+
   &__consentOffer {
     font-size: 12px;
     padding: 0;
@@ -129,10 +145,12 @@
     flex-direction: column;
     gap: 0.5rem;
   }
+
   &__item {
     display: flex;
     align-items: center;
   }
+
   &__label {
     display: flex;
     gap: 0.5rem;
@@ -142,5 +160,24 @@
 @media screen and (max-width: 1100px) {
   .detailedCart {
     flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .detailedCart {
+    &__item {
+      flex-direction: column;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .detailedCart {
+    &__imageContainer {
+      width: 100%;
+    }
+    &__summary {
+      width: 100%;
+    }
   }
 }
