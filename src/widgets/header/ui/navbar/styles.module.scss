@@ -38,9 +38,9 @@
 
 .contacts {
   &__telephone {
-    font-size: 28px;
-    font-weight: 600;
-    font-family: "Roboto", sans-serif;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
   }
 
   &__telephoneCode {
@@ -48,16 +48,16 @@
   }
 
   &__social {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
+    margin: 0.25rem 0 0 0;
     display: flex;
     gap: 15px;
+    justify-content: flex-end;
   }
 
   &__socialItem {
     position: relative;
     padding: 0 0 0 22px;
+    font-size: var(--font-size-xs);
   }
 
   &__telegram::before {

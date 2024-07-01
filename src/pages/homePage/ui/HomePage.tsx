@@ -1,6 +1,5 @@
 import { getServices } from "@/src/pages/homePage/api/getServices";
 import { Services } from "@/src/shared/ui";
-import { SectionTitle } from "@/src/shared/ui/sectionTitle";
 import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
 import { HeroSection } from "@/src/widgets/heroSection";
 
@@ -13,10 +12,10 @@ export const HomePage = async () => {
       <HeroSection />
       <Services services={services} />
       <main className={styles.home}>
-        <SectionTitle>Экскурсии</SectionTitle>
+        <h2>Экскурсии</h2>
         <ExcursionCatalog />
         <section className={styles.aboutUs}>
-          <SectionTitle>О компании</SectionTitle>
+          <h2>О компании</h2>
           <h3 className={styles.aboutUs__subtitle}>У нас большая история!</h3>
           <ol className={styles.timeline}>
             <li className={styles.timeline__item}>

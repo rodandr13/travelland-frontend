@@ -2,7 +2,6 @@ import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDeta
 import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
 import { findAdultMinPrice } from "@/src/shared/lib/findAdultMinPrice";
 import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
-import { PageTitle } from "@/src/shared/ui/pageTitle/PageTitle";
 
 import { Advantages } from "./components/advantages/Advantages";
 import { AttentionBlock } from "./components/attentionBlock/AttentionBlock";
@@ -43,7 +42,7 @@ export const Detail = async ({ slug }: Props) => {
         <div className={styles.excursionDetail__content}>
           <div className={styles.excursionDetail__info}>
             <Breadcrumbs title={excursion.title} />
-            <PageTitle>{excursion.title}</PageTitle>
+            <h1>{excursion.title}</h1>
             <Categories
               category={excursion.category}
               subCategory={excursion.subcategory}

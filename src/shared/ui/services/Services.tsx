@@ -7,7 +7,6 @@ import Image from "next/image";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Service } from "@/src/shared/types/service";
 import { SlideButton } from "@/src/shared/ui";
-import { SectionTitle } from "@/src/shared/ui/sectionTitle";
 import { goToSlide } from "@/src/shared/ui/slider/lib/goToSlide";
 import { setSlideRef } from "@/src/shared/ui/slider/lib/setSlideRef";
 
@@ -27,7 +26,7 @@ export const Services = ({ services }: Props) => {
   return (
     <section className={styles.services}>
       <div className={styles.services__containerHeader}>
-        <SectionTitle>Экскурсионное сопровождение в Европе</SectionTitle>
+        <h2>Экскурсионное сопровождение в Европе</h2>
         <p className={styles.services__subheader}>
           Экскурсии и другой разнообразный сервис от лицензированной компании.
           Гарантия качества на все виды услуг: экскурсии, туры, трансферы,

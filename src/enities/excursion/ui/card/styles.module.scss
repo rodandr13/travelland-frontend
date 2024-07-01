@@ -43,8 +43,6 @@
   &__duration::before {
     content: url("../../../../shared/assets/clock_icon.svg");
     position: absolute;
-    top: 50%;
     left: 0;
-    transform: translateY(-50%);
   }
 }

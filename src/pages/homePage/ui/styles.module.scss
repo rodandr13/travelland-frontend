@@ -8,7 +8,7 @@
 .aboutUs {
   padding: 80px 0 0 0;
   &__subtitle {
-    font-weight: 500;
+    padding: 2rem 0 1rem 0;
     text-align: center;
   }
 }
@@ -72,6 +72,11 @@
 }
 
 @media screen and (max-width: 750px) {
+  .aboutUs {
+    &__subtitle {
+      text-align: left;
+    }
+  }
   .timeline {
     align-items: start;
     &__item {
@@ -109,6 +114,7 @@
   .timeline {
     &__item {
       grid-template-columns: 1fr;
+      gap: 0;
       &::after {
         display: none;
       }

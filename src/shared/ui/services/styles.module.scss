@@ -7,10 +7,6 @@
     overflow: hidden;
   }
   &__subheader {
-    font-size: 16px;
-    margin: 0;
-    padding: 0;
-    line-height: 1.2;
     color: var(--color-gray-dark);
     max-width: 700px;
   }
@@ -74,6 +70,7 @@
 
   }
   &__buttonsContainer {
+    padding: 5px 40px 5px 0;
     position: relative;
     margin: 0 auto;
     display: flex;
@@ -82,7 +79,6 @@
     width: auto;
     gap: 50px;
     box-sizing: border-box;
-    padding: 5px 40px 5px 0;
     & > button {
       border: 1px solid var(--color-gray-dark);
       position: relative;
@@ -91,11 +87,6 @@
     }
   }
   &__title {
-    margin: 0;
-    padding: 0;
-    font-size: 20px;
-    line-height: 1.1;
-    font-weight: 400;
     color: var(--color-white);
   }
   &__caption {
@@ -141,6 +132,7 @@
 
 @media screen and (max-width: 600px){
   .services {
+    padding: 40px 0 40px 0;
     width: 100%;
     &__list {
       width: 100%;
@@ -151,6 +143,13 @@
       width: 100%;
       flex: unset;
       flex-shrink: 0;
+    }
+    &__containerHeader {
+      padding: 0 20px;
+      gap: 1rem;
+    }
+    &__buttonsContainer {
+      padding: 2rem 0.5rem 1rem 0;
     }
   }
 }

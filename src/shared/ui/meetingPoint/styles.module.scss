@@ -9,24 +9,6 @@
     gap: 10px;
     width: 390px;
   }
-  &__title {
-    margin: 0;
-    padding: 0;
-    font-size: 28px;
-    font-weight: 400;
-  }
-  &__subheader {
-    margin: 0;
-    padding: 0;
-    font-size: 18px;
-    font-weight: 500;
-  }
-  &__description {
-    margin: 0;
-    padding: 0;
-    line-height: 1.4;
-    font-size: 16px;
-  }
   &__gallery {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
