@@ -1,5 +1,7 @@
 import clsx from "clsx";
 
+import { formatCurrency } from "@/src/shared/lib/formatCurrency";
+
 import styles from "./styles.module.scss";
 
 interface Props {
@@ -47,7 +49,7 @@ export const PriceBlock = ({
         >
           {!actualPrice && `от `}
           <span className={clsx(styles.priceBlock__price)}>
-            {price !== undefined ? price : ""} €
+            {price !== undefined ? formatCurrency(price) : ""}
           </span>
         </li>
         {showBasePrice && basePrice && (
@@ -56,7 +58,7 @@ export const PriceBlock = ({
               [styles[`priceBlock_${parent}__oldPrice`]]: parent,
             })}
           >
-            {basePrice} €
+            {formatCurrency(basePrice)}
           </li>
         )}
         {discount !== undefined && discount > 0 && (

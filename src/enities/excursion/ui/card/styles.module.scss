@@ -8,7 +8,9 @@
     position: relative;
     display: block;
     z-index: 0;
-
+    &:hover {
+      text-decoration: none;
+    }
   }
   &__imageContainer {
     position: relative;

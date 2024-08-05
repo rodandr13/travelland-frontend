@@ -1,5 +1,6 @@
 import clsx from "clsx";
 
+import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { Price, PricesMap } from "@/src/shared/types/booking";
 
@@ -34,7 +35,7 @@ export const CustomDay = ({ dayNumber, day, basePrices, prices }: Props) => {
       <span className="react-datepicker__dayValue">{dayNumber}</span>
       {showPrice && (
         <span className="react-datepicker__price">
-          € {adultPrice.toFixed(2)}
+          {formatCurrency(adultPrice)}
         </span>
       )}
     </div>

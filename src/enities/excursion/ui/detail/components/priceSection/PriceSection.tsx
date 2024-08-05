@@ -15,6 +15,7 @@ import {
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
 import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
+import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Price } from "@/src/shared/types/booking";
 import { Button } from "@/src/shared/ui/button";
@@ -158,11 +159,10 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
                                 className={styles.priceSection__dottedLine}
                               ></span>
                               <span className={styles.priceSection__priceSum}>
-                                {(
+                                {formatCurrency(
                                   price.price *
-                                  bookingDetails.participants[i].count
-                                ).toFixed(2)}
-                                &nbsp;€
+                                    bookingDetails.participants[i].count
+                                )}
                               </span>
                             </div>
                             <span className={styles.priceSection__caption}>

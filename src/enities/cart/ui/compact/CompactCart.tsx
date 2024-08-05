@@ -12,6 +12,7 @@ import {
   getTotalQuantity,
   selectCartState,
 } from "@/src/enities/cart/model/selectors";
+import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 
@@ -57,7 +58,7 @@ export const CompactCart = () => {
     >
       <Link href="/cart" className={styles.cart__link}>
         <p className={styles.cart__title}>
-          Корзина <span>({totalPrice} €)</span>
+          Корзина <span>({formatCurrency(totalPrice)})</span>
         </p>
       </Link>
       <div className={styles.cart__totalQuantity}>{totalQuantity}</div>
@@ -87,13 +88,17 @@ export const CompactCart = () => {
                         })}{" "}
                       в {value.time}
                     </p>
-                    <p className={styles.cart__price}>{value.totalPrice} €</p>
+                    <p className={styles.cart__price}>
+                      {formatCurrency(value.totalPrice)}
+                    </p>
                   </div>
                 </div>
               </li>
             ))}
           </ul>
-          <div className={styles.cart__totalPrice}>Итого: {totalPrice} €</div>
+          <div className={styles.cart__totalPrice}>
+            Итого: {formatCurrency(totalPrice)}
+          </div>
         </div>
       )}
     </section>

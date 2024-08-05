@@ -7,6 +7,7 @@ import {
   selectDateByKey,
   selectParticipantsByKey,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
+import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { PricesMap } from "@/src/shared/types/booking";
@@ -73,7 +74,7 @@ export const SelectPeoples = ({ prices }: Props) => {
                 onNumberChange={handleChange(i, price.title)}
               />
               <span className={styles.selectPeoples__sum}>
-                = {(price.price * (participants[i]?.count || 0)).toFixed(2)} €
+                = {formatCurrency(price.price * (participants[i]?.count || 0))}
               </span>
             </div>
           </div>
