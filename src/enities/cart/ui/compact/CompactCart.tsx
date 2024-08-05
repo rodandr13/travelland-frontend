@@ -77,6 +77,7 @@ export const CompactCart = () => {
                   quality={60}
                   width={50}
                   height={40}
+                  sizes={"50px"}
                 />
                 <div className={styles.cart__textContainer}>
                   <h3 className={styles.cart__title}>{value.title}</h3>

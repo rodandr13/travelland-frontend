@@ -40,6 +40,7 @@ export const DetailedCart = () => {
                       placeholder="blur"
                       loading="lazy"
                       quality={60}
+                      sizes={"180px"}
                       fill
                       objectFit="cover"
                     />
