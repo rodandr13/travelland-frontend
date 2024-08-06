@@ -26,6 +26,11 @@ export const generatePriceMap = ({
   const pricesMap: PricesMap = new Map();
   let startDate = baseDates.dateFrom;
   const currentDate = new Date().toISOString().slice(0, 10);
+
+  if (startDate >= currentDate || currentDate >= baseDates.dateTo) {
+    return pricesMap;
+  }
+
   startDate = startDate >= currentDate ? startDate : currentDate;
   const weekdaySet = new Set(weekdays);
 
@@ -73,7 +78,6 @@ export const generatePriceMap = ({
     } else if (correction) {
       applyPrices(correction.prices);
     }
-
     pricesMap.set(formattedDay, {
       prices: Array.from(dailyPrices.values()),
       basePrice: basePrices,

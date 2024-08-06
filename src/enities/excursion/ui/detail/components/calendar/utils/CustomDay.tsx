@@ -15,7 +15,6 @@ export const CustomDay = ({ dayNumber, day, basePrices, prices }: Props) => {
   const dayKey = getFormattedDate(day);
   const showPrice = prices.has(dayKey);
   const baseAdultPrice = basePrices ? basePrices[0].price : 0;
-
   const adultPriceData = showPrice ? prices.get(dayKey) : null;
   const adultPrice =
     adultPriceData && adultPriceData.prices && adultPriceData.prices[0]

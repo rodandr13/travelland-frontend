@@ -24,6 +24,7 @@ interface Props {
 export const Detail = async ({ slug }: Props) => {
   const excursion = await getExcursionDetail({ slug });
   const { basePrices, promotionalPrices, priceCorrections } = excursion;
+
   const prices = generatePriceMap({
     basePrices: basePrices,
     priceCorrections: priceCorrections,
@@ -31,10 +32,8 @@ export const Detail = async ({ slug }: Props) => {
     weekdays: excursion.weekdays,
     promoPrices: excursion.promotionalPrices,
   });
-
   const baseAdultPrice = findAdultBasePrice(basePrices);
-  const minPrice = findAdultMinPrice(prices);
-
+  const minPrice = findAdultMinPrice(prices) || baseAdultPrice;
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={excursion.gallery} />
