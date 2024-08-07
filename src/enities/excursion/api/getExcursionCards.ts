@@ -6,8 +6,8 @@ export const getExcursionCards = async () => {
   *[_type == "excursion"]{
   _id,
   title,
-  "category": excursionCategory->title[_key == "ru"][0].value,
-  "subcategory": excursionSubcategory[]->title[0].value,
+    "category": excursionCategory->{_id, "title":title[_key == "ru"][0].value, "icon": icon.asset._ref},
+  "subcategory": excursionSubcategory[]->{_id, "title":title[_key == "ru"][0].value, "icon": icon.asset._ref},
   "gallery": gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip},
   "slug": slug.current,
   "weekdays": weekdays,

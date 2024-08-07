@@ -15,6 +15,7 @@ export type Dates = {
 };
 
 export type Price = {
+  _id: string;
   price: number;
   title: string;
   description: string;
@@ -48,6 +49,7 @@ export type Subcategory = {
   icon: string;
 };
 export type Category = {
+  _id: string;
   title: string;
   icon: string;
 };
@@ -64,6 +66,7 @@ export type GalleryImage = {
 
 export type ExcursionType = {
   _id: string;
+  _type: string;
   title: string;
   city: string;
   country: string;
@@ -93,7 +96,7 @@ export interface ExcursionCard {
   slug: string;
   gallery: GalleryImage[];
   weekdays: Weekdays;
-  category: string;
+  category: Category;
   duration: Duration;
   subcategory: string[];
   basePrices: Price[];

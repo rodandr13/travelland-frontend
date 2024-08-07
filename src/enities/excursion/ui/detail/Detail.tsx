@@ -30,7 +30,7 @@ export const Detail = async ({ slug }: Props) => {
     priceCorrections: priceCorrections,
     baseDates: excursion.dates,
     weekdays: excursion.weekdays,
-    promoPrices: excursion.promotionalPrices,
+    promoPrices: promotionalPrices,
   });
   const baseAdultPrice = findAdultBasePrice(basePrices);
   const minPrice = findAdultMinPrice(prices) || baseAdultPrice;
