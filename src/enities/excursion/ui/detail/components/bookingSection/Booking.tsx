@@ -6,6 +6,7 @@ import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
 import {
+  resetDetails,
   setDetails,
   setVisible,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
@@ -27,6 +28,7 @@ import { Calendar } from "../calendar/Calendar";
 import { SelectPeoples } from "../selectPeoples/SelectPeoples";
 
 interface Props {
+  id: string;
   image: GalleryImage;
   duration: Duration;
   weekdays: Weekdays;
@@ -42,6 +44,7 @@ export const Booking = ({
   basePrices,
   startTime,
   prices,
+  id,
   title,
   image,
 }: Props) => {
@@ -53,17 +56,21 @@ export const Booking = ({
   const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
 
   useEffect(() => {
+    dispatch(resetDetails());
     dispatch(
       setDetails({
-        key: pathname as string,
-        details: { title: title, image: { src: image.src, lqip: image.lqip } },
+        key: id,
+        details: {
+          title: title,
+          image: { src: image.src, lqip: image.lqip },
+        },
       })
     );
-  }, []);
+  }, [id, title, image]);
 
   useEffect(() => {
     dispatch(setVisible(isVisible));
-  }, [dispatch, isVisible]);
+  }, [isVisible]);
 
   const handleClick = (time: string) => {
     if (pathname) {

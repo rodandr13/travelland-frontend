@@ -60,8 +60,11 @@ const bookingSlice = createSlice({
         state.details[key].totalPrice = totalPrice;
       }
     },
+    resetDetails: (state) => {
+      state.details = initialState.details;
+    },
   },
 });
 
-export const { setVisible, setDetails } = bookingSlice.actions;
+export const { setVisible, setDetails, resetDetails } = bookingSlice.actions;
 export default bookingSlice.reducer;

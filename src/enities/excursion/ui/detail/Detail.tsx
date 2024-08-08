@@ -22,63 +22,79 @@ interface Props {
 }
 
 export const Detail = async ({ slug }: Props) => {
-  const excursion = await getExcursionDetail({ slug });
-  const { basePrices, promotionalPrices, priceCorrections } = excursion;
+  const {
+    basePrices,
+    promotionalPrices,
+    priceCorrections,
+    title,
+    _id,
+    startTime,
+    duration,
+    weekdays,
+    startingPlace,
+    gallery,
+    dates,
+    category,
+    subcategory,
+    parameters,
+    description,
+    additionalTerms,
+    surcharge,
+    included,
+    route,
+    endingPlace,
+  } = await getExcursionDetail({ slug });
 
   const prices = generatePriceMap({
     basePrices: basePrices,
     priceCorrections: priceCorrections,
-    baseDates: excursion.dates,
-    weekdays: excursion.weekdays,
+    baseDates: dates,
+    weekdays: weekdays,
     promoPrices: promotionalPrices,
   });
   const baseAdultPrice = findAdultBasePrice(basePrices);
   const minPrice = findAdultMinPrice(prices) || baseAdultPrice;
   return (
     <section className={styles.excursionDetail}>
-      <Gallery images={excursion.gallery} />
+      <Gallery images={gallery} />
       <div className={styles.excursionDetail__container}>
         <div className={styles.excursionDetail__content}>
           <div className={styles.excursionDetail__info}>
-            <Breadcrumbs title={excursion.title} />
-            <h1>{excursion.title}</h1>
-            <Categories
-              category={excursion.category}
-              subCategory={excursion.subcategory}
-            />
+            <Breadcrumbs title={title} />
+            <h1>{title}</h1>
+            <Categories category={category} subCategory={subcategory} />
             <div className={styles.excursionDetail__mainInfo}>
               <div className={styles.excursionDetail__containerDescription}>
                 <TimeSpending
-                  startTime={excursion.startTime}
-                  weekdays={excursion.weekdays}
-                  duration={excursion.duration}
+                  startTime={startTime}
+                  weekdays={weekdays}
+                  duration={duration}
                 />
-                {excursion.parameters && (
-                  <Parameters parameters={excursion.parameters} />
-                )}
-                <Description description={excursion.description} />
+                {parameters && <Parameters parameters={parameters} />}
+                <Description description={description} />
               </div>
             </div>
             <Conditions
-              additionalTerms={excursion.additionalTerms}
-              surcharge={excursion.surcharge}
-              included={excursion.included}
+              additionalTerms={additionalTerms}
+              surcharge={surcharge}
+              included={included}
             />
           </div>
           <Advantages />
           <ExcursionRoute
-            routes={excursion.route}
-            startingPlace={excursion.startingPlace}
-            endingPlace={excursion.endingPlace}
+            routes={route}
+            startingPlace={startingPlace}
+            endingPlace={endingPlace}
           />
           <Booking
-            image={excursion.gallery[0]}
-            title={excursion.title}
-            dates={excursion.dates}
-            startTime={excursion.startTime}
-            weekdays={excursion.weekdays}
-            duration={excursion.duration}
-            basePrices={excursion.basePrices}
+            id={_id}
+            image={gallery[0]}
+            title={title}
+            dates={dates}
+            startTime={startTime}
+            weekdays={weekdays}
+            duration={duration}
+            basePrices={basePrices}
             prices={prices}
           />
         </div>
@@ -86,7 +102,7 @@ export const Detail = async ({ slug }: Props) => {
           <PriceSection
             minPrice={minPrice}
             basePrice={baseAdultPrice}
-            title={excursion.title}
+            title={title}
           />
           <AttentionBlock />
         </div>
