@@ -1,5 +1,3 @@
-import { usePathname } from "next/navigation";
-
 import { addItem } from "@/src/enities/cart/model/cartSlice";
 import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
@@ -8,15 +6,14 @@ import { Button } from "@/src/shared/ui/button";
 
 interface Props {
   bookingDetails: BookingDetails;
+  id: string;
 }
 
-export const AddToCart = ({ bookingDetails }: Props) => {
+export const AddToCart = ({ bookingDetails, id }: Props) => {
   const dispatch = useAppDispatch();
-
-  const pathname = usePathname();
-  const itemExists = useAppSelector(selectCartItemExists(pathname as string));
+  const itemExists = useAppSelector(selectCartItemExists(id));
   const handleClick = () => {
-    dispatch(addItem({ key: pathname as string, details: bookingDetails }));
+    dispatch(addItem({ key: id, details: bookingDetails }));
   };
 
   const title = !bookingDetails?.selectedDate

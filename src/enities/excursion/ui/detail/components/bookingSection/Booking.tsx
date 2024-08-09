@@ -3,7 +3,6 @@
 import { useEffect, useRef } from "react";
 
 import clsx from "clsx";
-import { usePathname } from "next/navigation";
 
 import {
   resetDetails,
@@ -52,8 +51,7 @@ export const Booking = ({
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
-  const pathname = usePathname();
-  const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
+  const bookingDetails = useAppSelector(selectDetailsByKey(id as string));
 
   useEffect(() => {
     dispatch(resetDetails());
@@ -73,16 +71,15 @@ export const Booking = ({
   }, [isVisible]);
 
   const handleClick = (time: string) => {
-    if (pathname) {
-      dispatch(setDetails({ key: pathname, details: { time: time } }));
+    if (id) {
+      dispatch(setDetails({ key: id, details: { time: time } }));
     }
   };
-
   return (
     <section className={styles.booking} ref={bookingRef}>
       <div>
         <h2 className={styles.booking__title}>Выберите дату</h2>
-        <Calendar prices={prices} basePrices={basePrices} />
+        <Calendar prices={prices} basePrices={basePrices} id={id} />
       </div>
       {bookingDetails?.selectedDate && (
         <div>
@@ -133,7 +130,7 @@ export const Booking = ({
       {bookingDetails?.time && (
         <div>
           <h2 className={styles.booking__title}>Количество человек</h2>
-          <SelectPeoples prices={prices} />
+          <SelectPeoples prices={prices} id={id} />
         </div>
       )}
     </section>

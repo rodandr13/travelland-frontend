@@ -100,6 +100,7 @@ export const Detail = async ({ slug }: Props) => {
         </div>
         <div className={styles.excursionDetail__sideBar}>
           <PriceSection
+            id={_id}
             minPrice={minPrice}
             basePrice={baseAdultPrice}
             title={title}

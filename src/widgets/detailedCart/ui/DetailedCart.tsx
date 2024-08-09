@@ -23,6 +23,7 @@ export const DetailedCart = () => {
   const totalPrice = useAppSelector(getTotalPrice);
   const cartItems = useAppSelector(selectCartItems);
   const cartItemEntries = Object.entries(cartItems);
+  console.log(cartItemEntries);
   return (
     <>
       {cartItemEntries.length > 0 ? (
