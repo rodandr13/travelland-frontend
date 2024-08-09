@@ -1,7 +1,6 @@
 "use client";
 
 import { ru } from "date-fns/locale/ru";
-import { usePathname } from "next/navigation";
 import DatePicker, { registerLocale } from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
@@ -22,18 +21,18 @@ registerLocale("ru", ru);
 interface Props {
   basePrices: Price[];
   prices: PricesMap;
+  id: string;
 }
-export const Calendar = ({ basePrices, prices }: Props) => {
-  const pathname = usePathname();
+export const Calendar = ({ basePrices, prices, id }: Props) => {
   const dispatch = useAppDispatch();
   const monthsShown = 2;
-  const selectedDate = useAppSelector(selectDateByKey(pathname as string));
+  const selectedDate = useAppSelector(selectDateByKey(id as string));
 
   const handleChange = (date: Date | null) => {
-    if (pathname && date) {
+    if (id && date) {
       dispatch(
         setDetails({
-          key: pathname,
+          key: id,
           details: {
             selectedDate: date.toString(),
             prices: prices.get(getFormattedDate(date)),

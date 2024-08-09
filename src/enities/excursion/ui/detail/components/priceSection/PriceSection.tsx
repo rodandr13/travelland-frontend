@@ -6,7 +6,6 @@ import clsx from "clsx";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
 import {
@@ -27,13 +26,13 @@ interface Props {
   minPrice: number | undefined;
   basePrice: number | undefined;
   title?: string;
+  id: string;
 }
 
-export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
-  const pathname = usePathname();
+export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const bookingIsVisible = useAppSelector(selectVisibility);
-  const bookingDetails = useAppSelector(selectDetailsByKey(pathname as string));
-  const itemExists = useAppSelector(selectCartItemExists(pathname as string));
+  const bookingDetails = useAppSelector(selectDetailsByKey(id));
+  const itemExists = useAppSelector(selectCartItemExists(id));
   const [showBlockPreview, setShowBlockPreview] = useState(true);
   const [showBlockPrice, setShowBlockPrice] = useState(false);
   const [animationClassPreview, setAnimationClassPreview] = useState("");
@@ -86,7 +85,6 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
     bookingDetails?.prices && bookingDetails?.participants
       ? calculateTotalPrice(bookingDetails.prices, bookingDetails.participants)
       : 0;
-
   return (
     <>
       {showBlockPreview && (
@@ -187,7 +185,7 @@ export const PriceSection = ({ minPrice, basePrice, title }: Props) => {
             />
           </div>
           {!itemExists ? (
-            <AddToCart bookingDetails={bookingDetails} />
+            <AddToCart bookingDetails={bookingDetails} id={id} />
           ) : (
             <Link href="/cart" className={styles.priceSection__link_cart}>
               Перейти в корзину

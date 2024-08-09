@@ -23,7 +23,7 @@ export const CardsList = ({ excursionCards }: Props) => {
   const filteredExcursions = activeFilter
     ? excursionCards.filter(
         (excursion) =>
-          excursion.category === activeFilter ||
+          excursion.category._id === activeFilter ||
           excursion.subcategory.some((item) => item === activeFilter)
       )
     : excursionCards;

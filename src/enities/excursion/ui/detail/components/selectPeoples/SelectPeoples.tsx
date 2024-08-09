@@ -1,7 +1,5 @@
 "use client";
 
-import { usePathname } from "next/navigation";
-
 import { setDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import {
   selectDateByKey,
@@ -18,18 +16,16 @@ import { SelectNumber } from "./ui/SelectNumber";
 
 interface Props {
   prices: PricesMap;
+  id: string;
 }
 
-export const SelectPeoples = ({ prices }: Props) => {
+export const SelectPeoples = ({ prices, id }: Props) => {
   const dispatch = useAppDispatch();
-  const pathname = usePathname();
-  const selectedDate = useAppSelector(selectDateByKey(pathname as string));
+  const selectedDate = useAppSelector(selectDateByKey(id as string));
   const formattedDate = selectedDate ? getFormattedDate(selectedDate) : "";
   const tempPrice = prices.get(formattedDate)?.prices;
   const basePrice = prices.get(formattedDate)?.basePrice;
-  const participants = useAppSelector(
-    selectParticipantsByKey(pathname as string)
-  );
+  const participants = useAppSelector(selectParticipantsByKey(id as string));
   const handleChange =
     (index: number, category: string) => (newValue: number) => {
       const updatedParticipants = [...participants];
@@ -38,10 +34,10 @@ export const SelectPeoples = ({ prices }: Props) => {
         count: newValue,
         category: category,
       };
-      if (pathname) {
+      if (id) {
         dispatch(
           setDetails({
-            key: pathname,
+            key: id,
             details: {
               participants: updatedParticipants,
             },
