@@ -35,6 +35,7 @@ export const AddToCart = ({ bookingDetails, id }: Props) => {
         bookingDetails.participants.length === 0
       }
       onClick={handleClick}
+      variant="add-to-cart"
     />
   );
 };

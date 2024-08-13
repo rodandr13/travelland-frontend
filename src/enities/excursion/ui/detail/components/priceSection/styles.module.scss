@@ -79,13 +79,20 @@
   &__link_cart {
     display: block;
     background: var(--color-link-cart-bg);
-    border: 1px solid var(--color-link-cart-border);
     color: var(--color-black);
     text-decoration: none;
     text-align: center;
     padding: 12px 24px;
     font-size: 14px;
     border-radius: 3px;
+    transition: all 0.1s ease 0s;
+    &:hover {
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    &:active {
+      transform: scale(0.98);
+    }
   }
 
 }

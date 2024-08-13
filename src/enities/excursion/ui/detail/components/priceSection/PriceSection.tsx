@@ -7,6 +7,7 @@ import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
+import { useScroll } from "@/src/app/providers/ScrollProvider";
 import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
 import {
   selectDetailsByKey,
@@ -37,6 +38,12 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const [showBlockPrice, setShowBlockPrice] = useState(false);
   const [animationClassPreview, setAnimationClassPreview] = useState("");
   const [animationClassPrice, setAnimationClassPrice] = useState("");
+
+  const targetRef = useScroll();
+
+  const handleScroll = () => {
+    targetRef?.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 900px)");
@@ -104,7 +111,11 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
               Скидка 5% при оплате картой
             </li>
           </ul>
-          <Button title="Бронировать" />
+          <Button
+            title="Бронировать"
+            variant="booking"
+            onClick={handleScroll}
+          />
         </section>
       )}
       {showBlockPrice && (

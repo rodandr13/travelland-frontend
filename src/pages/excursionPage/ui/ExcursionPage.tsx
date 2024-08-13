@@ -1,3 +1,4 @@
+import { ScrollProvider } from "@/src/app/providers/ScrollProvider";
 import { Detail } from "@/src/enities/excursion";
 
 import styles from "./styles.module.scss";
@@ -8,8 +9,10 @@ interface Props {
 
 export const ExcursionPage = ({ slug }: Props) => {
   return (
-    <section className={styles.excursionPage}>
-      <Detail slug={slug} />
-    </section>
+    <ScrollProvider>
+      <section className={styles.excursionPage}>
+        <Detail slug={slug} />
+      </section>
+    </ScrollProvider>
   );
 };

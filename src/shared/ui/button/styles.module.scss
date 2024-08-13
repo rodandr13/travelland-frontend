@@ -16,4 +16,24 @@
   &_green {
     background: var(--color-green);
   }
+  &_addToCart {
+    transition: all 0.1s ease 0s;
+    &:hover {
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+  &_booking {
+    transition: all 0.1s ease 0s;
+    &:hover {
+      text-decoration: none;
+      opacity: 0.9;
+    }
+    &:active {
+      transform: scale(0.98);
+    }
+  }
 }

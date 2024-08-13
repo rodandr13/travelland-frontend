@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 
 import clsx from "clsx";
 
+import { useScroll } from "@/src/app/providers/ScrollProvider";
 import {
   resetDetails,
   setDetails,
@@ -52,7 +53,7 @@ export const Booking = ({
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const bookingDetails = useAppSelector(selectDetailsByKey(id as string));
-
+  const targetRef = useScroll();
   useEffect(() => {
     dispatch(resetDetails());
     dispatch(
@@ -77,7 +78,7 @@ export const Booking = ({
   };
   return (
     <section className={styles.booking} ref={bookingRef}>
-      <div>
+      <div ref={targetRef}>
         <h2 className={styles.booking__title}>Выберите дату</h2>
         <Calendar prices={prices} basePrices={basePrices} id={id} />
       </div>
