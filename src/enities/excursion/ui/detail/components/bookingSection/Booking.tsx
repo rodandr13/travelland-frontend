@@ -5,12 +5,16 @@ import { useEffect, useRef } from "react";
 import clsx from "clsx";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
+import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
 import {
-  resetDetails,
   setDetails,
+  setIsEditing,
   setVisible,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
-import { selectDetailsByKey } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
+import {
+  selectDetailsByKey,
+  selectExcursionIsEditing,
+} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
@@ -22,6 +26,7 @@ import {
   StartTime,
   Weekdays,
 } from "@/src/shared/types/excursion";
+import { Button } from "@/src/shared/ui/button";
 
 import styles from "./styles.module.scss";
 import { Calendar } from "../calendar/Calendar";
@@ -48,14 +53,15 @@ export const Booking = ({
   title,
   image,
 }: Props) => {
+  const isEditing = useAppSelector(selectExcursionIsEditing(id));
   const bookingRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
-  const bookingDetails = useAppSelector(selectDetailsByKey(id as string));
+  const bookingDetails = useAppSelector(selectDetailsByKey(id));
+  const itemExistsInCart = useAppSelector(selectCartItemExists(id));
   const targetRef = useScroll();
   useEffect(() => {
-    dispatch(resetDetails());
     dispatch(
       setDetails({
         key: id,
@@ -71,69 +77,87 @@ export const Booking = ({
     dispatch(setVisible(isVisible));
   }, [isVisible]);
 
+  useEffect(() => {
+    return () => {
+      dispatch(setIsEditing({ key: id, value: false }));
+    };
+  }, []);
+
   const handleClick = (time: string) => {
     if (id) {
       dispatch(setDetails({ key: id, details: { time: time } }));
     }
   };
   return (
-    <section className={styles.booking} ref={bookingRef}>
-      <div ref={targetRef}>
-        <h2 className={styles.booking__title}>Выберите дату</h2>
-        <Calendar prices={prices} basePrices={basePrices} id={id} />
-      </div>
-      {bookingDetails?.selectedDate && (
-        <div>
-          <h2 className={styles.booking__title}>Время</h2>
-          <div className={styles.booking__timeGroup}>
-            {startTime &&
-              startTime.map((time, i) => (
-                <div
-                  key={i}
-                  className={clsx(styles.time, {
-                    [styles.time_active]: bookingDetails?.time === time,
-                  })}
-                  onClick={() => handleClick(time)}
-                >
-                  <div className={styles.time__container}>
-                    <span className={styles.time__title}>Начало</span>
-                    <span className={styles.time__value}>{time}</span>
-                  </div>
-                  <div
-                    className={clsx(
-                      styles.time__container,
-                      styles.time__container_end
-                    )}
-                  >
-                    <span
-                      className={clsx(
-                        styles.time__title,
-                        styles.time__title_end
-                      )}
-                    >
-                      Конец
-                    </span>
-                    <span
-                      className={clsx(
-                        styles.time__value,
-                        styles.time__value_end
-                      )}
-                    >
-                      ≈{endTimes[i]}
-                    </span>
-                  </div>
-                </div>
-              ))}
+    <>
+      {itemExistsInCart && !isEditing ? (
+        <>
+          <h2>Экскурсия уже в корзине</h2>
+          <Button
+            title="Редактировать"
+            onClick={() => dispatch(setIsEditing({ key: id, value: true }))}
+          />
+        </>
+      ) : (
+        <section className={styles.booking} ref={bookingRef}>
+          <div ref={targetRef}>
+            <h2 className={styles.booking__title}>Выберите дату</h2>
+            <Calendar prices={prices} basePrices={basePrices} id={id} />
           </div>
-        </div>
-      )}
+          {bookingDetails?.selectedDate && (
+            <div>
+              <h2 className={styles.booking__title}>Время</h2>
+              <div className={styles.booking__timeGroup}>
+                {startTime &&
+                  startTime.map((time, i) => (
+                    <div
+                      key={i}
+                      className={clsx(styles.time, {
+                        [styles.time_active]: bookingDetails?.time === time,
+                      })}
+                      onClick={() => handleClick(time)}
+                    >
+                      <div className={styles.time__container}>
+                        <span className={styles.time__title}>Начало</span>
+                        <span className={styles.time__value}>{time}</span>
+                      </div>
+                      <div
+                        className={clsx(
+                          styles.time__container,
+                          styles.time__container_end
+                        )}
+                      >
+                        <span
+                          className={clsx(
+                            styles.time__title,
+                            styles.time__title_end
+                          )}
+                        >
+                          Конец
+                        </span>
+                        <span
+                          className={clsx(
+                            styles.time__value,
+                            styles.time__value_end
+                          )}
+                        >
+                          ≈{endTimes[i]}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
 
-      {bookingDetails?.time && (
-        <div>
-          <h2 className={styles.booking__title}>Количество человек</h2>
-          <SelectPeoples prices={prices} id={id} />
-        </div>
+          {bookingDetails?.time && (
+            <div>
+              <h2 className={styles.booking__title}>Количество человек</h2>
+              <SelectPeoples prices={prices} id={id} />
+            </div>
+          )}
+        </section>
       )}
-    </section>
+    </>
   );
 };

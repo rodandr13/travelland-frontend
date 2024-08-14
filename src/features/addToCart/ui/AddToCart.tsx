@@ -1,11 +1,10 @@
 import { addItem } from "@/src/enities/cart/model/cartSlice";
-import { resetDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { BookingDetails } from "@/src/shared/types/booking";
 import { Button } from "@/src/shared/ui/button";
 
 interface Props {
-  bookingDetails: BookingDetails;
+  bookingDetails: Partial<BookingDetails>;
   id: string;
 }
 
@@ -13,7 +12,6 @@ export const AddToCart = ({ bookingDetails, id }: Props) => {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     dispatch(addItem({ key: id, details: bookingDetails }));
-    dispatch(resetDetails());
   };
 
   const title = !bookingDetails?.selectedDate

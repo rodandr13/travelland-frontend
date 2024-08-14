@@ -8,15 +8,21 @@ import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
+import { addItem } from "@/src/enities/cart/model/cartSlice";
 import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
 import {
+  saveChanges,
+  setIsEditing,
+} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
+import {
   selectDetailsByKey,
+  selectExcursionIsEditing,
   selectVisibility,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
 import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Price } from "@/src/shared/types/booking";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
@@ -34,11 +40,12 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const bookingIsVisible = useAppSelector(selectVisibility);
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
   const itemExists = useAppSelector(selectCartItemExists(id));
+  const isEditing = useAppSelector(selectExcursionIsEditing(id));
   const [showBlockPreview, setShowBlockPreview] = useState(true);
   const [showBlockPrice, setShowBlockPrice] = useState(false);
   const [animationClassPreview, setAnimationClassPreview] = useState("");
   const [animationClassPrice, setAnimationClassPrice] = useState("");
-
+  const dispatch = useAppDispatch();
   const targetRef = useScroll();
 
   const handleScroll = () => {
@@ -52,7 +59,7 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
       const matches = event ? event.matches : mediaQuery.matches;
 
       if (!matches) {
-        if (bookingIsVisible) {
+        if (bookingIsVisible || itemExists) {
           if (showBlockPreview) {
             setAnimationClassPreview(styles.fadeOut);
             setTimeout(() => {
@@ -144,48 +151,39 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
               </p>
             )}
           </div>
-          <ul className={styles.priceSection__list}>
-            {bookingDetails?.prices &&
-              bookingDetails?.participants &&
-              bookingDetails.prices.prices.length > 0 &&
-              bookingDetails.participants.length > 0 && (
-                <ul className={styles.priceSection__list}>
-                  {bookingDetails.prices.prices.map(
-                    (price: Price, i: number) => {
-                      if (bookingDetails.participants[i]) {
-                        return (
-                          <li className={styles.priceSection__item} key={i}>
-                            <div className={styles.priceSection__priceLine}>
-                              <span>
-                                {bookingDetails.participants[i].count}
-                                &nbsp;x&nbsp;
-                              </span>
-                              <span>
-                                {price.title}&nbsp;({price.price.toFixed(2)}
-                                &nbsp;€)&nbsp;
-                              </span>
-                              <span
-                                className={styles.priceSection__dottedLine}
-                              ></span>
-                              <span className={styles.priceSection__priceSum}>
-                                {formatCurrency(
-                                  price.price *
-                                    bookingDetails.participants[i].count
-                                )}
-                              </span>
-                            </div>
-                            <span className={styles.priceSection__caption}>
-                              ({price.description})
-                            </span>
-                          </li>
-                        );
-                      }
-                      return null;
-                    }
-                  )}
-                </ul>
-              )}
-          </ul>
+          {bookingDetails?.prices &&
+            bookingDetails?.participants &&
+            bookingDetails.prices.prices.length > 0 &&
+            bookingDetails.participants.length > 0 && (
+              <ul className={styles.priceSection__list}>
+                {bookingDetails.prices.prices.map((price: Price, i: number) => {
+                  const participant = bookingDetails.participants?.[i];
+                  if (participant) {
+                    return (
+                      <li className={styles.priceSection__item} key={i}>
+                        <div className={styles.priceSection__priceLine}>
+                          <span>{participant.count}&nbsp;x&nbsp;</span>
+                          <span>
+                            {price.title}&nbsp;({price.price.toFixed(2)}
+                            &nbsp;€)&nbsp;
+                          </span>
+                          <span
+                            className={styles.priceSection__dottedLine}
+                          ></span>
+                          <span className={styles.priceSection__priceSum}>
+                            {formatCurrency(price.price * participant.count)}
+                          </span>
+                        </div>
+                        <span className={styles.priceSection__caption}>
+                          ({price.description})
+                        </span>
+                      </li>
+                    );
+                  }
+                  return null;
+                })}
+              </ul>
+            )}
           <div>
             <span className={styles.priceSection__caption}>К оплате</span>
             <PriceBlock
@@ -201,6 +199,21 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
             <Link href="/cart" className={styles.priceSection__link_cart}>
               Перейти в корзину
             </Link>
+          )}
+          {!isEditing ? (
+            <Button
+              title="Редактировать"
+              onClick={() => dispatch(setIsEditing({ key: id, value: true }))}
+            />
+          ) : (
+            <Button
+              title="Сохранить изменения"
+              onClick={() => {
+                dispatch(saveChanges(id));
+                dispatch(setIsEditing({ key: id, value: false }));
+                dispatch(addItem({ key: id, details: bookingDetails }));
+              }}
+            />
           )}
         </section>
       )}
