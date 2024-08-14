@@ -23,38 +23,56 @@ const cartSlice = createSlice({
       action: PayloadAction<{ key: string; details: Partial<BookingDetails> }>
     ) => {
       const { key, details } = action.payload;
+
       state.items[key] = { ...state.items[key], ...details };
 
-      const prices = state.items[key].prices?.prices;
-      const participants = state.items[key].participants;
+      state.totalPrice = Object.values(state.items).reduce((total, item) => {
+        const prices = item.prices?.prices;
+        const participants = item.participants;
 
-      if (prices && participants) {
-        participants.forEach((participant, index) => {
-          if (prices.length > index) {
-            state.totalPrice += participant.count * (prices[index]?.price || 0);
-          }
-        });
-      }
+        if (prices && participants) {
+          return (
+            total +
+            participants.reduce((sum, participant, index) => {
+              if (prices.length > index) {
+                return sum + participant.count * (prices[index]?.price || 0);
+              }
+              return sum;
+            }, 0)
+          );
+        }
 
-      state.totalQuantity++;
+        return total;
+      }, 0);
+
+      state.totalQuantity = Object.keys(state.items).length;
     },
+
     removeItem: (state, action: PayloadAction<string>) => {
       const key = action.payload;
       if (state.items[key]) {
-        const prices = state.items[key].prices?.prices;
-        const participants = state.items[key].participants;
-
-        if (prices && participants) {
-          participants.forEach((participant, index) => {
-            if (prices.length > index) {
-              state.totalPrice -=
-                participant.count * (prices[index]?.price || 0);
-            }
-          });
-        }
-
-        state.totalQuantity--;
         delete state.items[key];
+
+        state.totalPrice = Object.values(state.items).reduce((total, item) => {
+          const prices = item.prices?.prices;
+          const participants = item.participants;
+
+          if (prices && participants) {
+            return (
+              total +
+              participants.reduce((sum, participant, index) => {
+                if (prices.length > index) {
+                  return sum + participant.count * (prices[index]?.price || 0);
+                }
+                return sum;
+              }, 0)
+            );
+          }
+
+          return total;
+        }, 0);
+
+        state.totalQuantity = Object.keys(state.items).length;
       }
     },
   },
