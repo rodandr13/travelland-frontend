@@ -12,7 +12,8 @@ export type PricesValue = {
 };
 
 export type Participants = {
-  category: string;
+  id: string;
+  title: string;
   count: number;
 };
 

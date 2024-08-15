@@ -8,8 +8,6 @@ import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
-import { addItem } from "@/src/enities/cart/model/cartSlice";
-import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
 import {
   saveChanges,
   setIsEditing,

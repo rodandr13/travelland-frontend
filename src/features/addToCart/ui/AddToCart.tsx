@@ -1,25 +1,22 @@
-import { addItem } from "@/src/enities/cart/model/cartSlice";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-import { BookingDetails } from "@/src/shared/types/booking";
+import { addItemToCartFeature } from "@/src/features/addToCart/model";
+import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 
 interface Props {
-  bookingDetails: Partial<BookingDetails>;
+  cartItem: CartItem;
   id: string;
 }
 
-export const AddToCart = ({ bookingDetails, id }: Props) => {
-  const dispatch = useAppDispatch();
+export const AddToCart = ({ cartItem, id }: Props) => {
   const handleClick = () => {
-    dispatch(addItem({ key: id, details: bookingDetails }));
+    addItemToCartFeature(cartItem);
   };
 
-  const title = !bookingDetails?.selectedDate
+  const title = !cartItem?.selectedDate
     ? "Выберите дату"
-    : !bookingDetails?.time
+    : !cartItem?.selectedTime
       ? "Выберите время"
-      : !bookingDetails?.participants ||
-          bookingDetails.participants.length === 0
+      : !cartItem?.participants || cartItem.participants.length === 0
         ? "Укажите количество человек"
         : "Добавить в корзину";
 
@@ -27,10 +24,10 @@ export const AddToCart = ({ bookingDetails, id }: Props) => {
     <Button
       title={title}
       disabled={
-        !bookingDetails?.selectedDate ||
-        !bookingDetails?.time ||
-        !bookingDetails?.participants ||
-        bookingDetails.participants.length === 0
+        !cartItem?.selectedDate ||
+        !cartItem?.selectedTime ||
+        !cartItem?.participants ||
+        cartItem.participants.length === 0
       }
       onClick={handleClick}
       variant="add-to-cart"
