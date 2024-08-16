@@ -1,6 +1,7 @@
 import { eachDayOfInterval, formatISO, parseISO } from "date-fns";
 
 import { PricesMap } from "@/src/shared/types/booking";
+import { CartParticipants } from "@/src/shared/types/cart";
 import {
   Dates,
   Price,
@@ -49,14 +50,26 @@ export const generatePriceMap = ({
 
     if (!weekdaySet.has(formattedWeekday)) return;
 
-    const dailyPrices = new Map(basePrices.map((p) => [p.title, p]));
+    // Инициализация массива с базовыми ценами
+    const priceArray: CartParticipants[] = basePrices.map((basePrice) => ({
+      currentPrice: basePrice.price,
+      basePrice: basePrice.price,
+      title: basePrice.title,
+      id: basePrice.categoryId,
+      count: 0,
+    }));
 
+    // Функция для применения промо или корректировочных цен
     const applyPrices = (prices: Price[]) => {
       prices.forEach((p) => {
-        dailyPrices.set(p.title, p);
+        const category = priceArray.find((item) => item.title === p.title);
+        if (category) {
+          category.currentPrice = p.price;
+        }
       });
     };
 
+    // Поиск соответствующего промо или коррекции
     const promo = promoPrices?.find(
       (p) =>
         formattedDay >= p.dates.dateFrom &&
@@ -73,16 +86,14 @@ export const generatePriceMap = ({
           c.weekdays.includes(formattedWeekday)
       );
 
-    if (promo) {
-      applyPrices(promo.prices);
-    } else if (correction) {
+    // Применение цен, приоритет коррекционной цене
+    if (correction) {
       applyPrices(correction.prices);
+    } else if (promo) {
+      applyPrices(promo.prices);
     }
-    pricesMap.set(formattedDay, {
-      prices: Array.from(dailyPrices.values()),
-      basePrice: basePrices,
-    });
-  });
 
+    pricesMap.set(formattedDay, priceArray);
+  });
   return pricesMap;
 };
