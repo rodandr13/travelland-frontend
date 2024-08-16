@@ -15,7 +15,7 @@ export type Dates = {
 };
 
 export type Price = {
-  _id: string;
+  categoryId: string;
   price: number;
   title: string;
   description: string;

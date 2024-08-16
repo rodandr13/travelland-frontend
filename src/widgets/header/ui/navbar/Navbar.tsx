@@ -3,8 +3,6 @@
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
-
-import { CompactCart } from "@/src/enities/cart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
@@ -73,9 +71,7 @@ export const Navbar = () => {
           {/*    </li>*/}
           {/*  </ul>*/}
           {/*</div>*/}
-          <div className={styles.navbar__cart}>
-            <CompactCart />
-          </div>
+          <div className={styles.navbar__cart}>{/*<CompactCart />*/}</div>
           <div className={styles.contacts}>
             <div className={styles.contacts__telephone}>
               <span className={styles.contacts__telephoneCode}>+429</span> 725

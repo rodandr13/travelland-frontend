@@ -3,8 +3,10 @@ import { GalleryImage } from "@/src/shared/types/excursion";
 export type CartParticipants = {
   id: string;
   title: string;
-  price: number;
-  count: number;
+  description: string;
+  currentPrice: number;
+  basePrice: number;
+  count: number | null;
 };
 
 export type CartItem = {
@@ -15,11 +17,13 @@ export type CartItem = {
   selectedDate: string;
   selectedTime: string;
   participants: CartParticipants[];
-  totalPrice: number;
+  totalCurrentPrice: number;
+  totalBasePrice: number;
 };
 
 export type Cart = {
   items: CartItem[];
   totalItems: number;
-  totalPrice: number;
+  totalCurrentPrice: number;
+  totalBasePrice: number;
 };

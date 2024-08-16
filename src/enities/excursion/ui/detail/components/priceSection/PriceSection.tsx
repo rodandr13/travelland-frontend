@@ -8,20 +8,16 @@ import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
-import {
-  saveChanges,
-  setIsEditing,
-} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
+import { isItemExistInCart } from "@/src/enities/cart";
+import { setIsEditing } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import {
   selectDetailsByKey,
   selectExcursionIsEditing,
   selectVisibility,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
-import { calculateTotalPrice } from "@/src/shared/lib/calculateTotalPrice";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { Price } from "@/src/shared/types/booking";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 
@@ -37,7 +33,7 @@ interface Props {
 export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const bookingIsVisible = useAppSelector(selectVisibility);
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
-  const itemExists = useAppSelector(selectCartItemExists(id));
+  const itemExists = isItemExistInCart(id);
   const isEditing = useAppSelector(selectExcursionIsEditing(id));
   const [showBlockPreview, setShowBlockPreview] = useState(true);
   const [showBlockPrice, setShowBlockPrice] = useState(false);
@@ -93,10 +89,6 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
       ? { price: minPrice }
       : { price: minPrice, basePrice: basePrice };
 
-  const totalPrice =
-    bookingDetails?.prices && bookingDetails?.participants
-      ? calculateTotalPrice(bookingDetails.prices, bookingDetails.participants)
-      : 0;
   return (
     <>
       {showBlockPreview && (
@@ -143,37 +135,37 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
                 })}
               </h3>
             )}
-            {bookingDetails?.time && (
+            {bookingDetails?.selectedTime && (
               <p className={styles.priceSection__subtitle}>
-                Начало в {bookingDetails.time}
+                Начало в {bookingDetails.selectedTime}
               </p>
             )}
           </div>
-          {bookingDetails?.prices &&
-            bookingDetails?.participants &&
-            bookingDetails.prices.prices.length > 0 &&
+          {bookingDetails?.participants &&
+            bookingDetails.selectedTime &&
             bookingDetails.participants.length > 0 && (
               <ul className={styles.priceSection__list}>
-                {bookingDetails.prices.prices.map((price: Price, i: number) => {
-                  const participant = bookingDetails.participants?.[i];
-                  if (participant) {
+                {bookingDetails.participants.map((participant, i: number) => {
+                  if (participant && participant.count) {
                     return (
                       <li className={styles.priceSection__item} key={i}>
                         <div className={styles.priceSection__priceLine}>
                           <span>{participant.count}&nbsp;x&nbsp;</span>
                           <span>
-                            {price.title}&nbsp;({price.price.toFixed(2)}
-                            &nbsp;€)&nbsp;
+                            {participant.title}&nbsp;(
+                            {formatCurrency(participant.currentPrice)})&nbsp;
                           </span>
                           <span
                             className={styles.priceSection__dottedLine}
                           ></span>
                           <span className={styles.priceSection__priceSum}>
-                            {formatCurrency(price.price * participant.count)}
+                            {formatCurrency(
+                              participant.currentPrice * participant.count
+                            )}
                           </span>
                         </div>
                         <span className={styles.priceSection__caption}>
-                          ({price.description})
+                          ({participant.title})
                         </span>
                       </li>
                     );
@@ -186,13 +178,13 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
             <span className={styles.priceSection__caption}>К оплате</span>
             <PriceBlock
               parent="priceSection"
-              price={totalPrice}
+              price={bookingDetails.totalCurrentPrice}
               size="m"
               actualPrice
             />
           </div>
           {!itemExists ? (
-            <AddToCart bookingDetails={bookingDetails} id={id} />
+            <AddToCart cartItem={bookingDetails} id={id} />
           ) : (
             <Link href="/cart" className={styles.priceSection__link_cart}>
               Перейти в корзину
@@ -207,9 +199,7 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
             <Button
               title="Сохранить изменения"
               onClick={() => {
-                dispatch(saveChanges(id));
                 dispatch(setIsEditing({ key: id, value: false }));
-                dispatch(addItem({ key: id, details: bookingDetails }));
               }}
             />
           )}

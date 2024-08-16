@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import clsx from "clsx";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
-import { selectCartItemExists } from "@/src/enities/cart/model/selectors";
+import { isItemExistInCart } from "@/src/enities/cart";
 import {
   setDetails,
   setIsEditing,
@@ -18,7 +18,7 @@ import {
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { Price, PricesMap } from "@/src/shared/types/booking";
+import { PricesMap } from "@/src/shared/types/booking";
 import {
   Dates,
   Duration,
@@ -38,7 +38,6 @@ interface Props {
   duration: Duration;
   weekdays: Weekdays;
   startTime: StartTime;
-  basePrices: Price[];
   dates: Dates;
   prices: PricesMap;
   title: string;
@@ -46,7 +45,6 @@ interface Props {
 
 export const Booking = ({
   duration,
-  basePrices,
   startTime,
   prices,
   id,
@@ -59,7 +57,7 @@ export const Booking = ({
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
-  const itemExistsInCart = useAppSelector(selectCartItemExists(id));
+  const itemExistsInCart = isItemExistInCart(id);
   const targetRef = useScroll();
   useEffect(() => {
     dispatch(
@@ -85,9 +83,10 @@ export const Booking = ({
 
   const handleClick = (time: string) => {
     if (id) {
-      dispatch(setDetails({ key: id, details: { time: time } }));
+      dispatch(setDetails({ key: id, details: { selectedTime: time } }));
     }
   };
+
   return (
     <>
       {itemExistsInCart && !isEditing ? (
@@ -102,7 +101,7 @@ export const Booking = ({
         <section className={styles.booking} ref={bookingRef}>
           <div ref={targetRef}>
             <h2 className={styles.booking__title}>Выберите дату</h2>
-            <Calendar prices={prices} basePrices={basePrices} id={id} />
+            <Calendar prices={prices} id={id} />
           </div>
           {bookingDetails?.selectedDate && (
             <div>
@@ -113,7 +112,8 @@ export const Booking = ({
                     <div
                       key={i}
                       className={clsx(styles.time, {
-                        [styles.time_active]: bookingDetails?.time === time,
+                        [styles.time_active]:
+                          bookingDetails?.selectedTime === time,
                       })}
                       onClick={() => handleClick(time)}
                     >
@@ -150,10 +150,14 @@ export const Booking = ({
             </div>
           )}
 
-          {bookingDetails?.time && (
+          {bookingDetails?.selectedTime && (
             <div>
               <h2 className={styles.booking__title}>Количество человек</h2>
-              <SelectPeoples prices={prices} id={id} />
+              <SelectPeoples
+                prices={prices}
+                id={id}
+                participants={bookingDetails.participants}
+              />
             </div>
           )}
         </section>

@@ -48,12 +48,13 @@ export const Detail = async ({ slug }: Props) => {
   const prices = generatePriceMap({
     basePrices: basePrices,
     priceCorrections: priceCorrections,
+    promoPrices: promotionalPrices,
     baseDates: dates,
     weekdays: weekdays,
-    promoPrices: promotionalPrices,
   });
+
   const baseAdultPrice = findAdultBasePrice(basePrices);
-  const minPrice = findAdultMinPrice(prices) || baseAdultPrice;
+  const minAdultPrice = findAdultMinPrice(prices) || baseAdultPrice;
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={gallery} />
@@ -94,14 +95,13 @@ export const Detail = async ({ slug }: Props) => {
             startTime={startTime}
             weekdays={weekdays}
             duration={duration}
-            basePrices={basePrices}
             prices={prices}
           />
         </div>
         <div className={styles.excursionDetail__sideBar}>
           <PriceSection
             id={_id}
-            minPrice={minPrice}
+            minPrice={minAdultPrice}
             basePrice={baseAdultPrice}
             title={title}
           />

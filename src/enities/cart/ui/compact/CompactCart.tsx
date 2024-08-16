@@ -7,21 +7,15 @@ import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
-import {
-  getTotalPrice,
-  getTotalQuantity,
-  selectCartState,
-} from "@/src/enities/cart/model/selectors";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 
 import styles from "./styles.module.scss";
 
 export const CompactCart = () => {
-  const totalQuantity = useAppSelector(getTotalQuantity);
-  const totalPrice = useAppSelector(getTotalPrice);
-  const cart = useAppSelector(selectCartState);
+  const totalQuantity = 1;
+  const totalPrice = 1;
+  const cart = undefined;
   const [isDetailsVisible, setDetailsVisible] = useState(false);
   const detailsVisibilityTimer = useRef<number | null>(null);
 
@@ -62,7 +56,7 @@ export const CompactCart = () => {
         </p>
       </Link>
       <div className={styles.cart__totalQuantity}>{totalQuantity}</div>
-      {Object.keys(cart.items).length > 0 && isDetailsVisible && (
+      {Object.keys(cart?.items).length > 0 && isDetailsVisible && (
         <div className={styles.cart__details}>
           <ul className={styles.cart__list}>
             {Object.entries(cart.items).map(([key, value], index) => (

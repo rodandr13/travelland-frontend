@@ -1,4 +1,5 @@
 import { GalleryImage } from "@/src/shared/types/excursion";
+import { CartParticipants } from "@/src/shared/types/cart";
 
 export type Price = {
   price: number;
@@ -7,8 +8,8 @@ export type Price = {
 };
 
 export type PricesValue = {
-  prices: Price[];
-  basePrice: Price[];
+  currentPrices: Price[];
+  basePrices: Price[];
 };
 
 export type Participants = {
@@ -17,14 +18,14 @@ export type Participants = {
   count: number;
 };
 
-export type PricesMap = Map<string, PricesValue>;
+export type PricesMap = Map<string, CartParticipants[]>;
 
 export type BookingDetails = {
   title: string;
   image: GalleryImage;
   selectedDate: string;
   participants: Participants[];
-  time: string;
+  selectedTime: string;
   prices: PricesValue;
   totalPrice: number;
 };

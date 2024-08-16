@@ -1,29 +1,26 @@
 import clsx from "clsx";
 
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
-import { Price, PricesMap } from "@/src/shared/types/booking";
+import { CartParticipants } from "@/src/shared/types/cart";
 
 interface Props {
   dayNumber: number;
-  day: Date;
-  basePrices: Price[];
-  prices: PricesMap;
+  prices: CartParticipants[] | undefined;
 }
 
-export const CustomDay = ({ dayNumber, day, basePrices, prices }: Props) => {
-  const dayKey = getFormattedDate(day);
-  const showPrice = prices.has(dayKey);
-  const baseAdultPrice = basePrices ? basePrices[0].price : 0;
-  const adultPriceData = showPrice ? prices.get(dayKey) : null;
-  const adultPrice =
-    adultPriceData && adultPriceData.prices && adultPriceData.prices[0]
-      ? adultPriceData.prices[0].price
-      : 0;
-
-  const isIncreased = baseAdultPrice < adultPrice;
+export const CustomDay = ({ dayNumber, prices }: Props) => {
+  const showPrice = Boolean(prices);
+  let baseAdultPrice = 0;
+  let currentAdultPrice = 0;
+  if (showPrice && prices) {
+    baseAdultPrice = prices[0]?.basePrice || 0;
+    currentAdultPrice = prices[0]?.currentPrice || 0;
+  }
+  const isIncreased = baseAdultPrice < currentAdultPrice;
   const isReduction =
-    baseAdultPrice !== 0 && adultPrice !== 0 && baseAdultPrice > adultPrice;
+    baseAdultPrice !== 0 &&
+    currentAdultPrice !== 0 &&
+    baseAdultPrice > currentAdultPrice;
   return (
     <div
       className={clsx(`react-datepicker__priceContainer`, {
@@ -34,7 +31,7 @@ export const CustomDay = ({ dayNumber, day, basePrices, prices }: Props) => {
       <span className="react-datepicker__dayValue">{dayNumber}</span>
       {showPrice && (
         <span className="react-datepicker__price">
-          {formatCurrency(adultPrice)}
+          {formatCurrency(currentAdultPrice)}
         </span>
       )}
     </div>

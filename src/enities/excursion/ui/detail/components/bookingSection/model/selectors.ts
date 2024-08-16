@@ -12,7 +12,7 @@ export const selectVisibility = createSelector(
 export const selectDetailsByKey = (key: string) =>
   createSelector(
     [selectBookingState],
-    (bookingState) => bookingState.tempDetails[key] || bookingState.details[key]
+    (bookingState) => bookingState.details[key]
   );
 
 export const selectExcursionIsEditing = (key: string) =>

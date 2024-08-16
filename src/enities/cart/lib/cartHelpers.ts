@@ -1,4 +1,10 @@
+import { getCartFromLocalStorage } from "@/src/enities/cart";
 import { Cart, CartItem } from "@/src/shared/types/cart";
+
+export const isItemExistInCart = (itemId: string): boolean => {
+  const cart = getCartFromLocalStorage();
+  return cart.items.some((item) => item.id === itemId);
+};
 
 export const updateCart = (
   cart: Cart,
@@ -21,8 +27,12 @@ export const updateCart = (
   }
 
   cart.totalItems = cart.items.length;
-  cart.totalPrice = cart.items.reduce(
-    (total, item) => total + item.totalPrice,
+  cart.totalBasePrice = cart.items.reduce(
+    (total, item) => total + item.totalBasePrice,
+    0
+  );
+  cart.totalCurrentPrice = cart.items.reduce(
+    (total, item) => total + item.totalCurrentPrice,
     0
   );
 
