@@ -7,6 +7,7 @@ import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
 import styles from "./styles.module.scss";
+import { CompactCart } from "@/src/enities/cart";
 
 export const Navbar = () => {
   const isOpen = useAppSelector((state) => state.menu.isOpen);
@@ -71,7 +72,9 @@ export const Navbar = () => {
           {/*    </li>*/}
           {/*  </ul>*/}
           {/*</div>*/}
-          <div className={styles.navbar__cart}>{/*<CompactCart />*/}</div>
+          <div className={styles.navbar__cart}>
+            <CompactCart />
+          </div>
           <div className={styles.contacts}>
             <div className={styles.contacts__telephone}>
               <span className={styles.contacts__telephoneCode}>+429</span> 725

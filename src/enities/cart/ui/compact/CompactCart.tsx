@@ -7,17 +7,28 @@ import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
+import { getCartFromLocalStorage } from "@/src/enities/cart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { Cart } from "@/src/shared/types/cart";
 
 import styles from "./styles.module.scss";
 
 export const CompactCart = () => {
-  const totalQuantity = 1;
-  const totalPrice = 1;
-  const cart = undefined;
   const [isDetailsVisible, setDetailsVisible] = useState(false);
   const detailsVisibilityTimer = useRef<number | null>(null);
+
+  const [cart, setCart] = useState<Cart>({
+    items: [],
+    totalItems: 0,
+    totalCurrentPrice: 0,
+    totalBasePrice: 0,
+  });
+
+  useEffect(() => {
+    const storedCart = getCartFromLocalStorage();
+    setCart(storedCart);
+  }, []);
 
   useEffect(() => {
     return () => {
@@ -52,19 +63,19 @@ export const CompactCart = () => {
     >
       <Link href="/cart" className={styles.cart__link}>
         <p className={styles.cart__title}>
-          Корзина <span>({formatCurrency(totalPrice)})</span>
+          Корзина <span>({formatCurrency(cart.totalCurrentPrice)})</span>
         </p>
       </Link>
-      <div className={styles.cart__totalQuantity}>{totalQuantity}</div>
+      <div className={styles.cart__totalQuantity}>{cart.totalItems}</div>
       {Object.keys(cart?.items).length > 0 && isDetailsVisible && (
         <div className={styles.cart__details}>
           <ul className={styles.cart__list}>
-            {Object.entries(cart.items).map(([key, value], index) => (
-              <li key={index} className={styles.cart__item}>
+            {cart.items.map((item) => (
+              <li key={item.id} className={styles.cart__item}>
                 <Image
                   className={styles.cart__image}
-                  src={urlFor(value.image.src)}
-                  blurDataURL={value.image.lqip}
+                  src={urlFor(item.image.src)}
+                  blurDataURL={item.image.lqip}
                   alt=""
                   placeholder="blur"
                   loading="lazy"
@@ -74,17 +85,17 @@ export const CompactCart = () => {
                   sizes={"50px"}
                 />
                 <div className={styles.cart__textContainer}>
-                  <h3 className={styles.cart__title}>{value.title}</h3>
+                  <h3 className={styles.cart__title}>{item.title}</h3>
                   <div className={styles.cart__dateContainer}>
                     <p className={styles.cart__date}>
-                      {value.selectedDate &&
-                        format(value.selectedDate, "d MMMM yyyy", {
+                      {item.selectedDate &&
+                        format(item.selectedDate, "d MMMM yyyy", {
                           locale: ru,
                         })}{" "}
-                      в {value.time}
+                      в {item.selectedTime}
                     </p>
                     <p className={styles.cart__price}>
-                      {formatCurrency(value.totalPrice)}
+                      {formatCurrency(item.totalCurrentPrice)}
                     </p>
                   </div>
                 </div>
@@ -92,7 +103,7 @@ export const CompactCart = () => {
             ))}
           </ul>
           <div className={styles.cart__totalPrice}>
-            Итого: {formatCurrency(totalPrice)}
+            Итого: {formatCurrency(cart.totalCurrentPrice)}
           </div>
         </div>
       )}
