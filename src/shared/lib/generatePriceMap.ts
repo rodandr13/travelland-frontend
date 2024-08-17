@@ -57,6 +57,7 @@ export const generatePriceMap = ({
       title: basePrice.title,
       id: basePrice.categoryId,
       count: null,
+      description: basePrice.description,
     }));
 
     // Функция для применения промо или корректировочных цен

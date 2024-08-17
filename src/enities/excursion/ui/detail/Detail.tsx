@@ -28,6 +28,7 @@ export const Detail = async ({ slug }: Props) => {
     priceCorrections,
     title,
     _id,
+    _type,
     startTime,
     duration,
     weekdays,
@@ -96,6 +97,7 @@ export const Detail = async ({ slug }: Props) => {
             weekdays={weekdays}
             duration={duration}
             prices={prices}
+            type={_type}
           />
         </div>
         <div className={styles.excursionDetail__sideBar}>

@@ -165,7 +165,7 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
                           </span>
                         </div>
                         <span className={styles.priceSection__caption}>
-                          ({participant.title})
+                          ({participant.description})
                         </span>
                       </li>
                     );
@@ -178,31 +178,32 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
             <span className={styles.priceSection__caption}>К оплате</span>
             <PriceBlock
               parent="priceSection"
-              price={bookingDetails.totalCurrentPrice}
+              price={bookingDetails?.totalCurrentPrice}
               size="m"
               actualPrice
             />
           </div>
           {!itemExists ? (
-            <AddToCart cartItem={bookingDetails} id={id} />
+            <AddToCart cartItem={bookingDetails} />
           ) : (
             <Link href="/cart" className={styles.priceSection__link_cart}>
               Перейти в корзину
             </Link>
           )}
-          {!isEditing ? (
-            <Button
-              title="Редактировать"
-              onClick={() => dispatch(setIsEditing({ key: id, value: true }))}
-            />
-          ) : (
-            <Button
-              title="Сохранить изменения"
-              onClick={() => {
-                dispatch(setIsEditing({ key: id, value: false }));
-              }}
-            />
-          )}
+          {itemExists &&
+            (!isEditing ? (
+              <Button
+                title="Редактировать"
+                onClick={() => dispatch(setIsEditing({ key: id, value: true }))}
+              />
+            ) : (
+              <Button
+                title="Сохранить изменения"
+                onClick={() => {
+                  dispatch(setIsEditing({ key: id, value: false }));
+                }}
+              />
+            ))}
         </section>
       )}
     </>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
 
@@ -41,6 +41,7 @@ interface Props {
   dates: Dates;
   prices: PricesMap;
   title: string;
+  type: string;
 }
 
 export const Booking = ({
@@ -50,7 +51,9 @@ export const Booking = ({
   id,
   title,
   image,
+  type,
 }: Props) => {
+  const [isItemInCart, setIsItemInCart] = useState(false);
   const isEditing = useAppSelector(selectExcursionIsEditing(id));
   const bookingRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useOnScreen(bookingRef);
@@ -59,11 +62,18 @@ export const Booking = ({
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
   const itemExistsInCart = isItemExistInCart(id);
   const targetRef = useScroll();
+
+  useEffect(() => {
+    setIsItemInCart(isItemExistInCart(id));
+  }, [id]);
+
   useEffect(() => {
     dispatch(
       setDetails({
         key: id,
         details: {
+          id,
+          type,
           title: title,
           image: { src: image.src, lqip: image.lqip },
         },
@@ -89,7 +99,7 @@ export const Booking = ({
 
   return (
     <>
-      {itemExistsInCart && !isEditing ? (
+      {isItemInCart && !isEditing ? (
         <>
           <h2>Экскурсия уже в корзине</h2>
           <Button
@@ -154,7 +164,6 @@ export const Booking = ({
             <div>
               <h2 className={styles.booking__title}>Количество человек</h2>
               <SelectPeoples
-                prices={prices}
                 id={id}
                 participants={bookingDetails.participants}
               />
