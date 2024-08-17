@@ -59,17 +59,22 @@ const bookingSlice = createSlice({
       const currentDetails = state.details[key];
 
       if (currentDetails.participants) {
-        let totalPrice = 0;
+        let totalCurrentPrice = 0;
+        let totalBasePrice = 0;
         const participants = currentDetails.participants;
 
-        participants.forEach((participant, index) => {
+        participants.forEach((participant) => {
           if (participant && participant.currentPrice) {
             const participantCount = participant.count || 0;
-            const price = participant?.currentPrice || 0;
-            totalPrice += participantCount * price;
+            const currentPrice = participant?.currentPrice || 0;
+            const basePrice = participant?.basePrice || 0;
+            totalCurrentPrice += participantCount * currentPrice;
+            totalBasePrice += participantCount * basePrice;
           }
         });
-        currentDetails.totalCurrentPrice = totalPrice;
+
+        currentDetails.totalCurrentPrice = totalCurrentPrice;
+        currentDetails.totalBasePrice = totalBasePrice;
       }
     },
     resetDetails: (state) => {

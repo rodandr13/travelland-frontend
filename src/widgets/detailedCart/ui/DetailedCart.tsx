@@ -1,16 +1,15 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 
-import {
-  getTotalPrice,
-  selectCartItems,
-} from "@/src/enities/cart/model/selectors";
-import { RemoveFromCart } from "@/src/features/removeFromCart";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { getCartFromLocalStorage } from "@/src/enities/cart";
+import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { Cart } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
@@ -20,23 +19,31 @@ import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/Payment
 import styles from "./styles.module.scss";
 
 export const DetailedCart = () => {
-  const totalPrice = useAppSelector(getTotalPrice);
-  const cartItems = useAppSelector(selectCartItems);
-  const cartItemEntries = Object.entries(cartItems);
-  console.log(cartItemEntries);
+  const [cart, setCart] = useState<Cart>({
+    items: [],
+    totalItems: 0,
+    totalCurrentPrice: 0,
+    totalBasePrice: 0,
+  });
+
+  useEffect(() => {
+    const cart = getCartFromLocalStorage();
+    setCart(cart);
+  }, []);
+
   return (
     <>
-      {cartItemEntries.length > 0 ? (
+      {cart.items.length > 0 ? (
         <section className={styles.detailedCart}>
           <div className={styles.detailedCart__container}>
             <ul className={styles.detailedCart__list}>
-              {cartItemEntries.map(([key, value], index) => (
-                <li key={index} className={styles.detailedCart__item}>
+              {cart.items.map((item) => (
+                <li key={item.id} className={styles.detailedCart__item}>
                   <div className={styles.detailedCart__imageContainer}>
                     <Image
                       className={styles.detailedCart__image}
-                      src={urlFor(value.image.src)}
-                      blurDataURL={value.image.lqip}
+                      src={urlFor(item.image.src)}
+                      blurDataURL={item.image.lqip}
                       alt=""
                       placeholder="blur"
                       loading="lazy"
@@ -47,26 +54,24 @@ export const DetailedCart = () => {
                     />
                   </div>
                   <div className={styles.detailedCart__textContainer}>
-                    <h3 className={styles.detailedCart__title}>
-                      {value.title}
-                    </h3>
+                    <h3 className={styles.detailedCart__title}>{item.title}</h3>
                     <div className={styles.detailedCart__dateContainer}>
                       <p className={styles.detailedCart__date}>
-                        {value.selectedDate &&
-                          format(value.selectedDate, "d MMMM yyyy", {
+                        {item.selectedDate &&
+                          format(item.selectedDate, "d MMMM yyyy", {
                             locale: ru,
                           })}{" "}
-                        в {value.time}
+                        в {item.selectedTime}
                       </p>
                     </div>
                     <div className={styles.detailedCart__participantsContainer}>
                       <ul className={styles.detailedCart__participantsList}>
-                        {value.participants.map((participant, index) => (
+                        {item.participants.map((participant) => (
                           <li
-                            key={index}
+                            key={participant.id}
                             className={styles.detailedCart__participantsItem}
                           >
-                            {participant.category} {participant.count}
+                            {participant.title} {participant.count}
                           </li>
                         ))}
                       </ul>
@@ -74,9 +79,9 @@ export const DetailedCart = () => {
                   </div>
                   <div className={styles.detailedCart__rightSection}>
                     <div className={styles.detailedCart__price}>
-                      <PriceBlock actualPrice price={value.totalPrice} />
+                      <PriceBlock actualPrice price={item.totalCurrentPrice} />
                     </div>
-                    <RemoveFromCart itemKey={key} />
+                    {/*<RemoveFromCart itemKey={item.id} />*/}
                   </div>
                 </li>
               ))}
@@ -88,24 +93,24 @@ export const DetailedCart = () => {
             <h2 className={styles.detailedCart__title}>Ваш заказ</h2>
             <ul className={styles.detailedCart__priceList}>
               <div className={styles.detailedCart__priceLine}>
-                <span>Услуги (2)</span>
+                <span>Услуги ({cart.totalItems})</span>
                 <span className={styles.detailedCart__dottedLine}></span>
                 <span className={styles.detailedCart__priceSum}>
-                  4124 &nbsp;€
+                  {formatCurrency(cart.totalBasePrice)}
                 </span>
               </div>
               <div className={styles.detailedCart__priceLine}>
                 <span>Скидка</span>
                 <span className={styles.detailedCart__dottedLine}></span>
                 <span className={styles.detailedCart__priceSum}>
-                  – 123 &nbsp;€
+                  {formatCurrency(cart.totalBasePrice - cart.totalCurrentPrice)}
                 </span>
               </div>
             </ul>
             <PromotionalCode />
             <div className={styles.detailedCart__totalPriceBlock}>
               <h3 className={styles.detailedCart__title}>Общая стоимость:</h3>
-              <PriceBlock actualPrice price={totalPrice} />
+              <PriceBlock actualPrice price={cart.totalCurrentPrice} />
             </div>
             <Button title="Заказать" color="green" />
             <p className={styles.detailedCart__consentOffer}>
