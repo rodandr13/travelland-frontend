@@ -1,5 +1,5 @@
-import { GalleryImage } from "@/src/shared/types/excursion";
 import { CartParticipants } from "@/src/shared/types/cart";
+import { GalleryImage } from "@/src/shared/types/excursion";
 
 export type Price = {
   price: number;

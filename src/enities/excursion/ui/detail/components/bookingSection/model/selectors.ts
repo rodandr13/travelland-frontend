@@ -28,7 +28,7 @@ export const selectParticipantsByKey = (key: string) =>
 
 export const selectTimeByKey = (key: string) =>
   createSelector([selectDetailsByKey(key)], (details) =>
-    details ? details.time : null
+    details ? details.selectedTime : null
   );
 
 export const selectDateByKey = (key: string) =>
@@ -38,5 +38,5 @@ export const selectDateByKey = (key: string) =>
 
 export const selectPricesByKey = (key: string) =>
   createSelector([selectDetailsByKey(key)], (details) =>
-    details ? details.prices : null
+    details ? details.participants : null
   );

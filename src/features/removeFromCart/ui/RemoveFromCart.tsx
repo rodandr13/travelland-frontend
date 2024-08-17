@@ -1,20 +1,13 @@
 "use client";
 
-import { removeItem } from "@/src/enities/cart/model/cartSlice";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-
 import styles from "./styles.module.scss";
 
 interface Props {
-  itemKey: string;
+  id: string;
 }
 
-export const RemoveFromCart = ({ itemKey }: Props) => {
-  const dispatch = useAppDispatch();
-
-  const handleClick = () => {
-    dispatch(removeItem(itemKey));
-  };
+export const RemoveFromCart = ({ id }: Props) => {
+  const handleClick = () => {};
 
   return (
     <button
