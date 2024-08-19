@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { getCartFromLocalStorage } from "@/src/enities/cart";
+import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Cart } from "@/src/shared/types/cart";
@@ -93,7 +94,7 @@ export const DetailedCart = () => {
                           price={item.totalCurrentPrice}
                         />
                       </div>
-                      {/*<RemoveFromCart itemKey={item.id} />*/}
+                      <RemoveFromCart itemId={item.id} />
                     </div>
                   </Link>
                 </li>
