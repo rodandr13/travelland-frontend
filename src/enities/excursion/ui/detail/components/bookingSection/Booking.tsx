@@ -42,6 +42,7 @@ interface Props {
   prices: PricesMap;
   title: string;
   type: string;
+  slug: string;
 }
 
 export const Booking = ({
@@ -52,6 +53,7 @@ export const Booking = ({
   title,
   image,
   type,
+  slug,
 }: Props) => {
   const [isItemInCart, setIsItemInCart] = useState(false);
   const isEditing = useAppSelector(selectExcursionIsEditing(id));
@@ -75,6 +77,7 @@ export const Booking = ({
           id,
           type,
           title: title,
+          slug,
           image: { src: image.src, lqip: image.lqip },
         },
       })

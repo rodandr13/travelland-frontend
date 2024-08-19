@@ -13,6 +13,7 @@ export type CartItem = {
   id: string;
   type: string;
   title: string;
+  slug: string;
   image: GalleryImage;
   selectedDate: string;
   selectedTime: string;

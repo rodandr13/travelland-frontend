@@ -98,6 +98,7 @@ export const Detail = async ({ slug }: Props) => {
             duration={duration}
             prices={prices}
             type={_type}
+            slug={slug}
           />
         </div>
         <div className={styles.excursionDetail__sideBar}>

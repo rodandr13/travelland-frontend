@@ -38,6 +38,7 @@ const bookingSlice = createSlice({
         state.details[key] = {
           id: "",
           type: "",
+          slug: "",
           image: {
             src: "",
             lqip: "",

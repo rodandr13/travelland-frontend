@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
+import Link from "next/link";
 
 import { getCartFromLocalStorage } from "@/src/enities/cart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
@@ -39,50 +40,62 @@ export const DetailedCart = () => {
             <ul className={styles.detailedCart__list}>
               {cart.items.map((item) => (
                 <li key={item.id} className={styles.detailedCart__item}>
-                  <div className={styles.detailedCart__imageContainer}>
-                    <Image
-                      className={styles.detailedCart__image}
-                      src={urlFor(item.image.src)}
-                      blurDataURL={item.image.lqip}
-                      alt=""
-                      placeholder="blur"
-                      loading="lazy"
-                      quality={60}
-                      sizes={"180px"}
-                      fill
-                      objectFit="cover"
-                    />
-                  </div>
-                  <div className={styles.detailedCart__textContainer}>
-                    <h3 className={styles.detailedCart__title}>{item.title}</h3>
-                    <div className={styles.detailedCart__dateContainer}>
-                      <p className={styles.detailedCart__date}>
-                        {item.selectedDate &&
-                          format(item.selectedDate, "d MMMM yyyy", {
-                            locale: ru,
-                          })}{" "}
-                        в {item.selectedTime}
-                      </p>
+                  <Link
+                    href={`/excursion/${item.slug}`}
+                    className={styles.detailedCart__link}
+                  >
+                    <div className={styles.detailedCart__imageContainer}>
+                      <Image
+                        className={styles.detailedCart__image}
+                        src={urlFor(item.image.src)}
+                        blurDataURL={item.image.lqip}
+                        alt=""
+                        placeholder="blur"
+                        loading="lazy"
+                        quality={60}
+                        sizes={"180px"}
+                        fill
+                        objectFit="cover"
+                      />
                     </div>
-                    <div className={styles.detailedCart__participantsContainer}>
-                      <ul className={styles.detailedCart__participantsList}>
-                        {item.participants.map((participant) => (
-                          <li
-                            key={participant.id}
-                            className={styles.detailedCart__participantsItem}
-                          >
-                            {participant.title} {participant.count}
-                          </li>
-                        ))}
-                      </ul>
+                    <div className={styles.detailedCart__textContainer}>
+                      <h3 className={styles.detailedCart__title}>
+                        {item.title}
+                      </h3>
+                      <div className={styles.detailedCart__dateContainer}>
+                        <p className={styles.detailedCart__date}>
+                          {item.selectedDate &&
+                            format(item.selectedDate, "d MMMM yyyy", {
+                              locale: ru,
+                            })}{" "}
+                          в {item.selectedTime}
+                        </p>
+                      </div>
+                      <div
+                        className={styles.detailedCart__participantsContainer}
+                      >
+                        <ul className={styles.detailedCart__participantsList}>
+                          {item.participants.map((participant) => (
+                            <li
+                              key={participant.id}
+                              className={styles.detailedCart__participantsItem}
+                            >
+                              {participant.title} {participant.count}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
-                  </div>
-                  <div className={styles.detailedCart__rightSection}>
-                    <div className={styles.detailedCart__price}>
-                      <PriceBlock actualPrice price={item.totalCurrentPrice} />
+                    <div className={styles.detailedCart__rightSection}>
+                      <div className={styles.detailedCart__price}>
+                        <PriceBlock
+                          actualPrice
+                          price={item.totalCurrentPrice}
+                        />
+                      </div>
+                      {/*<RemoveFromCart itemKey={item.id} />*/}
                     </div>
-                    {/*<RemoveFromCart itemKey={item.id} />*/}
-                  </div>
+                  </Link>
                 </li>
               ))}
             </ul>
