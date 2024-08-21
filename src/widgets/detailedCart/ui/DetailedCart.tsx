@@ -1,17 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
-
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
-import { getCartFromLocalStorage } from "@/src/enities/cart";
+import { selectCart } from "@/src/enities/cart/model/selectors";
 import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
+import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
-import { Cart } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
@@ -21,17 +19,7 @@ import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/Payment
 import styles from "./styles.module.scss";
 
 export const DetailedCart = () => {
-  const [cart, setCart] = useState<Cart>({
-    items: [],
-    totalItems: 0,
-    totalCurrentPrice: 0,
-    totalBasePrice: 0,
-  });
-
-  useEffect(() => {
-    const cart = getCartFromLocalStorage();
-    setCart(cart);
-  }, []);
+  const cart = useAppSelector(selectCart);
 
   return (
     <>

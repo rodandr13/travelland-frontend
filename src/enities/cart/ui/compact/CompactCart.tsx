@@ -7,30 +7,21 @@ import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
-import { getCartFromLocalStorage } from "@/src/enities/cart";
+import { selectCart } from "@/src/enities/cart/model/selectors";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
+import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
-import { Cart } from "@/src/shared/types/cart";
 
 import styles from "./styles.module.scss";
 
 export const CompactCart = () => {
   const [isDetailsVisible, setDetailsVisible] = useState(false);
   const detailsVisibilityTimer = useRef<number | null>(null);
-
-  const [cart, setCart] = useState<Cart>({
-    items: [],
-    totalItems: 0,
-    totalCurrentPrice: 0,
-    totalBasePrice: 0,
-  });
+  const cart = useAppSelector(selectCart);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    const storedCart = getCartFromLocalStorage();
-    setCart(storedCart);
-  }, []);
-
-  useEffect(() => {
+    setIsMounted(true);
     return () => {
       if (detailsVisibilityTimer.current !== null) {
         clearTimeout(detailsVisibilityTimer.current);
@@ -54,6 +45,10 @@ export const CompactCart = () => {
     }, 100);
     detailsVisibilityTimer.current = timer;
   };
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <section

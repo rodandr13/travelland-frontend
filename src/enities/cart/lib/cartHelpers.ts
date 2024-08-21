@@ -1,9 +1,40 @@
-import { getCartFromLocalStorage } from "@/src/enities/cart";
 import { Cart, CartItem } from "@/src/shared/types/cart";
 
 export const isItemExistInCart = (itemId: string): boolean => {
   const cart = getCartFromLocalStorage();
   return cart.items.some((item) => item.id === itemId);
+};
+
+export const getCartFromLocalStorage = (): Cart => {
+  if (typeof window !== "undefined") {
+    const cartData = localStorage.getItem("cart");
+    if (cartData) {
+      return JSON.parse(cartData) as Cart;
+    }
+  }
+
+  return { items: [], totalItems: 0, totalBasePrice: 0, totalCurrentPrice: 0 };
+};
+
+export const saveCartToLocalStorage = (cart: Cart) => {
+  try {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  } catch (error) {
+    console.error("Failed to save cart to localStorage:", error);
+  }
+};
+
+export const calculateTotals = (items: CartItem[]) => {
+  let totalItems = items.length;
+  let totalCurrentPrice = 0;
+  let totalBasePrice = 0;
+
+  items.forEach((item) => {
+    totalCurrentPrice += item.totalCurrentPrice;
+    totalBasePrice += item.totalBasePrice;
+  });
+
+  return { totalItems, totalCurrentPrice, totalBasePrice };
 };
 
 export const updateCart = (
