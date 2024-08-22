@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useState } from "react";
+
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
@@ -10,6 +12,7 @@ import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
@@ -20,14 +23,19 @@ import styles from "./styles.module.scss";
 
 export const DetailedCart = () => {
   const cart = useAppSelector(selectCart);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  useEffect(() => {
+    setCartItems(cart.items);
+  }, [cart.items]);
 
   return (
     <>
-      {cart.items.length > 0 ? (
+      {cartItems.length > 0 ? (
         <section className={styles.detailedCart}>
           <div className={styles.detailedCart__container}>
             <ul className={styles.detailedCart__list}>
-              {cart.items.map((item) => (
+              {cartItems.map((item) => (
                 <li key={item.id} className={styles.detailedCart__item}>
                   <Link
                     href={`/excursion/${item.slug}`}

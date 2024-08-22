@@ -11,17 +11,26 @@ import { selectCart } from "@/src/enities/cart/model/selectors";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+import { CartItem } from "@/src/shared/types/cart";
 
 import styles from "./styles.module.scss";
 
 export const CompactCart = () => {
   const [isDetailsVisible, setDetailsVisible] = useState(false);
   const detailsVisibilityTimer = useRef<number | null>(null);
+  const [totalItems, setTotalItems] = useState(0);
+  const [totalCurrentPrice, setTotalCurrentPrice] = useState(0);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
   const cart = useAppSelector(selectCart);
-  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    setTotalItems(cart.totalItems);
+    setTotalCurrentPrice(cart.totalCurrentPrice);
+    setCartItems(cart.items);
+  }, [cart]);
+
+  useEffect(() => {
     return () => {
       if (detailsVisibilityTimer.current !== null) {
         clearTimeout(detailsVisibilityTimer.current);
@@ -46,10 +55,6 @@ export const CompactCart = () => {
     detailsVisibilityTimer.current = timer;
   };
 
-  if (!isMounted) {
-    return null;
-  }
-
   return (
     <section
       className={styles.cart}
@@ -58,11 +63,11 @@ export const CompactCart = () => {
     >
       <Link href="/cart" className={styles.cart__link}>
         <p className={styles.cart__title}>
-          Корзина <span>({formatCurrency(cart.totalCurrentPrice)})</span>
+          Корзина <span>({formatCurrency(totalCurrentPrice)})</span>
         </p>
       </Link>
-      <div className={styles.cart__totalQuantity}>{cart.totalItems}</div>
-      {Object.keys(cart?.items).length > 0 && isDetailsVisible && (
+      <div className={styles.cart__totalQuantity}>{totalItems}</div>
+      {cartItems.length > 0 && isDetailsVisible && (
         <div className={styles.cart__details}>
           <ul className={styles.cart__list}>
             {cart.items.map((item) => (
@@ -90,7 +95,7 @@ export const CompactCart = () => {
                       в {item.selectedTime}
                     </p>
                     <p className={styles.cart__price}>
-                      {formatCurrency(item.totalCurrentPrice)}
+                      {formatCurrency(totalCurrentPrice)}
                     </p>
                   </div>
                 </div>
@@ -98,7 +103,7 @@ export const CompactCart = () => {
             ))}
           </ul>
           <div className={styles.cart__totalPrice}>
-            Итого: {formatCurrency(cart.totalCurrentPrice)}
+            Итого: {formatCurrency(totalCurrentPrice)}
           </div>
         </div>
       )}
