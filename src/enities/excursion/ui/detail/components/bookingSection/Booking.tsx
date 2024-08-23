@@ -15,6 +15,7 @@ import {
   selectDetailsByKey,
   selectExcursionIsEditing,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
+import { EditExcursion } from "@/src/features/editExcursion";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
@@ -26,7 +27,6 @@ import {
   StartTime,
   Weekdays,
 } from "@/src/shared/types/excursion";
-import { Button } from "@/src/shared/ui/button";
 
 import styles from "./styles.module.scss";
 import { Calendar } from "../calendar/Calendar";
@@ -105,10 +105,7 @@ export const Booking = ({
       {isItemInCart && !isEditing ? (
         <>
           <h2>Экскурсия уже в корзине</h2>
-          <Button
-            title="Редактировать"
-            onClick={() => dispatch(setIsEditing({ key: id, value: true }))}
-          />
+          <EditExcursion id={id} />
         </>
       ) : (
         <section className={styles.booking} ref={bookingRef}>

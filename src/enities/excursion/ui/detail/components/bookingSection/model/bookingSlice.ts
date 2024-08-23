@@ -18,6 +18,12 @@ const bookingSlice = createSlice({
   name: "booking",
   initialState,
   reducers: {
+    setDetailsFromCart: (state, action: PayloadAction<CartItem>) => {
+      const cartItem = action.payload;
+      if (cartItem) {
+        state.details[cartItem.id] = cartItem;
+      }
+    },
     setVisible: (state, action: PayloadAction<boolean>) => {
       state.visible = action.payload;
     },
@@ -84,7 +90,12 @@ const bookingSlice = createSlice({
   },
 });
 
-export const { setVisible, setDetails, resetDetails, setIsEditing } =
-  bookingSlice.actions;
+export const {
+  setVisible,
+  setDetails,
+  resetDetails,
+  setIsEditing,
+  setDetailsFromCart,
+} = bookingSlice.actions;
 
 export default bookingSlice.reducer;

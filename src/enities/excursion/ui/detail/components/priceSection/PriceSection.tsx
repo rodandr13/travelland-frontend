@@ -9,13 +9,12 @@ import Link from "next/link";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
 import { isItemExistInCart } from "@/src/enities/cart";
-import { setIsEditing } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import {
   selectDetailsByKey,
-  selectExcursionIsEditing,
   selectVisibility,
 } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
+import { EditExcursion } from "@/src/features/editExcursion";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Button } from "@/src/shared/ui/button";
@@ -34,7 +33,7 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const bookingIsVisible = useAppSelector(selectVisibility);
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
   const itemExists = isItemExistInCart(id);
-  const isEditing = useAppSelector(selectExcursionIsEditing(id));
+
   const [showBlockPreview, setShowBlockPreview] = useState(true);
   const [showBlockPrice, setShowBlockPrice] = useState(false);
   const [animationClassPreview, setAnimationClassPreview] = useState("");
@@ -190,20 +189,7 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
               Перейти в корзину
             </Link>
           )}
-          {itemExists &&
-            (!isEditing ? (
-              <Button
-                title="Редактировать"
-                onClick={() => dispatch(setIsEditing({ key: id, value: true }))}
-              />
-            ) : (
-              <Button
-                title="Сохранить изменения"
-                onClick={() => {
-                  dispatch(setIsEditing({ key: id, value: false }));
-                }}
-              />
-            ))}
+          {itemExists && <EditExcursion id={id} />}
         </section>
       )}
     </>
