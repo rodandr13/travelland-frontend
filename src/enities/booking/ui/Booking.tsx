@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
 
@@ -63,6 +63,12 @@ export const Booking = ({
   const targetRef = useScroll();
   const isItemExists = useAppSelector((state) => itemExists(state, id));
 
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(isItemExists);
+  }, [isItemExists]);
+
   useEffect(() => {
     dispatch(
       setDetails({
@@ -96,9 +102,10 @@ export const Booking = ({
       dispatch(setDetails({ key: id, details: { selectedTime: time } }));
     }
   };
+
   return (
     <>
-      {isItemExists && !isEditing ? (
+      {loading && !isEditing ? (
         <>
           <h2>Экскурсия уже в корзине</h2>
           <EditExcursion id={id} />

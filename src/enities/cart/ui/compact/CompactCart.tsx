@@ -95,7 +95,7 @@ export const CompactCart = () => {
                       в {item.selectedTime}
                     </p>
                     <p className={styles.cart__price}>
-                      {formatCurrency(totalCurrentPrice)}
+                      {formatCurrency(item.totalCurrentPrice)}
                     </p>
                   </div>
                 </div>

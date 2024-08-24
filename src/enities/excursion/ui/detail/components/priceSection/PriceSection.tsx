@@ -9,7 +9,7 @@ import Link from "next/link";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
 import { selectDetailsByKey, selectVisibility } from "@/src/enities/booking";
-import { isItemExistInCart } from "@/src/enities/cart";
+import { itemExists, selectItemById } from "@/src/enities/cart/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
 import { EditExcursion } from "@/src/features/editExcursion";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
@@ -28,8 +28,9 @@ interface Props {
 
 export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const bookingIsVisible = useAppSelector(selectVisibility);
-  const bookingDetails = useAppSelector(selectDetailsByKey(id));
-  const itemExists = isItemExistInCart(id);
+  const bookingItem = useAppSelector(selectDetailsByKey(id));
+  const isItemExists = useAppSelector((state) => itemExists(state, id));
+  const cartItem = useAppSelector((state) => selectItemById(state, id));
 
   const [showBlockPreview, setShowBlockPreview] = useState(true);
   const [showBlockPrice, setShowBlockPrice] = useState(false);
@@ -43,12 +44,11 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 900px)");
-
     const handleResize = (event?: MediaQueryListEvent) => {
       const matches = event ? event.matches : mediaQuery.matches;
 
       if (!matches) {
-        if (bookingIsVisible || itemExists) {
+        if (bookingIsVisible || isItemExists) {
           if (showBlockPreview) {
             setAnimationClassPreview(styles.fadeOut);
             setTimeout(() => {
@@ -77,7 +77,9 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
 
     handleResize();
     return () => mediaQuery.removeEventListener("change", handleResize);
-  }, [bookingIsVisible, showBlockPreview, showBlockPrice, itemExists]);
+  }, [bookingIsVisible, showBlockPreview, showBlockPrice, isItemExists]);
+
+  const activeItem = bookingItem?.participants.length ? bookingItem : cartItem;
 
   const priceProps =
     minPrice === basePrice
@@ -123,24 +125,24 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
             <h3 className={styles.priceSection__title}>{title}</h3>
           </div>
           <div>
-            {bookingDetails?.selectedDate && (
+            {activeItem?.selectedDate && (
               <h3 className={styles.priceSection__title}>
-                {format(new Date(bookingDetails.selectedDate), "d MMMM yyyy", {
+                {format(new Date(activeItem.selectedDate), "d MMMM yyyy", {
                   locale: ru,
                 })}
               </h3>
             )}
-            {bookingDetails?.selectedTime && (
+            {activeItem?.selectedTime && (
               <p className={styles.priceSection__subtitle}>
-                Начало в {bookingDetails.selectedTime}
+                Начало в {activeItem.selectedTime}
               </p>
             )}
           </div>
-          {bookingDetails?.participants &&
-            bookingDetails.selectedTime &&
-            bookingDetails.participants.length > 0 && (
+          {activeItem?.participants &&
+            activeItem.selectedTime &&
+            activeItem.participants.length > 0 && (
               <ul className={styles.priceSection__list}>
-                {bookingDetails.participants.map((participant, i: number) => {
+                {activeItem.participants.map((participant, i: number) => {
                   if (participant && participant.count) {
                     return (
                       <li className={styles.priceSection__item} key={i}>
@@ -173,19 +175,19 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
             <span className={styles.priceSection__caption}>К оплате</span>
             <PriceBlock
               parent="priceSection"
-              price={bookingDetails?.totalCurrentPrice}
+              price={activeItem?.totalCurrentPrice}
               size="m"
               actualPrice
             />
           </div>
-          {!itemExists ? (
-            <AddToCart cartItem={bookingDetails} />
+          {!isItemExists ? (
+            <AddToCart cartItem={bookingItem} />
           ) : (
             <Link href="/cart" className={styles.priceSection__link_cart}>
               Перейти в корзину
             </Link>
           )}
-          {itemExists && <EditExcursion id={id} />}
+          {isItemExists && <EditExcursion id={id} />}
         </section>
       )}
     </>
