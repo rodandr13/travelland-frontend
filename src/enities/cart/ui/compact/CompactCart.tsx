@@ -20,6 +20,7 @@ export const CompactCart = () => {
   const detailsVisibilityTimer = useRef<number | null>(null);
   const [totalItems, setTotalItems] = useState(0);
   const [totalCurrentPrice, setTotalCurrentPrice] = useState(0);
+  const [totalBasePrice, setTotalBasePrice] = useState(0);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
   const cart = useAppSelector(selectCart);
@@ -27,6 +28,7 @@ export const CompactCart = () => {
   useEffect(() => {
     setTotalItems(cart.totalItems);
     setTotalCurrentPrice(cart.totalCurrentPrice);
+    setTotalBasePrice(cart.totalBasePrice);
     setCartItems(cart.items);
   }, [cart]);
 
@@ -88,14 +90,20 @@ export const CompactCart = () => {
                   <h3 className={styles.cart__title}>{item.title}</h3>
                   <div className={styles.cart__dateContainer}>
                     <p className={styles.cart__date}>
-                      {item.selectedDate &&
-                        format(item.selectedDate, "d MMMM yyyy", {
-                          locale: ru,
-                        })}{" "}
-                      в {item.selectedTime}
+                      <span>
+                        {item.selectedDate &&
+                          format(item.selectedDate, "d MMMM yyyy", {
+                            locale: ru,
+                          })}
+                      </span>
+                      <span>в {item.selectedTime}</span>
                     </p>
                     <p className={styles.cart__price}>
-                      {formatCurrency(item.totalCurrentPrice)}
+                      <span className={styles.cart__price_base}>
+                        {item.totalBasePrice !== item.totalCurrentPrice &&
+                          formatCurrency(item.totalBasePrice)}
+                      </span>
+                      <span>{formatCurrency(item.totalCurrentPrice)}</span>
                     </p>
                   </div>
                 </div>
@@ -103,8 +111,18 @@ export const CompactCart = () => {
             ))}
           </ul>
           <div className={styles.cart__totalPrice}>
-            Итого: {formatCurrency(totalCurrentPrice)}
+            Итого:
+            <span className={styles.cart__totalPrice_current}>
+              {formatCurrency(totalCurrentPrice)}
+            </span>
+            <span className={styles.cart__totalPrice_base}>
+              {totalCurrentPrice !== totalBasePrice &&
+                formatCurrency(totalBasePrice)}
+            </span>
           </div>
+          <Link href="/cart" className="link_cart">
+            В корзину
+          </Link>
         </div>
       )}
     </section>

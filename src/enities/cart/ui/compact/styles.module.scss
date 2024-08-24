@@ -2,6 +2,7 @@
   position: relative;
   box-sizing: border-box;
   flex-direction: column;
+
   &__link {
     position: relative;
     text-decoration: none;
@@ -13,14 +14,43 @@
     background-position: 10px center;
     background-repeat: no-repeat;
     border-radius: 15px;
+
     &:hover {
       background-color: var(--color-gray-light);
     }
   }
+
   &__totalPrice {
+    display: flex;
+    gap: 0.5rem;
     border-top: 1px solid var(--color-gray);
     padding: 20px 0 0 0;
+
+
+    &_current {
+      color: var(--color-green);
+    }
+
+    &_base {
+      position: relative;
+      display: block;
+      color: var(--color-gray-dark-2);
+      font-size: var(--font-size-sm);
+      align-self: flex-end;
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        background: var(--color-gray-dark-2);
+        width: 100%;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
   }
+
   &__totalQuantity {
     box-sizing: border-box;
     position: absolute;
@@ -39,6 +69,7 @@
     align-items: center;
     padding: 2px;
   }
+
   &__details {
     padding: 15px;
     position: absolute;
@@ -52,6 +83,7 @@
     flex-direction: column;
     gap: 20px;
   }
+
   &__list {
     margin: 0;
     padding: 0;
@@ -59,35 +91,66 @@
     display: flex;
     flex-direction: column;
   }
+
   &__item {
     display: flex;
     gap: 10px;
     padding: 7px 0;
   }
+
   &__image {
     border-radius: 7px;
   }
+
   &__title {
     font-size: var(--font-size-sm);
   }
+
   &__date {
     font-size: 14px;
     margin: 0;
     padding: 0;
-    color: var(--color-gray-very-dark)
+    color: var(--color-gray-very-dark);
+    flex-direction: column;
+    display: flex;
   }
+
   &__price {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
     font-size: 14px;
     margin: 0;
     padding: 0;
     font-weight: 500;
     color: var(--color-green);
+
+    &_base {
+      position: relative;
+      display: block;
+      color: var(--color-gray-dark-2);
+      font-size: var(--font-size-xs);
+
+      &::after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        background: var(--color-gray-dark-2);
+        width: 100%;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
   }
+
   &__dateContainer {
     display: flex;
+    justify-content: space-between;
     gap: 15px;
     margin: 5px 0 0 0;
   }
+
   &__textContainer {
     flex: 1;
   }

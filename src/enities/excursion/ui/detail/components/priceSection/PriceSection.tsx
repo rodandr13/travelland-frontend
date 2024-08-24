@@ -175,7 +175,10 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
           {!isItemExists ? (
             <AddToCart cartItem={bookingItem} />
           ) : (
-            <Link href="/cart" className={styles.priceSection__link_cart}>
+            <Link
+              href="/cart"
+              className={clsx(styles.priceSection__link, "link_cart")}
+            >
               Перейти в корзину
             </Link>
           )}

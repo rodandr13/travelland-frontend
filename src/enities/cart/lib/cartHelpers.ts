@@ -1,10 +1,5 @@
 import { Cart, CartItem } from "@/src/shared/types/cart";
 
-export const isItemExistInCart = (itemId: string): boolean => {
-  const cart = getCartFromLocalStorage();
-  return cart.items.some((item) => item.id === itemId);
-};
-
 export const getCartFromLocalStorage = (): Cart => {
   if (typeof window !== "undefined") {
     const cartData = localStorage.getItem("cart");

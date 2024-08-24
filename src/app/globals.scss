@@ -106,7 +106,33 @@ input {
 a {
   text-decoration: none;
   color: var(--color-blue-dark);
+
   &:hover {
     text-decoration: underline;
   }
+}
+
+.link {
+  &_cart {
+    display: block;
+    background: var(--color-link-cart-bg);
+    color: var(--color-black);
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 16px;
+    font-size: var(--font-size-sm);
+    border-radius: 0.625rem;
+    transition: all 0.2s ease 0s;
+
+    &:hover {
+      text-decoration: none;
+      opacity: 0.8;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+
 }
