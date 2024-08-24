@@ -6,11 +6,11 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 
-import { setDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import {
   selectDateByKey,
   selectDetailsByKey,
-} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
+  setDetails,
+} from "@/src/enities/booking";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { PricesMap } from "@/src/shared/types/booking";

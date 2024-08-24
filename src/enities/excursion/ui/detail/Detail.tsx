@@ -1,3 +1,4 @@
+import { Booking } from "@/src/enities/booking";
 import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
 import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
 import { findAdultMinPrice } from "@/src/shared/lib/findAdultMinPrice";
@@ -5,7 +6,6 @@ import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
 
 import { Advantages } from "./components/advantages/Advantages";
 import { AttentionBlock } from "./components/attentionBlock/AttentionBlock";
-import { Booking } from "./components/bookingSection/Booking";
 import { Breadcrumbs } from "./components/breadcrumbs/Breadcrumbs";
 import { Categories } from "./components/categories/Categories";
 import { Conditions } from "./components/conditions/Conditions";

@@ -1,6 +1,6 @@
 "use client";
 
-import { setDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
+import { setDetails } from "@/src/enities/booking/";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { CartParticipants } from "@/src/shared/types/cart";

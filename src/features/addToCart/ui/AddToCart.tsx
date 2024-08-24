@@ -1,5 +1,5 @@
+import { resetDetails } from "@/src/enities/booking";
 import { addItem } from "@/src/enities/cart/model/cartSlice";
-import { resetDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";

@@ -5,17 +5,17 @@ import { useEffect, useRef } from "react";
 import clsx from "clsx";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
-import { itemExists } from "@/src/enities/cart/model/selectors";
 import {
   resetDetails,
+  selectDetailsByKey,
+  selectExcursionIsEditing,
   setDetails,
   setIsEditing,
   setVisible,
-} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
-import {
-  selectDetailsByKey,
-  selectExcursionIsEditing,
-} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
+} from "@/src/enities/booking";
+import { itemExists } from "@/src/enities/cart/model/selectors";
+import { Calendar } from "@/src/enities/excursion/ui/detail/components/calendar/Calendar";
+import { SelectPeoples } from "@/src/enities/excursion/ui/detail/components/selectPeoples/SelectPeoples";
 import { EditExcursion } from "@/src/features/editExcursion";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
@@ -30,8 +30,6 @@ import {
 } from "@/src/shared/types/excursion";
 
 import styles from "./styles.module.scss";
-import { Calendar } from "../calendar/Calendar";
-import { SelectPeoples } from "../selectPeoples/SelectPeoples";
 
 interface Props {
   id: string;

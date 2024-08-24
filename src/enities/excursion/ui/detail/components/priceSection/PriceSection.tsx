@@ -8,15 +8,12 @@ import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
+import { selectDetailsByKey, selectVisibility } from "@/src/enities/booking";
 import { isItemExistInCart } from "@/src/enities/cart";
-import {
-  selectDetailsByKey,
-  selectVisibility,
-} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
 import { EditExcursion } from "@/src/features/editExcursion";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 
@@ -38,7 +35,6 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const [showBlockPrice, setShowBlockPrice] = useState(false);
   const [animationClassPreview, setAnimationClassPreview] = useState("");
   const [animationClassPrice, setAnimationClassPrice] = useState("");
-  const dispatch = useAppDispatch();
   const targetRef = useScroll();
 
   const handleScroll = () => {
@@ -81,7 +77,7 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
 
     handleResize();
     return () => mediaQuery.removeEventListener("change", handleResize);
-  }, [bookingIsVisible, showBlockPreview, showBlockPrice]);
+  }, [bookingIsVisible, showBlockPreview, showBlockPrice, itemExists]);
 
   const priceProps =
     minPrice === basePrice

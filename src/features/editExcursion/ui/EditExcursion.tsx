@@ -1,13 +1,11 @@
-import { updateItem } from "@/src/enities/cart/model/cartSlice";
-import { selectItemById } from "@/src/enities/cart/model/selectors";
-import {
-  setDetailsFromCart,
-  setIsEditing,
-} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
 import {
   selectDetailsByKey,
   selectExcursionIsEditing,
-} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
+  setDetailsFromCart,
+  setIsEditing,
+} from "@/src/enities/booking";
+import { updateItem } from "@/src/enities/cart/model/cartSlice";
+import { selectItemById } from "@/src/enities/cart/model/selectors";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Button } from "@/src/shared/ui/button";
 
