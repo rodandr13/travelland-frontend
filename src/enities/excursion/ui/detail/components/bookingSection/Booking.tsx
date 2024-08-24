@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 
 import clsx from "clsx";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
-import { isItemExistInCart } from "@/src/enities/cart";
+import { itemExists } from "@/src/enities/cart/model/selectors";
 import {
+  resetDetails,
   setDetails,
   setIsEditing,
   setVisible,
@@ -55,19 +56,14 @@ export const Booking = ({
   type,
   slug,
 }: Props) => {
-  const [isItemInCart, setIsItemInCart] = useState(false);
   const isEditing = useAppSelector(selectExcursionIsEditing(id));
   const bookingRef = useRef<HTMLDivElement | null>(null);
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
-  const itemExistsInCart = isItemExistInCart(id);
   const targetRef = useScroll();
-
-  useEffect(() => {
-    setIsItemInCart(isItemExistInCart(id));
-  }, [id]);
+  const isItemExists = useAppSelector((state) => itemExists(state, id));
 
   useEffect(() => {
     dispatch(
@@ -82,7 +78,10 @@ export const Booking = ({
         },
       })
     );
-  }, [id, title, image]);
+    return () => {
+      dispatch(resetDetails());
+    };
+  }, [id, title, image, slug, type]);
 
   useEffect(() => {
     dispatch(setVisible(isVisible));
@@ -99,10 +98,9 @@ export const Booking = ({
       dispatch(setDetails({ key: id, details: { selectedTime: time } }));
     }
   };
-
   return (
     <>
-      {isItemInCart && !isEditing ? (
+      {isItemExists && !isEditing ? (
         <>
           <h2>Экскурсия уже в корзине</h2>
           <EditExcursion id={id} />

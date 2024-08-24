@@ -7,7 +7,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 
 import { setDetails } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/bookingSlice";
-import { selectDateByKey } from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
+import {
+  selectDateByKey,
+  selectDetailsByKey,
+} from "@/src/enities/excursion/ui/detail/components/bookingSection/model/selectors";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { PricesMap } from "@/src/shared/types/booking";
@@ -27,15 +30,21 @@ export const Calendar = ({ prices, id }: Props) => {
   const dispatch = useAppDispatch();
   const monthsShown = 2;
   const selectedDate = useAppSelector(selectDateByKey(id));
+  const bookingDetails = useAppSelector(selectDetailsByKey(id));
 
   const handleChange = (date: Date | null) => {
     if (id && date) {
+      const currentParticipants = selectedDate
+        ? bookingDetails?.participants
+        : undefined;
+
       dispatch(
         setDetails({
           key: id,
           details: {
             selectedDate: date.toString(),
-            participants: prices.get(getFormattedDate(date)),
+            participants:
+              currentParticipants || prices.get(getFormattedDate(date)),
           },
         })
       );

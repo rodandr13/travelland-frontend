@@ -16,7 +16,6 @@ interface Props {
 
 export const SelectPeoples = ({ id, participants }: Props) => {
   const dispatch = useAppDispatch();
-
   const handleChange = (index: number) => (newValue: number) => {
     const updatedParticipants = [...participants];
     updatedParticipants[index] = {
