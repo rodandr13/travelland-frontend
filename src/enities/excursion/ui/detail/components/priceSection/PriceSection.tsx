@@ -31,12 +31,13 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
   const bookingItem = useAppSelector(selectDetailsByKey(id));
   const isItemExists = useAppSelector((state) => itemExists(state, id));
   const cartItem = useAppSelector((state) => selectItemById(state, id));
-
-  const [showBlockPreview, setShowBlockPreview] = useState(true);
-  const [showBlockPrice, setShowBlockPrice] = useState(false);
-  const [animationClassPreview, setAnimationClassPreview] = useState("");
-  const [animationClassPrice, setAnimationClassPrice] = useState("");
   const targetRef = useScroll();
+
+  const [blockState, setBlockState] = useState({
+    showPreview: true,
+    showPrice: false,
+    animationClass: "",
+  });
 
   const handleScroll = () => {
     targetRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -44,52 +45,50 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 900px)");
+
     const handleResize = (event?: MediaQueryListEvent) => {
       const matches = event ? event.matches : mediaQuery.matches;
 
-      if (!matches) {
-        if (bookingIsVisible || isItemExists) {
-          if (showBlockPreview) {
-            setAnimationClassPreview(styles.fadeOut);
-            setTimeout(() => {
-              setShowBlockPreview(false);
-              setShowBlockPrice(true);
-              setAnimationClassPrice(styles.fadeIn);
-            }, 200);
-          }
-        } else {
-          if (showBlockPrice) {
-            setAnimationClassPrice(styles.fadeOut);
-            setTimeout(() => {
-              setShowBlockPrice(false);
-              setShowBlockPreview(true);
-              setAnimationClassPreview(styles.fadeIn);
-            }, 200);
-          }
-        }
+      if (matches) {
+        setBlockState({
+          showPreview: false,
+          showPrice: true,
+          animationClass: "",
+        });
+      } else if (bookingIsVisible || isItemExists) {
+        setBlockState({
+          showPreview: false,
+          showPrice: true,
+          animationClass: styles.fadeIn,
+        });
       } else {
-        setShowBlockPreview(false);
-        setShowBlockPrice(true);
+        setBlockState({
+          showPreview: true,
+          showPrice: false,
+          animationClass: styles.fadeIn,
+        });
       }
     };
 
     mediaQuery.addEventListener("change", handleResize);
-
     handleResize();
-    return () => mediaQuery.removeEventListener("change", handleResize);
-  }, [bookingIsVisible, showBlockPreview, showBlockPrice, isItemExists]);
 
-  const activeItem = bookingItem?.participants.length ? bookingItem : cartItem;
+    return () => mediaQuery.removeEventListener("change", handleResize);
+  }, [bookingIsVisible, isItemExists]);
+
+  const activeItem = bookingItem?.participants?.length ? bookingItem : cartItem;
 
   const priceProps =
     minPrice === basePrice
       ? { price: minPrice }
-      : { price: minPrice, basePrice: basePrice };
+      : { price: minPrice, basePrice };
 
   return (
     <>
-      {showBlockPreview && (
-        <section className={clsx(styles.priceSection, animationClassPreview)}>
+      {blockState.showPreview && (
+        <section
+          className={clsx(styles.priceSection, blockState.animationClass)}
+        >
           <div>
             <PriceBlock parent="priceSection" {...priceProps} size="m" />
             <p className={styles.priceSection__caption}>за 1 взрослого</p>
@@ -112,12 +111,12 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
           />
         </section>
       )}
-      {showBlockPrice && (
+      {blockState.showPrice && (
         <section
           className={clsx(
             styles.priceSection,
             styles.priceSection_booking,
-            animationClassPrice
+            blockState.animationClass
           )}
         >
           <div>
@@ -138,39 +137,32 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
               </p>
             )}
           </div>
-          {activeItem?.participants &&
-            activeItem.selectedTime &&
-            activeItem.participants.length > 0 && (
-              <ul className={styles.priceSection__list}>
-                {activeItem.participants.map((participant, i: number) => {
-                  if (participant && participant.count) {
-                    return (
-                      <li className={styles.priceSection__item} key={i}>
-                        <div className={styles.priceSection__priceLine}>
-                          <span>{participant.count}&nbsp;x&nbsp;</span>
-                          <span>
-                            {participant.title}&nbsp;(
-                            {formatCurrency(participant.currentPrice)})&nbsp;
-                          </span>
-                          <span
-                            className={styles.priceSection__dottedLine}
-                          ></span>
-                          <span className={styles.priceSection__priceSum}>
-                            {formatCurrency(
-                              participant.currentPrice * participant.count
-                            )}
-                          </span>
-                        </div>
-                        <span className={styles.priceSection__caption}>
-                          ({participant.description})
-                        </span>
-                      </li>
-                    );
-                  }
-                  return null;
-                })}
-              </ul>
-            )}
+          {activeItem?.participants && activeItem.participants.length > 0 && (
+            <ul className={styles.priceSection__list}>
+              {activeItem.participants.map((participant, i) =>
+                participant && participant.count ? (
+                  <li className={styles.priceSection__item} key={i}>
+                    <div className={styles.priceSection__priceLine}>
+                      <span>{participant.count}&nbsp;x&nbsp;</span>
+                      <span>
+                        {participant.title}&nbsp;(
+                        {formatCurrency(participant.currentPrice)})&nbsp;
+                      </span>
+                      <span className={styles.priceSection__dottedLine}></span>
+                      <span className={styles.priceSection__priceSum}>
+                        {formatCurrency(
+                          participant.currentPrice * participant.count
+                        )}
+                      </span>
+                    </div>
+                    <span className={styles.priceSection__caption}>
+                      ({participant.description})
+                    </span>
+                  </li>
+                ) : null
+              )}
+            </ul>
+          )}
           <div>
             <span className={styles.priceSection__caption}>К оплате</span>
             <PriceBlock
