@@ -5,24 +5,15 @@ import styles from "./styles.module.scss";
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   title: string;
   disabled?: boolean;
-  color?: "green" | "blue";
   onClick?: () => void;
-  variant?: string;
+  variant?: "confirm" | "booking" | "inline";
 }
 
-export const Button = ({
-  title,
-  type,
-  color,
-  disabled,
-  onClick,
-  variant,
-}: Props) => {
+export const Button = ({ title, type, disabled, onClick, variant }: Props) => {
   return (
     <button
       className={clsx(styles.button, {
-        [styles.button_addToCart]: color === "green",
-        [styles.button_addToCart]: variant === "add-to-cart",
+        [styles.button_addToCart]: variant === "confirm",
         [styles.button_booking]: variant === "booking",
         [styles.button_inline]: variant === "inline",
       })}

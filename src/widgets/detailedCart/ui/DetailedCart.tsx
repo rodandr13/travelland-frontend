@@ -13,10 +13,11 @@ import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { CartItem } from "@/src/shared/types/cart";
-import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
 import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
+import { CreateOrder } from "@/src/widgets/detailedCart/ui/components/CreateOrder";
+import { EditItem } from "@/src/widgets/detailedCart/ui/components/EditItem";
 import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
 
 import styles from "./styles.module.scss";
@@ -87,10 +88,14 @@ export const DetailedCart = () => {
                       <div className={styles.detailedCart__price}>
                         <PriceBlock
                           actualPrice
-                          price={item.totalCurrentPrice}
+                          currentPrice={item.totalCurrentPrice}
+                          basePrice={item.totalBasePrice}
                         />
                       </div>
-                      <RemoveFromCart itemId={item.id} />
+                      <div className={styles.detailedCart__buttonsGroup}>
+                        <RemoveFromCart itemId={item.id} />
+                        <EditItem />
+                      </div>
                     </div>
                   </Link>
                 </li>
@@ -119,10 +124,14 @@ export const DetailedCart = () => {
             </ul>
             <PromotionalCode />
             <div className={styles.detailedCart__totalPriceBlock}>
-              <h3 className={styles.detailedCart__title}>Общая стоимость:</h3>
-              <PriceBlock actualPrice price={cart.totalCurrentPrice} />
+              <h3 className={styles.detailedCart__title}>К оплате:</h3>
+              <PriceBlock actualPrice currentPrice={cart.totalCurrentPrice} />
             </div>
-            <Button title="Заказать" color="green" />
+            <CreateOrder
+              items={cartItems}
+              paymentMethod="cash"
+              promoCode="asdsa"
+            />
             <p className={styles.detailedCart__consentOffer}>
               Нажимая кнопку &quot;Заказать&quot;, Вы принимаете условия
               соответствующей оферты: <a href="#">Оферты для физических</a> лиц

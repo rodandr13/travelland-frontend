@@ -37,7 +37,7 @@ export const AddToCart = ({ cartItem }: Props) => {
         )
       }
       onClick={handleClick}
-      variant="add-to-cart"
+      variant="confirm"
     />
   );
 };

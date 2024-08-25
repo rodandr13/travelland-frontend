@@ -1,20 +1,21 @@
 .removeFromCart {
   font-size: 0;
-  margin: 0;
-  padding: 0;
+  padding: 5px;
   box-sizing: border-box;
   border: none;
   outline: none;
-  width: 20px;
-  height: 20px;
-  background: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  background: var(--color-gray-light);
   cursor: pointer;
-  opacity: 1;
   position: relative;
   z-index: 2;
+
   &:hover {
-    opacity: 1;
+    background: var(--color-gray);
   }
+
   span {
     background: url("../assets/basket-icon.png");
     display: inline-block;

@@ -64,7 +64,7 @@ export const Card = ({ addFavorite, card }: Props) => {
         <p className={styles.excursionCard__duration}>
           {formatDuration(card.duration)}
         </p>
-        <PriceBlock price={minPrice} basePrice={basePrices} />
+        <PriceBlock currentPrice={minPrice} basePrice={basePrices} />
       </Link>
     </article>
   );
