@@ -21,9 +21,10 @@ export const Button = ({
   return (
     <button
       className={clsx(styles.button, {
-        [styles.button_green]: color === "green",
+        [styles.button_addToCart]: color === "green",
         [styles.button_addToCart]: variant === "add-to-cart",
         [styles.button_booking]: variant === "booking",
+        [styles.button_inline]: variant === "inline",
       })}
       type={type}
       disabled={disabled}

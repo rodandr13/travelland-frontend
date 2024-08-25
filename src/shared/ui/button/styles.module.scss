@@ -1,39 +1,54 @@
 .button {
-  font-size: 14px;
-  color: var(--color-white);
+  font-size: var(--font-size-sm);
+  color: var(--color-black);
   margin: 0;
-  padding: 12px 24px;
-  background: var(--color-blue-dark);
+  padding: 12px 16px;
+  line-height: 1.2;
   border: none;
   outline: none;
-  border-radius: 3px;
+  border-radius: 10px;
   cursor: pointer;
+  background: var(--color-gray);
+  transition: all 0.2s ease 0s;
+
+  &:hover {
+    text-decoration: none;
+    background: var(--color-gray-hover);
+  }
+
   &:disabled {
     background: var(--color-gray);
     color: var(--color-gray-dark);
     cursor: initial;
   }
-  &_green {
-    background: var(--color-green);
+
+  &:active {
+    transform: scale(0.98);
   }
+
   &_addToCart {
-    transition: all 0.1s ease 0s;
+    background: var(--color-green);
+    color: var(--color-white);
+
     &:hover {
-      text-decoration: none;
-      opacity: 0.9;
-    }
-    &:active {
-      transform: scale(0.98);
+      background: var(--color-green-light);
     }
   }
+
   &_booking {
-    transition: all 0.1s ease 0s;
+    color: var(--color-white);
+    background: var(--color-blue-dark);
+
     &:hover {
-      text-decoration: none;
-      opacity: 0.9;
+      background: var(--color-blue-light);
     }
-    &:active {
-      transform: scale(0.98);
+  }
+
+  &_inline {
+    color: var(--color-black);
+    background: none;
+    &:hover {
+      background: var(--color-gray-hover);
     }
   }
 }

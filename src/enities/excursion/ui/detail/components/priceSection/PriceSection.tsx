@@ -80,8 +80,8 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
 
   const priceProps =
     minPrice === basePrice
-      ? { price: minPrice }
-      : { price: minPrice, basePrice };
+      ? { currentPrice: minPrice }
+      : { currentPrice: minPrice, basePrice };
 
   return (
     <>
@@ -133,45 +133,62 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
             )}
             {activeItem?.selectedTime && (
               <p className={styles.priceSection__subtitle}>
-                Начало в {activeItem.selectedTime}
+                Начало в {activeItem.selectedTime} часов
               </p>
             )}
           </div>
           {activeItem?.participants && activeItem.participants.length > 0 && (
-            <ul className={styles.priceSection__list}>
-              {activeItem.participants.map((participant, i) =>
-                participant && participant.count ? (
-                  <li className={styles.priceSection__item} key={i}>
-                    <div className={styles.priceSection__priceLine}>
-                      <span>{participant.count}&nbsp;x&nbsp;</span>
-                      <span>
-                        {participant.title}&nbsp;(
-                        {formatCurrency(participant.currentPrice)})&nbsp;
+            <>
+              <ul className={styles.priceSection__list}>
+                {activeItem.participants.map((participant, i) =>
+                  participant && participant.count ? (
+                    <li className={styles.priceSection__item} key={i}>
+                      <div className={styles.priceSection__priceLine}>
+                        <span>{participant.count}&nbsp;x&nbsp;</span>
+                        <span>
+                          {participant.title}&nbsp;(
+                          {formatCurrency(participant.currentPrice)})&nbsp;
+                        </span>
+                        <span
+                          className={styles.priceSection__dottedLine}
+                        ></span>
+                        <span className={styles.priceSection__priceSum}>
+                          <span className={styles.priceSection__priceSum_base}>
+                            {participant.basePrice !==
+                              participant.currentPrice &&
+                              formatCurrency(
+                                participant.basePrice * participant.count
+                              )}
+                          </span>
+                          <span
+                            className={styles.priceSection__priceSum_current}
+                          >
+                            {formatCurrency(
+                              participant.currentPrice * participant.count
+                            )}
+                          </span>
+                        </span>
+                      </div>
+                      <span className={styles.priceSection__caption}>
+                        ({participant.description})
                       </span>
-                      <span className={styles.priceSection__dottedLine}></span>
-                      <span className={styles.priceSection__priceSum}>
-                        {formatCurrency(
-                          participant.currentPrice * participant.count
-                        )}
-                      </span>
-                    </div>
-                    <span className={styles.priceSection__caption}>
-                      ({participant.description})
-                    </span>
-                  </li>
-                ) : null
-              )}
-            </ul>
+                    </li>
+                  ) : null
+                )}
+              </ul>
+              <div>
+                <span className={styles.priceSection__caption}>К оплате</span>
+                <PriceBlock
+                  parent="priceSection"
+                  currentPrice={activeItem?.totalCurrentPrice}
+                  basePrice={activeItem?.totalBasePrice}
+                  size="m"
+                  actualPrice
+                />
+              </div>
+            </>
           )}
-          <div>
-            <span className={styles.priceSection__caption}>К оплате</span>
-            <PriceBlock
-              parent="priceSection"
-              price={activeItem?.totalCurrentPrice}
-              size="m"
-              actualPrice
-            />
-          </div>
+
           {!isItemExists ? (
             <AddToCart cartItem={bookingItem} />
           ) : (
@@ -182,7 +199,9 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
               Перейти в корзину
             </Link>
           )}
-          {isItemExists && <EditExcursion id={id} />}
+          {isItemExists && (
+            <EditExcursion id={id} handleScroll={handleScroll} />
+          )}
         </section>
       )}
     </>

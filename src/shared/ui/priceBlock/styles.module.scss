@@ -27,6 +27,7 @@
     margin: 0 0 0 10px;
     position: relative;
     white-space: nowrap;
+    line-height: 1.8;
 
     &::after {
       content: "";
@@ -63,6 +64,7 @@
       font-size: calc(var(--base-font-size) * 0.7);
       order: 1;
     }
+
     &__oldPrice {
       font-size: calc(var(--base-font-size) * 0.5);
     }
@@ -79,9 +81,11 @@
     &__discount {
       display: none;
     }
+
     &__price {
       font-size: calc(var(--base-font-size) * 0.6);
     }
+
     &__oldPrice {
       font-size: calc(var(--base-font-size) * 0.5);
     }

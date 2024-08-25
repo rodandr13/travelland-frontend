@@ -5,7 +5,7 @@ import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import styles from "./styles.module.scss";
 
 interface Props {
-  price?: number;
+  currentPrice?: number;
   basePrice?: number;
   size?: "s" | "m";
   parent?: string;
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const PriceBlock = ({
-  price,
+  currentPrice,
   basePrice,
   size,
   parent,
@@ -22,9 +22,9 @@ export const PriceBlock = ({
   let discount: number | undefined = undefined;
   let showBasePrice = true;
 
-  if (price !== undefined && basePrice !== undefined && basePrice > 0) {
-    if (price !== basePrice) {
-      discount = Math.round(((basePrice - price) / basePrice) * 100);
+  if (currentPrice !== undefined && basePrice !== undefined && basePrice > 0) {
+    if (currentPrice !== basePrice) {
+      discount = Math.round(((basePrice - currentPrice) / basePrice) * 100);
     } else {
       showBasePrice = false;
       discount = undefined;
@@ -49,10 +49,10 @@ export const PriceBlock = ({
         >
           {!actualPrice && `от `}
           <span className={clsx(styles.priceBlock__price)}>
-            {price !== undefined ? formatCurrency(price) : ""}
+            {currentPrice !== undefined ? formatCurrency(currentPrice) : ""}
           </span>
         </li>
-        {showBasePrice && basePrice && (
+        {showBasePrice && basePrice !== undefined && basePrice > 0 && (
           <li
             className={clsx(styles.priceBlock__oldPrice, {
               [styles[`priceBlock_${parent}__oldPrice`]]: parent,

@@ -49,7 +49,7 @@ export const SelectPeoples = ({ id, participants }: Props) => {
               </h4>
               <PriceBlock
                 actualPrice
-                price={participant.currentPrice}
+                currentPrice={participant.currentPrice}
                 basePrice={participant.basePrice}
               />
             </div>

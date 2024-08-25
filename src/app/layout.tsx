@@ -13,7 +13,7 @@ import { Footer } from "../shared/ui/footer";
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
   display: "swap",
-  weight: ["400", "500"],
+  weight: ["400", "500", "600"],
 });
 
 export const metadata: Metadata = {
