@@ -57,9 +57,20 @@
 
   &__date {
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 28px;
     font-weight: 400;
     font-size: 16px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      background: url("../assets/calendar.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
   }
 
   &__imageContainer {
@@ -73,10 +84,39 @@
 
   &__participantsList {
     margin: 0;
-    padding: 0;
+    padding: 0 0 0 28px;
     list-style-type: none;
     display: flex;
     gap: 15px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      background: url("../assets/people.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+  }
+
+  &__freeCancelation {
+    margin: 0;
+    padding: 0 0 0 28px;
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: url("../assets/check.svg") no-repeat;
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
   }
 
   &__participantsItem {
@@ -124,7 +164,7 @@
   &__rightSection {
     display: flex;
     flex-direction: column;
-    min-width: 160px;
+    min-width: 240px;
     gap: 15px;
   }
 
@@ -167,7 +207,7 @@
       top: 50%;
       transform: translateY(-50%);
       content: "";
-      background: url("../assets/edit-pen-svgrepo-com.svg") no-repeat;
+      background: url("../assets/edit-pen.svg") no-repeat;
       width: 20px;
       height: 20px;
       background-size: contain;

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 
+import clsx from "clsx";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
@@ -15,6 +16,7 @@ import { urlFor } from "@/src/shared/lib/sanity/client";
 import { CartItem } from "@/src/shared/types/cart";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
+import { formatCountParticipants } from "@/src/widgets/detailedCart/lib/formatCountParticipants";
 import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
 import { CreateOrder } from "@/src/widgets/detailedCart/ui/components/CreateOrder";
 import { EditItem } from "@/src/widgets/detailedCart/ui/components/EditItem";
@@ -61,7 +63,7 @@ export const DetailedCart = () => {
                         {item.title}
                       </h3>
                       <div className={styles.detailedCart__dateContainer}>
-                        <p className={styles.detailedCart__date}>
+                        <p className={clsx(styles.detailedCart__date)}>
                           {item.selectedDate &&
                             format(item.selectedDate, "d MMMM yyyy", {
                               locale: ru,
@@ -73,15 +75,29 @@ export const DetailedCart = () => {
                         className={styles.detailedCart__participantsContainer}
                       >
                         <ul className={styles.detailedCart__participantsList}>
-                          {item.participants.map((participant) => (
+                          {item.participants.map((participant, i) => (
                             <li
                               key={participant.id}
-                              className={styles.detailedCart__participantsItem}
+                              className={clsx(
+                                styles.detailedCart__participantsItem
+                              )}
                             >
-                              {participant.title} {participant.count}
+                              {participant.count &&
+                                formatCountParticipants(
+                                  participant.count,
+                                  participant.title
+                                )}
+                              {i < item.participants.length - 1 ? "," : ""}
                             </li>
                           ))}
                         </ul>
+                      </div>
+                      <div>
+                        <p
+                          className={clsx(styles.detailedCart__freeCancelation)}
+                        >
+                          Бесплатная отмена до 10:00 21.07.2024
+                        </p>
                       </div>
                     </div>
                     <div className={styles.detailedCart__rightSection}>
