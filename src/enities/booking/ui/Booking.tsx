@@ -13,10 +13,9 @@ import {
   setIsEditing,
   setVisible,
 } from "@/src/enities/booking";
-import { itemExists } from "@/src/enities/cart/model/selectors";
+import { itemExists, selectItemById } from "@/src/enities/cart/model/selectors";
 import { Calendar } from "@/src/enities/excursion/ui/detail/components/calendar/Calendar";
 import { SelectPeoples } from "@/src/enities/excursion/ui/detail/components/selectPeoples/SelectPeoples";
-import { EditExcursion } from "@/src/features/editExcursion";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
@@ -62,8 +61,13 @@ export const Booking = ({
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
   const targetRef = useScroll();
   const isItemExists = useAppSelector((state) => itemExists(state, id));
+  const cartItem = useAppSelector((state) => selectItemById(state, id));
 
   const [loading, setLoading] = useState(false);
+
+  const handleScroll = () => {
+    targetRef?.current?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     setLoading(isItemExists);
@@ -105,12 +109,7 @@ export const Booking = ({
 
   return (
     <>
-      {loading && !isEditing ? (
-        <>
-          <h2>Экскурсия уже в корзине</h2>
-          <EditExcursion id={id} />
-        </>
-      ) : (
+      {loading && isEditing && (
         <section className={styles.booking} ref={bookingRef}>
           <div ref={targetRef}>
             <h2 className={styles.booking__title}>Выберите дату</h2>

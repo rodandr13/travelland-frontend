@@ -11,7 +11,7 @@ export const EditItem = () => {
       type="button"
       onClick={handleClick}
     >
-      <span>Редактировать</span>
+      <span>Изменить</span>
     </button>
   );
 };

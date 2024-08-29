@@ -53,7 +53,7 @@ export const CompactCart = () => {
     }
     const timer = window.setTimeout(() => {
       setDetailsVisible(true);
-    }, 100);
+    }, 200);
     detailsVisibilityTimer.current = timer;
   };
 

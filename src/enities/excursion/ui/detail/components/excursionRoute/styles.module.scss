@@ -65,13 +65,13 @@
     }
     &_type_start::after {
       content: "";
-      width: 16px;
-      height: 16px;
+      width: 22px;
+      height: 22px;
       background: var(--color-red-light);
       border-radius: 50%;
       border: 5px solid var(--color-white);
-      left: 2px;
-      top: 2px;
+      left: 4px;
+      top: 4px;
     }
     &_type_end::before {
       content: "";
@@ -83,13 +83,13 @@
     }
     &_type_end::after {
       content: "";
-      width: 16px;
-      height: 16px;
+      width: 22px;
+      height: 22px;
       background: var(--color-black);
       border-radius: 50%;
       border: 5px solid var(--color-white);
-      left: 2px;
-      top: 2px;
+      left: 4px;
+      top: 4px;
     }
   }
   &__gallery {

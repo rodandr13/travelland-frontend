@@ -60,7 +60,7 @@ interface ButtonProps {
 }
 
 const EditButton = ({ onClick }: ButtonProps) => (
-  <Button title="Редактировать" onClick={onClick} variant="inline" />
+  <Button title="Изменить параметры" onClick={onClick} variant="inline" />
 );
 
 const SaveButton = ({ onClick }: ButtonProps) => (

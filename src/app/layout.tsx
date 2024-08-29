@@ -1,10 +1,11 @@
 import React from "react";
 
+import { MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 
+import "@mantine/core/styles.css";
 import "./globals.scss";
-
 import { StoreProvider } from "@/src/app/providers/StoreProvider";
 import { Header } from "@/src/widgets/header";
 
@@ -29,11 +30,13 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <StoreProvider>
-          <Header />
-          {children}
-          <Footer />
-        </StoreProvider>
+        <MantineProvider>
+          <StoreProvider>
+            <Header />
+            {children}
+            <Footer />
+          </StoreProvider>
+        </MantineProvider>
       </body>
     </html>
   );
