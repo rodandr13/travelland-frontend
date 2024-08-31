@@ -63,7 +63,7 @@ export const Booking = ({
   const isItemExists = useAppSelector((state) => itemExists(state, id));
   const cartItem = useAppSelector((state) => selectItemById(state, id));
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const handleScroll = () => {
     targetRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -107,72 +107,68 @@ export const Booking = ({
     }
   };
 
-  return (
-    <>
-      {loading && isEditing && (
-        <section className={styles.booking} ref={bookingRef}>
-          <div ref={targetRef}>
-            <h2 className={styles.booking__title}>Выберите дату</h2>
-            <Calendar prices={prices} id={id} />
-          </div>
-          {bookingDetails?.selectedDate && (
-            <div>
-              <h2 className={styles.booking__title}>Время</h2>
-              <div className={styles.booking__timeGroup}>
-                {startTime &&
-                  startTime.map((time, i) => (
-                    <div
-                      key={i}
-                      className={clsx(styles.time, {
-                        [styles.time_active]:
-                          bookingDetails?.selectedTime === time,
-                      })}
-                      onClick={() => handleClick(time)}
-                    >
-                      <div className={styles.time__container}>
-                        <span className={styles.time__title}>Начало</span>
-                        <span className={styles.time__value}>{time}</span>
-                      </div>
-                      <div
-                        className={clsx(
-                          styles.time__container,
-                          styles.time__container_end
-                        )}
-                      >
-                        <span
-                          className={clsx(
-                            styles.time__title,
-                            styles.time__title_end
-                          )}
-                        >
-                          Конец
-                        </span>
-                        <span
-                          className={clsx(
-                            styles.time__value,
-                            styles.time__value_end
-                          )}
-                        >
-                          ≈{endTimes[i]}
-                        </span>
-                      </div>
-                    </div>
-                  ))}
-              </div>
-            </div>
-          )}
+  if (loading && !isEditing) {
+    return null;
+  }
 
-          {bookingDetails?.selectedTime && (
-            <div>
-              <h2 className={styles.booking__title}>Количество человек</h2>
-              <SelectPeoples
-                id={id}
-                participants={bookingDetails.participants}
-              />
-            </div>
-          )}
-        </section>
+  return (
+    <section className={styles.booking} ref={bookingRef}>
+      <div ref={targetRef}>
+        <h2 className={styles.booking__title}>Выберите дату</h2>
+        <Calendar prices={prices} id={id} />
+      </div>
+      {bookingDetails?.selectedDate && (
+        <div>
+          <h2 className={styles.booking__title}>Время</h2>
+          <div className={styles.booking__timeGroup}>
+            {startTime &&
+              startTime.map((time, i) => (
+                <div
+                  key={i}
+                  className={clsx(styles.time, {
+                    [styles.time_active]: bookingDetails?.selectedTime === time,
+                  })}
+                  onClick={() => handleClick(time)}
+                >
+                  <div className={styles.time__container}>
+                    <span className={styles.time__title}>Начало</span>
+                    <span className={styles.time__value}>{time}</span>
+                  </div>
+                  <div
+                    className={clsx(
+                      styles.time__container,
+                      styles.time__container_end
+                    )}
+                  >
+                    <span
+                      className={clsx(
+                        styles.time__title,
+                        styles.time__title_end
+                      )}
+                    >
+                      Конец
+                    </span>
+                    <span
+                      className={clsx(
+                        styles.time__value,
+                        styles.time__value_end
+                      )}
+                    >
+                      ≈{endTimes[i]}
+                    </span>
+                  </div>
+                </div>
+              ))}
+          </div>
+        </div>
       )}
-    </>
+
+      {bookingDetails?.selectedTime && (
+        <div>
+          <h2 className={styles.booking__title}>Количество человек</h2>
+          <SelectPeoples id={id} participants={bookingDetails.participants} />
+        </div>
+      )}
+    </section>
   );
 };
