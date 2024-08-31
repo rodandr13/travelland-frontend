@@ -13,7 +13,7 @@ import {
   setIsEditing,
   setVisible,
 } from "@/src/enities/booking";
-import { itemExists, selectItemById } from "@/src/enities/cart/model/selectors";
+import { itemExists } from "@/src/enities/cart/model/selectors";
 import { Calendar } from "@/src/enities/excursion/ui/detail/components/calendar/Calendar";
 import { SelectPeoples } from "@/src/enities/excursion/ui/detail/components/selectPeoples/SelectPeoples";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
@@ -61,17 +61,12 @@ export const Booking = ({
   const bookingDetails = useAppSelector(selectDetailsByKey(id));
   const targetRef = useScroll();
   const isItemExists = useAppSelector((state) => itemExists(state, id));
-  const cartItem = useAppSelector((state) => selectItemById(state, id));
 
-  const [loading, setLoading] = useState(true);
-
-  const handleScroll = () => {
-    targetRef?.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const [isComponentLoaded, setIsComponentLoaded] = useState(false);
 
   useEffect(() => {
-    setLoading(isItemExists);
-  }, [isItemExists]);
+    setIsComponentLoaded(true);
+  }, []);
 
   useEffect(() => {
     dispatch(
@@ -99,7 +94,7 @@ export const Booking = ({
     return () => {
       dispatch(setIsEditing({ key: id, value: false }));
     };
-  }, []);
+  }, [id]);
 
   const handleClick = (time: string) => {
     if (id) {
@@ -107,68 +102,72 @@ export const Booking = ({
     }
   };
 
-  if (loading && !isEditing) {
-    return null;
-  }
-
   return (
-    <section className={styles.booking} ref={bookingRef}>
-      <div ref={targetRef}>
-        <h2 className={styles.booking__title}>Выберите дату</h2>
-        <Calendar prices={prices} id={id} />
-      </div>
-      {bookingDetails?.selectedDate && (
-        <div>
-          <h2 className={styles.booking__title}>Время</h2>
-          <div className={styles.booking__timeGroup}>
-            {startTime &&
-              startTime.map((time, i) => (
-                <div
-                  key={i}
-                  className={clsx(styles.time, {
-                    [styles.time_active]: bookingDetails?.selectedTime === time,
-                  })}
-                  onClick={() => handleClick(time)}
-                >
-                  <div className={styles.time__container}>
-                    <span className={styles.time__title}>Начало</span>
-                    <span className={styles.time__value}>{time}</span>
-                  </div>
-                  <div
-                    className={clsx(
-                      styles.time__container,
-                      styles.time__container_end
-                    )}
-                  >
-                    <span
-                      className={clsx(
-                        styles.time__title,
-                        styles.time__title_end
-                      )}
-                    >
-                      Конец
-                    </span>
-                    <span
-                      className={clsx(
-                        styles.time__value,
-                        styles.time__value_end
-                      )}
-                    >
-                      ≈{endTimes[i]}
-                    </span>
-                  </div>
-                </div>
-              ))}
+    <div ref={bookingRef}>
+      {isComponentLoaded && (!isItemExists || isEditing) && (
+        <section className={styles.booking} ref={targetRef}>
+          <div>
+            <h2 className={styles.booking__title}>Выберите дату</h2>
+            <Calendar prices={prices} id={id} />
           </div>
-        </div>
-      )}
+          {bookingDetails?.selectedDate && (
+            <div>
+              <h2 className={styles.booking__title}>Время</h2>
+              <div className={styles.booking__timeGroup}>
+                {startTime &&
+                  startTime.map((time, i) => (
+                    <div
+                      key={i}
+                      className={clsx(styles.time, {
+                        [styles.time_active]:
+                          bookingDetails?.selectedTime === time,
+                      })}
+                      onClick={() => handleClick(time)}
+                    >
+                      <div className={styles.time__container}>
+                        <span className={styles.time__title}>Начало</span>
+                        <span className={styles.time__value}>{time}</span>
+                      </div>
+                      <div
+                        className={clsx(
+                          styles.time__container,
+                          styles.time__container_end
+                        )}
+                      >
+                        <span
+                          className={clsx(
+                            styles.time__title,
+                            styles.time__title_end
+                          )}
+                        >
+                          Конец
+                        </span>
+                        <span
+                          className={clsx(
+                            styles.time__value,
+                            styles.time__value_end
+                          )}
+                        >
+                          ≈{endTimes[i]}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+              </div>
+            </div>
+          )}
 
-      {bookingDetails?.selectedTime && (
-        <div>
-          <h2 className={styles.booking__title}>Количество человек</h2>
-          <SelectPeoples id={id} participants={bookingDetails.participants} />
-        </div>
+          {bookingDetails?.selectedTime && (
+            <div>
+              <h2 className={styles.booking__title}>Количество человек</h2>
+              <SelectPeoples
+                id={id}
+                participants={bookingDetails.participants}
+              />
+            </div>
+          )}
+        </section>
       )}
-    </section>
+    </div>
   );
 };
