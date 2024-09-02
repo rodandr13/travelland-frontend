@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { selectCart } from "@/src/enities/cart/model/selectors";
+import { BookOrder } from "@/src/features/bookOrder";
 import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
@@ -18,7 +19,6 @@ import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
 import { formatCountParticipants } from "@/src/widgets/detailedCart/lib/formatCountParticipants";
 import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
-import { CreateOrder } from "@/src/widgets/detailedCart/ui/components/CreateOrder";
 import { EditItem } from "@/src/widgets/detailedCart/ui/components/EditItem";
 import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
 
@@ -27,6 +27,20 @@ import styles from "./styles.module.scss";
 export const DetailedCart = () => {
   const cart = useAppSelector(selectCart);
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [paymentMethod, setPaymentMethod] = useState("cash");
+  const [promoCode, setPromoCode] = useState("");
+  const [contactsData, setContactsData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+  });
+
+  const handleInputChange = (filed: string, value: string) => {
+    setContactsData((prevData) => ({
+      ...prevData,
+      [filed]: value,
+    }));
+  };
 
   useEffect(() => {
     setCartItems(cart.items);
@@ -117,8 +131,11 @@ export const DetailedCart = () => {
                 </li>
               ))}
             </ul>
-            <Contacts />
-            <PaymentMethods />
+            <Contacts
+              onInputChange={handleInputChange}
+              contactsData={contactsData}
+            />
+            <PaymentMethods setPaymentMethod={setPaymentMethod} />
           </div>
           <div className={styles.detailedCart__summary}>
             <h2 className={styles.detailedCart__title}>Ваш заказ</h2>
@@ -143,10 +160,11 @@ export const DetailedCart = () => {
               <h3 className={styles.detailedCart__title}>К оплате:</h3>
               <PriceBlock actualPrice currentPrice={cart.totalCurrentPrice} />
             </div>
-            <CreateOrder
+            <BookOrder
+              user={contactsData}
               items={cartItems}
-              paymentMethod="cash"
-              promoCode="asdsa"
+              paymentMethod={paymentMethod}
+              promoCode={promoCode}
             />
             <p className={styles.detailedCart__consentOffer}>
               Нажимая кнопку &quot;Заказать&quot;, Вы принимаете условия
