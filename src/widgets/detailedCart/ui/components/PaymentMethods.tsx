@@ -1,17 +1,14 @@
-import { useState } from "react";
+import { useFormContext } from "react-hook-form";
 
 import styles from "../styles.module.scss";
 
-interface Props {
-  setPaymentMethod: (paymentMethod: string) => void;
-}
+export const PaymentMethods = () => {
+  const { register, setValue, watch } = useFormContext();
+  const selectedMethod = watch("paymentMethod", "cash");
 
-export const PaymentMethods = ({ setPaymentMethod }: Props) => {
-  const [selectedMethod, setSelectedMethod] = useState<string>("cash");
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    setSelectedMethod(value);
-    setPaymentMethod(value);
+    setValue("paymentMethod", value);
   };
 
   return (
@@ -23,8 +20,8 @@ export const PaymentMethods = ({ setPaymentMethod }: Props) => {
             <input
               className={styles.paymentMethods__input}
               type="radio"
-              name="payment"
               value="cash"
+              {...register("paymentMethod")}
               onChange={handleChange}
               checked={selectedMethod === "cash"}
             />
@@ -36,8 +33,8 @@ export const PaymentMethods = ({ setPaymentMethod }: Props) => {
             <input
               className={styles.paymentMethods__input}
               type="radio"
-              name="payment"
               value="card"
+              {...register("paymentMethod")}
               onChange={handleChange}
               checked={selectedMethod === "card"}
             />
@@ -49,10 +46,10 @@ export const PaymentMethods = ({ setPaymentMethod }: Props) => {
             <input
               className={styles.paymentMethods__input}
               type="radio"
-              name="payment"
-              value="split"
+              value="installment_payment"
+              {...register("paymentMethod")}
               onChange={handleChange}
-              checked={selectedMethod === "split"}
+              checked={selectedMethod === "installment_payment"}
             />
             <span>Оплата частями</span>
           </label>

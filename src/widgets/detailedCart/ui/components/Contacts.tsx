@@ -1,45 +1,99 @@
+import { Controller, useFormContext } from "react-hook-form";
+
 import styles from "../styles.module.scss";
 
-interface Props {
-  contactsData: {
-    name: string;
-    phone: string;
-    email: string;
-  };
-  onInputChange: (field: string, value: string) => void;
-}
+type ContactsData = {
+  name: string;
+  phone: string;
+  email: string;
+};
 
-export const Contacts = ({ contactsData, onInputChange }: Props) => {
+export const Contacts = () => {
+  const {
+    control,
+    formState: { errors },
+    trigger,
+  } = useFormContext<ContactsData>();
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    onInputChange(name, value);
+    const { name } = e.target;
+    trigger(name as keyof ContactsData);
+  };
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
+    const { name } = e.target;
+    trigger(name as keyof ContactsData);
   };
 
   return (
     <section className={styles.contacts}>
       <h2>Заполните информацию о себе</h2>
       <div className={styles.contacts__form}>
-        <input
-          type="text"
+        <Controller
           name="name"
-          value={contactsData.name}
-          placeholder="Имя"
-          onChange={handleChange}
+          control={control}
+          defaultValue=""
+          rules={{ required: "Поле 'Имя' обязательно" }}
+          render={({ field }) => (
+            <input
+              type="text"
+              placeholder="Имя"
+              {...field}
+              onChange={(e) => {
+                field.onChange(e);
+                handleChange(e);
+              }}
+              onBlur={handleBlur}
+            />
+          )}
         />
-        <input
-          type="text"
+        {errors.name && <p className={styles.error}>{errors.name.message}</p>}
+
+        <Controller
           name="phone"
-          value={contactsData.phone}
-          placeholder="Телефон"
-          onChange={handleChange}
+          control={control}
+          defaultValue=""
+          rules={{ required: "Поле 'Телефон' обязательно" }}
+          render={({ field }) => (
+            <input
+              type="text"
+              placeholder="Телефон"
+              {...field}
+              onChange={(e) => {
+                field.onChange(e);
+                handleChange(e);
+              }}
+              onBlur={handleBlur}
+            />
+          )}
         />
-        <input
-          type="text"
+        {errors.phone && <p className={styles.error}>{errors.phone.message}</p>}
+
+        <Controller
           name="email"
-          value={contactsData.email}
-          placeholder="Почта"
-          onChange={handleChange}
+          control={control}
+          defaultValue=""
+          rules={{
+            required: "Поле 'Почта' обязательно",
+            pattern: {
+              value: /^\S+@\S+$/i,
+              message: "Неверный формат почты",
+            },
+          }}
+          render={({ field }) => (
+            <input
+              type="text"
+              placeholder="Почта"
+              {...field}
+              onChange={(e) => {
+                field.onChange(e);
+                handleChange(e);
+              }}
+              onBlur={handleBlur}
+            />
+          )}
         />
+        {errors.email && <p className={styles.error}>{errors.email.message}</p>}
       </div>
     </section>
   );

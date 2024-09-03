@@ -1,30 +1,26 @@
-import { logger } from "@sentry/utils";
+import { useFormContext } from "react-hook-form";
 
 import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 
 interface Props {
   items: CartItem[];
-  promoCode: string;
-  paymentMethod: string;
-  user: {
-    email: string;
-    name: string;
-    phone: string;
-  };
 }
 
-export const BookOrder = ({ user, items, promoCode, paymentMethod }: Props) => {
-  const handleCreateOrder = async () => {
+export const BookOrder = ({ items }: Props) => {
+  const { handleSubmit } = useFormContext();
+
+  const onSubmit = async (formData: any) => {
+    console.log(formData);
     const order = {
       user: {
-        email: user.email,
-        name: user.name,
-        telephone: user.phone,
+        email: formData.email,
+        name: formData.name,
+        telephone: formData.phone,
         id: "6a42dbeb-219b-42d4-b2cd-7acd637cfdc0",
       },
-      promoCode: promoCode,
-      paymentMethod: paymentMethod,
+      promoCode: formData.promoCode,
+      paymentMethod: formData.paymentMethod,
       reservations: items.map((item) => {
         return {
           __type: item.type,
@@ -59,11 +55,16 @@ export const BookOrder = ({ user, items, promoCode, paymentMethod }: Props) => {
       const data = await response.json();
       console.log(data);
     } catch (error) {
-      logger.error(error);
+      console.error(error);
     }
   };
 
   return (
-    <Button title="Заказать" variant="confirm" onClick={handleCreateOrder} />
+    <Button
+      title="Заказать"
+      variant="confirm"
+      type="submit"
+      onClick={handleSubmit(onSubmit)}
+    />
   );
 };
