@@ -8,7 +8,8 @@ interface Props {
 }
 
 export const BookOrder = ({ items }: Props) => {
-  const { handleSubmit } = useFormContext();
+  const { handleSubmit, formState } = useFormContext();
+  const { isValid } = formState;
 
   const onSubmit = async (formData: any) => {
     console.log(formData);
@@ -65,6 +66,7 @@ export const BookOrder = ({ items }: Props) => {
       variant="confirm"
       type="submit"
       onClick={handleSubmit(onSubmit)}
+      disabled={!isValid}
     />
   );
 };

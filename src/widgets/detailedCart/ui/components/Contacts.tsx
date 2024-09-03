@@ -1,3 +1,4 @@
+import { Input } from "@mantine/core";
 import { Controller, useFormContext } from "react-hook-form";
 
 import styles from "../styles.module.scss";
@@ -12,18 +13,7 @@ export const Contacts = () => {
   const {
     control,
     formState: { errors },
-    trigger,
   } = useFormContext<ContactsData>();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-    trigger(name as keyof ContactsData);
-  };
-
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    const { name } = e.target;
-    trigger(name as keyof ContactsData);
-  };
 
   return (
     <section className={styles.contacts}>
@@ -33,67 +23,43 @@ export const Contacts = () => {
           name="name"
           control={control}
           defaultValue=""
-          rules={{ required: "Поле 'Имя' обязательно" }}
+          rules={{ required: "Имя обязательно" }}
           render={({ field }) => (
-            <input
-              type="text"
-              placeholder="Имя"
-              {...field}
-              onChange={(e) => {
-                field.onChange(e);
-                handleChange(e);
-              }}
-              onBlur={handleBlur}
-            />
+            <Input.Wrapper label="Имя" error={errors.name?.message}>
+              <Input placeholder="Введите имя" {...field} />
+            </Input.Wrapper>
           )}
         />
-        {errors.name && <p className={styles.error}>{errors.name.message}</p>}
 
         <Controller
           name="phone"
           control={control}
           defaultValue=""
-          rules={{ required: "Поле 'Телефон' обязательно" }}
+          rules={{ required: "Телефон обязателен" }}
           render={({ field }) => (
-            <input
-              type="text"
-              placeholder="Телефон"
-              {...field}
-              onChange={(e) => {
-                field.onChange(e);
-                handleChange(e);
-              }}
-              onBlur={handleBlur}
-            />
+            <Input.Wrapper label="Телефон" error={errors.phone?.message}>
+              <Input placeholder="Введите телефон" {...field} />
+            </Input.Wrapper>
           )}
         />
-        {errors.phone && <p className={styles.error}>{errors.phone.message}</p>}
 
         <Controller
           name="email"
           control={control}
           defaultValue=""
           rules={{
-            required: "Поле 'Почта' обязательно",
+            required: "Почта обязательна",
             pattern: {
-              value: /^\S+@\S+$/i,
+              value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i,
               message: "Неверный формат почты",
             },
           }}
           render={({ field }) => (
-            <input
-              type="text"
-              placeholder="Почта"
-              {...field}
-              onChange={(e) => {
-                field.onChange(e);
-                handleChange(e);
-              }}
-              onBlur={handleBlur}
-            />
+            <Input.Wrapper label="Почта" error={errors.email?.message}>
+              <Input placeholder="Введите почту" {...field} />
+            </Input.Wrapper>
           )}
         />
-        {errors.email && <p className={styles.error}>{errors.email.message}</p>}
       </div>
     </section>
   );

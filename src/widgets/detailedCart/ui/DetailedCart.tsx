@@ -27,7 +27,9 @@ import styles from "./styles.module.scss";
 
 export const DetailedCart = () => {
   const cart = useAppSelector(selectCart);
-  const methods = useForm();
+  const methods = useForm({
+    mode: "onTouched",
+  });
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
@@ -123,7 +125,7 @@ export const DetailedCart = () => {
                   </li>
                 ))}
               </ul>
-              <form>
+              <form className={styles.detailedCart__form}>
                 <Contacts />
                 <PaymentMethods />
               </form>

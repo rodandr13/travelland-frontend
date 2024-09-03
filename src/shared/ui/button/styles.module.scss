@@ -20,6 +20,9 @@
     background: var(--color-gray);
     color: var(--color-gray-dark);
     cursor: initial;
+    &:hover {
+      background: var(--color-gray);
+    }
   }
 
   &:active {

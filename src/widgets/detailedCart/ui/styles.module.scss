@@ -23,6 +23,12 @@
 
   }
 
+  &__form {
+    display: flex;
+    gap: 40px;
+    flex-direction: column;
+  }
+
   &__link {
     color: inherit;
     display: flex;
