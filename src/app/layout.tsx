@@ -10,6 +10,7 @@ import { StoreProvider } from "@/src/app/providers/StoreProvider";
 import { Header } from "@/src/widgets/header";
 
 import { Footer } from "../shared/ui/footer";
+import { Main } from "../shared/ui/main";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -33,7 +34,7 @@ export default function RootLayout({
         <MantineProvider>
           <StoreProvider>
             <Header />
-            {children}
+            <Main>{children}</Main>
             <Footer />
           </StoreProvider>
         </MantineProvider>
