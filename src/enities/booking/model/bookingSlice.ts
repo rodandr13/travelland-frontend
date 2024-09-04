@@ -6,12 +6,16 @@ interface BookingState {
   visible: boolean;
   details: Record<string, CartItem>;
   isEditing: Record<string, boolean>;
+  isOrderSuccess: boolean | null;
+  orderError: string | null;
 }
 
 const initialState: BookingState = {
   visible: false,
   details: {},
   isEditing: {},
+  isOrderSuccess: null,
+  orderError: null,
 };
 
 const bookingSlice = createSlice({
@@ -87,6 +91,18 @@ const bookingSlice = createSlice({
     resetDetails: (state) => {
       state.details = initialState.details;
     },
+    setOrderSuccess: (state, action: PayloadAction<boolean>) => {
+      state.isOrderSuccess = action.payload;
+      state.orderError = null;
+    },
+    setOrderError: (state, action: PayloadAction<string>) => {
+      state.isOrderSuccess = false;
+      state.orderError = action.payload;
+    },
+    resetOrderStatus: (state) => {
+      state.isOrderSuccess = null;
+      state.orderError = null;
+    },
   },
 });
 
@@ -96,6 +112,9 @@ export const {
   resetDetails,
   setIsEditing,
   setDetailsFromCart,
+  setOrderSuccess,
+  setOrderError,
+  resetOrderStatus,
 } = bookingSlice.actions;
 
 export default bookingSlice.reducer;

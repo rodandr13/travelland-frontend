@@ -40,3 +40,13 @@ export const selectPricesByKey = (key: string) =>
   createSelector([selectDetailsByKey(key)], (details) =>
     details ? details.participants : null
   );
+
+export const selectOrderSuccess = createSelector(
+  [selectBookingState],
+  (bookingState) => bookingState.isOrderSuccess
+);
+
+export const selectOrderError = createSelector(
+  [selectBookingState],
+  (bookingState) => bookingState.orderError
+);

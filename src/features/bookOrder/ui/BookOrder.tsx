@@ -1,5 +1,11 @@
+import { useState } from "react";
+
 import { useFormContext } from "react-hook-form";
 
+import { resetDetails } from "@/src/enities/booking";
+import { setOrderSuccess } from "@/src/enities/booking/model/bookingSlice";
+import { resetCart } from "@/src/enities/cart/model/cartSlice";
+import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 
@@ -9,10 +15,15 @@ interface Props {
 
 export const BookOrder = ({ items }: Props) => {
   const { handleSubmit, formState } = useFormContext();
+  const dispatch = useAppDispatch();
   const { isValid } = formState;
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const onSubmit = async (formData: any) => {
-    console.log(formData);
+    setIsLoading(true);
+    setError(null);
+
     const order = {
       user: {
         email: formData.email,
@@ -54,19 +65,26 @@ export const BookOrder = ({ items }: Props) => {
       }
 
       const data = await response.json();
-      console.log(data);
+      dispatch(resetDetails());
+      dispatch(resetCart());
+      dispatch(setOrderSuccess(true));
     } catch (error) {
-      console.error(error);
+      setError((error as Error).message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   return (
-    <Button
-      title="Заказать"
-      variant="confirm"
-      type="submit"
-      onClick={handleSubmit(onSubmit)}
-      disabled={!isValid}
-    />
+    <>
+      <Button
+        title={isLoading ? "Загрузка..." : "Заказать"}
+        variant="confirm"
+        type="submit"
+        onClick={handleSubmit(onSubmit)}
+        disabled={!isValid || isLoading}
+      />
+      {error && <p style={{ color: "red" }}>{error}</p>}
+    </>
   );
 };
