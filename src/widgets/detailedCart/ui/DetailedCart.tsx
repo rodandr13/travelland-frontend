@@ -9,6 +9,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 
+import { resetOrderStatus } from "@/src/enities/booking/model/bookingSlice";
 import {
   selectOrderError,
   selectOrderSuccess,
@@ -17,7 +18,7 @@ import { selectCart } from "@/src/enities/cart/model/selectors";
 import { BookOrder } from "@/src/features/bookOrder";
 import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { CartItem } from "@/src/shared/types/cart";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
@@ -32,6 +33,7 @@ import styles from "./styles.module.scss";
 
 export const DetailedCart = () => {
   const cart = useAppSelector(selectCart);
+  const dispatch = useAppDispatch();
   const isOrderSuccess = useAppSelector(selectOrderSuccess);
   const orderError = useAppSelector(selectOrderError);
   const methods = useForm({
@@ -43,6 +45,12 @@ export const DetailedCart = () => {
   useEffect(() => {
     setCartItems(cart.items);
   }, [cart.items]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(resetOrderStatus());
+    };
+  }, []);
 
   return (
     <>
