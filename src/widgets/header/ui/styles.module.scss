@@ -1,9 +1,57 @@
 .header {
   position: relative;
+
+  &__topNav {
+    height: 25px;
+    background-color: var(--color-green);
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  &__contacts {
+    font-size: var(--font-size-sm);
+    color: var(--color-white);
+    position: relative;
+
+    &::after {
+      content: "";
+      background: url("../assets/telegram.png") no-repeat;
+      background-size: contain;
+      position: absolute;
+      left: -24px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+    }
+
+    &::before {
+      content: "";
+      background: url("../assets/whatsapp.png") no-repeat;
+      background-size: contain;
+      position: absolute;
+      left: -48px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__topNavContainer {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: flex-end;
+  }
+
   &__container {
     position: absolute;
     width: 100%;
-    top: 0;
+    top: 35px;
     left: 0;
   }
 }

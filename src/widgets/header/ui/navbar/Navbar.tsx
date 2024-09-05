@@ -12,16 +12,6 @@ import styles from "./styles.module.scss";
 
 export const Navbar = () => {
   const isOpen = useAppSelector((state) => state.menu.isOpen);
-  const links = [
-    {
-      title: "Экскурсии",
-      path: "/#excursion",
-    },
-    {
-      title: "О компании",
-      path: "/#aboutUs",
-    },
-  ];
 
   return (
     <div className={styles.navbar}>
@@ -76,23 +66,8 @@ export const Navbar = () => {
           <div className={styles.navbar__cart}>
             <CompactCart />
           </div>
-          <div className={styles.contacts}>
-            <div className={styles.contacts__telephone}>
-              <span className={styles.contacts__telephoneCode}>+429</span> 725
-              841 086
-            </div>
-            <ul className={styles.contacts__social}>
-              <li
-                className={`${styles.contacts__socialItem} ${styles.contacts__telegram}`}
-              >
-                Telegram
-              </li>
-              <li
-                className={`${styles.contacts__socialItem} ${styles.contacts__whatsapp}`}
-              >
-                WhatsApp
-              </li>
-            </ul>
+          <div>
+            <Link href="/">Войти</Link>
           </div>
         </div>
         <HamburgerButton />
