@@ -1,0 +1,113 @@
+"use client";
+
+import { useState } from "react";
+
+import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  Anchor,
+  Button,
+  Checkbox,
+  Divider,
+  Group,
+  PasswordInput,
+  Stack,
+  TextInput,
+} from "@mantine/core";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
+
+import { GoogleButton } from "@/src/shared/ui/googleButton";
+
+import styles from "./styles.module.scss";
+
+const schema = z.object({
+  email: z.string().email("Некорректный формат email"),
+  password: z.string().min(8, "Пароль должен быть не менее 8 символов"),
+});
+
+export const Registration = () => {
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  const onSubmit = async (data) => {
+    const { terms, ...submitData } = data;
+    try {
+      const response = await fetch("http://localhost:4000/api/auth/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(submitData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Registration failed");
+      }
+
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  return (
+    <section className={styles.registration}>
+      <h1>Регистрация</h1>
+
+      <div className={styles.registration__container}>
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <Stack>
+            <TextInput
+              required
+              label="Email"
+              placeholder="info@traventico.com"
+              {...register("email")}
+              error={errors.email?.message}
+              radius="md"
+            />
+            <PasswordInput
+              required
+              label="Пароль"
+              placeholder="Ваш пароль"
+              {...register("password")}
+              error={errors.password?.message}
+              radius="md"
+            />
+            <Checkbox
+              label="Я принимаю условия обработки персональных данных и политику конфиденциальности"
+              checked={isTermsAccepted}
+              onChange={(event) =>
+                setIsTermsAccepted(event.currentTarget.checked)
+              }
+            />
+          </Stack>
+
+          <Group justify="space-between" mt="xl">
+            <Anchor component="button" type="button" c="dimmed" size="xs">
+              Уже есть аккаунт? Войти
+            </Anchor>
+            <Button type="submit" radius="xl" disabled={!isTermsAccepted}>
+              Регистрация
+            </Button>
+          </Group>
+        </form>
+        <Divider label="или" labelPosition="center" my="lg" />
+        <Group grow mb="md" mt="md">
+          <GoogleButton radius="xl">Google</GoogleButton>
+        </Group>
+      </div>
+    </section>
+  );
+};
