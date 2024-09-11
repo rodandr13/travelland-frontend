@@ -16,6 +16,7 @@ import {
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { apiClient } from "@/src/shared/api";
 import { GoogleButton } from "@/src/shared/ui/googleButton";
 
 import styles from "./styles.module.scss";
@@ -42,20 +43,12 @@ export const Registration = () => {
 
   const onSubmit = async (data) => {
     const { terms, ...submitData } = data;
+
     try {
-      const response = await fetch("http://localhost:4000/api/auth/register", {
+      const result = await apiClient("/auth/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
         body: JSON.stringify(submitData),
       });
-
-      if (!response.ok) {
-        throw new Error("Registration failed");
-      }
-
-      const result = await response.json();
       console.log(result);
     } catch (error) {
       console.error(error);
