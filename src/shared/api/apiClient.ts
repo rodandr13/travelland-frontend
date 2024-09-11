@@ -14,7 +14,7 @@ export const apiClient = async (url: string, options = {}) => {
   const response = await fetch(fullUrl, defaultOptions);
 
   if (!response.ok) {
-    throw new Error(`Error: ${response.status}`);
+    // throw new Error(`Error: ${response.status}`);
   }
 
   return response.json();
