@@ -1,11 +1,11 @@
-import { Registration } from "@/src/pages/registration";
+import { Signup } from "../../../pages/signup";
 
 import styles from "./styles.module.scss";
 
 export default function Page() {
   return (
     <section className={styles.page}>
-      <Registration />
+      <Signup />
     </section>
   );
 }

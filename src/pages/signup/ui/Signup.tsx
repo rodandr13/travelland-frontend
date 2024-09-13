@@ -13,6 +13,7 @@ import {
   Stack,
   TextInput,
 } from "@mantine/core";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
@@ -26,7 +27,8 @@ const schema = z.object({
   password: z.string().min(8, "Пароль должен быть не менее 8 символов"),
 });
 
-export const Registration = () => {
+export const Signup = () => {
+  const router = useRouter();
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
   const {
@@ -41,7 +43,7 @@ export const Registration = () => {
     },
   });
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     const { terms, ...submitData } = data;
 
     try {
@@ -50,6 +52,7 @@ export const Registration = () => {
         body: JSON.stringify(submitData),
       });
       console.log(result);
+      await router.replace("/");
     } catch (error) {
       console.error(error);
     }
