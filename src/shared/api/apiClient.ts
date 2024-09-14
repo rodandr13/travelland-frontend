@@ -12,9 +12,8 @@ export const apiClient = async (url: string, options = {}) => {
   const fullUrl = `${baseURL}${url}`;
 
   const response = await fetch(fullUrl, defaultOptions);
-
   if (!response.ok) {
-    console.log("ошибка", response.status);
+    // console.log("ошибка", response.status);
   }
   return response.json();
 };

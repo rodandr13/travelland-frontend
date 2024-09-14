@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 
 import "@mantine/core/styles.css";
 import "./globals.scss";
+import AuthProvider from "@/src/app/providers/AuthProvider";
 import { StoreProvider } from "@/src/app/providers/StoreProvider";
 import { Header } from "@/src/widgets/header";
 
@@ -31,13 +32,15 @@ export default function RootLayout({
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <MantineProvider>
-          <StoreProvider>
-            <Header />
-            <Main>{children}</Main>
-            <Footer />
-          </StoreProvider>
-        </MantineProvider>
+        <AuthProvider>
+          <MantineProvider>
+            <StoreProvider>
+              <Header />
+              <Main>{children}</Main>
+              <Footer />
+            </StoreProvider>
+          </MantineProvider>
+        </AuthProvider>
       </body>
     </html>
   );

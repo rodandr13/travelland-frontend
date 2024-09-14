@@ -27,7 +27,7 @@ const schema = z.object({
   password: z.string().min(8, "Пароль должен быть не менее 8 символов"),
 });
 
-export const Signup = () => {
+export const SignUp = () => {
   const router = useRouter();
   const [isTermsAccepted, setIsTermsAccepted] = useState(false);
 
@@ -51,19 +51,22 @@ export const Signup = () => {
         method: "POST",
         body: JSON.stringify(submitData),
       });
-      console.log(result);
       await router.replace("/");
+      router.refresh();
     } catch (error) {
-      console.error(error);
+      console.log(error);
     }
   };
 
   return (
     <section className={styles.registration}>
-      <h1>Регистрация</h1>
-
       <div className={styles.registration__container}>
-        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <h1 className={styles.registration__title}>Регистрация</h1>
+        <form
+          className={styles.registration__form}
+          onSubmit={handleSubmit(onSubmit)}
+          noValidate
+        >
           <Stack>
             <TextInput
               required

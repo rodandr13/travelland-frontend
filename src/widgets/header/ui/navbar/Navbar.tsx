@@ -4,15 +4,18 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useAuth } from "@/src/app/providers/AuthProvider";
 import { CompactCart } from "@/src/enities/cart";
+import { SignOut } from "@/src/features/signOut";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
 import styles from "./styles.module.scss";
 
 export const Navbar = () => {
+  const auth = useAuth();
   const isOpen = useAppSelector((state) => state.menu.isOpen);
-
+  // console.log(auth);
   return (
     <div className={styles.navbar}>
       <div className={styles.navbar__logo}>
@@ -66,9 +69,7 @@ export const Navbar = () => {
           <div className={styles.navbar__cart}>
             <CompactCart />
           </div>
-          <div>
-            <Link href="/">Войти</Link>
-          </div>
+          <div>{auth.user ? <SignOut /> : <Link href="/">Войти</Link>}</div>
         </div>
         <HamburgerButton />
       </div>
