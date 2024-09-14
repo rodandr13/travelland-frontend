@@ -1,5 +1,12 @@
-export const refreshAccessToken = async (refreshToken: string) => {
-  return await fetch("http://localhost:4000/api/auth/login/access-token", {
+interface TokenResponse {
+  accessToken: string;
+  refreshToken: string;
+}
+
+export const refreshAccessToken = async (
+  refreshToken: string
+): Promise<TokenResponse> => {
+  const result = await fetch("http://localhost:4000/api/auth/refresh", {
     method: "POST",
     credentials: "include",
     headers: {
@@ -7,4 +14,10 @@ export const refreshAccessToken = async (refreshToken: string) => {
       Cookie: `refreshToken=${refreshToken}`,
     },
   });
+
+  if (!result.ok) {
+    throw new Error("Failed to refresh token");
+  }
+
+  return await result.json();
 };

@@ -1,3 +1,4 @@
+import { parse, serialize } from "cookie";
 import { NextRequest, NextResponse } from "next/server";
 
 import { refreshAccessToken } from "@/src/shared/api/refreshAccessToken";
@@ -6,7 +7,9 @@ import {
   REFRESH_TOKEN_LIFETIME,
 } from "@/src/shared/lib/constans";
 
-export const middleware = async (request: NextRequest) => {
+export const middleware = async (
+  request: NextRequest
+): Promise<NextResponse> => {
   const accessToken = request.cookies.get("accessToken");
   const refreshToken = request.cookies.get("refreshToken");
 
@@ -19,35 +22,51 @@ export const middleware = async (request: NextRequest) => {
   }
 
   if (!refreshToken && accessToken) {
-    const nextResponse = NextResponse.redirect(new URL("/login", request.url));
+    const nextResponse = NextResponse.redirect(new URL("/signin", request.url));
     nextResponse.cookies.delete("accessToken");
     return nextResponse;
   }
 
   if (!accessToken && refreshToken) {
     try {
-      const res = await refreshAccessToken(refreshToken.value);
-      const setCookieHeader = res.headers.get("set-cookie");
+      const newTokens = await refreshAccessToken(refreshToken.value);
+      if (newTokens.accessToken && newTokens.refreshToken) {
+        // Обновляем заголовки запроса
+        const requestHeaders = new Headers(request.headers);
 
-      if (res.ok && setCookieHeader) {
-        const nextResponse = NextResponse.next();
-        const cookies = setCookieHeader.split(/,(?=\S)/);
+        const existingCookies = requestHeaders.get("cookie") || "";
+        const cookies = parse(existingCookies);
 
-        cookies.forEach((cookie) => {
-          const [cookieName, cookieValue] = cookie.split(";")[0].split("=");
+        cookies.accessToken = newTokens.accessToken;
+        cookies.refreshToken = newTokens.refreshToken;
 
-          if (cookieName === "accessToken" || cookieName === "refreshToken") {
-            nextResponse.cookies.set(cookieName, cookieValue, {
-              httpOnly: true,
-              secure: true,
-              path: "/",
-              maxAge:
-                cookieName === "accessToken"
-                  ? ACCESS_TOKEN_LIFETIME
-                  : REFRESH_TOKEN_LIFETIME,
-              sameSite: "lax",
-            });
-          }
+        const updatedCookieString = Object.entries(cookies)
+          .map(([name, value]) => serialize(name, value))
+          .join("; ");
+
+        requestHeaders.set("cookie", updatedCookieString);
+
+        // Создаем NextResponse с модифицированными заголовками запроса
+        const nextResponse = NextResponse.next({
+          request: {
+            headers: requestHeaders,
+          },
+        });
+
+        // Устанавливаем куки на том же NextResponse
+        nextResponse.cookies.set("accessToken", newTokens.accessToken, {
+          httpOnly: true,
+          secure: true,
+          path: "/",
+          maxAge: ACCESS_TOKEN_LIFETIME,
+          sameSite: "lax",
+        });
+        nextResponse.cookies.set("refreshToken", newTokens.refreshToken, {
+          httpOnly: true,
+          secure: true,
+          path: "/",
+          maxAge: REFRESH_TOKEN_LIFETIME,
+          sameSite: "lax",
         });
 
         return nextResponse;
