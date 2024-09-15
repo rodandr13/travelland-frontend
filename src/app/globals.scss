@@ -111,7 +111,7 @@ input {
 
 a {
   text-decoration: none;
-  color: var(--color-blue-dark);
+  color: inherit;
 
   &:hover {
     text-decoration: underline;
