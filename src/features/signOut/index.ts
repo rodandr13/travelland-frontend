@@ -1,1 +1,2 @@
-export { SignOut } from "./ui/SignOut";
+export { SignOutButton } from "./ui/SignOutButton";
+export { useSignOut } from "./model/signOut";
