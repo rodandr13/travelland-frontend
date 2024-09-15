@@ -1,18 +1,26 @@
 "use client";
 
+import { Avatar } from "@mantine/core";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { CompactCart } from "@/src/enities/cart";
-import { SignOut } from "@/src/features/signOut";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { AccountButton } from "@/src/shared/ui/accountButton/AccountButton";
 import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
 import styles from "./styles.module.scss";
 
-export const Navbar = () => {
+interface Props {
+  user: {
+    email: string;
+    id: string;
+  };
+}
+
+export const Navbar = ({ user }: Props) => {
   const auth = useAuth();
   const isOpen = useAppSelector((state) => state.menu.isOpen);
   // console.log(auth);
@@ -69,7 +77,23 @@ export const Navbar = () => {
           <div className={styles.navbar__cart}>
             <CompactCart />
           </div>
-          <div>{auth.user ? <SignOut /> : <Link href="/">Войти</Link>}</div>
+          <div>
+            {user ? (
+              <AccountButton user={user} />
+            ) : (
+              <div className={styles.navbar__account}>
+                <Avatar
+                  src={null}
+                  alt=""
+                  variant="transparent"
+                  color="rgba(77, 77, 77, 1)"
+                />
+                <Link className={styles.navbar__accountLink} href="/signin">
+                  Войти
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
         <HamburgerButton />
       </div>

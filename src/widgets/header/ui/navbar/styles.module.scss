@@ -33,6 +33,14 @@
   &__cart {
     align-self: center;
   }
+  &__account {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  &__accountLink {
+
+  }
 }
 
 .contacts {

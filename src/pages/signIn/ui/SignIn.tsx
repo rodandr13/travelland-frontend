@@ -5,7 +5,6 @@ import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   Button,
-  Checkbox,
   Divider,
   Group,
   PasswordInput,
@@ -23,15 +22,11 @@ import styles from "./styles.module.scss";
 const schema = z.object({
   email: z.string().email("Некорректный формат email"),
   password: z.string().min(8, "Пароль должен быть не менее 8 символов"),
-  isTermsAccepted: z.boolean().refine((val) => val, {
-    message: "Необходимо принять условия",
-  }),
 });
 
 interface FormData {
   email: string;
   password: string;
-  isTermsAccepted: boolean;
 }
 
 export const SignIn = () => {
@@ -48,12 +43,11 @@ export const SignIn = () => {
     defaultValues: {
       email: "",
       password: "",
-      isTermsAccepted: false,
     },
   });
 
   const onSubmit = async (data: FormData) => {
-    const { isTermsAccepted, ...submitData } = data;
+    const { ...submitData } = data;
     setIsLoading(true);
     try {
       const response = await fetch("http://localhost:4000/api/auth/login", {
@@ -112,11 +106,6 @@ export const SignIn = () => {
           >
             Забыли пароль?
           </Link>
-          <Checkbox
-            label="Я принимаю условия обработки персональных данных и политику конфиденциальности"
-            {...register("isTermsAccepted")}
-            error={errors.isTermsAccepted && "Необходимо принять условия"}
-          />
 
           <Group justify="space-between" mt="xl">
             {apiError && (

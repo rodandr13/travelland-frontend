@@ -20,7 +20,7 @@ export const Header = async () => {
         },
       });
     } catch (error) {
-      console.error("Ошибка получения данных пользователя:", error);
+      console.log("Ошибка получения данных пользователя:", error);
     }
   }
 
@@ -28,12 +28,11 @@ export const Header = async () => {
     <header className={styles.header}>
       <div className={styles.header__topNav}>
         <div className={styles.header__topNavContainer}>
-          {user ? <p>{user.email}</p> : <p>Вы не авторизованы</p>}
           <p className={styles.header__contacts}>+429 725 841 086</p>
         </div>
       </div>
       <div className={styles.header__container}>
-        <Navbar />
+        <Navbar user={user} />
       </div>
     </header>
   );

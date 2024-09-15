@@ -9,7 +9,14 @@ import { useSignOut } from "@/src/features/signOut";
 
 import styles from "./styles.module.scss";
 
-export const AccountButton = () => {
+interface Props {
+  user: {
+    email: string;
+    id: string;
+  };
+}
+
+export const AccountButton = ({ user }: Props) => {
   const signOut = useSignOut();
 
   const handleSignOut = () => {
@@ -36,11 +43,11 @@ export const AccountButton = () => {
             />
             <div style={{ flex: 1 }}>
               <Text size="sm" fw={500}>
-                Harriette Spoonlicker
+                {user.id}
               </Text>
 
               <Text c="dimmed" size="xs">
-                hspoonlicker@outlook.com
+                {user.email}
               </Text>
             </div>
           </Group>

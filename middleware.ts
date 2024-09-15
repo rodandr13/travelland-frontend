@@ -31,7 +31,6 @@ export const middleware = async (
     try {
       const newTokens = await refreshAccessToken(refreshToken.value);
       if (newTokens.accessToken && newTokens.refreshToken) {
-        // Обновляем заголовки запроса
         const requestHeaders = new Headers(request.headers);
 
         const existingCookies = requestHeaders.get("cookie") || "";
@@ -46,27 +45,30 @@ export const middleware = async (
 
         requestHeaders.set("cookie", updatedCookieString);
 
-        // Создаем NextResponse с модифицированными заголовками запроса
+        // Создаем NextResponse с модифицированными заголовками запроса,
+        // чтобы серверные компоненты могли сразу видеть новые куки
         const nextResponse = NextResponse.next({
           request: {
             headers: requestHeaders,
           },
         });
 
-        // Устанавливаем куки на том же NextResponse
+        // Устанавливаем куки на том же NextResponse для отправки их в браузер
         nextResponse.cookies.set("accessToken", newTokens.accessToken, {
+          domain: process.env.COOKIE_DOMAIN || "localhost",
           httpOnly: true,
-          secure: true,
           path: "/",
           maxAge: ACCESS_TOKEN_LIFETIME,
-          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
         });
         nextResponse.cookies.set("refreshToken", newTokens.refreshToken, {
+          domain: process.env.COOKIE_DOMAIN || "localhost",
           httpOnly: true,
-          secure: true,
           path: "/",
           maxAge: REFRESH_TOKEN_LIFETIME,
-          sameSite: "lax",
+          secure: process.env.NODE_ENV === "production",
+          sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
         });
 
         return nextResponse;
