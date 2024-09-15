@@ -20,6 +20,7 @@
     "@sanity/client": "^6.21.3",
     "@sanity/image-url": "^1.0.2",
     "@sanity/react-loader": "^1.10.6",
+    "@tabler/icons-react": "^3.17.0",
     "@types/google.maps": "^3.57.0",
     "@types/react-datepicker": "^7.0.0",
     "clsx": "^2.1.1",
