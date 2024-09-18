@@ -5,7 +5,6 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useAuth } from "@/src/app/providers/AuthProvider";
 import { CompactCart } from "@/src/enities/cart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { AccountButton } from "@/src/shared/ui/accountButton/AccountButton";
@@ -21,7 +20,6 @@ interface Props {
 }
 
 export const Navbar = ({ user }: Props) => {
-  const auth = useAuth();
   const isOpen = useAppSelector((state) => state.menu.isOpen);
   // console.log(auth);
   return (

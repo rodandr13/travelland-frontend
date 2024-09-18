@@ -29,14 +29,16 @@ export const BookOrder = ({ items }: Props) => {
         email: formData.email,
         name: formData.name,
         telephone: formData.phone,
-        id: "6a42dbeb-219b-42d4-b2cd-7acd637cfdc0",
       },
       promoCode: formData.promoCode,
       paymentMethod: formData.paymentMethod,
       reservations: items.map((item) => {
         return {
-          __type: item.type,
+          type: item.type,
           title: item.title,
+          slug: item.slug,
+          image_src: item.image.src,
+          image_lqip: item.image.lqip,
           id: item.id,
           date: new Date(item.selectedDate).toISOString(),
           time: item.selectedTime,

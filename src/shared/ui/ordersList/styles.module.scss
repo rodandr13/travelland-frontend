@@ -1,0 +1,140 @@
+.ordersList {
+  width: 100%;
+}
+
+.orderParams {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 40px 10px 0;
+
+  &__optionTitle {
+    font-size: var(--font-size-xs);
+    color: var(--color-gray-2);
+  }
+
+  &__option {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+.item {
+  border-radius: 0;
+  margin: 0 0 0 0;
+  background: none;
+  border-bottom: 1px solid var(--mantine-color-gray-3);
+
+  &:hover {
+    background: var(--color-gray-hover);
+  }
+}
+
+.orderItem {
+  display: flex;
+  gap: 16px;
+
+  &__image {
+    border-radius: 8px;
+  }
+
+  &__textContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-grow: 1;
+  }
+
+  &__title {
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    margin: 0 0 8px 0;
+  }
+
+  &__date {
+    position: relative;
+    display: flex;
+    gap: 8px;
+    font-size: var(--font-size-sm);
+
+    &::before {
+      content: "";
+      display: block;
+      background: url("../../assets/calendar-month.svg");
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+  }
+
+  &__participantsList {
+    position: relative;
+    display: flex;
+    font-size: var(--font-size-sm);
+    gap: 8px;
+
+    &::before {
+      content: "";
+      display: block;
+      background: url("../../assets/users.svg");
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+  }
+
+  &__freeCancelation {
+    position: relative;
+    display: flex;
+    font-size: var(--font-size-sm);
+    gap: 8px;
+    margin: 8px 0 0 0;
+
+    &::before {
+      content: "";
+      display: block;
+      background: url("../../assets/square-rounded-check.svg");
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+  }
+
+  &__rightSection {
+    padding: 16px;
+    border-radius: 8px;
+    background: var(--color-gray-light);
+  }
+
+  &__voucher {
+    position: relative;
+    padding: 0 0 0 26px;
+    margin: 16px 0 0 0;
+    display: block;
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      display: block;
+      background: url("../../assets/file-type-pdf.svg");
+      width: 20px;
+      height: 20px;
+      background-size: contain;
+    }
+  }
+}
+
+.orderItems {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex-grow: 1;
+}
+
+.panelContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+}
