@@ -15,7 +15,7 @@ const data = [
 
 export const Account = () => {
   const [active, setActive] = useState("Мои бронирования");
-  const [orders, setOrders] = useState(null);
+  const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -27,7 +27,7 @@ export const Account = () => {
         });
 
         if (response.ok) {
-          const data = await response.json();
+          const data: Order[] = await response.json();
           setOrders(data);
         } else {
           console.error("Ошибка при получении заказов");

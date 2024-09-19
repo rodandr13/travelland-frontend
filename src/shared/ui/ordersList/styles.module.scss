@@ -38,6 +38,10 @@
     border-radius: 8px;
   }
 
+  &__link {
+    width: fit-content;
+  }
+
   &__textContainer {
     display: flex;
     flex-direction: column;
@@ -124,6 +128,11 @@
       background-size: contain;
     }
   }
+
+  &__price {
+    width: 240px;
+    margin: 24px 0 0 0;
+  }
 }
 
 .orderItems {
@@ -131,10 +140,13 @@
   flex-direction: column;
   gap: 24px;
   flex-grow: 1;
+  list-style-type: decimal;
+  padding-left: 40px;
 }
 
 .panelContainer {
   display: flex;
   justify-content: space-between;
   gap: 24px;
+  margin: 24px 0 0 0;
 }
