@@ -2,10 +2,7 @@
 
 import { useRouter } from "next/navigation";
 
-import { useAuth } from "@/src/app/providers/AuthProvider";
-
 export const useSignOut = () => {
-  const auth = useAuth();
   const router = useRouter();
 
   return async () => {
@@ -16,8 +13,6 @@ export const useSignOut = () => {
       });
 
       if (response.ok) {
-        auth.setUser(null);
-        router.replace("/");
         router.refresh();
       }
     } catch (error) {

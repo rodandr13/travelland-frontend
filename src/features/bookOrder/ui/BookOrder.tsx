@@ -32,9 +32,9 @@ export const BookOrder = ({ items }: Props) => {
       },
       promoCode: formData.promoCode,
       paymentMethod: formData.paymentMethod,
-      reservations: items.map((item) => {
+      orderItems: items.map((item) => {
         return {
-          type: item.type,
+          type: item.type.toUpperCase(),
           title: item.title,
           slug: item.slug,
           image_src: item.image.src,

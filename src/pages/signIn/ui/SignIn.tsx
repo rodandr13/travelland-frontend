@@ -66,7 +66,6 @@ export const SignIn = () => {
         throw new Error(errorMessage);
       }
       reset();
-      await router.replace("/");
       router.refresh();
     } catch (error: any) {
       setApiError(error.message || "Ошибка авторизации. Попробуйте снова.");

@@ -66,17 +66,15 @@ export const OrdersList = ({ orders }: Props) => {
                 </li>
                 <li className={styles.orderParams__option}>
                   <span className={styles.orderParams__optionTitle}>
-                    Оплата
-                  </span>
-                  <Badge variant="light" color="red">
-                    Не оплачен
-                  </Badge>
-                </li>
-                <li className={styles.orderParams__option}>
-                  <span className={styles.orderParams__optionTitle}>
                     К оплате
                   </span>
                   <p>{formatCurrency(order.orderTotalCurrentPrice)}</p>
+                </li>
+                <li className={styles.orderParams__option}>
+                  <span className={styles.orderParams__optionTitle}>
+                    Оплачено
+                  </span>
+                  <p>{formatCurrency(0)}</p>
                 </li>
               </ul>
             </Accordion.Control>

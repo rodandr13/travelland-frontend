@@ -25,6 +25,7 @@ const schema = z
   .object({
     email: z.string().email("Некорректный формат email"),
     password: z.string().min(8, "Пароль должен быть не менее 8 символов"),
+    firstName: z.string().min(2, "Имя должно быть не менее 2 символов"),
     confirmPassword: z.string(),
     isTermsAccepted: z.boolean().refine((val) => val, {
       message: "Необходимо принять условия",
@@ -37,6 +38,7 @@ const schema = z
 
 interface FormData {
   email: string;
+  firstName: string;
   password: string;
   confirmPassword: string;
   isTermsAccepted: boolean;
@@ -58,6 +60,7 @@ export const SignUp = () => {
     defaultValues: {
       email: "",
       password: "",
+      firstName: "",
       confirmPassword: "",
       isTermsAccepted: false,
     },
@@ -108,6 +111,14 @@ export const SignUp = () => {
               placeholder="info@traventico.com"
               {...register("email")}
               error={errors.email?.message}
+              radius="md"
+            />
+            <TextInput
+              required
+              label="Имя"
+              placeholder="Имя"
+              {...register("firstName")}
+              error={errors.firstName?.message}
               radius="md"
             />
             <PasswordInput

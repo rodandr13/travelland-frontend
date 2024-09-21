@@ -12,13 +12,13 @@ import styles from "./styles.module.scss";
 interface Props {
   user: {
     email: string;
-    id: string;
+    id: number;
+    first_name: string;
   };
 }
 
 export const AccountButton = ({ user }: Props) => {
   const signOut = useSignOut();
-
   const handleSignOut = () => {
     signOut();
   };
@@ -43,7 +43,7 @@ export const AccountButton = ({ user }: Props) => {
             />
             <div style={{ flex: 1 }}>
               <Text size="sm" fw={500}>
-                {user.id}
+                {user.first_name}
               </Text>
 
               <Text c="dimmed" size="xs">

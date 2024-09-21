@@ -14,14 +14,14 @@ import styles from "./styles.module.scss";
 
 interface Props {
   user: {
+    first_name: string;
+    id: number;
     email: string;
-    id: string;
   };
 }
 
 export const Navbar = ({ user }: Props) => {
   const isOpen = useAppSelector((state) => state.menu.isOpen);
-  // console.log(auth);
   return (
     <div className={styles.navbar}>
       <div className={styles.navbar__logo}>

@@ -108,6 +108,7 @@
     padding: 16px;
     border-radius: 8px;
     background: var(--color-gray-light);
+    align-self: flex-start;
   }
 
   &__voucher {
@@ -115,6 +116,7 @@
     padding: 0 0 0 26px;
     margin: 16px 0 0 0;
     display: block;
+
     &::before {
       content: "";
       position: absolute;
