@@ -32,7 +32,7 @@ export const BookOrder = ({ items }: Props) => {
       },
       promoCode: formData.promoCode,
       paymentMethod: formData.paymentMethod,
-      orderItems: items.map((item) => {
+      orderServices: items.map((item) => {
         return {
           type: item.type.toUpperCase(),
           title: item.title,

@@ -4,6 +4,7 @@ import {
   IconLogout2,
   IconUserScan,
 } from "@tabler/icons-react";
+import Link from "next/link";
 
 import { useSignOut } from "@/src/features/signOut";
 
@@ -58,6 +59,8 @@ export const AccountButton = ({ user }: Props) => {
           leftSection={
             <IconUserScan style={{ width: "18px", height: "18px" }} />
           }
+          component={Link}
+          href="/my/profile"
         >
           Профиль
         </Menu.Item>
@@ -65,8 +68,10 @@ export const AccountButton = ({ user }: Props) => {
           leftSection={
             <IconListDetails style={{ width: "18px", height: "18px" }} />
           }
+          component={Link}
+          href="/my/orders"
         >
-          Бронирования
+          Мои заказы
         </Menu.Item>
         <Menu.Item
           leftSection={

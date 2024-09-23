@@ -17,44 +17,54 @@ type PaymentStatus =
 
 type PaymentMethod = "CASH" | "CARD" | "INSTALLMENT_PAYMENT";
 
-type ReservationPrice = {
+type ServicePrice = {
   id: number;
   price_type: string;
   base_price: number;
   current_price: number;
-  amount_persons: number;
+  quantity: number;
   category_title: string;
-  order_reservation_id: number;
+  order_service_id: number;
+  total_base_price: number;
+  total_current_price: number;
 };
 
-type OrderReservation = {
+type OrderService = {
   id: number;
-  reservation_id: string;
-  reservation_type: string;
-  reservation_title: string;
+  service_id: string;
+  service_type: string;
+  service_title: string;
   date: string;
   time: string;
   slug: string;
   image_src: string;
   image_lqip: string;
-  order_id: number;
-  reservation_prices: ReservationPrice[];
-  reservationTotalCurrentPrice: number;
-  reservationTotalBasePrice: number;
+  service_prices: ServicePrice[];
+  total_current_price: number;
+  total_base_price: number;
 };
 
 type Order = {
   id: number;
+  user_id: number;
+  cancellation_reason: string | null;
+  cancelled_at: string | null;
+  comments: string | null;
+  completed_at: string | null;
+  confirmed_at: string | null;
   created_at: string;
-  updated_at: string;
+  updated_at: string | null;
+  due_date: string | null;
+  currency: string;
   order_status: OrderStatus;
   email_status: NotificationStatus;
   telegram_status: NotificationStatus;
   payment_status: PaymentStatus;
   payment_method: PaymentMethod;
   promo_code: string | null;
-  user_id: number;
-  order_reservations: OrderReservation[];
-  orderTotalCurrentPrice: number;
-  orderTotalBasePrice: number;
+  order_services: OrderService[];
+  paid_amount: number;
+  discount_amount: number;
+  total_base_price: number;
+  total_current_price: number;
 };
