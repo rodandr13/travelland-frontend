@@ -2,13 +2,16 @@
 
 import { useEffect, useState } from "react";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
 import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
 
+import { useAuth } from "@/src/app/providers/AuthProvider";
 import { resetOrderStatus } from "@/src/enities/booking/model/bookingSlice";
 import {
   selectOrderError,
@@ -31,13 +34,45 @@ import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/Payment
 
 import styles from "./styles.module.scss";
 
+const contactsSchema = z.object({
+  name: z
+    .string()
+    .min(2, "Имя должно содержать минимум 2 символа")
+    .max(30, "Имя должно содержать не более 30 символов"),
+  phone: z
+    .string()
+    .min(6, "Телефон должен содержать минимум 6 символов")
+    .max(15, "Телефон должен содержать не более 15 символов")
+    .regex(/^[\d\s()+-]+$/, "Неверный формат телефона"),
+  email: z
+    .string()
+    .email("Некорректный формат email")
+    .min(5, "Почта должна содержать минимум 5 символов")
+    .max(30, "Почта должна содержать не более 30 символов"),
+  paymentMethod: z.enum(["cash", "card", "installment_payment"], {
+    errorMap: () => ({ message: "Выберите способ оплаты" }),
+  }),
+  promoCode: z.string().optional(),
+});
+
+export type ContactsData = z.infer<typeof contactsSchema>;
+
 export const DetailedCart = () => {
   const cart = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
   const isOrderSuccess = useAppSelector(selectOrderSuccess);
+  const { authUser } = useAuth();
   const orderError = useAppSelector(selectOrderError);
-  const methods = useForm({
-    mode: "onTouched",
+  const methods = useForm<ContactsData>({
+    resolver: zodResolver(contactsSchema),
+    mode: "onSubmit",
+    defaultValues: {
+      name: authUser?.first_name,
+      phone: "",
+      email: authUser?.email,
+      paymentMethod: "cash",
+      promoCode: "",
+    },
   });
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);

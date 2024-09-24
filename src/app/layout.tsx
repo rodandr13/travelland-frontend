@@ -7,6 +7,7 @@ import "@mantine/core/styles.css";
 import "./globals.scss";
 import { cookies } from "next/headers";
 
+import { AuthProvider } from "@/src/app/providers/AuthProvider";
 import { StoreProvider } from "@/src/app/providers/StoreProvider";
 import { apiClient } from "@/src/shared/api";
 import { Header } from "@/src/widgets/header";
@@ -50,13 +51,15 @@ export default async function RootLayout({
   return (
     <html lang="ru">
       <body className={inter.className}>
-        <MantineProvider>
-          <StoreProvider>
-            <Header user={user} />
-            <Main>{children}</Main>
-            <Footer />
-          </StoreProvider>
-        </MantineProvider>
+        <AuthProvider initialUser={user} initialAccessToken={accessToken}>
+          <MantineProvider>
+            <StoreProvider>
+              <Header />
+              <Main>{children}</Main>
+              <Footer />
+            </StoreProvider>
+          </MantineProvider>
+        </AuthProvider>
       </body>
     </html>
   );

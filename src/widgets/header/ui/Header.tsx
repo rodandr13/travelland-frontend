@@ -3,15 +3,7 @@ import React from "react";
 import { Navbar } from "./navbar/";
 import styles from "./styles.module.scss";
 
-interface Props {
-  user: {
-    first_name: string;
-    id: number;
-    email: string;
-  };
-}
-
-export const Header = ({ user }: Props) => {
+export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={styles.header__topNav}>
@@ -20,7 +12,7 @@ export const Header = ({ user }: Props) => {
         </div>
       </div>
       <div className={styles.header__container}>
-        <Navbar user={user} />
+        <Navbar />
       </div>
     </header>
   );

@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { useAuth } from "@/src/app/providers/AuthProvider";
 import { GoogleButton } from "@/src/shared/ui/googleButton";
 
 import styles from "./styles.module.scss";
@@ -33,6 +34,8 @@ export const SignIn = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const { setAuthUser } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -65,8 +68,10 @@ export const SignIn = () => {
           errorData.message || "Ошибка авторизации. Попробуйте снова.";
         throw new Error(errorMessage);
       }
+      const data = await response.json();
+      setAuthUser(data);
       reset();
-      router.refresh();
+      router.replace("/");
     } catch (error: any) {
       setApiError(error.message || "Ошибка авторизации. Попробуйте снова.");
     } finally {

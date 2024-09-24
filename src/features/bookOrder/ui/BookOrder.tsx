@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { useFormContext } from "react-hook-form";
+import { SubmitHandler, useFormContext } from "react-hook-form";
 
 import { resetDetails } from "@/src/enities/booking";
 import { setOrderSuccess } from "@/src/enities/booking/model/bookingSlice";
@@ -8,19 +8,19 @@ import { resetCart } from "@/src/enities/cart/model/cartSlice";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
+import { ContactsData } from "@/src/widgets/detailedCart/ui/DetailedCart";
 
 interface Props {
   items: CartItem[];
 }
 
 export const BookOrder = ({ items }: Props) => {
-  const { handleSubmit, formState } = useFormContext();
+  const { handleSubmit } = useFormContext<ContactsData>();
   const dispatch = useAppDispatch();
-  const { isValid } = formState;
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = async (formData: any) => {
+  const onSubmit: SubmitHandler<ContactsData> = async (formData) => {
     setIsLoading(true);
     setError(null);
 
@@ -30,7 +30,7 @@ export const BookOrder = ({ items }: Props) => {
         name: formData.name,
         telephone: formData.phone,
       },
-      promoCode: formData.promoCode,
+      promoCode: formData.promoCode || "",
       paymentMethod: formData.paymentMethod,
       orderServices: items.map((item) => {
         return {
@@ -84,7 +84,7 @@ export const BookOrder = ({ items }: Props) => {
         variant="confirm"
         type="submit"
         onClick={handleSubmit(onSubmit)}
-        disabled={!isValid || isLoading}
+        disabled={isLoading}
       />
       {error && <p style={{ color: "red" }}>{error}</p>}
     </>

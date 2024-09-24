@@ -5,6 +5,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
+import { useAuth } from "@/src/app/providers/AuthProvider";
 import { CompactCart } from "@/src/enities/cart";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { AccountButton } from "@/src/shared/ui/accountButton/AccountButton";
@@ -12,15 +13,8 @@ import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
 import styles from "./styles.module.scss";
 
-interface Props {
-  user: {
-    first_name: string;
-    id: number;
-    email: string;
-  };
-}
-
-export const Navbar = ({ user }: Props) => {
+export const Navbar = () => {
+  const { authUser } = useAuth();
   const isOpen = useAppSelector((state) => state.menu.isOpen);
   return (
     <div className={styles.navbar}>
@@ -76,8 +70,8 @@ export const Navbar = ({ user }: Props) => {
             <CompactCart />
           </div>
           <div>
-            {user ? (
-              <AccountButton user={user} />
+            {authUser ? (
+              <AccountButton user={authUser} />
             ) : (
               <div className={styles.navbar__account}>
                 <Avatar

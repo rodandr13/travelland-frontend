@@ -2,8 +2,11 @@
 
 import { useRouter } from "next/navigation";
 
+import { useAuth } from "@/src/app/providers/AuthProvider";
+
 export const useSignOut = () => {
   const router = useRouter();
+  const { setAuthUser } = useAuth();
 
   return async () => {
     try {
@@ -13,7 +16,8 @@ export const useSignOut = () => {
       });
 
       if (response.ok) {
-        router.refresh();
+        setAuthUser(null);
+        router.replace("/");
       }
     } catch (error) {
       console.error("Ошибка при выходе из аккаунта:", error);
