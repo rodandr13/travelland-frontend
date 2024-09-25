@@ -12,7 +12,8 @@ export const middleware = async (
 ): Promise<NextResponse> => {
   const accessToken = request.cookies.get("accessToken");
   const refreshToken = request.cookies.get("refreshToken");
-
+  console.log(accessToken);
+  console.log(refreshToken);
   const isAuthPage =
     request.nextUrl.pathname.startsWith("/signin") ||
     request.nextUrl.pathname.startsWith("/signup");
