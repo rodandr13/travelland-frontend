@@ -5,6 +5,11 @@ import { SubmitHandler, useFormContext } from "react-hook-form";
 import { resetDetails } from "@/src/enities/booking";
 import { setOrderSuccess } from "@/src/enities/booking/model/bookingSlice";
 import { resetCart } from "@/src/enities/cart/model/cartSlice";
+import { apiClient } from "@/src/shared/api";
+import {
+  EXTERNAL_API_BASE_URL,
+  ORDER_ENDPOINTS,
+} from "@/src/shared/lib/constants";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
@@ -54,19 +59,12 @@ export const BookOrder = ({ items }: Props) => {
     };
 
     try {
-      const response = await fetch("http://localhost:4000/api/order", {
+      const url = `${EXTERNAL_API_BASE_URL}${ORDER_ENDPOINTS.CREATE}`;
+      const response = await apiClient(url, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(order),
+        body: order,
+        credentials: "include",
       });
-
-      if (!response.ok) {
-        throw new Error(`Ошибка: ${response.status}`);
-      }
-
-      const data = await response.json();
       dispatch(resetDetails());
       dispatch(resetCart());
       dispatch(setOrderSuccess(true));

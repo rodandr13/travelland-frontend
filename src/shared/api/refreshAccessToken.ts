@@ -1,3 +1,9 @@
+import { apiClient, ApiError } from "@/src/shared/api/apiClient";
+import {
+  AUTH_ENDPOINTS,
+  EXTERNAL_API_BASE_URL,
+} from "@/src/shared/lib/constants";
+
 interface TokenResponse {
   accessToken: string;
   refreshToken: string;
@@ -6,18 +12,25 @@ interface TokenResponse {
 export const refreshAccessToken = async (
   refreshToken: string
 ): Promise<TokenResponse> => {
-  const result = await fetch("http://localhost:4000/api/auth/refresh", {
-    method: "POST",
-    credentials: "include",
-    headers: {
-      "Content-Type": "application/json",
-      Cookie: `refreshToken=${refreshToken}`,
-    },
-  });
+  try {
+    const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.REFRESH}`;
 
-  if (!result.ok) {
-    throw new Error("Failed to refresh token");
+    return await apiClient<TokenResponse>(url, {
+      method: "POST",
+      headers: {
+        Cookie: `refreshToken=${refreshToken}`,
+      },
+      credentials: "include",
+    });
+  } catch (error) {
+    if (error instanceof ApiError) {
+      console.error(
+        `API Error: ${error.message} (Status: ${error.statusCode})`,
+        error.data
+      );
+    } else {
+      console.error("Unexpected Error:", error);
+    }
+    throw error;
   }
-
-  return await result.json();
 };

@@ -2,6 +2,11 @@
 
 import { useEffect, useState } from "react";
 
+import { apiClient } from "@/src/shared/api";
+import {
+  EXTERNAL_API_BASE_URL,
+  ORDER_ENDPOINTS,
+} from "@/src/shared/lib/constants";
 import { OrdersList } from "@/src/shared/ui/ordersList/OrdersList";
 
 import styles from "./styles.module.scss";
@@ -13,24 +18,17 @@ export const Account = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const response = await fetch("http://localhost:4000/api/order", {
-          method: "GET",
+        const url = `${EXTERNAL_API_BASE_URL}${ORDER_ENDPOINTS.GET_ALL}`;
+        const response = await apiClient<Order[]>(url, {
           credentials: "include",
         });
-
-        if (response.ok) {
-          const data: Order[] = await response.json();
-          setOrders(data);
-        } else {
-          console.error("Ошибка при получении заказов");
-        }
+        setOrders(response);
       } catch (error) {
         console.error(error);
       } finally {
         setLoading(false);
       }
     };
-
     fetchOrders();
   }, []);
 

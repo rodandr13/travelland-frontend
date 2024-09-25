@@ -5,7 +5,7 @@ import { refreshAccessToken } from "@/src/shared/api/refreshAccessToken";
 import {
   ACCESS_TOKEN_LIFETIME,
   REFRESH_TOKEN_LIFETIME,
-} from "@/src/shared/lib/constans";
+} from "@/src/shared/lib/constants";
 
 export const middleware = async (
   request: NextRequest
@@ -30,6 +30,7 @@ export const middleware = async (
   if (!accessToken && refreshToken) {
     try {
       const newTokens = await refreshAccessToken(refreshToken.value);
+      console.log(newTokens);
       if (newTokens.accessToken && newTokens.refreshToken) {
         const requestHeaders = new Headers(request.headers);
 

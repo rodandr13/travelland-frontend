@@ -17,6 +17,12 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
+import { useAuth } from "@/src/app/providers/AuthProvider";
+import { apiClient } from "@/src/shared/api";
+import {
+  AUTH_ENDPOINTS,
+  EXTERNAL_API_BASE_URL,
+} from "@/src/shared/lib/constants";
 import { GoogleButton } from "@/src/shared/ui/googleButton";
 
 import styles from "./styles.module.scss";
@@ -44,11 +50,18 @@ interface FormData {
   isTermsAccepted: boolean;
 }
 
+type SignupResponse = {
+  id: number;
+  first_name: string;
+  email: string;
+  phone_number: string;
+};
+
 export const SignUp = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
-
+  const { setAuthUser } = useAuth();
   const {
     register,
     handleSubmit,
@@ -68,25 +81,18 @@ export const SignUp = () => {
 
   const onSubmit = async (data: FormData) => {
     const { confirmPassword, isTermsAccepted, ...submitData } = data;
+
     setIsLoading(true);
     try {
-      const response = await fetch("http://localhost:4000/api/auth/register", {
+      const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.REGISTER}`;
+      const response = await apiClient<SignupResponse>(url, {
         method: "POST",
         credentials: "include",
-        body: JSON.stringify(submitData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: submitData,
       });
-      if (!response.ok) {
-        const errorData = await response.json();
-        const errorMessage =
-          errorData.message || "Ошибка регистрации. Попробуйте снова.";
-        throw new Error(errorMessage);
-      }
       reset();
-      await router.replace("/");
-      router.refresh();
+      setAuthUser(response);
+      router.replace("/");
       setApiError("");
     } catch (error: any) {
       setApiError(error.message || "Произошла ошибка. Попробуйте снова.");

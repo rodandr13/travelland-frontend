@@ -16,6 +16,11 @@ import { useForm } from "react-hook-form";
 import * as z from "zod";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
+import { apiClient, ApiError } from "@/src/shared/api/apiClient";
+import {
+  AUTH_ENDPOINTS,
+  EXTERNAL_API_BASE_URL,
+} from "@/src/shared/lib/constants";
 import { GoogleButton } from "@/src/shared/ui/googleButton";
 
 import styles from "./styles.module.scss";
@@ -29,6 +34,13 @@ interface FormData {
   email: string;
   password: string;
 }
+
+type LoginResponse = {
+  id: number;
+  first_name: string;
+  email: string;
+  phone_number: string;
+};
 
 export const SignIn = () => {
   const router = useRouter();
@@ -50,30 +62,26 @@ export const SignIn = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    const { ...submitData } = data;
     setIsLoading(true);
+    setApiError(null);
     try {
-      const response = await fetch("http://localhost:4000/api/auth/login", {
+      const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.LOGIN}`;
+      const response = await apiClient<LoginResponse>(url, {
         method: "POST",
         credentials: "include",
-        body: JSON.stringify(submitData),
-        headers: {
-          "Content-Type": "application/json",
-        },
+        body: data,
       });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        const errorMessage =
-          errorData.message || "Ошибка авторизации. Попробуйте снова.";
-        throw new Error(errorMessage);
-      }
-      const data = await response.json();
-      setAuthUser(data);
+      setAuthUser(response);
       reset();
       router.replace("/");
     } catch (error: any) {
-      setApiError(error.message || "Ошибка авторизации. Попробуйте снова.");
+      if (error instanceof ApiError) {
+        setApiError(
+          error.data.message || "Ошибка авторизации. Попробуйте снова."
+        );
+      } else {
+        setApiError(error.message || "Ошибка авторизации. Попробуйте снова.");
+      }
     } finally {
       setIsLoading(false);
     }
