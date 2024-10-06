@@ -18,3 +18,5 @@ export const ORDER_ENDPOINTS = {
   CREATE: "/api/order",
   GET_ALL: "/api/order",
 };
+
+export const ADULT_CATEGORY_ID = "40746088-7530-4514-b94e-d0df8560e8de";

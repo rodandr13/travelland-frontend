@@ -65,6 +65,11 @@ export const BookOrder = ({ items }: Props) => {
         body: order,
         credentials: "include",
       });
+
+      if (response.redirect) {
+        window.location.href = response.redirect;
+      }
+
       dispatch(resetDetails());
       dispatch(resetCart());
       dispatch(setOrderSuccess(true));

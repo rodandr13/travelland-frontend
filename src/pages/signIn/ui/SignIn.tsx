@@ -67,8 +67,8 @@ export const SignIn = () => {
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.LOGIN}`;
       const response = await apiClient<LoginResponse>(url, {
-        method: "POST",
         credentials: "include",
+        method: "POST",
         body: data,
       });
       setAuthUser(response);

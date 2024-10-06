@@ -5,6 +5,7 @@ export type Price = {
   price: number;
   title: string;
   description: string;
+  categoryId: string;
 };
 
 export type PricesValue = {
