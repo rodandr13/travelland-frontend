@@ -13,10 +13,7 @@ import { z } from "zod";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { resetOrderStatus } from "@/src/enities/booking/model/bookingSlice";
-import {
-  selectOrderError,
-  selectOrderSuccess,
-} from "@/src/enities/booking/model/selectors";
+import { selectOrderError } from "@/src/enities/booking/model/selectors";
 import { selectCart } from "@/src/enities/cart/model/selectors";
 import { BookOrder } from "@/src/features/bookOrder";
 import { RemoveFromCart } from "@/src/features/removeFromCart";
@@ -26,7 +23,6 @@ import { urlFor } from "@/src/shared/lib/sanity/client";
 import { CartItem } from "@/src/shared/types/cart";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
-import { SuccessfulOrder } from "@/src/shared/ui/successfulOrder";
 import { formatCountParticipants } from "@/src/widgets/detailedCart/lib/formatCountParticipants";
 import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
 import { EditItem } from "@/src/widgets/detailedCart/ui/components/EditItem";
@@ -60,7 +56,6 @@ export type ContactsData = z.infer<typeof contactsSchema>;
 export const DetailedCart = () => {
   const cart = useAppSelector(selectCart);
   const dispatch = useAppDispatch();
-  const isOrderSuccess = useAppSelector(selectOrderSuccess);
   const { authUser } = useAuth();
   const orderError = useAppSelector(selectOrderError);
   const methods = useForm<ContactsData>({
@@ -217,8 +212,6 @@ export const DetailedCart = () => {
             </div>
           </section>
         </FormProvider>
-      ) : isOrderSuccess ? (
-        <SuccessfulOrder order="test" />
       ) : (
         <h2>В корзине пусто</h2>
       )}

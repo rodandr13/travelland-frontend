@@ -3,7 +3,6 @@ import { useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 
 import { resetDetails } from "@/src/enities/booking";
-import { setOrderSuccess } from "@/src/enities/booking/model/bookingSlice";
 import { resetCart } from "@/src/enities/cart/model/cartSlice";
 import { apiClient } from "@/src/shared/api";
 import {
@@ -18,6 +17,12 @@ import { ContactsData } from "@/src/widgets/detailedCart/ui/DetailedCart";
 interface Props {
   items: CartItem[];
 }
+
+type PaymentCreateResponse = {
+  success: boolean;
+  message: string;
+  redirect: string;
+};
 
 export const BookOrder = ({ items }: Props) => {
   const { handleSubmit } = useFormContext<ContactsData>();
@@ -60,19 +65,18 @@ export const BookOrder = ({ items }: Props) => {
 
     try {
       const url = `${EXTERNAL_API_BASE_URL}${ORDER_ENDPOINTS.CREATE}`;
-      const response = await apiClient(url, {
+      const response = await apiClient<PaymentCreateResponse>(url, {
         method: "POST",
         body: order,
         credentials: "include",
       });
 
-      if (response.redirect) {
+      if (response.success && response.redirect) {
         window.location.href = response.redirect;
       }
 
       dispatch(resetDetails());
       dispatch(resetCart());
-      dispatch(setOrderSuccess(true));
     } catch (error) {
       setError((error as Error).message);
     } finally {

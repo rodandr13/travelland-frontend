@@ -3,13 +3,13 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 
 interface Props {
-  order: any;
+  orderNumber: string;
 }
 
-export const SuccessfulOrder = ({ order }: Props) => {
+export const SuccessfulOrder = ({ orderNumber }: Props) => {
   return (
     <section className={styles.successfulOrder}>
-      <h2>Заказ №123 успешно создан</h2>
+      <h2>{`Заказ №${orderNumber} успешно оплачен`}</h2>
       <p>
         Наши менеджеры свяжутся с вами для уточнения деталей. На вашу почту
         отправлена информация о заказе.
