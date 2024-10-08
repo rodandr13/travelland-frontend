@@ -19,7 +19,6 @@ interface Props {
 }
 
 export const OrdersList = ({ orders }: Props) => {
-  console.log(orders);
   if (!orders || orders.length === 0) {
     return null;
   }

@@ -10,7 +10,7 @@ export const PaymentResultPage = ({ searchParams }: Props) => {
   const { token } = searchParams;
   return (
     <div>
-      {status === "success" ? (
+      {token ? (
         <SuccessfulOrder orderNumber={token} />
       ) : (
         <p>Ошибка при обработке платежа: {token}</p>

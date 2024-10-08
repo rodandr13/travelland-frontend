@@ -29,7 +29,6 @@ export const middleware = async (
   if (!accessToken && refreshToken) {
     try {
       const newTokens = await refreshAccessToken(refreshToken.value);
-      console.log(newTokens);
       if (newTokens.accessToken && newTokens.refreshToken) {
         const requestHeaders = new Headers(request.headers);
 
