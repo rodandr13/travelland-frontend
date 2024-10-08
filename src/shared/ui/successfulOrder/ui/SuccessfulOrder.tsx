@@ -3,7 +3,7 @@ import Link from "next/link";
 import styles from "./styles.module.scss";
 
 interface Props {
-  orderNumber: string;
+  orderNumber: number;
 }
 
 export const SuccessfulOrder = ({ orderNumber }: Props) => {

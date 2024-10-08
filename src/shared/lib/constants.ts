@@ -19,4 +19,8 @@ export const ORDER_ENDPOINTS = {
   GET_ALL: "/api/order",
 };
 
+export const PAYMENT_ENDPOINTS = {
+  STATUS: "/api/payment/status",
+};
+
 export const ADULT_CATEGORY_ID = "40746088-7530-4514-b94e-d0df8560e8de";
