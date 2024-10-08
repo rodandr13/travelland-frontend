@@ -29,6 +29,7 @@ export const apiClient = async <T>(
         "Content-Type": "application/json",
         ...options.headers,
       },
+      cache: "no-store",
       body: options.body ? JSON.stringify(options.body) : undefined,
       credentials: options.credentials || "same-origin",
     });
