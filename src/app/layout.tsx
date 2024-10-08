@@ -47,7 +47,7 @@ export default async function RootLayout({
 }>) {
   const accessToken = cookies().get("accessToken")?.value;
   let user = null;
-
+  console.log("RENDER ROOT LAYOUT");
   if (accessToken) {
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.ME}`;
