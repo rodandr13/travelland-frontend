@@ -44,9 +44,9 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const accessToken = cookies().get("accessToken")?.value;
-  let user = null;
   console.log("RENDER ROOT LAYOUT");
-  console.log("accessToken");
+  console.log("accessToken", accessToken);
+  let user = null;
   if (accessToken) {
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.ME}`;
