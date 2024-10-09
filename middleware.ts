@@ -15,7 +15,9 @@ export const middleware = async (
   const isAuthPage =
     request.nextUrl.pathname.startsWith("/signin") ||
     request.nextUrl.pathname.startsWith("/signup");
-
+  console.log("middleware");
+  console.log(refreshToken);
+  console.log(accessToken);
   if ((accessToken || refreshToken) && isAuthPage) {
     return NextResponse.redirect(new URL("/", request.url));
   }
@@ -84,5 +86,5 @@ export const middleware = async (
 };
 
 export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  matcher: ["/((?!_next/static|_next/image|.*\\.png$).*)"],
 };
