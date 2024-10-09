@@ -22,6 +22,7 @@ type UserResponse = {
 export const Header = async () => {
   console.log("RENDER HEADER");
   const accessToken = cookies().get("accessToken")?.value;
+  console.log("accessToken", accessToken);
   let user = null;
   if (accessToken) {
     try {
