@@ -13,8 +13,18 @@ import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
 import styles from "./styles.module.scss";
 
-export const Navbar = () => {
-  const { authUser } = useAuth();
+interface Props {
+  user?: {
+    id: number;
+    first_name: string;
+    email: string;
+    phone_number?: string;
+  } | null;
+}
+
+export const Navbar = ({ user }: Props) => {
+  const { setAuthUser, authUser } = useAuth();
+
   const isOpen = useAppSelector((state) => state.menu.isOpen);
   return (
     <div className={styles.navbar}>
@@ -70,8 +80,8 @@ export const Navbar = () => {
             <CompactCart />
           </div>
           <div>
-            {authUser ? (
-              <AccountButton user={authUser} />
+            {user ? (
+              <AccountButton user={user} />
             ) : (
               <div className={styles.navbar__account}>
                 <Avatar

@@ -25,21 +25,9 @@ const AuthContext = createContext<AuthContextProps>({
 
 export const useAuth = () => useContext(AuthContext);
 
-interface AuthProviderProps {
-  children: ReactNode;
-  initialUser?: AuthUser | null;
-  initialAccessToken?: string | null;
-}
-
-export const AuthProvider = ({
-  children,
-  initialUser = null,
-  initialAccessToken = null,
-}: AuthProviderProps) => {
-  const [authUser, setAuthUser] = useState<AuthUser | null>(initialUser);
-  const [accessToken, setAccessToken] = useState<string | null>(
-    initialAccessToken
-  );
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+  const [authUser, setAuthUser] = useState<AuthUser | null>(null);
+  const [accessToken, setAccessToken] = useState<string | null>(null);
 
   return (
     <AuthContext.Provider
