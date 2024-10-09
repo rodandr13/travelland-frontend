@@ -22,7 +22,7 @@ type PaymentResultResponse = {
 export const PaymentResultPage = async ({ searchParams }: Props) => {
   const { token } = searchParams;
   const accessToken = cookies().get("accessToken")?.value;
-  console.log("RENDER PaymentResultPage LAYOUT");
+  console.log("RENDER PaymentResultPage");
   console.log("accessToken", accessToken);
   const { orderId, message, status } = await apiClient<PaymentResultResponse>(
     `${EXTERNAL_API_BASE_URL}${PAYMENT_ENDPOINTS.STATUS}`,
