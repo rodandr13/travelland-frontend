@@ -14,9 +14,7 @@ import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 import styles from "./styles.module.scss";
 
 export const Navbar = () => {
-  console.log("NAVBAR RENDER");
   const { authUser } = useAuth();
-  console.log("authUser", authUser);
   const isOpen = useAppSelector((state) => state.menu.isOpen);
   return (
     <div className={styles.navbar}>

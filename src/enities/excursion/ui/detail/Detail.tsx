@@ -1,8 +1,8 @@
 import { Booking } from "@/src/enities/booking";
 import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
 import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
-import { findAdultMinPrice } from "@/src/shared/lib/findAdultMinPrice";
 import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
+import { getMinPrice } from "@/src/shared/lib/getMinPrice";
 
 import { Advantages } from "./components/advantages/Advantages";
 import { AttentionBlock } from "./components/attentionBlock/AttentionBlock";
@@ -55,7 +55,24 @@ export const Detail = async ({ slug }: Props) => {
   });
 
   const baseAdultPrice = findAdultBasePrice(basePrices);
-  const minAdultPrice = findAdultMinPrice(prices) || baseAdultPrice;
+  const minPrice = getMinPrice(
+    {
+      basePrices,
+      ...(priceCorrections
+        ? {
+            priceCorrections: priceCorrections.flatMap((promo) => promo.prices),
+          }
+        : {}),
+      ...(promotionalPrices
+        ? {
+            promotionalPrices: promotionalPrices.flatMap(
+              (promo) => promo.prices
+            ),
+          }
+        : {}),
+    },
+    category.key
+  );
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={gallery} />
@@ -104,7 +121,7 @@ export const Detail = async ({ slug }: Props) => {
         <div className={styles.excursionDetail__sideBar}>
           <PriceSection
             id={_id}
-            minPrice={minAdultPrice}
+            minPrice={minPrice}
             basePrice={baseAdultPrice}
             title={title}
           />

@@ -19,6 +19,8 @@ export type Price = {
   price: number;
   title: string;
   description: string;
+  key: string;
+  type: string;
 };
 
 export type PromotionalPrice = {
@@ -52,6 +54,7 @@ export type Category = {
   _id: string;
   title: string;
   icon: string;
+  key: CategoryKey;
 };
 export type Parameter = {
   title: string;
@@ -63,6 +66,16 @@ export type GalleryImage = {
   src: string;
   lqip: string;
 };
+
+export enum CategoryKey {
+  Individual = "individual",
+  Group = "group",
+}
+
+export enum AgeCategory {
+  Adult = "adult",
+  Children = "child",
+}
 
 export type ExcursionType = {
   _id: string;
