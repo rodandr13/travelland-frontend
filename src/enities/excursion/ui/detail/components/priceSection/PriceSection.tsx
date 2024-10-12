@@ -14,11 +14,11 @@ import { AddToCart } from "@/src/features/addToCart";
 import { EditExcursion } from "@/src/features/editExcursion";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { CategoryKey } from "@/src/shared/types/excursion";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 
 import styles from "./styles.module.scss";
-import { CategoryKey } from "@/src/shared/types/excursion";
 
 interface Props {
   minPrice: number | undefined;
