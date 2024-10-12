@@ -80,6 +80,7 @@ export enum AgeCategory {
 export type ExcursionType = {
   _id: string;
   _type: string;
+  slug: string;
   title: string;
   city: string;
   country: string;
@@ -103,18 +104,16 @@ export type ExcursionType = {
   parameters: Parameter[];
 };
 
-export interface ExcursionCard {
-  _id: string;
-  title: string;
-  slug: string;
-  gallery: GalleryImage[];
-  weekdays: Weekdays;
-  category: Category;
-  duration: Duration;
-  subcategory: string[];
-  basePrices: Price[];
-  promotionalPrices: PromotionalPrice[];
-  priceCorrections: PromotionalPrice[];
-}
+export type ExcursionCard = Omit<
+  ExcursionType,
+  | "parameters"
+  | "route"
+  | "endingPlace"
+  | "startingPlace"
+  | "additionalTerms"
+  | "surcharge"
+  | "included"
+  | "description"
+>;
 
 export type ExcursionCards = ExcursionCard[];

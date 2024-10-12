@@ -3,6 +3,7 @@ import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDeta
 import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
 import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
 import { getMinPrice } from "@/src/shared/lib/getMinPrice";
+import { Price } from "@/src/shared/types/booking";
 
 import { Advantages } from "./components/advantages/Advantages";
 import { AttentionBlock } from "./components/attentionBlock/AttentionBlock";
@@ -19,6 +20,12 @@ import styles from "./styles.module.scss";
 
 interface Props {
   slug: string;
+}
+
+interface PriceData {
+  basePrices: Price[];
+  priceCorrections?: Price[];
+  promotionalPrices?: Price[];
 }
 
 export const Detail = async ({ slug }: Props) => {
@@ -54,25 +61,25 @@ export const Detail = async ({ slug }: Props) => {
     weekdays: weekdays,
   });
 
+  const priceData: PriceData = {
+    basePrices,
+  };
+
+  if (priceCorrections) {
+    priceData.priceCorrections = priceCorrections.flatMap(
+      (promo) => promo.prices
+    );
+  }
+
+  if (promotionalPrices) {
+    priceData.promotionalPrices = promotionalPrices.flatMap(
+      (promo) => promo.prices
+    );
+  }
+
   const baseAdultPrice = findAdultBasePrice(basePrices);
-  const minPrice = getMinPrice(
-    {
-      basePrices,
-      ...(priceCorrections
-        ? {
-            priceCorrections: priceCorrections.flatMap((promo) => promo.prices),
-          }
-        : {}),
-      ...(promotionalPrices
-        ? {
-            promotionalPrices: promotionalPrices.flatMap(
-              (promo) => promo.prices
-            ),
-          }
-        : {}),
-    },
-    category.key
-  );
+  const minPrice = getMinPrice(priceData, category.key);
+
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={gallery} />
@@ -124,6 +131,7 @@ export const Detail = async ({ slug }: Props) => {
             minPrice={minPrice}
             basePrice={baseAdultPrice}
             title={title}
+            category={category.key}
           />
           <AttentionBlock />
         </div>

@@ -18,15 +18,23 @@ import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 
 import styles from "./styles.module.scss";
+import { CategoryKey } from "@/src/shared/types/excursion";
 
 interface Props {
   minPrice: number | undefined;
   basePrice: number | undefined;
   title?: string;
   id: string;
+  category: string;
 }
 
-export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
+export const PriceSection = ({
+  minPrice,
+  basePrice,
+  title,
+  id,
+  category,
+}: Props) => {
   const bookingIsVisible = useAppSelector(selectVisibility);
   const bookingItem = useAppSelector(selectDetailsByKey(id));
   const isItemExists = useAppSelector((state) => itemExists(state, id));
@@ -38,6 +46,9 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
     showPrice: false,
     animationClass: "",
   });
+
+  const categoryPrice =
+    category === CategoryKey.Group ? "за 1 взрослого" : "за группу";
 
   const handleScroll = () => {
     targetRef?.current?.scrollIntoView({ behavior: "smooth" });
@@ -91,7 +102,7 @@ export const PriceSection = ({ minPrice, basePrice, title, id }: Props) => {
         >
           <div>
             <PriceBlock parent="priceSection" {...priceProps} size="m" />
-            <p className={styles.priceSection__caption}>за 1 взрослого</p>
+            <p className={styles.priceSection__caption}>{categoryPrice}</p>
           </div>
           <ul className={styles.priceSection__advantages}>
             <li className={styles.priceSection__advantagesItem}>

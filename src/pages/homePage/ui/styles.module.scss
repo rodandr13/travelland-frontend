@@ -1,5 +1,6 @@
 .home {
   max-width: 1440px;
+  width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
   padding: 40px 40px;
@@ -7,6 +8,7 @@
 
 .aboutUs {
   padding: 80px 0 0 0;
+
   &__subtitle {
     padding: 2rem 0 1rem 0;
     text-align: center;
@@ -29,6 +31,7 @@
     align-items: start;
     position: relative;
     min-height: 200px;
+
     &::after {
       content: '';
       position: absolute;
@@ -44,9 +47,11 @@
                       transparent 30px
       );
     }
+
     &:last-child::after {
       bottom: 80px;
     }
+
     &:nth-child(even) .timeline__description {
       grid-column: 1 / 2;
       grid-row: 1;
@@ -61,6 +66,7 @@
     justify-self: center;
     grid-column: 2 / 3;
   }
+
   &__description {
     max-width: 400px;
     margin: 0;
@@ -79,25 +85,31 @@
   }
   .timeline {
     align-items: start;
+
     &__item {
       grid-template-columns: 150px 1fr;
       min-height: 100px;
+
       &:nth-child(even) .timeline__description {
         grid-column: 2 / 3;
         grid-row: 1;
         text-align: left;
       }
+
       &:last-child {
         min-height: 200px;
       }
+
       &::after {
         left: 60px;
       }
     }
+
     &__year {
       grid-column: 1 / 2;
       justify-self: start;
     }
+
     &__description {
       padding-bottom: 40px;
     }
@@ -115,9 +127,11 @@
     &__item {
       grid-template-columns: 1fr;
       gap: 0;
+
       &::after {
         display: none;
       }
+
       &:nth-child(even) .timeline__description {
         grid-column: 1 / 2;
         grid-row: 2;

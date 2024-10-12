@@ -4,6 +4,9 @@ import React from "react";
 
 import Link from "next/link";
 
+import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
+import { getMinPrice } from "@/src/shared/lib/getMinPrice";
+import { Price } from "@/src/shared/types/booking";
 import { ExcursionCard } from "@/src/shared/types/excursion";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { ImageSlider } from "@/src/shared/ui/slider";
@@ -27,28 +30,36 @@ const daysOfWeek = [
   "Sunday",
 ];
 
+interface PriceData {
+  basePrices: Price[];
+  priceCorrections?: Price[];
+  promotionalPrices?: Price[];
+}
+
 export const Card = ({ addFavorite, card }: Props) => {
   const filledDays = daysOfWeek.map((day) =>
     card.weekdays.includes(day) ? day : ""
   );
-  const formattedDuration = formatDuration(card.duration);
 
-  const priceCorrections =
-    card.priceCorrections?.flatMap((pricesObj) =>
-      pricesObj.prices.flatMap((price) => price.price)
-    ) || [];
-  const promotionalPrices =
-    card.promotionalPrices?.flatMap((pricesObj) =>
-      pricesObj.prices.flatMap((price) => price.price)
-    ) || [];
-  const basePrices =
-    card.basePrices.map((priceObj) => priceObj.price)[0] ?? null;
-  const allPrices = [
-    basePrices,
-    ...priceCorrections,
-    ...promotionalPrices,
-  ].filter((price) => price != null);
-  const minPrice = allPrices.length > 0 ? Math.min(...allPrices) : basePrices;
+  const priceData: PriceData = {
+    basePrices: card.basePrices,
+  };
+
+  if (card.priceCorrections) {
+    priceData.priceCorrections = card.priceCorrections.flatMap(
+      (promo) => promo.prices
+    );
+  }
+
+  if (card.promotionalPrices) {
+    priceData.promotionalPrices = card.promotionalPrices.flatMap(
+      (promo) => promo.prices
+    );
+  }
+
+  const baseAdultPrice = findAdultBasePrice(card.basePrices);
+  const minPrice = getMinPrice(priceData, card.category.key);
+
   return (
     <article className={styles.excursionCard}>
       <Link
@@ -64,7 +75,7 @@ export const Card = ({ addFavorite, card }: Props) => {
         <p className={styles.excursionCard__duration}>
           {formatDuration(card.duration)}
         </p>
-        <PriceBlock currentPrice={minPrice} basePrice={basePrices} />
+        <PriceBlock currentPrice={minPrice} basePrice={baseAdultPrice} />
       </Link>
     </article>
   );
