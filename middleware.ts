@@ -38,6 +38,7 @@ export const middleware = async (
         cookies.refreshToken = newTokens.refreshToken;
 
         const updatedCookieString = Object.entries(cookies)
+          .filter((entry): entry is [string, string] => entry[1] !== undefined)
           .map(([name, value]) => serialize(name, value))
           .join("; ");
 
@@ -58,7 +59,7 @@ export const middleware = async (
           path: "/",
           maxAge: ACCESS_TOKEN_LIFETIME,
           secure: process.env.NODE_ENV === "production",
-          sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+          sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
         });
         nextResponse.cookies.set("refreshToken", newTokens.refreshToken, {
           domain: process.env.COOKIE_DOMAIN || "localhost",
@@ -66,7 +67,7 @@ export const middleware = async (
           path: "/",
           maxAge: REFRESH_TOKEN_LIFETIME,
           secure: process.env.NODE_ENV === "production",
-          sameSite: process.env.NODE_ENV === "production" ? "strict" : "lax",
+          sameSite: process.env.NODE_ENV === "production" ? "lax" : "lax",
         });
 
         return nextResponse;
