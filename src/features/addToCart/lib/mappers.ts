@@ -10,7 +10,7 @@ export const mapToDto = (item: CartItem): CartItemDto => ({
   service_type: item.service_type.toUpperCase(),
   date: new Date(item.date),
   time: item.time,
-  options: item.options.map((participant) => ({
+  cart_item_options: item.cart_item_options.map((participant) => ({
     base_price: participant.base_price,
     current_price: participant.current_price,
     category_title: participant.category_title,

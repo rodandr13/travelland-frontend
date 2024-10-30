@@ -28,7 +28,7 @@ export const SelectPeoples = ({ id, participants }: Props) => {
         setDetails({
           key: id,
           details: {
-            options: updatedParticipants,
+            cart_item_options: updatedParticipants,
           },
         })
       );

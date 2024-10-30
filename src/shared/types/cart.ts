@@ -22,7 +22,7 @@ export type CartItem = {
   image_src: string;
   total_base_price: number;
   total_current_price: number;
-  options: CartItemParticipants[];
+  cart_item_options: CartItemParticipants[];
 };
 
 export type Cart = {

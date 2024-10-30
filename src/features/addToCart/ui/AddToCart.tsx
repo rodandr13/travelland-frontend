@@ -1,4 +1,8 @@
-import { useAddToCart } from "@/src/features/addToCart/model/useAddToCart";
+import { useState } from "react";
+
+import { addCartItem } from "@/src/enities/cart/model/thunks";
+import { mapToDto } from "@/src/features/addToCart/lib/mappers";
+import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 
@@ -7,41 +11,61 @@ interface Props {
 }
 
 export const AddToCart = ({ cartItem }: Props) => {
-  const { addToCart, loading, error } = useAddToCart();
+  const dispatch = useAppDispatch();
+  const [isAdding, setIsAdding] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const handleClick = async () => {
+    if (isAdding) return;
+
+    setIsAdding(true);
+    setError(null);
+
     try {
-      await addToCart(cartItem);
-    } catch (error) {
-      console.error("Revalidation error:", error);
+      const mappedCart = mapToDto(cartItem);
+      await dispatch(addCartItem(mappedCart)).unwrap();
+    } catch (err) {
+      console.log(err);
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("Ошибка при добавлении в корзину");
+      }
+    } finally {
+      setIsAdding(false);
     }
   };
 
   const getButtonTitle = () => {
-    if (loading) return "Добавление...";
     if (!cartItem?.date) return "Выберите дату";
     if (!cartItem?.time) return "Выберите время";
     if (
-      !cartItem?.options.some((participant) => (participant.quantity ?? 0) > 0)
+      !cartItem?.cart_item_options.some(
+        (participant) => (participant.quantity ?? 0) > 0
+      )
     ) {
       return "Укажите количество человек";
     }
-    return "Добавить в корзину";
+    return isAdding ? "Добавление..." : "Добавить в корзину";
   };
 
+  const isDisabled =
+    isAdding ||
+    !cartItem?.date ||
+    !cartItem?.time ||
+    !cartItem?.cart_item_options.some(
+      (participant) => (participant.quantity ?? 0) > 0
+    );
+
   return (
-    <Button
-      title={getButtonTitle()}
-      disabled={
-        loading ||
-        !cartItem?.date ||
-        !cartItem?.time ||
-        !cartItem?.options.some(
-          (participant) => (participant.quantity ?? 0) > 0
-        )
-      }
-      onClick={handleClick}
-      variant="confirm"
-    />
+    <>
+      {error && <div className="error">{error}</div>}
+      <Button
+        title={getButtonTitle()}
+        disabled={isDisabled}
+        onClick={handleClick}
+        variant="confirm"
+      />
+    </>
   );
 };

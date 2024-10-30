@@ -6,7 +6,12 @@ import {
 
 import { Cart } from "@/src/shared/types/cart";
 
-import { fetchCart, removeCartItem, updateCartItem } from "./thunks";
+import {
+  addCartItem,
+  fetchCart,
+  removeCartItem,
+  updateCartItem,
+} from "./thunks";
 
 interface CartState {
   data: Cart | null;
@@ -48,6 +53,7 @@ const cartSlice = createSlice({
     addCommonCases(builder, fetchCart);
     addCommonCases(builder, updateCartItem, "Failed to update item");
     addCommonCases(builder, removeCartItem, "Failed to remove item");
+    addCommonCases(builder, addCartItem, "Failed to add item");
   },
 });
 

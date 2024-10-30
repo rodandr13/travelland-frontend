@@ -66,9 +66,7 @@ export const Navbar = () => {
           {/*    </li>*/}
           {/*  </ul>*/}
           {/*</div>*/}
-          <div className={styles.navbar__cart}>
-            <CompactCart />
-          </div>
+          <div className={styles.navbar__cart}>{<CompactCart />}</div>
           <div>
             {authUser ? (
               <AccountButton user={authUser} />

@@ -91,7 +91,9 @@ export const PriceSection = ({
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, [bookingIsVisible, isItemExists]);
 
-  const activeItem = bookingItem?.options?.length ? bookingItem : cartItem;
+  const activeItem = bookingItem?.cart_item_options?.length
+    ? bookingItem
+    : cartItem;
 
   const priceProps =
     minPrice === basePrice
@@ -152,57 +154,60 @@ export const PriceSection = ({
               </p>
             )}
           </div>
-          {activeItem?.options && activeItem.options.length > 0 && (
-            <>
-              <ul className={styles.priceSection__list}>
-                {activeItem.options.map((participant, i) =>
-                  participant && participant.quantity ? (
-                    <li className={styles.priceSection__item} key={i}>
-                      <div className={styles.priceSection__priceLine}>
-                        <span>{participant.quantity}&nbsp;x&nbsp;</span>
-                        <span>
-                          {participant.category_title}&nbsp;(
-                          {formatCurrency(participant.current_price)})&nbsp;
-                        </span>
-                        <span
-                          className={styles.priceSection__dottedLine}
-                        ></span>
-                        <span className={styles.priceSection__priceSum}>
-                          <span className={styles.priceSection__priceSum_base}>
-                            {participant.base_price !==
-                              participant.current_price &&
-                              formatCurrency(
-                                participant.base_price * participant.quantity
-                              )}
+          {activeItem?.cart_item_options &&
+            activeItem.cart_item_options.length > 0 && (
+              <>
+                <ul className={styles.priceSection__list}>
+                  {activeItem.cart_item_options.map((participant, i) =>
+                    participant && participant.quantity ? (
+                      <li className={styles.priceSection__item} key={i}>
+                        <div className={styles.priceSection__priceLine}>
+                          <span>{participant.quantity}&nbsp;x&nbsp;</span>
+                          <span>
+                            {participant.category_title}&nbsp;(
+                            {formatCurrency(participant.current_price)})&nbsp;
                           </span>
                           <span
-                            className={styles.priceSection__priceSum_current}
-                          >
-                            {formatCurrency(
-                              participant.current_price * participant.quantity
-                            )}
+                            className={styles.priceSection__dottedLine}
+                          ></span>
+                          <span className={styles.priceSection__priceSum}>
+                            <span
+                              className={styles.priceSection__priceSum_base}
+                            >
+                              {participant.base_price !==
+                                participant.current_price &&
+                                formatCurrency(
+                                  participant.base_price * participant.quantity
+                                )}
+                            </span>
+                            <span
+                              className={styles.priceSection__priceSum_current}
+                            >
+                              {formatCurrency(
+                                participant.current_price * participant.quantity
+                              )}
+                            </span>
                           </span>
+                        </div>
+                        <span className={styles.priceSection__caption}>
+                          ({participant.category_description})
                         </span>
-                      </div>
-                      <span className={styles.priceSection__caption}>
-                        ({participant.category_description})
-                      </span>
-                    </li>
-                  ) : null
-                )}
-              </ul>
-              <div>
-                <span className={styles.priceSection__caption}>К оплате</span>
-                <PriceBlock
-                  parent="priceSection"
-                  currentPrice={activeItem?.total_current_price}
-                  basePrice={activeItem?.total_base_price}
-                  size="m"
-                  actualPrice
-                />
-              </div>
-            </>
-          )}
+                      </li>
+                    ) : null
+                  )}
+                </ul>
+                <div>
+                  <span className={styles.priceSection__caption}>К оплате</span>
+                  <PriceBlock
+                    parent="priceSection"
+                    currentPrice={activeItem?.total_current_price}
+                    basePrice={activeItem?.total_base_price}
+                    size="m"
+                    actualPrice
+                  />
+                </div>
+              </>
+            )}
 
           {!isItemExists ? (
             <AddToCart cartItem={bookingItem} />

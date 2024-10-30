@@ -7,7 +7,7 @@ export type CartItemDto = {
   slug: string;
   date: Date;
   time: string;
-  options: CartItemOptionDto[];
+  cart_item_options: CartItemOptionDto[];
 };
 
 export type CartItemOptionDto = {

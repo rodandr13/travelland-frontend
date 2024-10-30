@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import clsx from "clsx";
@@ -12,24 +12,17 @@ import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
-import { resetOrderStatus } from "@/src/enities/booking/model/bookingSlice";
-import { selectOrderError } from "@/src/enities/booking/model/selectors";
-import { selectCart } from "@/src/enities/cart/model/selectors";
-import { BookOrder } from "@/src/features/bookOrder";
-import { RemoveFromCart } from "@/src/features/removeFromCart";
+import { selectCartData } from "@/src/enities/cart/model/selectors";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
-import { CartItem } from "@/src/shared/types/cart";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
 import { formatCountParticipants } from "@/src/widgets/detailedCart/lib/formatCountParticipants";
 import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
-import { EditItem } from "@/src/widgets/detailedCart/ui/components/EditItem";
 import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
 
 import styles from "./styles.module.scss";
-import { useCart } from "@/src/enities/cart/hooks/useCart";
 
 const contactsSchema = z.object({
   name: z
@@ -55,10 +48,9 @@ const contactsSchema = z.object({
 export type ContactsData = z.infer<typeof contactsSchema>;
 
 export const DetailedCart = () => {
-  const cart = useAppSelector(selectCart);
+  const cart = useAppSelector(selectCartData);
   const dispatch = useAppDispatch();
   const { authUser } = useAuth();
-  const orderError = useAppSelector(selectOrderError);
   const methods = useForm<ContactsData>({
     resolver: zodResolver(contactsSchema),
     mode: "onSubmit",
@@ -71,31 +63,26 @@ export const DetailedCart = () => {
     },
   });
 
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-
-  const { cart: test } = useCart();
-
-  console.log(test);
-
-  useEffect(() => {
-    setCartItems(cart.items);
-  }, [cart.items]);
-
   useEffect(() => {
     return () => {
-      dispatch(resetOrderStatus());
+      // dispatch(resetOrderStatus());
     };
   }, []);
+  console.log("authUser", authUser);
+  console.log("cart", cart);
 
   return (
     <>
-      {cartItems.length > 0 ? (
+      {cart && cart.cart_items.length > 0 ? (
         <FormProvider {...methods}>
           <section className={styles.detailedCart}>
             <div className={styles.detailedCart__container}>
               <ul className={styles.detailedCart__list}>
-                {cartItems.map((item) => (
-                  <li key={item.id} className={styles.detailedCart__item}>
+                {cart.cart_items.map((item) => (
+                  <li
+                    key={item.service_id}
+                    className={styles.detailedCart__item}
+                  >
                     <Link
                       href={`/excursion/${item.slug}`}
                       className={styles.detailedCart__link}
@@ -103,8 +90,8 @@ export const DetailedCart = () => {
                       <div className={styles.detailedCart__imageContainer}>
                         <Image
                           className={styles.detailedCart__image}
-                          src={urlFor(item.image.src)}
-                          blurDataURL={item.image.lqip}
+                          src={urlFor(item.image_src)}
+                          blurDataURL={item.image_lqip}
                           alt=""
                           placeholder="blur"
                           loading="lazy"
@@ -120,30 +107,32 @@ export const DetailedCart = () => {
                         </h3>
                         <div className={styles.detailedCart__dateContainer}>
                           <p className={clsx(styles.detailedCart__date)}>
-                            {item.selectedDate &&
-                              format(item.selectedDate, "d MMMM yyyy", {
+                            {item.date &&
+                              format(item.date, "d MMMM yyyy", {
                                 locale: ru,
                               })}{" "}
-                            в {item.selectedTime}
+                            в {item.time}
                           </p>
                         </div>
                         <div
                           className={styles.detailedCart__participantsContainer}
                         >
                           <ul className={styles.detailedCart__participantsList}>
-                            {item.participants.map((participant, i) => (
+                            {item.cart_item_options.map((participant, i) => (
                               <li
-                                key={participant.id}
+                                key={i}
                                 className={clsx(
                                   styles.detailedCart__participantsItem
                                 )}
                               >
-                                {participant.count &&
+                                {participant.quantity &&
                                   formatCountParticipants(
-                                    participant.count,
-                                    participant.title
+                                    participant.quantity,
+                                    participant.category_title
                                   )}
-                                {i < item.participants.length - 1 ? "," : ""}
+                                {i < item.cart_item_options.length - 1
+                                  ? ","
+                                  : ""}
                               </li>
                             ))}
                           </ul>
@@ -162,13 +151,13 @@ export const DetailedCart = () => {
                         <div className={styles.detailedCart__price}>
                           <PriceBlock
                             actualPrice
-                            currentPrice={item.totalCurrentPrice}
-                            basePrice={item.totalBasePrice}
+                            currentPrice={item.total_current_price}
+                            basePrice={item.total_base_price}
                           />
                         </div>
                         <div className={styles.detailedCart__buttonsGroup}>
-                          <RemoveFromCart itemId={item.id} />
-                          <EditItem />
+                          {/*<RemoveFromCart itemId={item.service_id} />*/}
+                          {/*<EditItem />*/}
                         </div>
                       </div>
                     </Link>
@@ -184,10 +173,10 @@ export const DetailedCart = () => {
               <h2 className={styles.detailedCart__title}>Ваш заказ</h2>
               <ul className={styles.detailedCart__priceList}>
                 <div className={styles.detailedCart__priceLine}>
-                  <span>Услуги ({cart.totalItems})</span>
+                  <span>Услуги ({cart.cart_items.length})</span>
                   <span className={styles.detailedCart__dottedLine}></span>
                   <span className={styles.detailedCart__priceSum}>
-                    {formatCurrency(cart.totalBasePrice)}
+                    {formatCurrency(cart.total_base_price)}
                   </span>
                 </div>
                 <div className={styles.detailedCart__priceLine}>
@@ -195,7 +184,7 @@ export const DetailedCart = () => {
                   <span className={styles.detailedCart__dottedLine}></span>
                   <span className={styles.detailedCart__priceSum}>
                     {formatCurrency(
-                      cart.totalBasePrice - cart.totalCurrentPrice
+                      cart.total_base_price - cart.total_current_price
                     )}
                   </span>
                 </div>
@@ -203,9 +192,12 @@ export const DetailedCart = () => {
               <PromotionalCode />
               <div className={styles.detailedCart__totalPriceBlock}>
                 <h3 className={styles.detailedCart__title}>К оплате:</h3>
-                <PriceBlock actualPrice currentPrice={cart.totalCurrentPrice} />
+                <PriceBlock
+                  actualPrice
+                  currentPrice={cart.total_current_price}
+                />
               </div>
-              <BookOrder items={cartItems} />
+              {/*<BookOrder items={cart.cart_items} />*/}
               <p className={styles.detailedCart__consentOffer}>
                 Нажимая кнопку &quot;Заказать&quot;, Вы принимаете условия
                 соответствующей оферты: <a href="#">Оферты для физических</a>{" "}

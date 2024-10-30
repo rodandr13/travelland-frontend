@@ -32,7 +32,7 @@ export const Calendar = ({ prices, id }: Props) => {
   const handleChange = (date: Date | null) => {
     if (id && date) {
       const currentParticipants = selectedDate
-        ? bookingDetails?.options
+        ? bookingDetails?.cart_item_options
         : undefined;
 
       dispatch(
@@ -40,7 +40,8 @@ export const Calendar = ({ prices, id }: Props) => {
           key: id,
           details: {
             date: date.toString(),
-            options: currentParticipants || prices.get(getFormattedDate(date)),
+            cart_item_options:
+              currentParticipants || prices.get(getFormattedDate(date)),
           },
         })
       );

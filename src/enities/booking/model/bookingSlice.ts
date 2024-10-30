@@ -54,7 +54,7 @@ const bookingSlice = createSlice({
           title: "",
           date: "",
           time: "",
-          options: [],
+          cart_item_options: [],
           total_current_price: 0,
           total_base_price: 0,
         };
@@ -67,10 +67,10 @@ const bookingSlice = createSlice({
 
       const currentDetails = state.details[key];
 
-      if (currentDetails.options) {
+      if (currentDetails.cart_item_options) {
         let totalCurrentPrice = 0;
         let totalBasePrice = 0;
-        const participants = currentDetails.options;
+        const participants = currentDetails.cart_item_options;
 
         participants.forEach((participant) => {
           if (participant && participant.current_price) {

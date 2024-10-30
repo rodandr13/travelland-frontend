@@ -161,7 +161,10 @@ export const Booking = ({
           {bookingDetails?.time && (
             <div>
               <h2 className={styles.booking__title}>Количество человек</h2>
-              <SelectPeoples id={id} participants={bookingDetails.options} />
+              <SelectPeoples
+                id={id}
+                participants={bookingDetails.cart_item_options}
+              />
             </div>
           )}
         </section>
