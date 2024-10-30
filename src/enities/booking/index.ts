@@ -10,11 +10,6 @@ export {
 } from "./model/bookingSlice";
 
 export {
-  selectDetailsByKey,
-  selectDateByKey,
-  selectParticipantsByKey,
-  selectPricesByKey,
-  selectTimeByKey,
   selectBookingState,
   selectExcursionIsEditing,
   selectVisibility,

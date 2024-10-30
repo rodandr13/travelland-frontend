@@ -1,16 +1,19 @@
 import { createSelector } from "@reduxjs/toolkit";
 
 import { TypeRootState } from "@/src/app/appStore";
-import { CartItem } from "@/src/shared/types/cart";
 
 export const selectCart = (state: TypeRootState) => state.cart;
 
-export const selectItemById = createSelector(
-  [selectCart, (_: TypeRootState, id: string) => id],
-  (cart, id): CartItem | undefined => cart.items.find((item) => item.id === id)
-);
+export const selectCartData = (state: TypeRootState) => state.cart.data;
 
-export const itemExists = createSelector(
-  [selectCart, (_: TypeRootState, id: string) => id],
-  (cart, id): boolean => cart.items.some((item) => item.id === id)
-);
+export const selectIsItemInCart = (id: string) =>
+  createSelector(selectCartData, (cartData) => {
+    if (!cartData) return false;
+    return cartData.cart_items.some((item) => item.service_id === id);
+  });
+
+export const selectItemById = (id: string) =>
+  createSelector(selectCartData, (cartData) => {
+    if (!cartData) return null;
+    return cartData.cart_items.find((item) => item.service_id === id);
+  });

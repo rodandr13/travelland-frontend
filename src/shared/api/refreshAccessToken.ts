@@ -15,13 +15,15 @@ export const refreshAccessToken = async (
   try {
     const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.REFRESH}`;
 
-    return await apiClient<TokenResponse>(url, {
+    const { data } = await apiClient<TokenResponse>(url, {
       method: "POST",
       headers: {
         Cookie: `refreshToken=${refreshToken}`,
       },
       credentials: "include",
     });
+
+    return data;
   } catch (error) {
     if (error instanceof ApiError) {
       console.error(

@@ -1,4 +1,4 @@
-import { CartParticipants } from "@/src/shared/types/cart";
+import { CartItemParticipants } from "@/src/shared/types/cart";
 import { GalleryImage } from "@/src/shared/types/excursion";
 
 export type Price = {
@@ -20,7 +20,7 @@ export type Participants = {
   count: number;
 };
 
-export type PricesMap = Map<string, CartParticipants[]>;
+export type PricesMap = Map<string, CartItemParticipants[]>;
 
 export type BookingDetails = {
   title: string;

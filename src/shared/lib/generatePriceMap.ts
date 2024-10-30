@@ -1,7 +1,7 @@
 import { eachDayOfInterval, formatISO, parseISO } from "date-fns";
 
 import { PricesMap } from "@/src/shared/types/booking";
-import { CartParticipants } from "@/src/shared/types/cart";
+import { CartItemParticipants } from "@/src/shared/types/cart";
 import {
   Dates,
   Price,
@@ -51,21 +51,26 @@ export const generatePriceMap = ({
     if (!weekdaySet.has(formattedWeekday)) return;
 
     // Инициализация массива с базовыми ценами
-    const priceArray: CartParticipants[] = basePrices.map((basePrice) => ({
-      currentPrice: basePrice.price,
-      basePrice: basePrice.price,
-      title: basePrice.title,
-      id: basePrice.categoryId,
-      count: null,
-      description: basePrice.description,
+    const priceArray: CartItemParticipants[] = basePrices.map((basePrice) => ({
+      current_price: basePrice.price,
+      base_price: basePrice.price,
+      category_title: basePrice.title,
+      category_id: basePrice.categoryId,
+      quantity: 0,
+      category_description: basePrice.description,
+      price_type: basePrice.type,
+      total_base_price: 0,
+      total_current_price: 0,
     }));
 
     // Функция для применения промо или корректировочных цен
     const applyPrices = (prices: Price[]) => {
       prices.forEach((p) => {
-        const category = priceArray.find((item) => item.title === p.title);
+        const category = priceArray.find(
+          (item) => item.category_title === p.title
+        );
         if (category) {
-          category.currentPrice = p.price;
+          category.current_price = p.price;
         }
       });
     };

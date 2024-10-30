@@ -1,5 +1,6 @@
 import { Booking } from "@/src/enities/booking";
 import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
+import { PriceSection } from "@/src/enities/excursion/ui/detail/components/priceSection/PriceSection";
 import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
 import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
 import { getMinPrice } from "@/src/shared/lib/getMinPrice";
@@ -14,7 +15,6 @@ import { Description } from "./components/description/Description";
 import { ExcursionRoute } from "./components/excursionRoute/ExcursionRoute";
 import { Gallery } from "./components/gallery/Gallery";
 import { Parameters } from "./components/parameters/Parameters";
-import { PriceSection } from "./components/priceSection/PriceSection";
 import { TimeSpending } from "./components/timeSpending/TimeSpending";
 import styles from "./styles.module.scss";
 

@@ -1,11 +1,10 @@
 import {
   resetDetails,
-  selectDetailsByKey,
   selectExcursionIsEditing,
   setDetailsFromCart,
   setIsEditing,
 } from "@/src/enities/booking";
-import { updateItem } from "@/src/enities/cart/model/cartSlice";
+import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
 import { selectItemById } from "@/src/enities/cart/model/selectors";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Button } from "@/src/shared/ui/button";
@@ -20,8 +19,8 @@ interface EditExcursion {
 export const EditExcursion = ({ id, handleScroll }: EditExcursion) => {
   const dispatch = useAppDispatch();
   const isEditing = useAppSelector(selectExcursionIsEditing(id));
-  const cartItem = useAppSelector((state) => selectItemById(state, id));
-  const updatedItem = useAppSelector(selectDetailsByKey(id));
+  const cartItem = useAppSelector(selectItemById(id));
+  const updatedItem = useAppSelector(selectBookingDetailsById(id));
 
   return !isEditing ? (
     <EditButton
@@ -41,7 +40,6 @@ export const EditExcursion = ({ id, handleScroll }: EditExcursion) => {
         onClick={() => {
           if (updatedItem) {
             dispatch(setIsEditing({ key: id, value: false }));
-            dispatch(updateItem(updatedItem));
           }
         }}
       />

@@ -19,7 +19,7 @@ export const Account = () => {
     const fetchOrders = async () => {
       try {
         const url = `${EXTERNAL_API_BASE_URL}${ORDER_ENDPOINTS.GET_ALL}`;
-        const response = await apiClient<Order[]>(url, {
+        const { data: response } = await apiClient<Order[]>(url, {
           credentials: "include",
         });
         setOrders(response);

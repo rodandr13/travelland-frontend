@@ -1,5 +1,5 @@
 import imageUrlBuilder from "@sanity/image-url";
-import { createClient } from "next-sanity";
+import { createClient, type QueryParams } from "next-sanity";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
@@ -20,3 +20,22 @@ export const urlFor = (source: string) => {
 
   return imageBuilder.url();
 };
+
+export async function sanityFetch<const QueryString extends string>({
+  query,
+  params = {},
+  revalidate = 60,
+  tags = [],
+}: {
+  query: QueryString;
+  params?: QueryParams;
+  revalidate?: number | false;
+  tags?: string[];
+}) {
+  return client.fetch(query, params, {
+    next: {
+      revalidate: tags.length ? false : revalidate,
+      tags,
+    },
+  });
+}

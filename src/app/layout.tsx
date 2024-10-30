@@ -48,12 +48,13 @@ export default async function RootLayout({
   if (accessToken) {
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.ME}`;
-      user = await apiClient<UserResponse>(url, {
+      const { data } = await apiClient<UserResponse>(url, {
         credentials: "include",
         headers: {
           Cookie: `accessToken=${accessToken}`,
         },
       });
+      user = data;
     } catch (error: any) {
       user = null;
       if (error instanceof ApiError) {

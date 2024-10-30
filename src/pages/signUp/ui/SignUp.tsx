@@ -85,7 +85,7 @@ export const SignUp = () => {
     setIsLoading(true);
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.REGISTER}`;
-      const response = await apiClient<SignupResponse>(url, {
+      const { data: response } = await apiClient<SignupResponse>(url, {
         method: "POST",
         credentials: "include",
         body: submitData,

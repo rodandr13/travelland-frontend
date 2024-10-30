@@ -1,10 +1,17 @@
 import { RequestCredentials } from "undici-types";
 
+type NextFetchRequestConfig = {
+  revalidate?: number | false;
+  tags?: string[];
+  force?: boolean;
+};
+
 export type ApiRequestOptions = {
   method?: string;
   headers?: HeadersInit;
   body?: any;
   credentials?: RequestCredentials;
+  next?: NextFetchRequestConfig;
 };
 
 export class ApiError extends Error {
@@ -21,7 +28,7 @@ export class ApiError extends Error {
 export const apiClient = async <T>(
   url: string,
   options: ApiRequestOptions = {}
-): Promise<T> => {
+): Promise<{ data: T; status: number }> => {
   try {
     const response = await fetch(url, {
       method: options.method || "GET",
@@ -31,6 +38,7 @@ export const apiClient = async <T>(
       },
       body: options.body ? JSON.stringify(options.body) : undefined,
       credentials: options.credentials || "same-origin",
+      ...(options.next && { next: options.next }),
     });
 
     const contentType = response.headers.get("Content-Type");
@@ -38,19 +46,19 @@ export const apiClient = async <T>(
 
     if (contentType && contentType.includes("application/json")) {
       data = await response.json();
-    } else {
+    } else if (contentType && contentType.includes("text/")) {
       data = await response.text();
     }
 
     if (!response.ok) {
       throw new ApiError(
-        data.message || "API request failed",
+        (data && data.message) || "Ошибка при получении данных",
         response.status,
         data
       );
     }
 
-    return data as T;
+    return { data: data as T, status: response.status };
   } catch (error: any) {
     if (error instanceof ApiError) {
       throw error;

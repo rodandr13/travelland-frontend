@@ -8,8 +8,12 @@ import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
 import { useScroll } from "@/src/app/providers/ScrollProvider";
-import { selectDetailsByKey, selectVisibility } from "@/src/enities/booking";
-import { itemExists, selectItemById } from "@/src/enities/cart/model/selectors";
+import { selectVisibility } from "@/src/enities/booking";
+import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
+import {
+  selectIsItemInCart,
+  selectItemById,
+} from "@/src/enities/cart/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
 import { EditExcursion } from "@/src/features/editExcursion";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
@@ -35,10 +39,10 @@ export const PriceSection = ({
   id,
   category,
 }: Props) => {
-  const bookingIsVisible = useAppSelector(selectVisibility);
-  const bookingItem = useAppSelector(selectDetailsByKey(id));
-  const isItemExists = useAppSelector((state) => itemExists(state, id));
-  const cartItem = useAppSelector((state) => selectItemById(state, id));
+  const bookingIsVisible = useAppSelector(selectVisibility());
+  const bookingItem = useAppSelector(selectBookingDetailsById(id));
+  const isItemExists = useAppSelector(selectIsItemInCart(id));
+  const cartItem = useAppSelector(selectItemById(id));
   const targetRef = useScroll();
 
   const [blockState, setBlockState] = useState({
@@ -87,7 +91,7 @@ export const PriceSection = ({
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, [bookingIsVisible, isItemExists]);
 
-  const activeItem = bookingItem?.participants?.length ? bookingItem : cartItem;
+  const activeItem = bookingItem?.options?.length ? bookingItem : cartItem;
 
   const priceProps =
     minPrice === basePrice
@@ -135,53 +139,53 @@ export const PriceSection = ({
             <h3 className={styles.priceSection__title}>{title}</h3>
           </div>
           <div>
-            {activeItem?.selectedDate && (
+            {activeItem?.date && (
               <h3 className={styles.priceSection__title}>
-                {format(new Date(activeItem.selectedDate), "d MMMM yyyy", {
+                {format(new Date(activeItem.date), "d MMMM yyyy", {
                   locale: ru,
                 })}
               </h3>
             )}
-            {activeItem?.selectedTime && (
+            {activeItem?.time && (
               <p className={styles.priceSection__subtitle}>
-                Начало в {activeItem.selectedTime} часов
+                Начало в {activeItem.time} часов
               </p>
             )}
           </div>
-          {activeItem?.participants && activeItem.participants.length > 0 && (
+          {activeItem?.options && activeItem.options.length > 0 && (
             <>
               <ul className={styles.priceSection__list}>
-                {activeItem.participants.map((participant, i) =>
-                  participant && participant.count ? (
+                {activeItem.options.map((participant, i) =>
+                  participant && participant.quantity ? (
                     <li className={styles.priceSection__item} key={i}>
                       <div className={styles.priceSection__priceLine}>
-                        <span>{participant.count}&nbsp;x&nbsp;</span>
+                        <span>{participant.quantity}&nbsp;x&nbsp;</span>
                         <span>
-                          {participant.title}&nbsp;(
-                          {formatCurrency(participant.currentPrice)})&nbsp;
+                          {participant.category_title}&nbsp;(
+                          {formatCurrency(participant.current_price)})&nbsp;
                         </span>
                         <span
                           className={styles.priceSection__dottedLine}
                         ></span>
                         <span className={styles.priceSection__priceSum}>
                           <span className={styles.priceSection__priceSum_base}>
-                            {participant.basePrice !==
-                              participant.currentPrice &&
+                            {participant.base_price !==
+                              participant.current_price &&
                               formatCurrency(
-                                participant.basePrice * participant.count
+                                participant.base_price * participant.quantity
                               )}
                           </span>
                           <span
                             className={styles.priceSection__priceSum_current}
                           >
                             {formatCurrency(
-                              participant.currentPrice * participant.count
+                              participant.current_price * participant.quantity
                             )}
                           </span>
                         </span>
                       </div>
                       <span className={styles.priceSection__caption}>
-                        ({participant.description})
+                        ({participant.category_description})
                       </span>
                     </li>
                   ) : null
@@ -191,8 +195,8 @@ export const PriceSection = ({
                 <span className={styles.priceSection__caption}>К оплате</span>
                 <PriceBlock
                   parent="priceSection"
-                  currentPrice={activeItem?.totalCurrentPrice}
-                  basePrice={activeItem?.totalBasePrice}
+                  currentPrice={activeItem?.total_current_price}
+                  basePrice={activeItem?.total_base_price}
                   size="m"
                   actualPrice
                 />

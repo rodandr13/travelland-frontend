@@ -1,60 +1,54 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
 import {
-  calculateTotals,
-  getCartFromLocalStorage,
-  saveCartToLocalStorage,
-} from "@/src/enities/cart/lib/cartHelpers";
-import { CartItem } from "@/src/shared/types/cart";
+  ActionReducerMapBuilder,
+  createSlice,
+  PayloadAction,
+} from "@reduxjs/toolkit";
 
-const initialState = getCartFromLocalStorage();
+import { Cart } from "@/src/shared/types/cart";
+
+import { fetchCart, removeCartItem, updateCartItem } from "./thunks";
+
+interface CartState {
+  data: Cart | null;
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: CartState = {
+  data: null,
+  loading: false,
+  error: null,
+};
+
+const addCommonCases = (
+  builder: ActionReducerMapBuilder<CartState>,
+  thunk: any,
+  errorMessage: string = "Unknown error"
+) => {
+  builder
+    .addCase(thunk.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    })
+    .addCase(thunk.fulfilled, (state, action: PayloadAction<Cart>) => {
+      state.loading = false;
+      state.data = action.payload;
+    })
+    .addCase(thunk.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error.message ?? errorMessage;
+    });
+};
 
 const cartSlice = createSlice({
   name: "cart",
   initialState,
-  reducers: {
-    addItem: (state, action: PayloadAction<CartItem>) => {
-      state.items.push(action.payload);
-      const totals = calculateTotals(state.items);
-      state.totalItems = totals.totalItems;
-      state.totalCurrentPrice = totals.totalCurrentPrice;
-      state.totalBasePrice = totals.totalBasePrice;
-
-      saveCartToLocalStorage(state);
-    },
-    removeItem: (state, action: PayloadAction<string>) => {
-      const id = action.payload;
-      state.items = state.items.filter((item) => item.id !== id);
-      const totals = calculateTotals(state.items);
-      state.totalItems = totals.totalItems;
-      state.totalCurrentPrice = totals.totalCurrentPrice;
-      state.totalBasePrice = totals.totalBasePrice;
-
-      saveCartToLocalStorage(state);
-    },
-    updateItem: (state, action: PayloadAction<CartItem>) => {
-      const updatedItem = action.payload;
-      const index = state.items.findIndex((item) => item.id === updatedItem.id);
-      if (index !== -1) {
-        state.items[index] = updatedItem;
-        const totals = calculateTotals(state.items);
-        state.totalItems = totals.totalItems;
-        state.totalCurrentPrice = totals.totalCurrentPrice;
-        state.totalBasePrice = totals.totalBasePrice;
-
-        saveCartToLocalStorage(state);
-      }
-    },
-    resetCart: (state) => {
-      state.items = [];
-      state.totalItems = 0;
-      state.totalCurrentPrice = 0;
-      state.totalBasePrice = 0;
-
-      saveCartToLocalStorage(state);
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    addCommonCases(builder, fetchCart);
+    addCommonCases(builder, updateCartItem, "Failed to update item");
+    addCommonCases(builder, removeCartItem, "Failed to remove item");
   },
 });
 
-export const { addItem, removeItem, updateItem, resetCart } = cartSlice.actions;
 export default cartSlice.reducer;

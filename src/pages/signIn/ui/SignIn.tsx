@@ -66,7 +66,7 @@ export const SignIn = () => {
     setApiError(null);
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.LOGIN}`;
-      const response = await apiClient<LoginResponse>(url, {
+      const { data: response } = await apiClient<LoginResponse>(url, {
         credentials: "include",
         method: "POST",
         body: data,

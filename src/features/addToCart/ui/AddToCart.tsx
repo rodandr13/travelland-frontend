@@ -1,6 +1,4 @@
-import { resetDetails } from "@/src/enities/booking";
-import { addItem } from "@/src/enities/cart/model/cartSlice";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
+import { useAddToCart } from "@/src/features/addToCart/model/useAddToCart";
 import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 
@@ -9,31 +7,37 @@ interface Props {
 }
 
 export const AddToCart = ({ cartItem }: Props) => {
-  const dispatch = useAppDispatch();
+  const { addToCart, loading, error } = useAddToCart();
 
-  const handleClick = () => {
-    dispatch(addItem(cartItem));
-    dispatch(resetDetails());
+  const handleClick = async () => {
+    try {
+      await addToCart(cartItem);
+    } catch (error) {
+      console.error("Revalidation error:", error);
+    }
   };
 
-  const title = !cartItem?.selectedDate
-    ? "Выберите дату"
-    : !cartItem?.selectedTime
-      ? "Выберите время"
-      : !cartItem?.participants.some(
-            (participant) => (participant.count ?? 0) > 0
-          )
-        ? "Укажите количество человек"
-        : "Добавить в корзину";
+  const getButtonTitle = () => {
+    if (loading) return "Добавление...";
+    if (!cartItem?.date) return "Выберите дату";
+    if (!cartItem?.time) return "Выберите время";
+    if (
+      !cartItem?.options.some((participant) => (participant.quantity ?? 0) > 0)
+    ) {
+      return "Укажите количество человек";
+    }
+    return "Добавить в корзину";
+  };
 
   return (
     <Button
-      title={title}
+      title={getButtonTitle()}
       disabled={
-        !cartItem?.selectedDate ||
-        !cartItem?.selectedTime ||
-        !cartItem?.participants.some(
-          (participant) => (participant.count ?? 0) > 0
+        loading ||
+        !cartItem?.date ||
+        !cartItem?.time ||
+        !cartItem?.options.some(
+          (participant) => (participant.quantity ?? 0) > 0
         )
       }
       onClick={handleClick}

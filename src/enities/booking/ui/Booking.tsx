@@ -7,13 +7,14 @@ import clsx from "clsx";
 import { useScroll } from "@/src/app/providers/ScrollProvider";
 import {
   resetDetails,
-  selectDetailsByKey,
   selectExcursionIsEditing,
   setDetails,
   setIsEditing,
   setVisible,
 } from "@/src/enities/booking";
-import { itemExists } from "@/src/enities/cart/model/selectors";
+// import { itemExists } from "@/src/enities/cart/model/selectors";
+import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
+import { selectIsItemInCart } from "@/src/enities/cart/model/selectors";
 import { Calendar } from "@/src/enities/excursion/ui/detail/components/calendar/Calendar";
 import { SelectPeoples } from "@/src/enities/excursion/ui/detail/components/selectPeoples/SelectPeoples";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
@@ -58,9 +59,9 @@ export const Booking = ({
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
-  const bookingDetails = useAppSelector(selectDetailsByKey(id));
+  const bookingDetails = useAppSelector(selectBookingDetailsById(id));
   const targetRef = useScroll();
-  const isItemExists = useAppSelector((state) => itemExists(state, id));
+  const isItemExists = useAppSelector(selectIsItemInCart(id));
 
   const [isComponentLoaded, setIsComponentLoaded] = useState(false);
 
@@ -73,11 +74,12 @@ export const Booking = ({
       setDetails({
         key: id,
         details: {
-          id,
-          type,
+          service_type: type,
+          service_id: id,
           title: title,
           slug,
-          image: { src: image.src, lqip: image.lqip },
+          image_lqip: image.lqip,
+          image_src: image.src,
         },
       })
     );
@@ -98,7 +100,7 @@ export const Booking = ({
 
   const handleClick = (time: string) => {
     if (id) {
-      dispatch(setDetails({ key: id, details: { selectedTime: time } }));
+      dispatch(setDetails({ key: id, details: { time: time } }));
     }
   };
 
@@ -110,7 +112,7 @@ export const Booking = ({
             <h2 className={styles.booking__title}>Выберите дату</h2>
             <Calendar prices={prices} id={id} />
           </div>
-          {bookingDetails?.selectedDate && (
+          {bookingDetails?.date && (
             <div>
               <h2 className={styles.booking__title}>Время</h2>
               <div className={styles.booking__timeGroup}>
@@ -119,8 +121,7 @@ export const Booking = ({
                     <div
                       key={i}
                       className={clsx(styles.time, {
-                        [styles.time_active]:
-                          bookingDetails?.selectedTime === time,
+                        [styles.time_active]: bookingDetails?.time === time,
                       })}
                       onClick={() => handleClick(time)}
                     >
@@ -157,13 +158,10 @@ export const Booking = ({
             </div>
           )}
 
-          {bookingDetails?.selectedTime && (
+          {bookingDetails?.time && (
             <div>
               <h2 className={styles.booking__title}>Количество человек</h2>
-              <SelectPeoples
-                id={id}
-                participants={bookingDetails.participants}
-              />
+              <SelectPeoples id={id} participants={bookingDetails.options} />
             </div>
           )}
         </section>

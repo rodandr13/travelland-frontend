@@ -7,30 +7,29 @@ import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
-import { selectCart } from "@/src/enities/cart/model/selectors";
+import { selectCartData } from "@/src/enities/cart/model/selectors";
+import { fetchCart } from "@/src/enities/cart/model/thunks";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
-import { CartItem } from "@/src/shared/types/cart";
 
 import styles from "./styles.module.scss";
 
 export const CompactCart = () => {
   const [isDetailsVisible, setDetailsVisible] = useState(false);
   const detailsVisibilityTimer = useRef<number | null>(null);
-  const [totalItems, setTotalItems] = useState(0);
-  const [totalCurrentPrice, setTotalCurrentPrice] = useState(0);
-  const [totalBasePrice, setTotalBasePrice] = useState(0);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
 
-  const cart = useAppSelector(selectCart);
+  const dispatch = useAppDispatch();
+  const cart = useAppSelector(selectCartData);
+
+  const totalItems = cart?.cart_items.length ?? 0;
+  const totalCurrentPrice = cart?.total_current_price ?? 0;
+  const totalBasePrice = cart?.total_base_price ?? 0;
+  const cartItems = cart?.cart_items ?? [];
 
   useEffect(() => {
-    setTotalItems(cart.totalItems);
-    setTotalCurrentPrice(cart.totalCurrentPrice);
-    setTotalBasePrice(cart.totalBasePrice);
-    setCartItems(cart.items);
-  }, [cart]);
+    dispatch(fetchCart());
+  }, [dispatch]);
 
   useEffect(() => {
     return () => {
@@ -72,43 +71,44 @@ export const CompactCart = () => {
       {cartItems.length > 0 && isDetailsVisible && (
         <div className={styles.cart__details}>
           <ul className={styles.cart__list}>
-            {cart.items.map((item) => (
-              <li key={item.id} className={styles.cart__item}>
-                <Image
-                  className={styles.cart__image}
-                  src={urlFor(item.image.src)}
-                  blurDataURL={item.image.lqip}
-                  alt=""
-                  placeholder="blur"
-                  loading="lazy"
-                  quality={60}
-                  width={50}
-                  height={40}
-                  sizes={"50px"}
-                />
-                <div className={styles.cart__textContainer}>
-                  <h3 className={styles.cart__title}>{item.title}</h3>
-                  <div className={styles.cart__dateContainer}>
-                    <p className={styles.cart__date}>
-                      <span>
-                        {item.selectedDate &&
-                          format(item.selectedDate, "d MMMM yyyy", {
-                            locale: ru,
-                          })}
-                      </span>
-                      <span>в {item.selectedTime}</span>
-                    </p>
-                    <p className={styles.cart__price}>
-                      <span className={styles.cart__price_base}>
-                        {item.totalBasePrice !== item.totalCurrentPrice &&
-                          formatCurrency(item.totalBasePrice)}
-                      </span>
-                      <span>{formatCurrency(item.totalCurrentPrice)}</span>
-                    </p>
+            {cart &&
+              cart.cart_items.map((item) => (
+                <li key={item.service_id} className={styles.cart__item}>
+                  <Image
+                    className={styles.cart__image}
+                    src={urlFor(item.image_src)}
+                    blurDataURL={item.image_lqip}
+                    alt=""
+                    placeholder="blur"
+                    loading="lazy"
+                    quality={60}
+                    width={50}
+                    height={40}
+                    sizes={"50px"}
+                  />
+                  <div className={styles.cart__textContainer}>
+                    <h3 className={styles.cart__title}>{item.title}</h3>
+                    <div className={styles.cart__dateContainer}>
+                      <p className={styles.cart__date}>
+                        <span>
+                          {item.date &&
+                            format(item.date, "d MMMM yyyy", {
+                              locale: ru,
+                            })}
+                        </span>
+                        <span>в {item.time}</span>
+                      </p>
+                      <p className={styles.cart__price}>
+                        <span className={styles.cart__price_base}>
+                          {item.total_base_price !== item.total_current_price &&
+                            formatCurrency(item.total_base_price)}
+                        </span>
+                        <span>{formatCurrency(item.total_current_price)}</span>
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </li>
-            ))}
+                </li>
+              ))}
           </ul>
           <div className={styles.cart__totalPrice}>
             Итого:

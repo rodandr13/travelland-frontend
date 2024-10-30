@@ -1,11 +1,11 @@
 import clsx from "clsx";
 
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { CartParticipants } from "@/src/shared/types/cart";
+import { CartItemParticipants } from "@/src/shared/types/cart";
 
 interface Props {
   dayNumber: number;
-  prices: CartParticipants[] | undefined;
+  prices: CartItemParticipants[] | undefined;
 }
 
 export const CustomDay = ({ dayNumber, prices }: Props) => {
@@ -13,8 +13,8 @@ export const CustomDay = ({ dayNumber, prices }: Props) => {
   let baseAdultPrice = 0;
   let currentAdultPrice = 0;
   if (showPrice && prices) {
-    baseAdultPrice = prices[0]?.basePrice || 0;
-    currentAdultPrice = prices[0]?.currentPrice || 0;
+    baseAdultPrice = prices[0]?.base_price || 0;
+    currentAdultPrice = prices[0]?.current_price || 0;
   }
   const isIncreased = baseAdultPrice < currentAdultPrice;
   const isReduction =

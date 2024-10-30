@@ -29,6 +29,7 @@ import { EditItem } from "@/src/widgets/detailedCart/ui/components/EditItem";
 import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
 
 import styles from "./styles.module.scss";
+import { useCart } from "@/src/enities/cart/hooks/useCart";
 
 const contactsSchema = z.object({
   name: z
@@ -71,6 +72,10 @@ export const DetailedCart = () => {
   });
 
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+
+  const { cart: test } = useCart();
+
+  console.log(test);
 
   useEffect(() => {
     setCartItems(cart.items);

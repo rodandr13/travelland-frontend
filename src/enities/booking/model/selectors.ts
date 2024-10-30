@@ -1,52 +1,19 @@
-import { createSelector } from "reselect";
+import { createSelector } from "@reduxjs/toolkit";
 
 import { TypeRootState } from "@/src/app/appStore";
 
 export const selectBookingState = (state: TypeRootState) => state.booking;
 
-export const selectVisibility = createSelector(
-  [selectBookingState],
-  (bookingState) => bookingState.visible
-);
+export const selectBookingDetails = (state: TypeRootState) =>
+  state.booking.details;
 
-export const selectDetailsByKey = (key: string) =>
-  createSelector(
-    [selectBookingState],
-    (bookingState) => bookingState.details[key]
-  );
+export const selectBookingDetailsById = (id: string) =>
+  createSelector(selectBookingDetails, (details) => {
+    return details[id] || null;
+  });
 
-export const selectExcursionIsEditing = (key: string) =>
-  createSelector(
-    [selectBookingState],
-    (bookingState) => bookingState.isEditing[key]
-  );
+export const selectExcursionIsEditing = (id: string) =>
+  createSelector(selectBookingState, (booking) => booking.isEditing[id]);
 
-export const selectParticipantsByKey = (key: string) =>
-  createSelector([selectDetailsByKey(key)], (details) =>
-    details ? details.participants : []
-  );
-
-export const selectTimeByKey = (key: string) =>
-  createSelector([selectDetailsByKey(key)], (details) =>
-    details ? details.selectedTime : null
-  );
-
-export const selectDateByKey = (key: string) =>
-  createSelector([selectDetailsByKey(key)], (details) =>
-    details ? details.selectedDate : null
-  );
-
-export const selectPricesByKey = (key: string) =>
-  createSelector([selectDetailsByKey(key)], (details) =>
-    details ? details.participants : null
-  );
-
-export const selectOrderSuccess = createSelector(
-  [selectBookingState],
-  (bookingState) => bookingState.isOrderSuccess
-);
-
-export const selectOrderError = createSelector(
-  [selectBookingState],
-  (bookingState) => bookingState.orderError
-);
+export const selectVisibility = () =>
+  createSelector(selectBookingState, (booking) => booking.visible);

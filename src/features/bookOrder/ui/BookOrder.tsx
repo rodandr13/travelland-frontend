@@ -3,7 +3,6 @@ import { useState } from "react";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 
 import { resetDetails } from "@/src/enities/booking";
-import { resetCart } from "@/src/enities/cart/model/cartSlice";
 import { apiClient } from "@/src/shared/api";
 import {
   EXTERNAL_API_BASE_URL,
@@ -42,41 +41,21 @@ export const BookOrder = ({ items }: Props) => {
       },
       promoCode: formData.promoCode || "",
       paymentMethod: formData.paymentMethod,
-      orderServices: items.map((item) => {
-        return {
-          type: item.type.toUpperCase(),
-          title: item.title,
-          slug: item.slug,
-          image_src: item.image.src,
-          image_lqip: item.image.lqip,
-          id: item.id,
-          date: new Date(item.selectedDate).toISOString(),
-          time: item.selectedTime,
-          participants: item.participants.map((participant) => {
-            return {
-              category: participant.id,
-              title: participant.title,
-              count: Number(participant.count),
-            };
-          }),
-        };
-      }),
     };
 
     try {
       const url = `${EXTERNAL_API_BASE_URL}${ORDER_ENDPOINTS.CREATE}`;
-      const response = await apiClient<PaymentCreateResponse>(url, {
+      const { data: response } = await apiClient<PaymentCreateResponse>(url, {
         method: "POST",
         body: order,
         credentials: "include",
       });
 
-      if (response.success && response.redirect) {
-        window.location.href = response.redirect;
-      }
+      // if (response.success && response.redirect) {
+      //   window.location.href = response.redirect;
+      // }
 
       dispatch(resetDetails());
-      dispatch(resetCart());
     } catch (error) {
       setError((error as Error).message);
     } finally {

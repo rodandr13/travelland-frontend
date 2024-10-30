@@ -6,11 +6,8 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 
-import {
-  selectDateByKey,
-  selectDetailsByKey,
-  setDetails,
-} from "@/src/enities/booking";
+import { setDetails } from "@/src/enities/booking";
+import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
 import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { PricesMap } from "@/src/shared/types/booking";
@@ -29,22 +26,21 @@ interface Props {
 export const Calendar = ({ prices, id }: Props) => {
   const dispatch = useAppDispatch();
   const monthsShown = 2;
-  const selectedDate = useAppSelector(selectDateByKey(id));
-  const bookingDetails = useAppSelector(selectDetailsByKey(id));
+  const bookingDetails = useAppSelector(selectBookingDetailsById(id));
+  const selectedDate = bookingDetails.date;
 
   const handleChange = (date: Date | null) => {
     if (id && date) {
       const currentParticipants = selectedDate
-        ? bookingDetails?.participants
+        ? bookingDetails?.options
         : undefined;
 
       dispatch(
         setDetails({
           key: id,
           details: {
-            selectedDate: date.toString(),
-            participants:
-              currentParticipants || prices.get(getFormattedDate(date)),
+            date: date.toString(),
+            options: currentParticipants || prices.get(getFormattedDate(date)),
           },
         })
       );

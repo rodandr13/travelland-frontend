@@ -3,7 +3,6 @@ import {
   EXTERNAL_API_BASE_URL,
   PAYMENT_ENDPOINTS,
 } from "@/src/shared/lib/constants";
-import { SuccessfulOrder } from "@/src/shared/ui/successfulOrder";
 
 interface Props {
   searchParams: {
@@ -19,7 +18,7 @@ type PaymentResultResponse = {
 
 export const PaymentResultPage = async ({ searchParams }: Props) => {
   const { token } = searchParams;
-  const { orderId, message, status } = await apiClient<PaymentResultResponse>(
+  const { data } = await apiClient<PaymentResultResponse>(
     `${EXTERNAL_API_BASE_URL}${PAYMENT_ENDPOINTS.STATUS}`,
     {
       method: "POST",
@@ -30,11 +29,11 @@ export const PaymentResultPage = async ({ searchParams }: Props) => {
 
   return (
     <div>
-      {token ? (
-        <SuccessfulOrder orderNumber={orderId} />
-      ) : (
-        <p>Ошибка при обработке платежа: {message}</p>
-      )}
+      {/*{token ? (*/}
+      {/*  <SuccessfulOrder orderNumber={orderId} />*/}
+      {/*) : (*/}
+      {/*  <p>Ошибка при обработке платежа: {message}</p>*/}
+      {/*)}*/}
     </div>
   );
 };

@@ -25,7 +25,7 @@ const bookingSlice = createSlice({
     setDetailsFromCart: (state, action: PayloadAction<CartItem>) => {
       const cartItem = action.payload;
       if (cartItem) {
-        state.details[cartItem.id] = cartItem;
+        state.details[cartItem.service_id] = cartItem;
       }
     },
     setVisible: (state, action: PayloadAction<boolean>) => {
@@ -46,19 +46,17 @@ const bookingSlice = createSlice({
 
       if (!state.details[key]) {
         state.details[key] = {
-          id: "",
-          type: "",
+          service_id: "",
+          service_type: "",
           slug: "",
-          image: {
-            src: "",
-            lqip: "",
-          },
+          image_lqip: "",
+          image_src: "",
           title: "",
-          selectedDate: "",
-          participants: [],
-          selectedTime: "",
-          totalCurrentPrice: 0,
-          totalBasePrice: 0,
+          date: "",
+          time: "",
+          options: [],
+          total_current_price: 0,
+          total_base_price: 0,
         };
       }
 
@@ -69,23 +67,23 @@ const bookingSlice = createSlice({
 
       const currentDetails = state.details[key];
 
-      if (currentDetails.participants) {
+      if (currentDetails.options) {
         let totalCurrentPrice = 0;
         let totalBasePrice = 0;
-        const participants = currentDetails.participants;
+        const participants = currentDetails.options;
 
         participants.forEach((participant) => {
-          if (participant && participant.currentPrice) {
-            const participantCount = participant.count || 0;
-            const currentPrice = participant?.currentPrice || 0;
-            const basePrice = participant?.basePrice || 0;
+          if (participant && participant.current_price) {
+            const participantCount = participant.quantity || 0;
+            const currentPrice = participant?.current_price || 0;
+            const basePrice = participant?.base_price || 0;
             totalCurrentPrice += participantCount * currentPrice;
             totalBasePrice += participantCount * basePrice;
           }
         });
 
-        currentDetails.totalCurrentPrice = totalCurrentPrice;
-        currentDetails.totalBasePrice = totalBasePrice;
+        currentDetails.total_current_price = totalCurrentPrice;
+        currentDetails.total_base_price = totalBasePrice;
       }
     },
     resetDetails: (state) => {

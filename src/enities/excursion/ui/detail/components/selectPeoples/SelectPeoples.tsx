@@ -3,7 +3,7 @@
 import { setDetails } from "@/src/enities/booking/";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-import { CartParticipants } from "@/src/shared/types/cart";
+import { CartItemParticipants } from "@/src/shared/types/cart";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 
 import styles from "./styles.module.scss";
@@ -11,7 +11,7 @@ import { SelectNumber } from "./ui/SelectNumber";
 
 interface Props {
   id: string;
-  participants: CartParticipants[];
+  participants: CartItemParticipants[];
 }
 
 export const SelectPeoples = ({ id, participants }: Props) => {
@@ -20,7 +20,7 @@ export const SelectPeoples = ({ id, participants }: Props) => {
     const updatedParticipants = [...participants];
     updatedParticipants[index] = {
       ...updatedParticipants[index],
-      count: newValue,
+      quantity: newValue,
     };
 
     if (id) {
@@ -28,7 +28,7 @@ export const SelectPeoples = ({ id, participants }: Props) => {
         setDetails({
           key: id,
           details: {
-            participants: updatedParticipants,
+            options: updatedParticipants,
           },
         })
       );
@@ -39,29 +39,32 @@ export const SelectPeoples = ({ id, participants }: Props) => {
     <section className={styles.selectPeoples}>
       {participants &&
         participants.map((participant, i) => (
-          <div key={participant.id} className={styles.selectPeoples__container}>
+          <div
+            key={participant.category_id}
+            className={styles.selectPeoples__container}
+          >
             <div>
               <h4 className={styles.selectPeoples__title}>
-                {participant.title}
+                {participant.category_title}
                 <span className={styles.selectPeoples__age}>
-                  &nbsp;{participant.description}
+                  &nbsp;{participant.category_description}
                 </span>
               </h4>
               <PriceBlock
                 actualPrice
-                currentPrice={participant.currentPrice}
-                basePrice={participant.basePrice}
+                currentPrice={participant.current_price}
+                basePrice={participant.base_price}
               />
             </div>
             <div className={styles.selectPeoples__container}>
               <SelectNumber
-                value={participant.count || 0}
+                value={participant.quantity || 0}
                 onNumberChange={handleChange(i)}
               />
               <span className={styles.selectPeoples__sum}>
                 ={" "}
                 {formatCurrency(
-                  participant.currentPrice * (participant.count || 0)
+                  participant.current_price * (participant.quantity || 0)
                 )}
               </span>
             </div>

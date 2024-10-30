@@ -1,30 +1,36 @@
-import { GalleryImage } from "@/src/shared/types/excursion";
-
-export type CartParticipants = {
-  id: string;
-  title: string;
-  description: string;
-  currentPrice: number;
-  basePrice: number;
-  count: number | null;
+export type CartItemParticipants = {
+  id?: number;
+  category_id: string;
+  price_type: string;
+  base_price: number;
+  current_price: number;
+  quantity: number;
+  category_title: string;
+  category_description: string;
+  total_base_price: number;
+  total_current_price: number;
 };
 
 export type CartItem = {
-  id: string;
-  type: string;
-  title: string;
+  service_id: string;
+  service_type: string;
+  date: string;
+  time: string;
   slug: string;
-  image: GalleryImage;
-  selectedDate: string;
-  selectedTime: string;
-  participants: CartParticipants[];
-  totalCurrentPrice: number;
-  totalBasePrice: number;
+  title: string;
+  image_lqip: string;
+  image_src: string;
+  total_base_price: number;
+  total_current_price: number;
+  options: CartItemParticipants[];
 };
 
 export type Cart = {
-  items: CartItem[];
-  totalItems: number;
-  totalCurrentPrice: number;
-  totalBasePrice: number;
+  id: number;
+  status: string;
+  user_id: number | null;
+  guest_session_id: string | null;
+  total_base_price: number;
+  total_current_price: number;
+  cart_items: CartItem[];
 };
