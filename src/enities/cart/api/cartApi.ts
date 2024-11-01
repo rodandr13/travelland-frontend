@@ -32,7 +32,7 @@ export const cartApi = {
   },
   removeItem: async (itemId: number) => {
     const { data } = await apiClient<Cart>(
-      `${EXTERNAL_API_BASE_URL}/api/cart/items/${itemId}`,
+      `${INTERNAL_API_BASE_URL}/api/cart/items/${itemId}`,
       {
         method: "DELETE",
         credentials: "include",

@@ -25,6 +25,8 @@ export const PAYMENT_ENDPOINTS = {
 
 export const CART_ENDPOINTS = {
   GET_CART: "/api/cart",
+  ADD_ITEM: "/api/cart/items",
+  DELETE_ITEM: "/api/cart/items",
 };
 
 export const ADULT_CATEGORY_ID = "40746088-7530-4514-b94e-d0df8560e8de";

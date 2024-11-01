@@ -2,12 +2,14 @@ import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 
 import { apiClient } from "@/src/shared/api";
+import { ensureAccessToken } from "@/src/shared/api/ensureAccessToken";
 import {
   CART_ENDPOINTS,
   EXTERNAL_API_BASE_URL,
 } from "@/src/shared/lib/constants";
 
 export const GET = async () => {
+  await ensureAccessToken();
   const accessToken = cookies().get("accessToken")?.value;
   const { data: cart } = await apiClient(
     `${EXTERNAL_API_BASE_URL}${CART_ENDPOINTS.GET_CART}`,
