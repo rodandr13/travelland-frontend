@@ -12,7 +12,6 @@ import {
   setIsEditing,
   setVisible,
 } from "@/src/enities/booking";
-// import { itemExists } from "@/src/enities/cart/model/selectors";
 import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
 import { selectIsItemInCart } from "@/src/enities/cart/model/selectors";
 import { Calendar } from "@/src/enities/excursion/ui/detail/components/calendar/Calendar";

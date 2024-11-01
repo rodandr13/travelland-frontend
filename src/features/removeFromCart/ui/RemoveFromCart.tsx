@@ -6,7 +6,7 @@ import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import styles from "./styles.module.scss";
 
 interface Props {
-  itemId: number;
+  itemId?: number;
 }
 
 export const RemoveFromCart = ({ itemId }: Props) => {
@@ -14,7 +14,7 @@ export const RemoveFromCart = ({ itemId }: Props) => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(removeCartItem(itemId));
+    if (itemId) dispatch(removeCartItem(itemId));
   };
 
   return (

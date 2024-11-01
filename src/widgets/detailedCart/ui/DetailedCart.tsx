@@ -13,6 +13,7 @@ import { z } from "zod";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { selectCartData } from "@/src/enities/cart/model/selectors";
+import { BookOrder } from "@/src/features/bookOrder";
 import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
@@ -197,7 +198,7 @@ export const DetailedCart = () => {
                   currentPrice={cart.total_current_price}
                 />
               </div>
-              {/*<BookOrder items={cart.cart_items} />*/}
+              <BookOrder cartId={cart.id} />
               <p className={styles.detailedCart__consentOffer}>
                 Нажимая кнопку &quot;Заказать&quot;, Вы принимаете условия
                 соответствующей оферты: <a href="#">Оферты для физических</a>{" "}

@@ -15,6 +15,7 @@ export const mapToDto = (item: CartItem): CartItemDto => ({
     current_price: participant.current_price,
     category_title: participant.category_title,
     category_description: participant.category_description,
+    category_id: participant.category_id,
     price_type: participant.price_type,
     quantity: participant.quantity || 0,
   })),

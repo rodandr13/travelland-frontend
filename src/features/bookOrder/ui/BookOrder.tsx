@@ -9,12 +9,11 @@ import {
   ORDER_ENDPOINTS,
 } from "@/src/shared/lib/constants";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-import { CartItem } from "@/src/shared/types/cart";
 import { Button } from "@/src/shared/ui/button";
 import { ContactsData } from "@/src/widgets/detailedCart/ui/DetailedCart";
 
 interface Props {
-  items: CartItem[];
+  cartId: number;
 }
 
 type PaymentCreateResponse = {
@@ -23,7 +22,7 @@ type PaymentCreateResponse = {
   redirect: string;
 };
 
-export const BookOrder = ({ items }: Props) => {
+export const BookOrder = ({ cartId }: Props) => {
   const { handleSubmit } = useFormContext<ContactsData>();
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -39,6 +38,7 @@ export const BookOrder = ({ items }: Props) => {
         name: formData.name,
         telephone: formData.phone,
       },
+      cartId: cartId,
       promoCode: formData.promoCode || "",
       paymentMethod: formData.paymentMethod,
     };
@@ -51,9 +51,9 @@ export const BookOrder = ({ items }: Props) => {
         credentials: "include",
       });
 
-      // if (response.success && response.redirect) {
-      //   window.location.href = response.redirect;
-      // }
+      if (response.success && response.redirect) {
+        window.location.href = response.redirect;
+      }
 
       dispatch(resetDetails());
     } catch (error) {
