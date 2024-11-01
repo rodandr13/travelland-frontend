@@ -22,8 +22,7 @@ export const formatCountParticipants = (
         return many;
     }
   };
-
-  if (count > 0 && title === "Взрослые") {
+  if (count > 0 && title.toLowerCase() === "взрослые") {
     return `${count} ${pluralize(count, "взрослый", "взрослых", "взрослых", locale)}`;
   }
 

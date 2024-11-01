@@ -25,7 +25,6 @@ export const AddToCart = ({ cartItem }: Props) => {
       const mappedCart = mapToDto(cartItem);
       await dispatch(addCartItem(mappedCart)).unwrap();
     } catch (err) {
-      console.log(err);
       if (err instanceof Error) {
         setError(err.message);
       } else {

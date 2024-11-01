@@ -21,7 +21,7 @@ export const cartApi = {
   },
   updateItem: async (item: CartItem) => {
     const { data } = await apiClient<Cart>(
-      `${INTERNAL_API_BASE_URL}/api/cart/items/${item.service_id}`,
+      `${EXTERNAL_API_BASE_URL}/api/cart/items/${item.service_id}`,
       {
         method: "PUT",
         body: item,
@@ -32,7 +32,7 @@ export const cartApi = {
   },
   removeItem: async (itemId: number) => {
     const { data } = await apiClient<Cart>(
-      `${INTERNAL_API_BASE_URL}/api/cart/items/${itemId}`,
+      `${EXTERNAL_API_BASE_URL}/api/cart/items/${itemId}`,
       {
         method: "DELETE",
         credentials: "include",

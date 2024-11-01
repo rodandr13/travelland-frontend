@@ -12,6 +12,7 @@ export type CartItemParticipants = {
 };
 
 export type CartItem = {
+  id: number;
   service_id: string;
   service_type: string;
   date: string;

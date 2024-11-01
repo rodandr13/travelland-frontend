@@ -1,12 +1,12 @@
 "use client";
 
-import { removeItem } from "@/src/enities/cart/model/cartSlice";
+import { removeCartItem } from "@/src/enities/cart/model/thunks";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 
 import styles from "./styles.module.scss";
 
 interface Props {
-  itemId: string;
+  itemId: number;
 }
 
 export const RemoveFromCart = ({ itemId }: Props) => {
@@ -14,7 +14,7 @@ export const RemoveFromCart = ({ itemId }: Props) => {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    dispatch(removeItem(itemId));
+    dispatch(removeCartItem(itemId));
   };
 
   return (

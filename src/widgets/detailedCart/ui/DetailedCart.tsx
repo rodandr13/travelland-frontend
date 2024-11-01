@@ -13,16 +13,17 @@ import { z } from "zod";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { selectCartData } from "@/src/enities/cart/model/selectors";
+import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
-import { formatCountParticipants } from "@/src/widgets/detailedCart/lib/formatCountParticipants";
 import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
 import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
 
 import styles from "./styles.module.scss";
+import { formatCountParticipants } from "../lib/formatCountParticipants";
 
 const contactsSchema = z.object({
   name: z
@@ -68,8 +69,6 @@ export const DetailedCart = () => {
       // dispatch(resetOrderStatus());
     };
   }, []);
-  console.log("authUser", authUser);
-  console.log("cart", cart);
 
   return (
     <>
@@ -118,23 +117,24 @@ export const DetailedCart = () => {
                           className={styles.detailedCart__participantsContainer}
                         >
                           <ul className={styles.detailedCart__participantsList}>
-                            {item.cart_item_options.map((participant, i) => (
-                              <li
-                                key={i}
-                                className={clsx(
-                                  styles.detailedCart__participantsItem
-                                )}
-                              >
-                                {participant.quantity &&
-                                  formatCountParticipants(
+                            {item.cart_item_options.map((participant, i) => {
+                              return (
+                                <li
+                                  key={participant.id}
+                                  className={clsx(
+                                    styles.detailedCart__participantsItem
+                                  )}
+                                >
+                                  {formatCountParticipants(
                                     participant.quantity,
                                     participant.category_title
                                   )}
-                                {i < item.cart_item_options.length - 1
-                                  ? ","
-                                  : ""}
-                              </li>
-                            ))}
+                                  {i < item.cart_item_options.length - 1
+                                    ? ","
+                                    : ""}
+                                </li>
+                              );
+                            })}
                           </ul>
                         </div>
                         <div>
@@ -156,7 +156,7 @@ export const DetailedCart = () => {
                           />
                         </div>
                         <div className={styles.detailedCart__buttonsGroup}>
-                          {/*<RemoveFromCart itemId={item.service_id} />*/}
+                          <RemoveFromCart itemId={item.id} />
                           {/*<EditItem />*/}
                         </div>
                       </div>
