@@ -11,7 +11,7 @@ export const GET = async () => {
     requestHeaders.cookie = cookieHeader;
   }
 
-  const response = await fetch(`http://localhost:4000/backend/cart`, {
+  const response = await fetch(`https://traventico.com/backend/cart`, {
     method: "GET",
     credentials: "include",
     headers: requestHeaders,

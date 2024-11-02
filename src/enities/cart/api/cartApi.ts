@@ -7,7 +7,7 @@ import {
 import { Cart, CartItem } from "@/src/shared/types/cart";
 
 export const cartApi = {
-  getCart: () => apiClient<Cart>(`${INTERNAL_API_BASE_URL}/api/cart`),
+  getCart: () => apiClient<Cart>(`/api/cart`),
   addItem: async (item: CartItemDto) => {
     const { data } = await apiClient<Cart>(
       `${EXTERNAL_API_BASE_URL}/api/cart/items`,
