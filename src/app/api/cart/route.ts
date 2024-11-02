@@ -1,6 +1,11 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
+import {
+  CART_ENDPOINTS,
+  EXTERNAL_API_BASE_URL,
+} from "@/src/shared/lib/constants";
+
 export const GET = async () => {
   const headersList = headers();
   const cookieHeader = headersList.get("cookie");
@@ -11,14 +16,17 @@ export const GET = async () => {
     requestHeaders.cookie = cookieHeader;
   }
 
-  const response = await fetch(`https://traventico.com/backend/cart`, {
-    method: "GET",
-    credentials: "include",
-    headers: requestHeaders,
-  });
+  const response = await fetch(
+    `${EXTERNAL_API_BASE_URL}${CART_ENDPOINTS.GET_CART}`,
+    {
+      method: "GET",
+      credentials: "include",
+      headers: requestHeaders,
+    }
+  );
 
   const cart = await response.json();
-  console.log("cart", cart);
+
   const nextResponse = NextResponse.json(cart);
 
   const setCookieHeader = response.headers.get("set-cookie");
