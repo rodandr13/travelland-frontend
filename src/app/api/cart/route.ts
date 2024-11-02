@@ -1,30 +1,35 @@
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-import { apiClient } from "@/src/shared/api";
-import { ensureAccessToken } from "@/src/shared/api/ensureAccessToken";
-import {
-  CART_ENDPOINTS,
-  EXTERNAL_API_BASE_URL,
-} from "@/src/shared/lib/constants";
-
 export const GET = async () => {
-  await ensureAccessToken();
-  const accessToken = cookies().get("accessToken")?.value;
-  const { data: cart } = await apiClient(
-    `${EXTERNAL_API_BASE_URL}${CART_ENDPOINTS.GET_CART}`,
-    {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Cookie: `accessToken=${accessToken}`,
-      },
-      next: {
-        tags: ["cart"],
-        revalidate: 60,
-      },
-    }
-  );
+  const headersList = headers();
+  const cookieHeader = headersList.get("cookie");
 
-  return NextResponse.json(cart);
+  const requestHeaders: HeadersInit = {};
+
+  if (cookieHeader) {
+    requestHeaders.cookie = cookieHeader;
+  }
+
+  const response = await fetch(`http://localhost:4000/backend/cart`, {
+    method: "GET",
+    credentials: "include",
+    headers: requestHeaders,
+  });
+
+  const cart = await response.json();
+
+  const nextResponse = NextResponse.json(cart);
+
+  const setCookieHeader = response.headers.get("set-cookie");
+
+  if (setCookieHeader) {
+    const cookies = setCookieHeader.split(/,(?=[^ ])/);
+
+    cookies.forEach((cookie) => {
+      nextResponse.headers.append("Set-Cookie", cookie.trim());
+    });
+  }
+
+  return nextResponse;
 };
