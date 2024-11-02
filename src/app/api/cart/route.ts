@@ -18,7 +18,7 @@ export const GET = async () => {
   });
 
   const cart = await response.json();
-
+  console.log("cart", cart);
   const nextResponse = NextResponse.json(cart);
 
   const setCookieHeader = response.headers.get("set-cookie");

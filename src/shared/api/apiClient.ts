@@ -40,7 +40,6 @@ export const apiClient = async <T>(
       credentials: options.credentials || "same-origin",
       ...(options.next && { next: options.next }),
     });
-    console.log(response);
     const contentType = response.headers.get("Content-Type");
     let data: any = null;
 
