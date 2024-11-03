@@ -27,6 +27,7 @@ export const CART_ENDPOINTS = {
   GET_CART: "/cart",
   ADD_ITEM: "/cart/items",
   DELETE_ITEM: "/cart/items",
+  UPDATE_ITEM: "/cart/items",
 };
 
 export const ADULT_CATEGORY_ID = "40746088-7530-4514-b94e-d0df8560e8de";

@@ -1,8 +1,5 @@
-import { cookies } from "next/headers";
+import { headers } from "next/headers";
 import { NextResponse } from "next/server";
-
-import { apiClient } from "@/src/shared/api";
-import { ensureAccessToken } from "@/src/shared/api/ensureAccessToken";
 import {
   CART_ENDPOINTS,
   EXTERNAL_API_BASE_URL,
@@ -12,34 +9,39 @@ export const DELETE = async (
   request: Request,
   { params }: { params: { id: string } }
 ) => {
-  try {
-    await ensureAccessToken();
+  // await ensureAccessToken();
 
-    const accessToken = cookies().get("accessToken")?.value;
-    const itemId = params.id;
+  const headersList = headers();
+  const cookieHeader = headersList.get("cookie");
 
-    const { data: cart } = await apiClient(
-      `${EXTERNAL_API_BASE_URL}${CART_ENDPOINTS.DELETE_ITEM}/${itemId}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-        headers: {
-          Cookie: `accessToken=${accessToken}`,
-          "Content-Type": "application/json",
-        },
-        next: {
-          tags: ["cart"],
-          revalidate: 60,
-        },
-      }
-    );
+  const requestHeaders: HeadersInit = {};
 
-    return NextResponse.json(cart);
-  } catch (error) {
-    console.error("Error deleting cart item:", error);
-    return NextResponse.json(
-      { error: "Failed to delete cart item" },
-      { status: 500 }
-    );
+  if (cookieHeader) {
+    requestHeaders.cookie = cookieHeader;
   }
+  const itemId = params.id;
+  const response = await fetch(
+    `${EXTERNAL_API_BASE_URL}${CART_ENDPOINTS.DELETE_ITEM}/${itemId}`,
+    {
+      method: "DELETE",
+      credentials: "include",
+      headers: requestHeaders,
+    }
+  );
+
+  const cart = await response.json();
+
+  const nextResponse = NextResponse.json(cart);
+
+  const setCookieHeader = response.headers.get("set-cookie");
+
+  if (setCookieHeader) {
+    const cookies = setCookieHeader.split(/,(?=[^ ])/);
+
+    cookies.forEach((cookie) => {
+      nextResponse.headers.append("Set-Cookie", cookie.trim());
+    });
+  }
+
+  return nextResponse;
 };
