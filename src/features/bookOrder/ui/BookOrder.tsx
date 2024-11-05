@@ -2,7 +2,6 @@ import { useState } from "react";
 
 import { SubmitHandler, useFormContext } from "react-hook-form";
 
-import { resetDetails } from "@/src/enities/booking";
 import { apiClient } from "@/src/shared/api";
 import {
   EXTERNAL_API_BASE_URL,
@@ -54,8 +53,6 @@ export const BookOrder = ({ cartId }: Props) => {
       if (response.success && response.redirect) {
         window.location.href = response.redirect;
       }
-
-      dispatch(resetDetails());
     } catch (error) {
       setError((error as Error).message);
     } finally {

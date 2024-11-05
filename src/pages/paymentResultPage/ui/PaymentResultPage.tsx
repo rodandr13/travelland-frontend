@@ -3,7 +3,8 @@ import {
   EXTERNAL_API_BASE_URL,
   PAYMENT_ENDPOINTS,
 } from "@/src/shared/lib/constants";
-import { SuccessfulOrder } from "@/src/shared/ui/successfulOrder";
+import { SuccessfulPayment } from "@/src/shared/ui/successfulPayment";
+import { UnsuccessfulPayment } from "@/src/shared/ui/unsuccessfulPayment";
 
 interface Props {
   searchParams: {
@@ -12,9 +13,10 @@ interface Props {
 }
 
 type PaymentResultResponse = {
-  orderId: number;
+  order_id: number;
   message: string;
   status: string;
+  result_text: string;
 };
 
 export const PaymentResultPage = async ({ searchParams }: Props) => {
@@ -28,12 +30,17 @@ export const PaymentResultPage = async ({ searchParams }: Props) => {
     }
   );
 
+  const isSuccess = data.status !== "UNPAID";
+
   return (
     <div>
-      {token ? (
-        <SuccessfulOrder orderNumber={data.orderId} />
+      {isSuccess ? (
+        <SuccessfulPayment orderNumber={data.order_id} />
       ) : (
-        <p>Ошибка при обработке платежа: {data.message}</p>
+        <UnsuccessfulPayment
+          orderNumber={data.order_id}
+          message={data.message}
+        />
       )}
     </div>
   );

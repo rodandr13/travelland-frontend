@@ -6,14 +6,11 @@ interface Props {
   orderNumber: number;
 }
 
-export const SuccessfulOrder = ({ orderNumber }: Props) => {
+export const SuccessfulPayment = ({ orderNumber }: Props) => {
   return (
     <section className={styles.successfulOrder}>
       <h2>{`Заказ №${orderNumber} успешно оплачен`}</h2>
-      <p>
-        Наши менеджеры свяжутся с вами для уточнения деталей. На вашу почту
-        отправлена информация о заказе.
-      </p>
+      <p>На вашу почту отправлена информация о заказе.</p>
       <Link href="/" className="link_cart">
         Вернуться на главную страницу
       </Link>
