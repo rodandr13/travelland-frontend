@@ -41,7 +41,7 @@ const contactsSchema = z.object({
     .email("Некорректный формат email")
     .min(5, "Почта должна содержать минимум 5 символов")
     .max(30, "Почта должна содержать не более 30 символов"),
-  paymentMethod: z.enum(["cash", "card", "installment_payment"], {
+  paymentMethod: z.enum(["cash", "card", "prepayment"], {
     errorMap: () => ({ message: "Выберите способ оплаты" }),
   }),
   promoCode: z.string().optional(),

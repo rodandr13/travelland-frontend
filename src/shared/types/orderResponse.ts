@@ -15,7 +15,7 @@ type PaymentStatus =
   | "FAILED"
   | "REFUNDED";
 
-type PaymentMethod = "CASH" | "CARD" | "INSTALLMENT_PAYMENT";
+type PaymentMethod = "CASH" | "CARD" | "PREPAYMENT";
 
 type ServicePrice = {
   id: number;

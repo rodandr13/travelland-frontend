@@ -46,10 +46,10 @@ export const PaymentMethods = () => {
             <input
               className={styles.paymentMethods__input}
               type="radio"
-              value="installment_payment"
+              value="prepayment"
               {...register("paymentMethod")}
               onChange={handleChange}
-              checked={selectedMethod === "installment_payment"}
+              checked={selectedMethod === "prepayment"}
             />
             <span>Оплата частями</span>
           </label>

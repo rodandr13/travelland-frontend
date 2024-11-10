@@ -1,5 +1,8 @@
+"use client";
+
 import { useState } from "react";
 
+import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 
 import { apiClient } from "@/src/shared/api";
@@ -16,9 +19,9 @@ interface Props {
 }
 
 type PaymentCreateResponse = {
-  success: boolean;
-  message: string;
-  redirect: string;
+  payment_method: PaymentMethod;
+  token?: string;
+  redirect?: string;
 };
 
 export const BookOrder = ({ cartId }: Props) => {
@@ -26,7 +29,7 @@ export const BookOrder = ({ cartId }: Props) => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const route = useRouter();
   const onSubmit: SubmitHandler<ContactsData> = async (formData) => {
     setIsLoading(true);
     setError(null);
@@ -50,8 +53,10 @@ export const BookOrder = ({ cartId }: Props) => {
         credentials: "include",
       });
 
-      if (response.success && response.redirect) {
+      if (response.redirect && response.payment_method === "CARD") {
         window.location.href = response.redirect;
+      } else if (response.token && response.payment_method === "CASH") {
+        route.replace(`/payment?token=${response.token}`);
       }
     } catch (error) {
       setError((error as Error).message);

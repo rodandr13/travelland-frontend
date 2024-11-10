@@ -17,6 +17,7 @@ type PaymentResultResponse = {
   message: string;
   status: string;
   result_text: string;
+  payment_method: string;
 };
 
 export const PaymentResultPage = async ({ searchParams }: Props) => {
@@ -30,7 +31,7 @@ export const PaymentResultPage = async ({ searchParams }: Props) => {
     }
   );
 
-  const isSuccess = data.status !== "UNPAID";
+  const isSuccess = data.status !== "UNPAID" || data.payment_method === "CASH";
 
   return (
     <div>
