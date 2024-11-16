@@ -53,7 +53,11 @@ export const BookOrder = ({ cartId }: Props) => {
         credentials: "include",
       });
 
-      if (response.redirect && response.payment_method === "CARD") {
+      if (
+        response.redirect &&
+        (response.payment_method === "CARD" ||
+          response.payment_method === "PREPAYMENT")
+      ) {
         window.location.href = response.redirect;
       } else if (response.token && response.payment_method === "CASH") {
         route.replace(`/payment?token=${response.token}`);

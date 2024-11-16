@@ -30,8 +30,11 @@ export const PaymentResultPage = async ({ searchParams }: Props) => {
       credentials: "include",
     }
   );
-
-  const isSuccess = data.status !== "UNPAID" || data.payment_method === "CASH";
+  console.log(data.payment_method);
+  const isSuccess =
+    data.status !== "UNPAID" ||
+    data.payment_method === "CASH" ||
+    data.payment_method === "PREPAYMENT";
 
   return (
     <div>
