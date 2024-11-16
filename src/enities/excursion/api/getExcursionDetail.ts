@@ -45,7 +45,7 @@ export const getExcursionDetail = async ({ slug }: Props) => {
     location{lng, lat},
     image{"src": asset._ref, "lqip": asset->metadata.lqip},
   },
-  "route": route[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip}},
+  "route": visitPlaces[]->{"title":title[_key == "ru"][0].value, "description":description[_key == "ru"][0].value, "gallery":gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip}},
   "gallery": gallery[]{"src": asset._ref, "lqip": asset->metadata.lqip},
 }[0]
 `;

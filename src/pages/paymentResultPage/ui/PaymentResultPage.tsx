@@ -6,6 +6,8 @@ import {
 import { SuccessfulPayment } from "@/src/shared/ui/successfulPayment";
 import { UnsuccessfulPayment } from "@/src/shared/ui/unsuccessfulPayment";
 
+import styles from "./styles.module.scss";
+
 interface Props {
   searchParams: {
     token: string;
@@ -30,14 +32,13 @@ export const PaymentResultPage = async ({ searchParams }: Props) => {
       credentials: "include",
     }
   );
-  console.log(data.payment_method);
   const isSuccess =
     data.status !== "UNPAID" ||
     data.payment_method === "CASH" ||
     data.payment_method === "PREPAYMENT";
 
   return (
-    <div>
+    <section className={styles.page}>
       {isSuccess ? (
         <SuccessfulPayment orderNumber={data.order_id} />
       ) : (
@@ -46,6 +47,6 @@ export const PaymentResultPage = async ({ searchParams }: Props) => {
           message={data.message}
         />
       )}
-    </div>
+    </section>
   );
 };
