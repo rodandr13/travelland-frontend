@@ -60,7 +60,7 @@ export const DetailedCart = () => {
       name: authUser?.first_name,
       phone: "",
       email: authUser?.email,
-      paymentMethod: "cash",
+      paymentMethod: "card",
       promoCode: "",
     },
   });
