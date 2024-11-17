@@ -81,6 +81,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    transition-delay: 0.2s;
   }
 
   &__list {
@@ -153,4 +157,11 @@
   &__textContainer {
     flex: 1;
   }
+}
+
+.cart:hover .cart__details,
+.cart:focus .cart__details {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0.2s;
 }

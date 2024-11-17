@@ -119,6 +119,7 @@ a {
 }
 
 .link {
+  width: fit-content;
   &_cart {
     display: block;
     background: var(--color-link-cart-bg);
@@ -130,6 +131,7 @@ a {
     border-radius: 10px;
     transition: all 0.2s ease 0s;
     line-height: 1.2;
+    width: 100%;
 
     &:hover {
       text-decoration: none;
