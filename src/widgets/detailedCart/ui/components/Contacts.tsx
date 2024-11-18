@@ -1,6 +1,6 @@
 "use client";
 
-import { Input } from "@mantine/core";
+import { Stack, TextInput } from "@mantine/core";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
@@ -13,6 +13,27 @@ type ContactsData = {
   email: string;
 };
 
+const FIELDS = [
+  {
+    name: "name" as const,
+    label: "Имя",
+    placeholder: "Введите имя",
+    authField: "first_name" as const,
+  },
+  {
+    name: "phone" as const,
+    label: "Телефон",
+    placeholder: "Введите телефон",
+    authField: "phone_number" as const,
+  },
+  {
+    name: "email" as const,
+    label: "Почта",
+    placeholder: "Введите почту",
+    authField: "email" as const,
+  },
+] as const;
+
 export const Contacts = () => {
   const { authUser } = useAuth();
   const {
@@ -23,64 +44,31 @@ export const Contacts = () => {
   return (
     <section className={styles.contacts}>
       <h2>Контактные данные</h2>
-      <div className={styles.contacts__form}>
-        <Controller
-          name="name"
-          control={control}
-          render={({ field }) => (
-            <Input.Wrapper
-              label="Имя"
-              error={errors.name?.message}
-              withAsterisk
-            >
-              <Input
-                placeholder="Введите имя"
+      <Stack gap="md" className={styles.contacts__form}>
+        {FIELDS.map(({ name, label, placeholder, authField }) => (
+          <Controller
+            key={name}
+            name={name}
+            control={control}
+            render={({ field }) => (
+              <TextInput
                 {...field}
-                readOnly={Boolean(authUser?.first_name)}
+                value={field.value || ""}
+                label={label}
+                placeholder={placeholder}
+                error={errors[name]?.message}
+                withAsterisk
+                readOnly={Boolean(authUser?.[authField])}
                 className={styles.input}
+                radius="md"
+                size="md"
+                autoComplete={name === "email" ? "email" : "off"}
+                type={name === "email" ? "email" : "text"}
               />
-            </Input.Wrapper>
-          )}
-        />
-
-        <Controller
-          name="phone"
-          control={control}
-          render={({ field }) => (
-            <Input.Wrapper
-              label="Телефон"
-              error={errors.phone?.message}
-              withAsterisk
-            >
-              <Input
-                placeholder="Введите телефон"
-                {...field}
-                readOnly={Boolean(authUser?.phone_number)}
-                className={styles.input}
-              />
-            </Input.Wrapper>
-          )}
-        />
-
-        <Controller
-          name="email"
-          control={control}
-          render={({ field }) => (
-            <Input.Wrapper
-              label="Почта"
-              error={errors.email?.message}
-              withAsterisk
-            >
-              <Input
-                placeholder="Введите почту"
-                {...field}
-                readOnly={Boolean(authUser?.email)}
-                className={styles.input}
-              />
-            </Input.Wrapper>
-          )}
-        />
-      </div>
+            )}
+          />
+        ))}
+      </Stack>
     </section>
   );
 };
