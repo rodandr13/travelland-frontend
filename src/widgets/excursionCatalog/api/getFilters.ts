@@ -10,13 +10,5 @@ export const getFilters = async () => {
   "title": title[_key == "ru"][0].value
 }
   `;
-  return await client.fetch<FiltersType>(
-    query,
-    {},
-    {
-      next: {
-        revalidate: 60,
-      },
-    }
-  );
+  return await client.fetch<FiltersType>(query);
 };

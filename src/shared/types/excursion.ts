@@ -21,6 +21,7 @@ export type Price = {
   description: string;
   key: string;
   type: string;
+  groupSize: number;
 };
 
 export type PromotionalPrice = {

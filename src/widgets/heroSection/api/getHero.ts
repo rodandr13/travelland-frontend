@@ -8,13 +8,5 @@ export const getHero = async () => {
   "title": heroTitle[_key == "ru"][0].value,
 }[0]
   `;
-  return await client.fetch(
-    query,
-    {},
-    {
-      next: {
-        revalidate: 60,
-      },
-    }
-  );
+  return await client.fetch(query);
 };

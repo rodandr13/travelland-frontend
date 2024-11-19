@@ -54,13 +54,18 @@ export const generatePriceMap = ({
     const priceArray: CartItemParticipants[] = basePrices.map((basePrice) => ({
       current_price: basePrice.price,
       base_price: basePrice.price,
-      category_title: basePrice.title,
+      category_title:
+        basePrice.type !== "groupSize" ? basePrice.title : "Группа",
       category_id: basePrice.categoryId,
       quantity: 0,
-      category_description: basePrice.description,
+      category_description:
+        basePrice.type !== "groupSize"
+          ? basePrice.description
+          : "Стоимость указана за всю группу",
       price_type: basePrice.type,
       total_base_price: 0,
       total_current_price: 0,
+      groupSize: basePrice.groupSize,
     }));
 
     // Функция для применения промо или корректировочных цен
@@ -101,5 +106,6 @@ export const generatePriceMap = ({
 
     pricesMap.set(formattedDay, priceArray);
   });
+
   return pricesMap;
 };

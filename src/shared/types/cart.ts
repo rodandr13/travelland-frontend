@@ -1,5 +1,6 @@
 export type CartItemParticipants = {
   id?: number;
+  groupSize?: number;
   category_id: string;
   price_type: string;
   base_price: number;

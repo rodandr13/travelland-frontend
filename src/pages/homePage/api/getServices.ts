@@ -10,13 +10,5 @@ export const getServices = async () => {
   "description": description[_key == "ru"][0].value
 }
   `;
-  return await client.fetch<Service[]>(
-    query,
-    {},
-    {
-      next: {
-        revalidate: 60,
-      },
-    }
-  );
+  return await client.fetch<Service[]>(query);
 };

@@ -18,7 +18,6 @@ import styles from "./styles.module.scss";
 export const CompactCart = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCartData);
-  console.log("render cart");
   const totalItems =
     cart && cart.cart_items && cart.cart_items.length
       ? cart.cart_items.length

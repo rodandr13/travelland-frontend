@@ -57,7 +57,6 @@ export const PriceSection = ({
   const handleScroll = () => {
     targetRef?.current?.scrollIntoView({ behavior: "smooth" });
   };
-
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 900px)");
 

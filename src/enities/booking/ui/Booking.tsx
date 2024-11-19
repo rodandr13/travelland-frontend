@@ -15,6 +15,7 @@ import {
 import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
 import { selectIsItemInCart } from "@/src/enities/cart/model/selectors";
 import { Calendar } from "@/src/enities/excursion/ui/detail/components/calendar/Calendar";
+import { SelectGroup } from "@/src/enities/excursion/ui/detail/components/selectGroup/SelectGroup";
 import { SelectPeoples } from "@/src/enities/excursion/ui/detail/components/selectPeoples/SelectPeoples";
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
@@ -41,6 +42,7 @@ interface Props {
   title: string;
   type: string;
   slug: string;
+  category: string;
 }
 
 export const Booking = ({
@@ -52,6 +54,7 @@ export const Booking = ({
   image,
   type,
   slug,
+  category,
 }: Props) => {
   const isEditing = useAppSelector(selectExcursionIsEditing(id));
   const bookingRef = useRef<HTMLDivElement | null>(null);
@@ -61,7 +64,6 @@ export const Booking = ({
   const bookingDetails = useAppSelector(selectBookingDetailsById(id));
   const targetRef = useScroll();
   const isItemExists = useAppSelector(selectIsItemInCart(id));
-
   const [isComponentLoaded, setIsComponentLoaded] = useState(false);
 
   useEffect(() => {
@@ -160,10 +162,17 @@ export const Booking = ({
           {bookingDetails?.time && (
             <div>
               <h2 className={styles.booking__title}>Количество человек</h2>
-              <SelectPeoples
-                id={id}
-                participants={bookingDetails.cart_item_options}
-              />
+              {category === "group" ? (
+                <SelectPeoples
+                  id={id}
+                  participants={bookingDetails.cart_item_options}
+                />
+              ) : (
+                <SelectGroup
+                  id={id}
+                  groups={bookingDetails.cart_item_options}
+                />
+              )}
             </div>
           )}
         </section>
