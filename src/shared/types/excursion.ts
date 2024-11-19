@@ -1,9 +1,3 @@
-export type MeetingPoint = {
-  description: string;
-  image: GalleryImage;
-  location: Location;
-};
-
 export type Location = {
   lng: number;
   lat: number;
@@ -35,6 +29,7 @@ export type RouteItem = {
   title: string;
   description: string;
   gallery: GalleryImage[];
+  location: Location;
 };
 
 export type AdditionalTerms = string[];
@@ -93,8 +88,8 @@ export type ExcursionType = {
   included: Included;
   surcharge: Surcharge;
   additionalTerms: AdditionalTerms;
-  startingPlace: MeetingPoint;
-  endingPlace: MeetingPoint;
+  startingPlace: RouteItem;
+  endingPlace: RouteItem;
   basePrices: Price[];
   promotionalPrices: PromotionalPrice[];
   priceCorrections: PromotionalPrice[];
