@@ -16,6 +16,7 @@ import {
 } from "@/src/enities/cart/model/selectors";
 import { AddToCart } from "@/src/features/addToCart";
 import { EditExcursion } from "@/src/features/editExcursion";
+import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { CategoryKey } from "@/src/shared/types/excursion";
@@ -219,7 +220,10 @@ export const PriceSection = ({
             </Link>
           )}
           {isItemExists && (
-            <EditExcursion id={id} handleScroll={handleScroll} />
+            <>
+              <EditExcursion id={id} handleScroll={handleScroll} />
+              <RemoveFromCart itemId={id} />
+            </>
           )}
         </section>
       )}

@@ -6,7 +6,7 @@ import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import styles from "./styles.module.scss";
 
 interface Props {
-  itemId?: number;
+  itemId?: string;
 }
 
 export const RemoveFromCart = ({ itemId }: Props) => {

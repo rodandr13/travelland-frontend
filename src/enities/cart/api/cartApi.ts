@@ -30,7 +30,7 @@ export const cartApi = {
     );
     return data;
   },
-  removeItem: async (itemId: number) => {
+  removeItem: async (itemId: string) => {
     const { data } = await apiClient<Cart>(`/api/cart/items/${itemId}`, {
       method: "DELETE",
       credentials: "include",

@@ -72,7 +72,7 @@ export const generatePriceMap = ({
     const applyPrices = (prices: Price[]) => {
       prices.forEach((p) => {
         const category = priceArray.find(
-          (item) => item.category_title === p.title
+          (item) => item.category_id === p.categoryId
         );
         if (category) {
           category.current_price = p.price;

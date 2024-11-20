@@ -157,7 +157,7 @@ export const DetailedCart = () => {
                           />
                         </div>
                         <div className={styles.detailedCart__buttonsGroup}>
-                          <RemoveFromCart itemId={item.id} />
+                          <RemoveFromCart itemId={item.service_id} />
                           {/*<EditItem />*/}
                         </div>
                       </div>

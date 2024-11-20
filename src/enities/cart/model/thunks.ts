@@ -25,7 +25,7 @@ export const updateCartItem = createAsyncThunk(
 
 export const removeCartItem = createAsyncThunk(
   "cart/removeItem",
-  async (itemId: number) => {
+  async (itemId: string) => {
     return await cartApi.removeItem(itemId);
   }
 );

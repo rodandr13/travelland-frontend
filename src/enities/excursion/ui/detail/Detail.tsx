@@ -79,7 +79,6 @@ export const Detail = async ({ slug }: Props) => {
 
   const baseAdultPrice = findAdultBasePrice(basePrices);
   const minPrice = getMinPrice(priceData, category.key);
-
   return (
     <section className={styles.excursionDetail}>
       <Gallery images={gallery} />
