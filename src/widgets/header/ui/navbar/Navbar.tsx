@@ -7,15 +7,12 @@ import Link from "next/link";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { CompactCart } from "@/src/enities/cart";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { AccountButton } from "@/src/shared/ui/accountButton/AccountButton";
-import { HamburgerButton } from "@/src/widgets/header/ui/navbar/ui";
 
 import styles from "./styles.module.scss";
 
 export const Navbar = () => {
   const { authUser } = useAuth();
-  const isOpen = useAppSelector((state) => state.menu.isOpen);
   return (
     <div className={styles.navbar}>
       <div className={styles.navbar__logo}>
@@ -26,21 +23,15 @@ export const Navbar = () => {
             height={44}
             alt="Logo"
             loading="eager"
+            className={styles.logo}
           />
         </Link>
       </div>
-      <div
-        className={clsx(styles.navbar__container, {
-          [styles.navbar__container_isOpen]: isOpen,
-        })}
-      >
+      <div className={clsx(styles.navbar__container)}>
         <div
           className={clsx(
             styles.navbar__containerMenu,
-            styles.navbar__containerMenu_mobile,
-            {
-              [styles.navbar__containerMenu_isOpen]: isOpen,
-            }
+            styles.navbar__containerMenu_mobile
           )}
         >
           <div className={`${styles.navbar__menu} ${styles.menu}`}>
@@ -66,7 +57,9 @@ export const Navbar = () => {
           {/*    </li>*/}
           {/*  </ul>*/}
           {/*</div>*/}
-          <div className={styles.navbar__cart}>{<CompactCart />}</div>
+          <div className={styles.navbar__cart}>
+            <CompactCart />
+          </div>
           <div>
             {authUser ? (
               <AccountButton user={authUser} />
@@ -85,7 +78,7 @@ export const Navbar = () => {
             )}
           </div>
         </div>
-        <HamburgerButton />
+        {/*<MobileMenu />*/}
       </div>
     </div>
   );

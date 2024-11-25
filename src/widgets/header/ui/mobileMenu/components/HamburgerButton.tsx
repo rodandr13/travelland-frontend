@@ -4,19 +4,18 @@ import { useEffect } from "react";
 
 import clsx from "clsx";
 
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import sharedStyles from "@/src/shared/styles/styles.module.scss";
-import { toggleMenu } from "@/src/widgets/header/model/menuSlice";
 
 import styles from "./styles.module.scss";
 
-export const HamburgerButton = () => {
-  const dispatch = useAppDispatch();
-  const isOpen = useAppSelector((state) => state.menu.isOpen);
+interface Props {
+  open: () => void;
+  opened: boolean;
+}
 
+export const HamburgerButton = ({ opened, open }: Props) => {
   const handleResize = () => {
-    if (window.innerWidth >= 750 && isOpen) {
-      dispatch(toggleMenu());
+    if (window.innerWidth >= 750 && opened) {
       document.body.classList.remove(sharedStyles.disableScroll);
       const pagePosition = parseInt(document.body.dataset.position || "0", 10);
       window.scrollTo(0, pagePosition);
@@ -28,11 +27,11 @@ export const HamburgerButton = () => {
   useEffect(() => {
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, [isOpen]);
+  }, [opened]);
 
   useEffect(() => {
     const body = document.body;
-    if (isOpen) {
+    if (opened) {
       const pagePosition = window.scrollY;
       body.dataset.position = pagePosition.toString();
       body.style.top = -pagePosition + "px";
@@ -44,24 +43,25 @@ export const HamburgerButton = () => {
       window.scrollTo(0, pagePosition);
       body.removeAttribute("data-position");
     }
-  }, [isOpen]);
+  }, [opened]);
 
-  const handleClick = () => {
-    dispatch(toggleMenu());
-  };
   return (
-    <button
-      className={clsx(
-        styles.hamburger,
-        isOpen ? styles.hamburger__button_type_close : styles.hamburger__button
-      )}
-      aria-label="Меню"
-      type="button"
-      onClick={handleClick}
-    >
-      <span className={`${styles.hamburger__buttonLine}`} />
-      <span className={`${styles.hamburger__buttonLine}`} />
-      <span className={`${styles.hamburger__buttonLine}`} />
-    </button>
+    <>
+      <button
+        className={clsx(
+          styles.hamburger,
+          opened
+            ? styles.hamburger__button_type_close
+            : styles.hamburger__button
+        )}
+        aria-label="Меню"
+        type="button"
+        onClick={open}
+      >
+        <span className={`${styles.hamburger__buttonLine}`} />
+        <span className={`${styles.hamburger__buttonLine}`} />
+        <span className={`${styles.hamburger__buttonLine}`} />
+      </button>
+    </>
   );
 };

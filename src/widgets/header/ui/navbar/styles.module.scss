@@ -14,8 +14,8 @@
   }
 
   &__containerMenu {
-    min-width: 320px;
     display: flex;
+    justify-content: flex-end;
     gap: 80px;
   }
 
@@ -151,78 +151,63 @@
 }
 
 
-@media screen and (max-width: 1100px) {
-  .navbar {
-    gap: 60px;
+.logo {
+  width: 173px;
+  height: 44px;
+  transition: width 0.3s ease, height 0.3s ease; /* Плавное изменение размеров */
+}
 
-    &__containerMenu {
-      gap: 60px;
-    }
-  }
+@media screen and (max-width: 1100px) {
+  //.navbar {
+  //  gap: 60px;
+  //
+  //  &__containerMenu {
+  //    gap: 60px;
+  //  }
+  //}
 }
 
 
 
 @media screen and (max-width: 800px) {
-  .contacts {
-    display: block;
-    margin: 0 auto;
-  }
-  .menu {
-    &__list {
-      align-items: center;
-    }
-  }
   .navbar {
-    padding: 20px 20px;
-
-    &__container_isOpen {
-      width: 100%;
-      background: var(--color-gray-dark);
-      position: fixed;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      z-index: 2;
-      transition: background 200ms ease-in;
-    }
-
+    padding: 0 20px;
     &__containerMenu {
-      visibility: hidden;
-      transition: transform, visibility 200ms ease-in;
-
-      &_mobile {
-        background: var(--color-white);
-        flex-direction: column;
-        max-width: 350px;
-        height: 100vh;
-        position: fixed;
-        right: 0;
-        top: 0;
-        z-index: 2;
-        padding: 200px 0 0 0;
-        transform: translateX(100%);
-      }
-
-      &_isOpen {
-        visibility: visible;
-        transform: translateX(0%);
-        transition: transform 200ms ease-in;
-      }
+      gap: 30px;
     }
   }
-  .menu {
-    &__list {
-      flex-direction: column;
-    }
-  }
+  //.contacts {
+  //  display: block;
+  //  margin: 0 auto;
+  //}
+  //.menu {
+  //  &__list {
+  //    align-items: center;
+  //  }
+  //}
+  //.navbar {
+  //  padding: 20px 20px;
+  //}
 }
 
 @media screen and (max-width: 500px) {
+  .logo {
+    width: 129.75px;
+    height: 33px;
+  }
+  //.navbar {
+  //  &__containerMenu {
+  //    width: 100%;
+  //  }
+  //}
+}
+
+@media screen and (max-width: 400px) {
   .navbar {
-    &__containerMenu {
-      width: 100%;
+    &__accountLink {
+      text-indent: -9999px;
+      overflow: hidden;
+      white-space: nowrap;
     }
   }
 }

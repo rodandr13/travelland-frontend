@@ -55,3 +55,11 @@
     left: 0;
   }
 }
+
+@media screen and (max-width: 800px) {
+  .header {
+    &__topNavContainer {
+      padding: 0 20px;
+    }
+  }
+}
