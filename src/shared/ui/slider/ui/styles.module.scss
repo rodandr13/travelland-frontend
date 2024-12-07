@@ -7,14 +7,8 @@
 
 .imageSlider {
   position: relative;
-  overflow-x: scroll;
-  overscroll-behavior: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
+  overflow: hidden;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
   &__buttonsContainer {
     opacity: 0;
   }
@@ -54,7 +48,6 @@
 
 .sliderControls {
   overflow: hidden;
-  width: 50px;
 
   &__list {
     padding: 0;
@@ -68,9 +61,9 @@
   }
 
   &__item {
-    height: 6px;
-    width: 6px;
-    min-width: 6px;
+    height: 8px;
+    width: 8px;
+    min-width: 8px;
   }
 
   &__button {
@@ -83,11 +76,66 @@
     height: 100%;
     border-radius: 50%;
     opacity: 0.6;
+    background: var(--color-gray-light);
+
 
     &_active {
       opacity: 1;
     }
   }
+}
+
+.hovered {
+  opacity: 1 !important;
+}
+.slideButton {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: opacity 100ms ease-in, background-color 100ms ease-in, transform 100ms ease-in;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  will-change: transform, opacity;
+
+  &:hover {
+    background: rgba(255, 255, 255, 1);
+    transform: scale(1.1) translateY(-45%);
+  }
+  &:disabled {
+    opacity: 0.5;
+  }
+  &:disabled:hover {
+    background: rgba(255, 255, 255, 0.8);
+    transform: translateY(-50%);
+  }
+
+  &_prev {
+    left: 10px;
+  }
+
+  &_next {
+    right: 10px;
+    position: absolute;
+  }
+  &__icon {
+    display: block;
+    fill: none;
+    height:12px;
+    width: 12px;
+    stroke: var(--color-black);
+    stroke-width: 4;
+    overflow: visible;
+  }
+
 }
 
 @media screen and (max-width: 950px) {

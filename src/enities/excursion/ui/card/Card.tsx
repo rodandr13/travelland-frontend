@@ -62,14 +62,14 @@ export const Card = ({ addFavorite, card }: Props) => {
 
   return (
     <article className={styles.excursionCard}>
+      <div className={styles.excursionCard__imageContainer}>
+        <div className={styles.excursionCard__favorites}>{addFavorite}</div>
+        <ImageSlider card={card} />
+      </div>
       <Link
         href={`excursion/${card.slug}`}
         className={styles.excursionCard__link}
       >
-        <div className={styles.excursionCard__imageContainer}>
-          <div className={styles.excursionCard__favorites}>{addFavorite}</div>
-          <ImageSlider images={card.gallery} />
-        </div>
         <WeekDays days={filledDays} />
         <h3 className={styles.excursionCard__header}>{card.title}</h3>
         <p className={styles.excursionCard__duration}>

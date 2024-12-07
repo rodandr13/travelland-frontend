@@ -1,108 +1,98 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 
 import clsx from "clsx";
+import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
+import Link from "next/link";
 
 import { urlFor } from "@/src/shared/lib/sanity/client";
-import { GalleryImage } from "@/src/shared/types/excursion";
-import { SlideButton } from "@/src/shared/ui/";
-import { getScaleStyle } from "@/src/shared/ui/slider/lib/getScaleStyle";
-import { goToSlide } from "@/src/shared/ui/slider/lib/goToSlide";
-import { setSlideRef } from "@/src/shared/ui/slider/lib/setSlideRef";
+import { ExcursionCard } from "@/src/shared/types/excursion";
+import { usePrevNextButtons } from "@/src/shared/ui/slider/lib/usePrevNextButtons";
+import {
+  DotButton,
+  useDotButton,
+} from "@/src/shared/ui/slider/ui/components/DotButton";
+import { SlideButton } from "@/src/shared/ui/slider/ui/components/SlideButton";
 
 import styles from "./styles.module.scss";
 
 interface Props {
-  images: GalleryImage[];
+  card: ExcursionCard;
 }
 
-export const ImageSlider = ({ images }: Props) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [controlsTranslateX, setControlsTranslateX] = useState(0);
-  const slideRefs = useRef<HTMLElement[]>([]);
-  const sliderControlsRef = useRef<HTMLUListElement>(null);
-  const slidesLength = images.length;
-  const transform = {
-    transform: `translateX(${controlsTranslateX}px)`,
-  };
+export const ImageSlider = ({ card }: Props) => {
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: true,
+  });
 
-  const handleGoToSlide = (index: number) => {
-    goToSlide(index, slidesLength, setCurrentIndex, slideRefs);
-  };
+  const { selectedIndex, scrollSnaps, onDotButtonClick } =
+    useDotButton(emblaApi);
+
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick,
+  } = usePrevNextButtons(emblaApi);
 
   return (
     <div className={styles.container}>
-      <section className={styles.imageSlider}>
-        <ul className={styles.imageSlider__list}>
-          {images.map((image, i) => (
-            <li
-              key={i}
-              className={styles.imageSlider__item}
-              ref={(ref) => setSlideRef(slideRefs, ref, i)}
-            >
-              <Image
-                className={styles.imageSlider__image}
-                src={urlFor(image.src)}
-                placeholder="blur"
-                blurDataURL={image.lqip}
-                fill
-                sizes="(max-width: 500px) 70vw, (max-width: 768px) 50vw, (max-width: 1200px) 30vw, 20vw"
-                alt="Card image"
-              />
-            </li>
-          ))}
-        </ul>
+      <section className={clsx(styles.imageSlider)}>
+        <div ref={emblaRef}>
+          <ul className={clsx(styles.imageSlider__list)}>
+            {card.gallery.map((image) => (
+              <li key={image.src} className={clsx(styles.imageSlider__item)}>
+                <Link href={`excursion/${card.slug}`}>
+                  <Image
+                    className={styles.imageSlider__image}
+                    src={urlFor(image.src)}
+                    placeholder="blur"
+                    blurDataURL={image.lqip}
+                    fill
+                    sizes="(max-width: 500px) 70vw, (max-width: 768px) 50vw, (max-width: 1200px) 30vw, 20vw"
+                    alt="Card image"
+                  />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <SlideButton
+            direction="prev"
+            ariaLabel=""
+            disabled={prevBtnDisabled}
+            onClick={onPrevButtonClick}
+          />
+          <SlideButton
+            direction="next"
+            ariaLabel=""
+            disabled={nextBtnDisabled}
+            onClick={onNextButtonClick}
+          />
+          <div
+            className={clsx(
+              styles.sliderControls,
+              styles.imageSlider__imageIncidator
+            )}
+          >
+            <ul className={clsx(styles.sliderControls__list)}>
+              {scrollSnaps.map((_, index) => (
+                <li key={index} className={styles.sliderControls__item}>
+                  <DotButton
+                    onClick={() => onDotButtonClick(index)}
+                    className={
+                      index === selectedIndex
+                        ? styles.sliderControls__button_active
+                        : ""
+                    }
+                  />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       </section>
-
-      <div className={styles.imageSlider__buttonsContainer}>
-        <SlideButton
-          direction="prev"
-          disabled={currentIndex <= 0}
-          onClick={(e) => {
-            e.preventDefault();
-            handleGoToSlide(currentIndex - 1);
-          }}
-        />
-
-        <SlideButton
-          direction="next"
-          disabled={currentIndex >= images.length - 1}
-          onClick={(e) => {
-            e.preventDefault();
-            handleGoToSlide(currentIndex + 1);
-            if (currentIndex >= 2 && currentIndex < images.length - 3) {
-              setControlsTranslateX((current) => current - 10);
-            }
-          }}
-        />
-      </div>
-
-      <div
-        className={clsx(
-          styles.sliderControls,
-          styles.imageSlider__imageIncidator
-        )}
-      >
-        <ul
-          className={clsx(styles.sliderControls__list)}
-          ref={sliderControlsRef}
-          style={transform}
-        >
-          {Array.from({ length: images.length }, (_, i) => (
-            <li
-              key={i}
-              className={styles.sliderControls__item}
-              style={getScaleStyle(i, currentIndex, images.length)}
-            >
-              <button
-                className={clsx(styles.sliderControls__button, {
-                  [styles.sliderControls__button_active]: i === currentIndex,
-                })}
-              />
-            </li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
