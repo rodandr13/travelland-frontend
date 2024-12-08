@@ -9,8 +9,10 @@ export const AddToFavorite = () => {
     e.preventDefault();
   };
   return (
-    <div onClick={handleClick}>
+    <div onClick={handleClick} className={styles.container}>
       <svg
+        width="28"
+        height="28"
         viewBox="0 0 32 32"
         xmlns="http://www.w3.org/2000/svg"
         className={styles.heart}

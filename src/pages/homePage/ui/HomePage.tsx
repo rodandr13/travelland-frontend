@@ -1,16 +1,12 @@
-import { getServices } from "@/src/pages/homePage/api/getServices";
-import { Services } from "@/src/shared/ui";
 import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
 import { HeroSection } from "@/src/widgets/heroSection";
 
 import styles from "./styles.module.scss";
 
 export const HomePage = async () => {
-  const services = await getServices();
   return (
     <>
       <HeroSection />
-      <Services services={services} />
       <main className={styles.home}>
         <h2>Экскурсии</h2>
         <ExcursionCatalog />

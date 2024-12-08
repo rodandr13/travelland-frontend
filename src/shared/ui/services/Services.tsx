@@ -1,20 +1,12 @@
-"use client";
-
-import React, { useRef } from "react";
-
 import Image from "next/image";
 
+import { getServices } from "@/src/pages/homePage/api/getServices";
 import { urlFor } from "@/src/shared/lib/sanity/client";
-import { Service } from "@/src/shared/types/service";
 
 import styles from "./styles.module.scss";
 
-interface Props {
-  services: Service[];
-}
-
-export const Services = ({ services }: Props) => {
-  const slideRefs = useRef<HTMLElement[]>([]);
+export const Services = async () => {
+  const services = await getServices();
 
   return (
     <section className={styles.services}>
