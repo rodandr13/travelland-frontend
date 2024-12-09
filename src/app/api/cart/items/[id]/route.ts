@@ -12,7 +12,7 @@ export const DELETE = async (
 ) => {
   // await ensureAccessToken();
 
-  const headersList = headers();
+  const headersList = await headers();
   const cookieHeader = headersList.get("cookie");
 
   const requestHeaders: HeadersInit = {};

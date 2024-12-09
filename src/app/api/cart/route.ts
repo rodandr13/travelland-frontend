@@ -7,7 +7,7 @@ import {
 } from "@/src/shared/lib/constants";
 
 export const GET = async () => {
-  const headersList = headers();
+  const headersList = await headers();
   const cookieHeader = headersList.get("cookie");
 
   const requestHeaders: HeadersInit = {};
