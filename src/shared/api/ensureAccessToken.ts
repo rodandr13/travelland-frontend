@@ -3,10 +3,10 @@ import { cookies } from "next/headers";
 import { refreshAccessToken } from "@/src/shared/api/refreshAccessToken";
 
 export const ensureAccessToken = async () => {
-  const accessToken = cookies().get("accessToken")?.value;
+  const accessToken = (await cookies()).get("accessToken")?.value;
 
   if (!accessToken) {
-    const refreshToken = cookies().get("refreshToken")?.value;
+    const refreshToken = (await cookies()).get("refreshToken")?.value;
     if (!refreshToken) {
       throw new Error("Refresh token не существует.");
     }

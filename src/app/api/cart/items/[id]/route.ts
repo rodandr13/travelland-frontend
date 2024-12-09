@@ -8,8 +8,9 @@ import {
 
 export const DELETE = async (
   request: Request,
-  { params }: { params: { id: string } }
+  props: { params: Promise<{ id: string }> }
 ) => {
+  const params = await props.params;
   // await ensureAccessToken();
 
   const headersList = await headers();

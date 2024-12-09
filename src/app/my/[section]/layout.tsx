@@ -8,9 +8,9 @@ import styles from "./styles.module.scss";
 
 interface LayoutProps {
   children: ReactNode;
-  params: {
+  params: Promise<{
     section: string;
-  };
+  }>;
 }
 
 const navData = [
@@ -28,7 +28,11 @@ const navData = [
   },
 ];
 
-export default function Layout({ children, params }: LayoutProps) {
+export default async function Layout(props: LayoutProps) {
+  const params = await props.params;
+
+  const { children } = props;
+
   const currentSection = params.section;
 
   return (

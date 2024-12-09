@@ -2,11 +2,10 @@ import { notFound } from "next/navigation";
 
 import { Account } from "@/src/pages/account";
 
-export default function SectionPage({
-  params,
-}: {
-  params: { section: string };
+export default async function SectionPage(props: {
+  params: Promise<{ section: string }>;
 }) {
+  const params = await props.params;
   const { section } = params;
 
   if (section === "profile") {

@@ -5,6 +5,9 @@ export async function generateStaticParams() {
   return await getAllExcursionSlugs();
 }
 
-export default function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: {
+  params: Promise<{ slug: string }>;
+}) {
+  const params = await props.params;
   return <ExcursionPage slug={params.slug} />;
 }
