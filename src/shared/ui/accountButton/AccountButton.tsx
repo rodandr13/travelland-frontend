@@ -6,9 +6,9 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { useSignOut } from "@/src/features/signOut";
-
 import styles from "./styles.module.scss";
+
+import { useSignOut } from "@/src/features/signOut";
 
 interface Props {
   user: {
