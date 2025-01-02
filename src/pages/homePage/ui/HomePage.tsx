@@ -1,7 +1,7 @@
+import styles from "./styles.module.scss";
+
 import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
 import { HeroSection } from "@/src/widgets/heroSection";
-
-import styles from "./styles.module.scss";
 
 export const HomePage = async () => {
   return (

@@ -4,12 +4,12 @@ import { useState } from "react";
 
 import { Group, Radio, Stack, Text } from "@mantine/core";
 
+import styles from "./styles.module.scss";
+
 import { setDetails } from "@/src/enities/booking/";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
 import { CartItemParticipants } from "@/src/shared/types/cart";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
-
-import styles from "./styles.module.scss";
 
 interface Props {
   id: string;

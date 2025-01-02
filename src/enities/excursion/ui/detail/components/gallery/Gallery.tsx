@@ -1,9 +1,9 @@
 import Image from "next/image";
 
+import styles from "./styles.module.scss";
+
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { GalleryImage } from "@/src/shared/types/excursion";
-
-import styles from "./styles.module.scss";
 
 interface Props {
   images: GalleryImage[];

@@ -5,11 +5,11 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
+import styles from "./styles.module.scss";
+
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { CompactCart } from "@/src/enities/cart";
 import { AccountButton } from "@/src/shared/ui/accountButton/AccountButton";
-
-import styles from "./styles.module.scss";
 
 export const Navbar = () => {
   const { authUser } = useAuth();

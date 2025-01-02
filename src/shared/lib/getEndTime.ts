@@ -2,7 +2,7 @@ import { Duration, StartTime } from "@/src/shared/types/excursion";
 
 export const getEndTime = (startTime: StartTime, duration: Duration) => {
   const endTimes = [];
-  for (let start of startTime) {
+  for (const start of startTime) {
     let [hour, minute] = start.split(":").map(Number);
     hour += duration.hours;
     minute += duration.minutes;

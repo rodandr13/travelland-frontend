@@ -1,3 +1,5 @@
+import styles from "./styles.module.scss";
+
 import {
   resetDetails,
   selectExcursionIsEditing,
@@ -8,8 +10,6 @@ import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors"
 import { selectItemById } from "@/src/enities/cart/model/selectors";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { Button } from "@/src/shared/ui/button";
-
-import styles from "./styles.module.scss";
 
 interface EditExcursion {
   id: string;

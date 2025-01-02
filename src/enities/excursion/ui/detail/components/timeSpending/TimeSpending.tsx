@@ -1,9 +1,9 @@
+import styles from "./styles.module.scss";
+import { formatDuration } from "../../../../lib/formatDuration";
+
 import { getEndTime } from "@/src/shared/lib/getEndTime";
 import { Duration, StartTime, Weekdays } from "@/src/shared/types/excursion";
 import { WeekDays } from "@/src/shared/ui/weekDays";
-
-import styles from "./styles.module.scss";
-import { formatDuration } from "../../../../lib/formatDuration";
 
 const daysOfWeek = [
   "Monday",

@@ -3,7 +3,7 @@ import { Duration } from "@/src/shared/types/excursion";
 export const formatDuration = (
   duration: Duration,
   locale = "ru-RU"
-): String => {
+): string => {
   const { days, minutes, hours } = duration;
   const pluralize = (
     count: number,

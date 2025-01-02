@@ -7,12 +7,12 @@ import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
+import styles from "./styles.module.scss";
+
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { formatCountParticipants } from "@/src/widgets/detailedCart/lib/formatCountParticipants";
-
-import styles from "./styles.module.scss";
 
 interface Props {
   orders: Order[];

@@ -1,8 +1,8 @@
 import clsx from "clsx";
 
-import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-
 import styles from "./styles.module.scss";
+
+import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 
 interface Props {
   currentPrice?: number;

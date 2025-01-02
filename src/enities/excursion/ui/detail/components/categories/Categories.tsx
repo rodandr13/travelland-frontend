@@ -1,6 +1,6 @@
-import { Category, Subcategory } from "@/src/shared/types/excursion";
-
 import styles from "./styles.module.scss";
+
+import { Category, Subcategory } from "@/src/shared/types/excursion";
 
 interface Props {
   category: Category;

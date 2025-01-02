@@ -4,6 +4,8 @@ import { useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
 
+import styles from "./styles.module.scss";
+
 import { useScroll } from "@/src/app/providers/ScrollProvider";
 import {
   resetDetails,
@@ -28,8 +30,6 @@ import {
   StartTime,
   Weekdays,
 } from "@/src/shared/types/excursion";
-
-import styles from "./styles.module.scss";
 
 interface Props {
   id: string;

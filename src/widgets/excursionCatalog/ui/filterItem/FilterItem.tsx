@@ -1,15 +1,13 @@
 "use client";
 
-import React from "react";
-
 import Image from "next/image";
-
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-import { urlFor } from "@/src/shared/lib/sanity/client";
 
 import styles from "./styles.module.scss";
 import { setFilter } from "../../model/filterSlice";
 import { IFilterItem } from "../../model/types/FiltersType";
+
+import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
+import { urlFor } from "@/src/shared/lib/sanity/client";
 
 interface Props {
   filter: IFilterItem;

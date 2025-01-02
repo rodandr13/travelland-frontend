@@ -1,11 +1,12 @@
-import React from "react";
-
 import { MantineProvider } from "@mantine/core";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@mantine/core/styles.css";
 import "./globals.scss";
 import { cookies } from "next/headers";
+
+import { Footer } from "../shared/ui/footer";
+import { Main } from "../shared/ui/main";
 
 import { AuthProvider } from "@/src/app/providers/AuthProvider";
 import { StoreProvider } from "@/src/app/providers/StoreProvider";
@@ -16,9 +17,6 @@ import {
   EXTERNAL_API_BASE_URL,
 } from "@/src/shared/lib/constants";
 import { Header } from "@/src/widgets/header";
-
-import { Footer } from "../shared/ui/footer";
-import { Main } from "../shared/ui/main";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -46,7 +44,7 @@ export default async function RootLayout({
 }>) {
   const accessToken = (await cookies()).get("accessToken")?.value;
   let user = null;
-  if (accessToken) {
+  if (accessToken != null) {
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.ME}`;
       const { data } = await apiClient<UserResponse>(url, {
@@ -56,7 +54,7 @@ export default async function RootLayout({
         },
       });
       user = data;
-    } catch (error: any) {
+    } catch (error) {
       user = null;
       if (error instanceof ApiError) {
         console.error(

@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 import clsx from "clsx";
 
-import sharedStyles from "@/src/shared/styles/styles.module.scss";
-
 import styles from "./styles.module.scss";
+
+import sharedStyles from "@/src/shared/styles/styles.module.scss";
 
 interface Props {
   open: () => void;
@@ -17,7 +17,12 @@ export const HamburgerButton = ({ opened, open }: Props) => {
   const handleResize = () => {
     if (window.innerWidth >= 750 && opened) {
       document.body.classList.remove(sharedStyles.disableScroll);
-      const pagePosition = parseInt(document.body.dataset.position || "0", 10);
+      const pagePosition = parseInt(
+        document.body.dataset.position != null
+          ? document.body.dataset.position
+          : "0",
+        10
+      );
       window.scrollTo(0, pagePosition);
       document.body.style.top = "";
       document.body.removeAttribute("data-position");
@@ -39,7 +44,10 @@ export const HamburgerButton = ({ opened, open }: Props) => {
     } else {
       body.style.top = "";
       body.classList.remove(sharedStyles.disableScroll);
-      const pagePosition = parseInt(body.dataset.position || "0", 10);
+      const pagePosition = parseInt(
+        body.dataset.position != null ? body.dataset.position : "0",
+        10
+      );
       window.scrollTo(0, pagePosition);
       body.removeAttribute("data-position");
     }

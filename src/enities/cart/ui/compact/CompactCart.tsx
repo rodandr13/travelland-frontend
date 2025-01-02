@@ -7,13 +7,13 @@ import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
+import styles from "./styles.module.scss";
+
 import { selectCartData } from "@/src/enities/cart/model/selectors";
 import { fetchCart } from "@/src/enities/cart/model/thunks";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
-
-import styles from "./styles.module.scss";
 
 export const CompactCart = () => {
   const dispatch = useAppDispatch();

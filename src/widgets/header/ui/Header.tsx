@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Navbar } from "./navbar";
 import styles from "./styles.module.scss";
 

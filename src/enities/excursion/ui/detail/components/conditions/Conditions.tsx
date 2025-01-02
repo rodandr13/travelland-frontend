@@ -1,12 +1,12 @@
 import clsx from "clsx";
 
+import styles from "./styles.module.scss";
+
 import {
   AdditionalTerms,
   Included,
   Surcharge,
 } from "@/src/shared/types/excursion";
-
-import styles from "./styles.module.scss";
 
 interface Props {
   surcharge: Surcharge;

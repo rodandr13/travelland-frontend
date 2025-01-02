@@ -44,7 +44,16 @@ export default tseslint.config(
             ],
             "react-hooks/rules-of-hooks": "error",
             "react-hooks/exhaustive-deps": "warn",
-            "@typescript-eslint/strict-boolean-expressions": "error",
+            '@typescript-eslint/strict-boolean-expressions': [
+                'error',
+                {
+                    allowString: true,
+                    allowNumber: false,
+                    allowNullableObject: true,
+                    allowNullableBoolean: true,
+                    allowNullableString: true,
+                },
+            ],
             "@typescript-eslint/no-explicit-any": "warn",
             "prettier/prettier": "error",
             "react/react-in-jsx-scope": "off",
