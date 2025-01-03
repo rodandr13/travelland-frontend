@@ -57,7 +57,7 @@ export const Booking = ({
   category,
 }: Props) => {
   const isEditing = useAppSelector(selectExcursionIsEditing(id));
-  const bookingRef = useRef<HTMLDivElement | null>(null);
+  const bookingRef = useRef<HTMLDivElement>(null);
   const isVisible = useOnScreen(bookingRef);
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
@@ -117,44 +117,43 @@ export const Booking = ({
             <div>
               <h2 className={styles.booking__title}>Время</h2>
               <div className={styles.booking__timeGroup}>
-                {startTime &&
-                  startTime.map((time, i) => (
+                {startTime.map((time, i) => (
+                  <div
+                    key={i}
+                    className={clsx(styles.time, {
+                      [styles.time_active]: bookingDetails?.time === time,
+                    })}
+                    onClick={() => handleClick(time)}
+                  >
+                    <div className={styles.time__container}>
+                      <span className={styles.time__title}>Начало</span>
+                      <span className={styles.time__value}>{time}</span>
+                    </div>
                     <div
-                      key={i}
-                      className={clsx(styles.time, {
-                        [styles.time_active]: bookingDetails?.time === time,
-                      })}
-                      onClick={() => handleClick(time)}
+                      className={clsx(
+                        styles.time__container,
+                        styles.time__container_end
+                      )}
                     >
-                      <div className={styles.time__container}>
-                        <span className={styles.time__title}>Начало</span>
-                        <span className={styles.time__value}>{time}</span>
-                      </div>
-                      <div
+                      <span
                         className={clsx(
-                          styles.time__container,
-                          styles.time__container_end
+                          styles.time__title,
+                          styles.time__title_end
                         )}
                       >
-                        <span
-                          className={clsx(
-                            styles.time__title,
-                            styles.time__title_end
-                          )}
-                        >
-                          Конец
-                        </span>
-                        <span
-                          className={clsx(
-                            styles.time__value,
-                            styles.time__value_end
-                          )}
-                        >
-                          ≈{endTimes[i]}
-                        </span>
-                      </div>
+                        Конец
+                      </span>
+                      <span
+                        className={clsx(
+                          styles.time__value,
+                          styles.time__value_end
+                        )}
+                      >
+                        ≈{endTimes[i]}
+                      </span>
                     </div>
-                  ))}
+                  </div>
+                ))}
               </div>
             </div>
           )}

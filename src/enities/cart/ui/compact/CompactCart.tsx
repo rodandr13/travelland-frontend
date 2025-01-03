@@ -18,15 +18,11 @@ import { urlFor } from "@/src/shared/lib/sanity/client";
 export const CompactCart = () => {
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectCartData);
-  const totalItems =
-    cart && cart.cart_items && cart.cart_items.length
-      ? cart.cart_items.length
-      : 0;
-  const totalCurrentPrice =
-    cart && cart.total_current_price != null ? cart.total_current_price : 0;
-  const totalBasePrice =
-    cart && cart.total_base_price != null ? cart.total_base_price : 0;
-  const cartItems = cart && cart.cart_items ? cart.cart_items : [];
+
+  const totalItems = cart?.cart_items.length ?? 0;
+  const totalCurrentPrice = cart?.total_current_price ?? 0;
+  const totalBasePrice = cart?.total_base_price ?? 0;
+  const cartItems = cart?.cart_items ?? [];
 
   useEffect(() => {
     dispatch(fetchCart());

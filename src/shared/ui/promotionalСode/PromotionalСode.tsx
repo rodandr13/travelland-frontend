@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 import { Button } from "@/src/shared/ui/button";
 
 export const PromotionalCode = () => {
-  const { register, setValue } = useFormContext();
+  const { setValue } = useFormContext();
   const [promoCodeInput, setPromoCodeInput] = useState<string>("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

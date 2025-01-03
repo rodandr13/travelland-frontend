@@ -43,13 +43,13 @@ export const Card = ({ addFavorite, card }: Props) => {
     basePrices: card.basePrices,
   };
 
-  if (card.priceCorrections) {
+  if (card.priceCorrections?.length != null) {
     priceData.priceCorrections = card.priceCorrections.flatMap(
       (promo) => promo.prices
     );
   }
 
-  if (card.promotionalPrices) {
+  if (card.promotionalPrices?.length != null) {
     priceData.promotionalPrices = card.promotionalPrices.flatMap(
       (promo) => promo.prices
     );

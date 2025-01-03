@@ -9,16 +9,16 @@ type NextFetchRequestConfig = {
 export type ApiRequestOptions = {
   method?: string;
   headers?: HeadersInit;
-  body?: any;
+  body?: Record<string, unknown>;
   credentials?: RequestCredentials;
   next?: NextFetchRequestConfig;
 };
 
 export class ApiError extends Error {
   public statusCode: number;
-  public data: any;
+  public data: unknown;
 
-  constructor(message: string, statusCode: number, data: any) {
+  constructor(message: string, statusCode: number, data: unknown) {
     super(message);
     this.statusCode = statusCode;
     this.data = data;
@@ -28,7 +28,7 @@ export class ApiError extends Error {
 export const apiClient = async <T>(
   url: string,
   options: ApiRequestOptions = {}
-): Promise<{ data: T; status: number }> => {
+): Promise<{ data: T | null; status: number }> => {
   try {
     const response = await fetch(url, {
       method: options.method || "GET",
@@ -38,30 +38,35 @@ export const apiClient = async <T>(
       },
       body: options.body ? JSON.stringify(options.body) : undefined,
       credentials: options.credentials || "same-origin",
-      ...(options.next && { next: options.next }),
+      ...(options.next ? { next: options.next } : {}),
     });
+
     const contentType = response.headers.get("Content-Type");
-    let data: any = null;
+    let data: T | null = null;
 
     if (contentType && contentType.includes("application/json")) {
       data = await response.json();
-    } else if (contentType && contentType.includes("text/")) {
-      data = await response.text();
+    } else {
+      throw new ApiError("Unsupported content type", response.status, null);
     }
 
     if (!response.ok) {
-      throw new ApiError(
-        (data && data.message) || "Ошибка при получении данных",
-        response.status,
-        data
-      );
+      const errorMessage =
+        typeof data === "object" && data !== null && "message" in data
+          ? (data as { message: string }).message
+          : "Ошибка при получении данных";
+
+      throw new ApiError(errorMessage, response.status, data);
     }
 
-    return { data: data as T, status: response.status };
-  } catch (error: any) {
+    return { data, status: response.status };
+  } catch (error: unknown) {
     if (error instanceof ApiError) {
       throw error;
     }
-    throw new Error(error.message || "Network error");
+    if (error instanceof Error) {
+      throw new Error(error.message || "Network error");
+    }
+    throw new Error("Unknown error");
   }
 };

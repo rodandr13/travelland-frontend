@@ -17,7 +17,7 @@ export const useSignOut = () => {
   return async () => {
     try {
       const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.LOGOUT}`;
-      const { data: response } = await apiClient(url, {
+      await apiClient(url, {
         method: "POST",
         credentials: "include",
       });

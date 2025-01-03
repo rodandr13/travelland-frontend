@@ -21,6 +21,7 @@ import styles from "./styles.module.scss";
 
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { apiClient } from "@/src/shared/api";
+import { ApiError } from "@/src/shared/api/apiClient";
 import {
   AUTH_ENDPOINTS,
   EXTERNAL_API_BASE_URL,
@@ -80,7 +81,7 @@ export const SignUp = () => {
   });
 
   const onSubmit = async (data: FormData) => {
-    const { confirmPassword, isTermsAccepted, ...submitData } = data;
+    const { ...submitData } = data;
 
     setIsLoading(true);
     try {
@@ -94,8 +95,22 @@ export const SignUp = () => {
       setAuthUser(response);
       router.replace("/");
       setApiError("");
-    } catch (error: any) {
-      setApiError(error.message || "Произошла ошибка. Попробуйте снова.");
+    } catch (error: unknown) {
+      if (error instanceof ApiError) {
+        const errorMessage =
+          typeof error.data === "object" &&
+          error.data !== null &&
+          "message" in error.data
+            ? (error.data as { message?: string }).message ||
+              "Произошла ошибка. Попробуйте снова."
+            : "Произошла ошибка. Попробуйте снова.";
+        setApiError(errorMessage);
+      } else if (error instanceof Error) {
+        setApiError(error.message || "Произошла ошибка. Попробуйте снова.");
+      } else {
+        setApiError("Произошла ошибка. Попробуйте снова.");
+      }
+      console.error(error);
     } finally {
       setIsLoading(false);
     }

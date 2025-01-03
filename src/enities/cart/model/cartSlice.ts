@@ -1,5 +1,6 @@
 import {
   ActionReducerMapBuilder,
+  AsyncThunk,
   createSlice,
   PayloadAction,
 } from "@reduxjs/toolkit";
@@ -25,9 +26,9 @@ const initialState: CartState = {
   error: null,
 };
 
-const addCommonCases = (
+const addCommonCases = <Returned, ThunkArg>(
   builder: ActionReducerMapBuilder<CartState>,
-  thunk: any,
+  thunk: AsyncThunk<Returned, ThunkArg, object>,
   errorMessage: string = "Unknown error"
 ) => {
   builder
@@ -35,9 +36,9 @@ const addCommonCases = (
       state.loading = true;
       state.error = null;
     })
-    .addCase(thunk.fulfilled, (state, action: PayloadAction<Cart>) => {
+    .addCase(thunk.fulfilled, (state, action: PayloadAction<Returned>) => {
       state.loading = false;
-      state.data = action.payload;
+      state.data = action.payload as unknown as Cart;
     })
     .addCase(thunk.rejected, (state, action) => {
       state.loading = false;
@@ -50,10 +51,10 @@ const cartSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    addCommonCases(builder, fetchCart);
+    addCommonCases(builder, fetchCart, "Failed to fetch cart");
+    addCommonCases(builder, addCartItem, "Failed to add item");
     addCommonCases(builder, updateCartItem, "Failed to update item");
     addCommonCases(builder, removeCartItem, "Failed to remove item");
-    addCommonCases(builder, addCartItem, "Failed to add item");
   },
 });
 

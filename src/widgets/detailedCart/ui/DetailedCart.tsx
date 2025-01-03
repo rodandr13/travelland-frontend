@@ -19,7 +19,7 @@ import { selectCartData } from "@/src/enities/cart/model/selectors";
 import { BookOrder } from "@/src/features/bookOrder";
 import { RemoveFromCart } from "@/src/features/removeFromCart";
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
+import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
@@ -51,7 +51,6 @@ export type ContactsData = z.infer<typeof contactsSchema>;
 
 export const DetailedCart = () => {
   const cart = useAppSelector(selectCartData);
-  const dispatch = useAppDispatch();
   const { authUser } = useAuth();
   const methods = useForm<ContactsData>({
     resolver: zodResolver(contactsSchema),

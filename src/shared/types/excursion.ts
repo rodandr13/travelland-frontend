@@ -91,13 +91,13 @@ export type ExcursionType = {
   startingPlace: RouteItem;
   endingPlace: RouteItem;
   basePrices: Price[];
-  promotionalPrices: PromotionalPrice[];
-  priceCorrections: PromotionalPrice[];
+  promotionalPrices: PromotionalPrice[] | null;
+  priceCorrections: PromotionalPrice[] | null;
   route: RouteItem[];
   gallery: GalleryImage[];
   subcategory: Subcategory[];
   category: Category;
-  parameters: Parameter[];
+  parameters: Parameter[] | null;
 };
 
 export type ExcursionCard = Omit<

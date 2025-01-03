@@ -1,9 +1,4 @@
-import React, {
-  ComponentPropsWithRef,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { ComponentPropsWithRef, useCallback, useEffect, useState } from "react";
 
 import clsx from "clsx";
 import { EmblaCarouselType } from "embla-carousel";

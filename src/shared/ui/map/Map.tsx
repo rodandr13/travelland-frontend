@@ -35,7 +35,7 @@ export const Map = ({ lng, lat }: Props) => {
           streetViewControl: false,
           mapTypeControl: false,
         });
-        const marker = new AdvancedMarkerElement({
+        new AdvancedMarkerElement({
           map: map,
           position: { lng, lat },
         });

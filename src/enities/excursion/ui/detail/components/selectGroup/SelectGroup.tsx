@@ -31,7 +31,7 @@ export const SelectGroup = ({ id, groups }: Props) => {
     const index = parseInt(value, 10);
     const selectedGroup = localGroups[index];
 
-    if (id && selectedGroup) {
+    if (id) {
       const updatedGroup = {
         ...selectedGroup,
         quantity: 1,

@@ -13,8 +13,8 @@ interface Props {
   baseDates: Dates;
   basePrices: Price[];
   weekdays: Weekdays;
-  promoPrices?: PromotionalPrice[];
-  priceCorrections?: PromotionalPrice[];
+  promoPrices?: PromotionalPrice[] | null;
+  priceCorrections?: PromotionalPrice[] | null;
 }
 
 export const generatePriceMap = ({
@@ -42,7 +42,7 @@ export const generatePriceMap = ({
     end: parseISO(baseDates.dateTo),
   }).forEach((day) => {
     const formattedDay = formatISO(day, { representation: "date" });
-    let formattedWeekday = dayFormatCache.get(formattedDay);
+    let formattedWeekday: string | undefined = dayFormatCache.get(formattedDay);
     if (!formattedWeekday) {
       formattedWeekday = day.toLocaleDateString("en-US", { weekday: "long" });
       dayFormatCache.set(formattedDay, formattedWeekday);
@@ -88,14 +88,14 @@ export const generatePriceMap = ({
         p.weekdays.includes(formattedWeekday)
     );
 
-    const correction =
-      !promo &&
-      priceCorrections?.find(
-        (c) =>
-          formattedDay >= c.dates.dateFrom &&
-          formattedDay <= c.dates.dateTo &&
-          c.weekdays.includes(formattedWeekday)
-      );
+    const correction = !promo
+      ? priceCorrections?.find(
+          (c) =>
+            formattedDay >= c.dates.dateFrom &&
+            formattedDay <= c.dates.dateTo &&
+            c.weekdays.includes(formattedWeekday)
+        )
+      : undefined;
 
     // Применение цен, приоритет коррекционной цене
     if (correction) {

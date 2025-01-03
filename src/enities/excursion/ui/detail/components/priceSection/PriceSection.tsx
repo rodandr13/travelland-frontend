@@ -91,9 +91,8 @@ export const PriceSection = ({
     return () => mediaQuery.removeEventListener("change", handleResize);
   }, [bookingIsVisible, isItemExists]);
 
-  const activeItem = bookingItem?.cart_item_options?.length
-    ? bookingItem
-    : cartItem;
+  const activeItem =
+    bookingItem?.cart_item_options?.length != null ? bookingItem : cartItem;
 
   const priceProps =
     minPrice === basePrice
@@ -159,7 +158,7 @@ export const PriceSection = ({
               <>
                 <ul className={styles.priceSection__list}>
                   {activeItem.cart_item_options.map((participant, i) =>
-                    participant && participant.quantity ? (
+                    participant.quantity ? (
                       <li className={styles.priceSection__item} key={i}>
                         <div className={styles.priceSection__priceLine}>
                           <span>{participant.quantity}&nbsp;x&nbsp;</span>
@@ -209,7 +208,7 @@ export const PriceSection = ({
               </>
             )}
 
-          {!isItemExists ? (
+          {!isItemExists && bookingItem ? (
             <AddToCart cartItem={bookingItem} />
           ) : (
             <Link

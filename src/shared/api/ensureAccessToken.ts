@@ -13,7 +13,13 @@ export const ensureAccessToken = async () => {
 
     try {
       await refreshAccessToken(refreshToken);
-    } catch (error) {
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error("Ошибка при обновлении токена доступа:", error);
+
+        throw new Error(`Не удалось обновить refresh token: ${error.message}`);
+      }
+
       throw new Error("Не удалось обновить refresh token");
     }
   }

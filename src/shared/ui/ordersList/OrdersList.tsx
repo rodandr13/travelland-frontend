@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import styles from "./styles.module.scss";
+import { Order, OrderService, ServicePrice } from "../../types/orderResponse";
 
 import { formatCurrency } from "@/src/shared/lib/formatCurrency";
 import { urlFor } from "@/src/shared/lib/sanity/client";
@@ -19,9 +20,6 @@ interface Props {
 }
 
 export const OrdersList = ({ orders }: Props) => {
-  if (!orders || orders.length === 0) {
-    return null;
-  }
   return (
     <section className={styles.ordersList}>
       <Accordion variant="separated">

@@ -34,5 +34,5 @@ export type Cart = {
   guest_session_id: string | null;
   total_base_price: number;
   total_current_price: number;
-  cart_items: CartItem[];
+  cart_items: CartItem[] | null;
 };

@@ -10,7 +10,7 @@ import {
   EXTERNAL_API_BASE_URL,
   ORDER_ENDPOINTS,
 } from "@/src/shared/lib/constants";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
+import { PaymentMethod } from "@/src/shared/types/orderResponse";
 import { Button } from "@/src/shared/ui/button";
 import { ContactsData } from "@/src/widgets/detailedCart/ui/DetailedCart";
 
@@ -26,7 +26,6 @@ type PaymentCreateResponse = {
 
 export const BookOrder = ({ cartId }: Props) => {
   const { handleSubmit } = useFormContext<ContactsData>();
-  const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const route = useRouter();
@@ -54,12 +53,17 @@ export const BookOrder = ({ cartId }: Props) => {
       });
 
       if (
+        response &&
         response.redirect &&
         (response.payment_method === "CARD" ||
           response.payment_method === "PREPAYMENT")
       ) {
         window.location.href = response.redirect;
-      } else if (response.token && response.payment_method === "CASH") {
+      } else if (
+        response &&
+        response.token &&
+        response.payment_method === "CASH"
+      ) {
         route.replace(`/payment?token=${response.token}`);
       }
     } catch (error) {

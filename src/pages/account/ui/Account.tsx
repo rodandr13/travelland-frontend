@@ -9,11 +9,12 @@ import {
   EXTERNAL_API_BASE_URL,
   ORDER_ENDPOINTS,
 } from "@/src/shared/lib/constants";
+import { Order } from "@/src/shared/types/orderResponse";
 import { OrdersList } from "@/src/shared/ui/ordersList/OrdersList";
 
 export const Account = () => {
   const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -22,11 +23,21 @@ export const Account = () => {
         const { data: response } = await apiClient<Order[]>(url, {
           credentials: "include",
         });
-        setOrders(response);
+
+        if (Array.isArray(response)) {
+          setOrders(response);
+        } else if (response === null) {
+          setError("Не удалось загрузить заказы: данные отсутствуют.");
+        } else {
+          setError("Неизвестный формат данных.");
+        }
       } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message || "Произошла неизвестная ошибка.");
+        } else {
+          setError("Произошла неизвестная ошибка.");
+        }
         console.error(error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchOrders();
@@ -35,7 +46,11 @@ export const Account = () => {
   return (
     <section className={styles.account}>
       <h1>Мои заказы</h1>
-      <OrdersList orders={orders} />
+      {error ? (
+        <p className={styles.error}>{error}</p>
+      ) : (
+        <OrdersList orders={orders} />
+      )}
     </section>
   );
 };

@@ -48,7 +48,7 @@ export default tseslint.config(
                 'error',
                 {
                     allowString: true,
-                    allowNumber: false,
+                    allowNumber: true,
                     allowNullableObject: true,
                     allowNullableBoolean: true,
                     allowNullableString: true,

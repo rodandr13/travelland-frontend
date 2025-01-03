@@ -59,6 +59,7 @@ export const SignIn = () => {
       email: "",
       password: "",
     },
+    mode: "onChange",
   });
 
   const onSubmit = async (data: FormData) => {
@@ -69,19 +70,30 @@ export const SignIn = () => {
       const { data: response } = await apiClient<LoginResponse>(url, {
         credentials: "include",
         method: "POST",
-        body: data,
+        body: data as unknown as Record<string, unknown>,
       });
       setAuthUser(response);
       reset();
       router.replace("/");
-    } catch (error: any) {
+    } catch (error: unknown) {
       if (error instanceof ApiError) {
-        setApiError(
-          error.data.message || "Ошибка авторизации. Попробуйте снова."
-        );
-      } else {
+        const errorMessage =
+          typeof error.data === "object" &&
+          error.data !== null &&
+          "message" in error.data
+            ? (
+                error.data as {
+                  message?: string;
+                }
+              ).message || "Ошибка авторизации. Попробуйте снова."
+            : "Ошибка авторизации. Попробуйте снова.";
+        setApiError(errorMessage);
+      } else if (error instanceof Error) {
         setApiError(error.message || "Ошибка авторизации. Попробуйте снова.");
+      } else {
+        setApiError("Ошибка авторизации. Попробуйте снова.");
       }
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
@@ -114,7 +126,7 @@ export const SignIn = () => {
           />
           <Link
             className={styles.registration__forgottenPassword}
-            href="/signin"
+            href="/forgot-password"
           >
             Забыли пароль?
           </Link>
@@ -125,7 +137,7 @@ export const SignIn = () => {
             )}
             <p className={styles.registration__caption}>
               У вас нет аккаунта?{" "}
-              <Link className={styles.registration__link} href={"/signup"}>
+              <Link className={styles.registration__link} href="/signup">
                 Регистрация
               </Link>
             </p>

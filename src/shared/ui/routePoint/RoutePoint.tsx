@@ -19,8 +19,9 @@ interface Props {
 
 export const RoutePoint = ({ position, place, isOpen }: Props) => {
   const [opened, { toggle }] = useDisclosure(isOpen);
-  const startTitle = position === "START" && "Место сбора";
-  const endTitle = position === "END" && "Место завершения экскурсии";
+  const startTitle = position === "START" ? "Место сбора" : undefined;
+  const endTitle =
+    position === "END" ? "Место завершения экскурсии" : undefined;
   const placeTitle = place.title || startTitle || endTitle;
 
   return (

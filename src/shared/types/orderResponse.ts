@@ -1,4 +1,4 @@
-type OrderStatus =
+export type OrderStatus =
   | "PENDING"
   | "CONFIRMED"
   | "CANCELLED"
@@ -6,18 +6,22 @@ type OrderStatus =
   | "PROCESSING"
   | "RETURNED";
 
-type NotificationStatus = "PENDING" | "CONFIRMED" | "CANCELLED" | "COMPLETED";
+export type NotificationStatus =
+  | "PENDING"
+  | "CONFIRMED"
+  | "CANCELLED"
+  | "COMPLETED";
 
-type PaymentStatus =
+export type PaymentStatus =
   | "PENDING"
   | "CANCELLED"
   | "COMPLETED"
   | "FAILED"
   | "REFUNDED";
 
-type PaymentMethod = "CASH" | "CARD" | "PREPAYMENT";
+export type PaymentMethod = "CASH" | "CARD" | "PREPAYMENT";
 
-type ServicePrice = {
+export type ServicePrice = {
   id: number;
   price_type: string;
   base_price: number;
@@ -29,7 +33,7 @@ type ServicePrice = {
   total_current_price: number;
 };
 
-type OrderService = {
+export type OrderService = {
   id: number;
   service_id: string;
   service_type: string;
@@ -44,7 +48,7 @@ type OrderService = {
   total_base_price: number;
 };
 
-type Order = {
+export type Order = {
   id: number;
   user_id: number;
   cancellation_reason: string | null;

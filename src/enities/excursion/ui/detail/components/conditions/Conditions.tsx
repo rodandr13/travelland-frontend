@@ -11,7 +11,7 @@ import {
 interface Props {
   surcharge: Surcharge;
   included: Included;
-  additionalTerms: AdditionalTerms;
+  additionalTerms: AdditionalTerms | null;
 }
 
 export const Conditions = ({ surcharge, included, additionalTerms }: Props) => {
