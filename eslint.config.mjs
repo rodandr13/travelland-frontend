@@ -1,90 +1,44 @@
-import pluginJs from "@eslint/js";
-import eslintImport from "eslint-plugin-import";
-import eslintPluginPrettier from "eslint-plugin-prettier";
-import eslintReact from "eslint-plugin-react";
-import eslintReactHooks from "eslint-plugin-react-hooks";
-import eslintReactRefresh from "eslint-plugin-react-refresh";
-import globals from "globals";
-import tseslint from "typescript-eslint";
+import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import eslintPluginReact from 'eslint-plugin-react';
+import eslintPluginReactHooks from 'eslint-plugin-react-hooks';
+import nextPlugin from '@next/eslint-plugin-next';
 
 export default tseslint.config(
-    {
-        files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
-        settings: {
-            react: {
-                version: "detect",
-            },
-        },
-        languageOptions: {
-            globals: {
-                ...globals.browser,
-                ...globals.node,
-                ...globals.es2020,
-            },
-            parserOptions: {
-                project: ["tsconfig.json"],
-                ecmaFeatures: {
-                    jsx: true,
-                },
-            },
-            sourceType: "module",
-        },
-        plugins: {
-            "@typescript-eslint": tseslint.plugin,
-            "react-hooks": eslintReactHooks,
-            react: eslintReact,
-            "react-refresh": eslintReactRefresh,
-            prettier: eslintPluginPrettier,
-            import: eslintImport,
-        },
-        rules: {
-            "react/jsx-filename-extension": [
-                "error",
-                { extensions: [".js", ".jsx", ".ts", ".tsx"] },
-            ],
-            "react-hooks/rules-of-hooks": "error",
-            "react-hooks/exhaustive-deps": "warn",
-            '@typescript-eslint/strict-boolean-expressions': [
-                'error',
-                {
-                    allowString: true,
-                    allowNumber: true,
-                    allowNullableObject: true,
-                    allowNullableBoolean: true,
-                    allowNullableString: true,
-                },
-            ],
-            "@typescript-eslint/no-explicit-any": "warn",
-            "prettier/prettier": "error",
-            "react/react-in-jsx-scope": "off",
-            "import/order": [
-                "error",
-                {
-                    groups: [
-                        ["builtin", "external"],
-                        "internal",
-                        ["sibling", "parent"],
-                        "index",
-                    ],
-                    pathGroups: [
-                        {
-                            pattern: "react",
-                            group: "external",
-                            position: "before",
-                        },
-                    ],
-                    pathGroupsExcludedImportTypes: ["react"],
-                    "newlines-between": "always",
-                    alphabetize: {
-                        order: "asc",
-                        caseInsensitive: true,
-                    },
-                },
-            ],
-        },
-    },
-    pluginJs.configs.recommended,
+    eslint.configs.recommended,
     ...tseslint.configs.recommended,
-    eslintReact.configs.flat.recommended,
-    eslintReact.configs.flat["jsx-runtime"]
+    {
+      files: ['**/*.{js,jsx,ts,tsx}'],
+      languageOptions: {
+        ecmaVersion: 2021,
+        sourceType: 'module',
+        parser: tseslint.parser,
+        parserOptions: {
+          ecmaFeatures: {
+            jsx: true,
+          },
+        },
+      },
+      plugins: {
+        react: eslintPluginReact,
+        'react-hooks': eslintPluginReactHooks,
+        '@next/next': nextPlugin,
+      },
+      rules: {
+        ...eslintPluginReact.configs.recommended.rules,
+        ...eslintPluginReactHooks.configs.recommended.rules,
+        ...nextPlugin.configs.recommended.rules,
+        ...nextPlugin.configs['core-web-vitals'].rules,
+        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+        'no-console': ['warn', { allow: ['warn', 'error'] }],
+      },
+      settings: {
+        react: {
+          version: 'detect',
+        },
+      },
+    }
 );
