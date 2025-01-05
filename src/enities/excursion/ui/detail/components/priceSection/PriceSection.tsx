@@ -44,7 +44,7 @@ export const PriceSection = ({
   const bookingItem = useAppSelector(selectBookingDetailsById(id));
   const isItemExists = useAppSelector(selectIsItemInCart(id));
   const cartItem = useAppSelector(selectItemById(id));
-  const targetRef = useScroll();
+  const {node} = useScroll();
 
   const [blockState, setBlockState] = useState({
     showPreview: true,
@@ -56,7 +56,7 @@ export const PriceSection = ({
     category === CategoryKey.Group ? "за 1 взрослого" : "за группу";
 
   const handleScroll = () => {
-    targetRef?.current?.scrollIntoView({ behavior: "smooth" });
+    node?.scrollIntoView({ behavior: "smooth" });
   };
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 900px)");

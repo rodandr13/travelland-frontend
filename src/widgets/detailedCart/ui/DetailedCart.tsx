@@ -72,7 +72,7 @@ export const DetailedCart = () => {
 
   return (
     <>
-      {cart && cart.cart_items.length > 0 ? (
+      {cart && cart.cart_items && cart.cart_items.length > 0 ? (
         <FormProvider {...methods}>
           <section className={styles.detailedCart}>
             <div className={styles.detailedCart__container}>

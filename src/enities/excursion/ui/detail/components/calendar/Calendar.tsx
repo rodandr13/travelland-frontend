@@ -27,7 +27,7 @@ export const Calendar = ({ prices, id }: Props) => {
   const dispatch = useAppDispatch();
   const monthsShown = 2;
   const bookingDetails = useAppSelector(selectBookingDetailsById(id));
-  const selectedDate = bookingDetails.date;
+  const selectedDate = bookingDetails?.date;
 
   const handleChange = (date: Date | null) => {
     if (id && date) {

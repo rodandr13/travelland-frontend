@@ -1,5 +1,6 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  output: "standalone",
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
@@ -8,9 +9,13 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "cdn.sanity.io",
+        port: '',
+        pathname: '/**',
+        search: '',
       },
     ],
   },
+  compress: false,
 };
 
 export default nextConfig;

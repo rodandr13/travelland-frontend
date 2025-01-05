@@ -37,3 +37,7 @@ yarn-error.log*
 next-env.d.ts
 
 .idea
+.dockerignore
+Dockerfile
+Dockerfile.old
+docker-compose.yml

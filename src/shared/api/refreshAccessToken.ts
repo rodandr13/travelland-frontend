@@ -11,7 +11,7 @@ interface TokenResponse {
 
 export const refreshAccessToken = async (
   refreshToken: string
-): Promise<TokenResponse> => {
+): Promise<TokenResponse | null> => {
   try {
     const url = `${EXTERNAL_API_BASE_URL}${AUTH_ENDPOINTS.REFRESH}`;
 

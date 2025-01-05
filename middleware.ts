@@ -28,7 +28,7 @@ export const middleware = async (
   if (!accessToken && refreshToken) {
     try {
       const newTokens = await refreshAccessToken(refreshToken.value);
-      if (newTokens.accessToken && newTokens.refreshToken) {
+      if (newTokens && newTokens.accessToken && newTokens.refreshToken) {
         const requestHeaders = new Headers(request.headers);
 
         const existingCookies = requestHeaders.get("cookie") || "";

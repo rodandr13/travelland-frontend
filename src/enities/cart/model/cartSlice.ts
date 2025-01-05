@@ -26,9 +26,13 @@ const initialState: CartState = {
   error: null,
 };
 
-const addCommonCases = <Returned, ThunkArg>(
+interface ThunkConfig {
+  rejectValue: string;
+}
+
+const addCommonCases = <Returned extends Cart, ThunkArg>(
   builder: ActionReducerMapBuilder<CartState>,
-  thunk: AsyncThunk<Returned, ThunkArg, object>,
+  thunk: AsyncThunk<Returned, ThunkArg, ThunkConfig>,
   errorMessage: string = "Unknown error"
 ) => {
   builder
@@ -38,13 +42,14 @@ const addCommonCases = <Returned, ThunkArg>(
     })
     .addCase(thunk.fulfilled, (state, action: PayloadAction<Returned>) => {
       state.loading = false;
-      state.data = action.payload as unknown as Cart;
+      state.data = action.payload;
     })
     .addCase(thunk.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? errorMessage;
     });
 };
+
 
 const cartSlice = createSlice({
   name: "cart",

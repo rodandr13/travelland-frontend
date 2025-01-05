@@ -1,18 +1,38 @@
 "use client";
 
-import { createContext, ReactNode, RefObject, useContext, useRef } from "react";
+import {
+  createContext,
+  ReactNode,
+  useCallback,
+  useContext,
+  useState,
+} from "react";
 
-const ScrollContext = createContext<RefObject<HTMLDivElement> | null>(null);
+interface ScrollContextType {
+  setRef: (node: HTMLDivElement | null) => void;
+  node: HTMLDivElement | null;
+}
+
+const ScrollContext = createContext<ScrollContextType | null>(null);
 
 export const ScrollProvider = ({ children }: { children: ReactNode }) => {
-  const targetRef = useRef<HTMLDivElement | null>(null);
+  const [node, setNode] = useState<HTMLDivElement | null>(null);
+
+  const setRef = useCallback((node: HTMLDivElement | null) => {
+    setNode(node);
+  }, []);
+
   return (
-    <ScrollContext.Provider value={targetRef}>
+    <ScrollContext.Provider value={{ setRef, node }}>
       {children}
     </ScrollContext.Provider>
   );
 };
 
 export const useScroll = () => {
-  return useContext(ScrollContext);
+  const context = useContext(ScrollContext);
+  if (!context) {
+    throw new Error("useScroll must be used within a ScrollProvider");
+  }
+  return context;
 };

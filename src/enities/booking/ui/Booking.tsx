@@ -62,7 +62,7 @@ export const Booking = ({
   const endTimes = getEndTime(startTime, duration);
   const dispatch = useAppDispatch();
   const bookingDetails = useAppSelector(selectBookingDetailsById(id));
-  const targetRef = useScroll();
+  const { setRef } = useScroll();
   const isItemExists = useAppSelector(selectIsItemInCart(id));
   const [isComponentLoaded, setIsComponentLoaded] = useState(false);
 
@@ -108,7 +108,7 @@ export const Booking = ({
   return (
     <div ref={bookingRef}>
       {isComponentLoaded && (!isItemExists || isEditing) && (
-        <section className={styles.booking} ref={targetRef}>
+        <section className={styles.booking} ref={setRef}>
           <div>
             <h2 className={styles.booking__title}>Выберите дату</h2>
             <Calendar prices={prices} id={id} />

@@ -9,9 +9,7 @@ import { SuccessfulPayment } from "@/src/shared/ui/successfulPayment";
 import { UnsuccessfulPayment } from "@/src/shared/ui/unsuccessfulPayment";
 
 interface Props {
-  searchParams: {
-    token: string;
-  };
+  token?: string;
 }
 
 type PaymentResultResponse = {
@@ -22,8 +20,7 @@ type PaymentResultResponse = {
   payment_method: string;
 };
 
-export const PaymentResultPage = async ({ searchParams }: Props) => {
-  const { token } = searchParams;
+export const PaymentResultPage = async ({ token }: Props) => {
   const { data } = await apiClient<PaymentResultResponse>(
     `${EXTERNAL_API_BASE_URL}${PAYMENT_ENDPOINTS.STATUS}`,
     {
@@ -32,6 +29,7 @@ export const PaymentResultPage = async ({ searchParams }: Props) => {
       credentials: "include",
     }
   );
+  if (data === null) return;
   const isSuccess =
     data.status !== "UNPAID" ||
     data.payment_method === "CASH" ||

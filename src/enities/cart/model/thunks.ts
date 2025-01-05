@@ -1,3 +1,4 @@
+// thunks.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 import { cartApi } from "@/src/enities/cart";
