@@ -5,14 +5,14 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
+import { Cart } from "@/src/shared/types/cart";
+
 import {
   addCartItem,
   fetchCart,
   removeCartItem,
   updateCartItem,
 } from "./thunks";
-
-import { Cart } from "@/src/shared/types/cart";
 
 interface CartState {
   data: Cart | null;
@@ -49,7 +49,6 @@ const addCommonCases = <Returned extends Cart, ThunkArg>(
       state.error = action.error.message ?? errorMessage;
     });
 };
-
 
 const cartSlice = createSlice({
   name: "cart",

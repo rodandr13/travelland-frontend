@@ -1,9 +1,9 @@
 import clsx from "clsx";
 
-import styles from "./styles.module.scss";
-
 import { RouteItem } from "@/src/shared/types/excursion";
 import { RoutePoint } from "@/src/shared/ui";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   routes: RouteItem[];

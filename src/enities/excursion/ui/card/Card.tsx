@@ -2,9 +2,6 @@
 
 import Link from "next/link";
 
-import styles from "./styles.module.scss";
-import { formatDuration } from "../../lib/formatDuration";
-
 import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
 import { getMinPrice } from "@/src/shared/lib/getMinPrice";
 import { Price } from "@/src/shared/types/booking";
@@ -12,6 +9,9 @@ import { ExcursionCard } from "@/src/shared/types/excursion";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { ImageSlider } from "@/src/shared/ui/slider";
 import { WeekDays } from "@/src/shared/ui/weekDays";
+
+import styles from "./styles.module.scss";
+import { formatDuration } from "../../lib/formatDuration";
 
 interface Props {
   addFavorite: React.ReactNode;

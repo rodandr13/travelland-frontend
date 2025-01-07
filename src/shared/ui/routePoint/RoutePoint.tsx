@@ -4,10 +4,10 @@ import { Collapse } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 
-import styles from "./styles.module.scss";
-
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { RouteItem } from "@/src/shared/types/excursion";
+
+import styles from "./styles.module.scss";
 
 type position = "START" | "END" | "POINT";
 

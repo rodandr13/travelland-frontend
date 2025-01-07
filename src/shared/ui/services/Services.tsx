@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import styles from "./styles.module.scss";
-
 import { getServices } from "@/src/pages/homePage/api/getServices";
 import { urlFor } from "@/src/shared/lib/sanity/client";
+
+import styles from "./styles.module.scss";
 
 export const Services = async () => {
   const services = await getServices();

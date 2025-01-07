@@ -1,5 +1,3 @@
-import styles from "./styles.module.scss";
-
 import { apiClient } from "@/src/shared/api";
 import {
   EXTERNAL_API_BASE_URL,
@@ -7,6 +5,8 @@ import {
 } from "@/src/shared/lib/constants";
 import { SuccessfulPayment } from "@/src/shared/ui/successfulPayment";
 import { UnsuccessfulPayment } from "@/src/shared/ui/unsuccessfulPayment";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   token?: string;

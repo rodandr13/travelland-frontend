@@ -6,8 +6,6 @@ import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import styles from "./styles.module.scss";
-
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { ExcursionCard } from "@/src/shared/types/excursion";
 import { usePrevNextButtons } from "@/src/shared/ui/slider/lib/usePrevNextButtons";
@@ -16,6 +14,8 @@ import {
   useDotButton,
 } from "@/src/shared/ui/slider/ui/components/DotButton";
 import { SlideButton } from "@/src/shared/ui/slider/ui/components/SlideButton";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   card: ExcursionCard;

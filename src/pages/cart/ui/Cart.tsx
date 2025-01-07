@@ -1,7 +1,7 @@
-import styles from "./styles.module.scss";
-
 import { Breadcrumbs } from "@/src/enities/excursion/ui/detail/components/breadcrumbs/Breadcrumbs";
 import { DetailedCart } from "@/src/widgets/detailedCart/ui/DetailedCart";
+
+import styles from "./styles.module.scss";
 
 export const Cart = () => {
   return (

@@ -2,8 +2,6 @@
 
 import { useEffect, useState } from "react";
 
-import styles from "./styles.module.scss";
-
 import { apiClient } from "@/src/shared/api";
 import {
   EXTERNAL_API_BASE_URL,
@@ -11,6 +9,8 @@ import {
 } from "@/src/shared/lib/constants";
 import { Order } from "@/src/shared/types/orderResponse";
 import { OrdersList } from "@/src/shared/ui/ordersList/OrdersList";
+
+import styles from "./styles.module.scss";
 
 export const Account = () => {
   const [orders, setOrders] = useState<Order[]>([]);

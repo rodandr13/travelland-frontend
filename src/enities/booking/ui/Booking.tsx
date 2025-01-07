@@ -4,8 +4,6 @@ import { useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
 
-import styles from "./styles.module.scss";
-
 import { useScroll } from "@/src/app/providers/ScrollProvider";
 import {
   resetDetails,
@@ -30,6 +28,8 @@ import {
   StartTime,
   Weekdays,
 } from "@/src/shared/types/excursion";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   id: string;
@@ -87,17 +87,17 @@ export const Booking = ({
     return () => {
       dispatch(resetDetails());
     };
-  }, [id, title, image, slug, type]);
+  }, [id, title, image, slug, type, dispatch]);
 
   useEffect(() => {
     dispatch(setVisible(isVisible));
-  }, [isVisible]);
+  }, [dispatch, isVisible]);
 
   useEffect(() => {
     return () => {
       dispatch(setIsEditing({ key: id, value: false }));
     };
-  }, [id]);
+  }, [dispatch, id]);
 
   const handleClick = (time: string) => {
     if (id) {

@@ -7,8 +7,6 @@ import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
-import styles from "./styles.module.scss";
-
 import { useScroll } from "@/src/app/providers/ScrollProvider";
 import { selectVisibility } from "@/src/enities/booking";
 import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
@@ -24,6 +22,8 @@ import { useAppSelector } from "@/src/shared/lib/redux/hooks";
 import { CategoryKey } from "@/src/shared/types/excursion";
 import { Button } from "@/src/shared/ui/button";
 import { PriceBlock } from "@/src/shared/ui/priceBlock";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   minPrice: number | undefined;
@@ -44,7 +44,7 @@ export const PriceSection = ({
   const bookingItem = useAppSelector(selectBookingDetailsById(id));
   const isItemExists = useAppSelector(selectIsItemInCart(id));
   const cartItem = useAppSelector(selectItemById(id));
-  const {node} = useScroll();
+  const { node } = useScroll();
 
   const [blockState, setBlockState] = useState({
     showPreview: true,

@@ -1,3 +1,11 @@
+import { Booking } from "@/src/enities/booking";
+import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
+import { PriceSection } from "@/src/enities/excursion/ui/detail/components/priceSection/PriceSection";
+import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
+import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
+import { getMinPrice } from "@/src/shared/lib/getMinPrice";
+import { Price } from "@/src/shared/types/booking";
+
 import { Advantages } from "./components/advantages/Advantages";
 import { AttentionBlock } from "./components/attentionBlock/AttentionBlock";
 import { Breadcrumbs } from "./components/breadcrumbs/Breadcrumbs";
@@ -9,14 +17,6 @@ import { Gallery } from "./components/gallery/Gallery";
 import { Parameters } from "./components/parameters/Parameters";
 import { TimeSpending } from "./components/timeSpending/TimeSpending";
 import styles from "./styles.module.scss";
-
-import { Booking } from "@/src/enities/booking";
-import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
-import { PriceSection } from "@/src/enities/excursion/ui/detail/components/priceSection/PriceSection";
-import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
-import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
-import { getMinPrice } from "@/src/shared/lib/getMinPrice";
-import { Price } from "@/src/shared/types/booking";
 
 interface Props {
   slug: string;

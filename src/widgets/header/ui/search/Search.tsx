@@ -5,9 +5,9 @@ import { useState } from "react";
 import clsx from "clsx";
 import Select from "react-select";
 
-import styles from "./styles.module.scss";
-
 import { Button } from "@/src/shared/ui/button";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   title: string;

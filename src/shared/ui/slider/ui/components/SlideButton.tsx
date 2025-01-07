@@ -2,9 +2,9 @@ import { ButtonHTMLAttributes } from "react";
 
 import clsx from "clsx";
 
-import styles from "../styles.module.scss";
-
 import { ArrowIcon } from "@/src/shared/ui/slider/ui/components/ArrowIcon";
+
+import styles from "../styles.module.scss";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   direction: "prev" | "next";

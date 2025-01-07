@@ -4,9 +4,9 @@ import { useEffect } from "react";
 
 import clsx from "clsx";
 
-import styles from "./styles.module.scss";
-
 import sharedStyles from "@/src/shared/styles/styles.module.scss";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   open: () => void;

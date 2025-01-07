@@ -3,9 +3,9 @@
 import { Stack, TextInput } from "@mantine/core";
 import { Controller, useFormContext } from "react-hook-form";
 
-import styles from "../styles.module.scss";
-
 import { useAuth } from "@/src/app/providers/AuthProvider";
+
+import styles from "../styles.module.scss";
 
 type ContactsData = {
   name: string;

@@ -1,9 +1,9 @@
 "use client";
 
-import styles from "./styles.module.scss";
-
 import { removeCartItem } from "@/src/enities/cart/model/thunks";
 import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   itemId?: string;

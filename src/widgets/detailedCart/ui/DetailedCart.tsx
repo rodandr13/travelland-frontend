@@ -11,9 +11,6 @@ import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import styles from "./styles.module.scss";
-import { formatCountParticipants } from "../lib/formatCountParticipants";
-
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { selectCartData } from "@/src/enities/cart/model/selectors";
 import { BookOrder } from "@/src/features/bookOrder";
@@ -25,6 +22,9 @@ import { PriceBlock } from "@/src/shared/ui/priceBlock";
 import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
 import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
 import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
+
+import styles from "./styles.module.scss";
+import { formatCountParticipants } from "../lib/formatCountParticipants";
 
 const contactsSchema = z.object({
   name: z

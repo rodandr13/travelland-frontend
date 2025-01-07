@@ -5,9 +5,6 @@ import "@mantine/core/styles.css";
 import "./globals.scss";
 import { cookies } from "next/headers";
 
-import { Footer } from "../shared/ui/footer";
-import { Main } from "../shared/ui/main";
-
 import { AuthProvider } from "@/src/app/providers/AuthProvider";
 import { StoreProvider } from "@/src/app/providers/StoreProvider";
 import { apiClient } from "@/src/shared/api";
@@ -17,6 +14,9 @@ import {
   EXTERNAL_API_BASE_URL,
 } from "@/src/shared/lib/constants";
 import { Header } from "@/src/widgets/header";
+
+import { Footer } from "../shared/ui/footer";
+import { Main } from "../shared/ui/main";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],

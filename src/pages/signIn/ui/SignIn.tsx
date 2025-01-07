@@ -15,8 +15,6 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import styles from "./styles.module.scss";
-
 import { useAuth } from "@/src/app/providers/AuthProvider";
 import { apiClient, ApiError } from "@/src/shared/api/apiClient";
 import {
@@ -24,6 +22,8 @@ import {
   EXTERNAL_API_BASE_URL,
 } from "@/src/shared/lib/constants";
 import { GoogleButton } from "@/src/shared/ui/googleButton";
+
+import styles from "./styles.module.scss";
 
 const schema = z.object({
   email: z.string().email("Некорректный формат email"),

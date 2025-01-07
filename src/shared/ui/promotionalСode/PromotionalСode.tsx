@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { useFormContext } from "react-hook-form";
 
-import styles from "./styles.module.scss";
-
 import { Button } from "@/src/shared/ui/button";
+
+import styles from "./styles.module.scss";
 
 export const PromotionalCode = () => {
   const { setValue } = useFormContext();

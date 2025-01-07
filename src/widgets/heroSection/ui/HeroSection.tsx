@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-import styles from "./styles.module.scss";
-
 import { urlFor } from "@/src/shared/lib/sanity/client";
 import { Search } from "@/src/widgets/header/ui/search";
 import { getHero } from "@/src/widgets/heroSection/api/getHero";
+
+import styles from "./styles.module.scss";
 
 export const HeroSection = async () => {
   const hero = await getHero();

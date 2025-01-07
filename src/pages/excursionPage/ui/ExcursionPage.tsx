@@ -1,7 +1,7 @@
-import styles from "./styles.module.scss";
-
 import { ScrollProvider } from "@/src/app/providers/ScrollProvider";
 import { Detail } from "@/src/enities/excursion";
+
+import styles from "./styles.module.scss";
 
 interface Props {
   slug: string;
