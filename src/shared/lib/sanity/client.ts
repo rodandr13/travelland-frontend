@@ -1,5 +1,5 @@
 import imageUrlBuilder from "@sanity/image-url";
-import { createClient, type QueryParams } from "next-sanity";
+import { createClient, type QueryParams } from "@sanity/client";
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
