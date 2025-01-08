@@ -1,5 +1,5 @@
-import { client } from "@/src/shared/lib/sanity/client";
-import { ExcursionCards } from "@/src/shared/types/excursion";
+import { client } from "@/shared/lib/sanity/client";
+import { ExcursionCards } from "@/shared/types/excursion";
 
 export const getAllExcursionSlugs = async () => {
   const query = `

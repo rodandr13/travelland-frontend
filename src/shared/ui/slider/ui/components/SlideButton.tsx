@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes } from "react";
 
 import clsx from "clsx";
 
-import { ArrowIcon } from "@/src/shared/ui/slider/ui/components/ArrowIcon";
+import { ArrowIcon } from "@/shared/ui/slider/ui/components/ArrowIcon";
 
 import styles from "../styles.module.scss";
 

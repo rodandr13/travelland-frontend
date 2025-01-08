@@ -1,4 +1,4 @@
-import { SignUp } from "@/src/pages/signUp";
+import { SignUp } from "@/pages/signUp";
 
 import styles from "./styles.module.scss";
 

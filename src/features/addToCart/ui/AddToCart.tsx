@@ -1,10 +1,10 @@
 import { useState } from "react";
 
-import { addCartItem } from "@/src/enities/cart/model/thunks";
-import { mapToDto } from "@/src/features/addToCart/lib/mappers";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-import { CartItem } from "@/src/shared/types/cart";
-import { Button } from "@/src/shared/ui/button";
+import { addCartItem } from "@/enities/cart/model/thunks";
+import { mapToDto } from "@/features/addToCart/lib/mappers";
+import { useAppDispatch } from "@/shared/lib/redux/hooks";
+import { CartItem } from "@/shared/types/cart";
+import { Button } from "@/shared/ui/button";
 
 interface Props {
   cartItem: CartItem;

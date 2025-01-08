@@ -15,13 +15,10 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 
-import { useAuth } from "@/src/app/providers/AuthProvider";
-import { apiClient, ApiError } from "@/src/shared/api/apiClient";
-import {
-  AUTH_ENDPOINTS,
-  EXTERNAL_API_BASE_URL,
-} from "@/src/shared/lib/constants";
-import { GoogleButton } from "@/src/shared/ui/googleButton";
+import { useAuth } from "@/app/providers/AuthProvider";
+import { apiClient, ApiError } from "@/shared/api/apiClient";
+import { AUTH_ENDPOINTS, EXTERNAL_API_BASE_URL } from "@/shared/lib/constants";
+import { GoogleButton } from "@/shared/ui/googleButton";
 
 import styles from "./styles.module.scss";
 

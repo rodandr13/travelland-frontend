@@ -1,4 +1,4 @@
-import { Category, Subcategory } from "@/src/shared/types/excursion";
+import { Category, Subcategory } from "@/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { getServices } from "@/src/pages/homePage/api/getServices";
-import { urlFor } from "@/src/shared/lib/sanity/client";
+import { getServices } from "@/pages/homePage/api/getServices";
+import { urlFor } from "@/shared/lib/sanity/client";
 
 import styles from "./styles.module.scss";
 

@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { formatCurrency } from "@/src/shared/lib/formatCurrency";
+import { formatCurrency } from "@/shared/lib/formatCurrency";
 
 import styles from "./styles.module.scss";
 

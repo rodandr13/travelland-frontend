@@ -1,13 +1,13 @@
 import { eachDayOfInterval, formatISO, parseISO } from "date-fns";
 
-import { PricesMap } from "@/src/shared/types/booking";
-import { CartItemParticipants } from "@/src/shared/types/cart";
+import { PricesMap } from "@/shared/types/booking";
+import { CartItemParticipants } from "@/shared/types/cart";
 import {
   Dates,
   Price,
   PromotionalPrice,
   Weekdays,
-} from "@/src/shared/types/excursion";
+} from "@/shared/types/excursion";
 
 interface Props {
   baseDates: Dates;

@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { urlFor } from "@/src/shared/lib/sanity/client";
-import { Parameter } from "@/src/shared/types/excursion";
+import { urlFor } from "@/shared/lib/sanity/client";
+import { Parameter } from "@/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

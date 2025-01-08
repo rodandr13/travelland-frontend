@@ -2,11 +2,11 @@
 
 import { useEffect } from "react";
 
-import { Card } from "@/src/enities/excursion";
-import { AddToFavorite } from "@/src/features/addToFavorite";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { ExcursionCards } from "@/src/shared/types/excursion";
-import { setFilter } from "@/src/widgets/excursionCatalog/model/filterSlice";
+import { Card } from "@/enities/excursion";
+import { AddToFavorite } from "@/features/addToFavorite";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/redux/hooks";
+import { ExcursionCards } from "@/shared/types/excursion";
+import { setFilter } from "@/widgets/excursionCatalog/model/filterSlice";
 
 interface Props {
   excursionCards: ExcursionCards;

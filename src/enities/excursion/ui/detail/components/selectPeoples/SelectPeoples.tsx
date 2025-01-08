@@ -1,10 +1,10 @@
 "use client";
 
-import { setDetails } from "@/src/enities/booking/";
-import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
-import { CartItemParticipants } from "@/src/shared/types/cart";
-import { PriceBlock } from "@/src/shared/ui/priceBlock";
+import { setDetails } from "@/enities/booking/";
+import { formatCurrency } from "@/shared/lib/formatCurrency";
+import { useAppDispatch } from "@/shared/lib/redux/hooks";
+import { CartItemParticipants } from "@/shared/types/cart";
+import { PriceBlock } from "@/shared/ui/priceBlock";
 
 import styles from "./styles.module.scss";
 import { SelectNumber } from "./ui/SelectNumber";

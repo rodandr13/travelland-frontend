@@ -6,11 +6,11 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker.scss";
 
-import { setDetails } from "@/src/enities/booking";
-import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
-import { getFormattedDate } from "@/src/shared/lib/getFormattedDate";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { PricesMap } from "@/src/shared/types/booking";
+import { setDetails } from "@/enities/booking";
+import { selectBookingDetailsById } from "@/enities/booking/model/selectors";
+import { getFormattedDate } from "@/shared/lib/getFormattedDate";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/redux/hooks";
+import { PricesMap } from "@/shared/types/booking";
 
 import styles from "./styles.module.scss";
 import { CustomDay } from "./utils/CustomDay";

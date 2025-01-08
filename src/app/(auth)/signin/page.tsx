@@ -1,4 +1,4 @@
-import { SignIn } from "@/src/pages/signIn";
+import { SignIn } from "@/pages/signIn";
 
 import styles from "./styles.module.scss";
 

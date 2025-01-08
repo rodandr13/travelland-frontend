@@ -3,11 +3,11 @@ import {
   selectExcursionIsEditing,
   setDetailsFromCart,
   setIsEditing,
-} from "@/src/enities/booking";
-import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
-import { selectItemById } from "@/src/enities/cart/model/selectors";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { Button } from "@/src/shared/ui/button";
+} from "@/enities/booking";
+import { selectBookingDetailsById } from "@/enities/booking/model/selectors";
+import { selectItemById } from "@/enities/cart/model/selectors";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/redux/hooks";
+import { Button } from "@/shared/ui/button";
 
 import styles from "./styles.module.scss";
 

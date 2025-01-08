@@ -6,7 +6,7 @@ import {
 } from "@tabler/icons-react";
 import Link from "next/link";
 
-import { useSignOut } from "@/src/features/signOut";
+import { useSignOut } from "@/features/signOut";
 
 import styles from "./styles.module.scss";
 

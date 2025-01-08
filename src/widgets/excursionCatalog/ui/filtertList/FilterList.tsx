@@ -1,6 +1,6 @@
 import clsx from "clsx";
 
-import { getFilters } from "@/src/widgets/excursionCatalog/api/getFilters";
+import { getFilters } from "@/widgets/excursionCatalog/api/getFilters";
 
 import styles from "./styles.module.scss";
 import { FilterItem } from "../filterItem/FilterItem";

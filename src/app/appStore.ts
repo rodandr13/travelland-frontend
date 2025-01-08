@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { bookingReducer } from "@/src/enities/booking";
-import cartReducer from "@/src/enities/cart/model/cartSlice";
-import filterReducer from "@/src/widgets/excursionCatalog/model/filterSlice";
+import { bookingReducer } from "@/enities/booking";
+import cartReducer from "@/enities/cart/model/cartSlice";
+import filterReducer from "@/widgets/excursionCatalog/model/filterSlice";
 
 export const appStore = configureStore({
   reducer: {

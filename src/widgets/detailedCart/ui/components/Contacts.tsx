@@ -3,7 +3,7 @@
 import { Stack, TextInput } from "@mantine/core";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { useAuth } from "@/src/app/providers/AuthProvider";
+import { useAuth } from "@/app/providers/AuthProvider";
 
 import styles from "../styles.module.scss";
 

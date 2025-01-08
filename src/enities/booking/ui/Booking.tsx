@@ -4,30 +4,30 @@ import { useEffect, useRef, useState } from "react";
 
 import clsx from "clsx";
 
-import { useScroll } from "@/src/app/providers/ScrollProvider";
+import { useScroll } from "@/app/providers/ScrollProvider";
 import {
   resetDetails,
   selectExcursionIsEditing,
   setDetails,
   setIsEditing,
   setVisible,
-} from "@/src/enities/booking";
-import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
-import { selectIsItemInCart } from "@/src/enities/cart/model/selectors";
-import { Calendar } from "@/src/enities/excursion/ui/detail/components/calendar/Calendar";
-import { SelectGroup } from "@/src/enities/excursion/ui/detail/components/selectGroup/SelectGroup";
-import { SelectPeoples } from "@/src/enities/excursion/ui/detail/components/selectPeoples/SelectPeoples";
-import { getEndTime } from "@/src/shared/lib/getEndTime";
-import { useOnScreen } from "@/src/shared/lib/hooks/useOnScreen";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { PricesMap } from "@/src/shared/types/booking";
+} from "@/enities/booking";
+import { selectBookingDetailsById } from "@/enities/booking/model/selectors";
+import { selectIsItemInCart } from "@/enities/cart/model/selectors";
+import { Calendar } from "@/enities/excursion/ui/detail/components/calendar/Calendar";
+import { SelectGroup } from "@/enities/excursion/ui/detail/components/selectGroup/SelectGroup";
+import { SelectPeoples } from "@/enities/excursion/ui/detail/components/selectPeoples/SelectPeoples";
+import { getEndTime } from "@/shared/lib/getEndTime";
+import { useOnScreen } from "@/shared/lib/hooks/useOnScreen";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/redux/hooks";
+import { PricesMap } from "@/shared/types/booking";
 import {
   Dates,
   Duration,
   GalleryImage,
   StartTime,
   Weekdays,
-} from "@/src/shared/types/excursion";
+} from "@/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

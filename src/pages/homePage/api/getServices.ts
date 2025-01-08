@@ -1,6 +1,6 @@
-import { client } from "@/src/shared/lib/sanity/client";
-import { slow } from "@/src/shared/lib/slow";
-import { Service } from "@/src/shared/types/service";
+import { client } from "@/shared/lib/sanity/client";
+import { slow } from "@/shared/lib/slow";
+import { Service } from "@/shared/types/service";
 
 export const getServices = async () => {
   await slow(3000);

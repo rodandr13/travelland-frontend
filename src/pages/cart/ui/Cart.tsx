@@ -1,5 +1,5 @@
-import { Breadcrumbs } from "@/src/enities/excursion/ui/detail/components/breadcrumbs/Breadcrumbs";
-import { DetailedCart } from "@/src/widgets/detailedCart/ui/DetailedCart";
+import { Breadcrumbs } from "@/enities/excursion/ui/detail/components/breadcrumbs/Breadcrumbs";
+import { DetailedCart } from "@/widgets/detailedCart/ui/DetailedCart";
 
 import styles from "./styles.module.scss";
 

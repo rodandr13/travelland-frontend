@@ -4,7 +4,7 @@ import { useEffect } from "react";
 
 import clsx from "clsx";
 
-import sharedStyles from "@/src/shared/styles/styles.module.scss";
+import sharedStyles from "@/shared/styles/styles.module.scss";
 
 import styles from "./styles.module.scss";
 

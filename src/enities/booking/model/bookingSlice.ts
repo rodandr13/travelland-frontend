@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-import { CartItem } from "@/src/shared/types/cart";
+import { CartItem } from "@/shared/types/cart";
 
 interface BookingState {
   visible: boolean;

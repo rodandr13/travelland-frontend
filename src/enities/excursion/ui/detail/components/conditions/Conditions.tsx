@@ -1,10 +1,6 @@
 import clsx from "clsx";
 
-import {
-  AdditionalTerms,
-  Included,
-  Surcharge,
-} from "@/src/shared/types/excursion";
+import { AdditionalTerms, Included, Surcharge } from "@/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

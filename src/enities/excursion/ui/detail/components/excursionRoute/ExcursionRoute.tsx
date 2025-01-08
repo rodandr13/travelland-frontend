@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
-import { RouteItem } from "@/src/shared/types/excursion";
-import { RoutePoint } from "@/src/shared/ui";
+import { RouteItem } from "@/shared/types/excursion";
+import { RoutePoint } from "@/shared/ui";
 
 import styles from "./styles.module.scss";
 

@@ -1,5 +1,5 @@
-import { ScrollProvider } from "@/src/app/providers/ScrollProvider";
-import { Detail } from "@/src/enities/excursion";
+import { ScrollProvider } from "@/app/providers/ScrollProvider";
+import { Detail } from "@/enities/excursion";
 
 import styles from "./styles.module.scss";
 

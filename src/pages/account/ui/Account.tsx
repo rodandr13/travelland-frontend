@@ -2,13 +2,10 @@
 
 import { useEffect, useState } from "react";
 
-import { apiClient } from "@/src/shared/api";
-import {
-  EXTERNAL_API_BASE_URL,
-  ORDER_ENDPOINTS,
-} from "@/src/shared/lib/constants";
-import { Order } from "@/src/shared/types/orderResponse";
-import { OrdersList } from "@/src/shared/ui/ordersList/OrdersList";
+import { apiClient } from "@/shared/api";
+import { EXTERNAL_API_BASE_URL, ORDER_ENDPOINTS } from "@/shared/lib/constants";
+import { Order } from "@/shared/types/orderResponse";
+import { OrdersList } from "@/shared/ui/ordersList/OrdersList";
 
 import styles from "./styles.module.scss";
 

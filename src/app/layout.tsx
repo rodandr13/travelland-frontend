@@ -5,15 +5,12 @@ import "@mantine/core/styles.css";
 import "./globals.scss";
 import { cookies } from "next/headers";
 
-import { AuthProvider } from "@/src/app/providers/AuthProvider";
-import { StoreProvider } from "@/src/app/providers/StoreProvider";
-import { apiClient } from "@/src/shared/api";
-import { ApiError } from "@/src/shared/api/apiClient";
-import {
-  AUTH_ENDPOINTS,
-  EXTERNAL_API_BASE_URL,
-} from "@/src/shared/lib/constants";
-import { Header } from "@/src/widgets/header";
+import { AuthProvider } from "@/app/providers/AuthProvider";
+import { StoreProvider } from "@/app/providers/StoreProvider";
+import { apiClient } from "@/shared/api";
+import { ApiError } from "@/shared/api/apiClient";
+import { AUTH_ENDPOINTS, EXTERNAL_API_BASE_URL } from "@/shared/lib/constants";
+import { Header } from "@/widgets/header";
 
 import { Footer } from "../shared/ui/footer";
 import { Main } from "../shared/ui/main";

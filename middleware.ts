@@ -1,11 +1,11 @@
 import { parse, serialize } from "cookie";
 import { NextRequest, NextResponse } from "next/server";
 
-import { refreshAccessToken } from "@/src/shared/api/refreshAccessToken";
+import { refreshAccessToken } from "@/shared/api/refreshAccessToken";
 import {
   ACCESS_TOKEN_LIFETIME,
   REFRESH_TOKEN_LIFETIME,
-} from "@/src/shared/lib/constants";
+} from "@/shared/lib/constants";
 
 export const middleware = async (
   request: NextRequest

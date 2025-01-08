@@ -2,7 +2,7 @@
 import { Drawer } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 
-import { HamburgerButton } from "@/src/widgets/header/ui/mobileMenu/components/HamburgerButton";
+import { HamburgerButton } from "@/widgets/header/ui/mobileMenu/components/HamburgerButton";
 
 export const MobileMenu = () => {
   const [opened, { open, close }] = useDisclosure(false);

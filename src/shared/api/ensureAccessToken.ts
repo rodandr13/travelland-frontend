@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-import { refreshAccessToken } from "@/src/shared/api/refreshAccessToken";
+import { refreshAccessToken } from "@/shared/api/refreshAccessToken";
 
 export const ensureAccessToken = async () => {
   const accessToken = (await cookies()).get("accessToken")?.value;

@@ -11,17 +11,17 @@ import Link from "next/link";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { useAuth } from "@/src/app/providers/AuthProvider";
-import { selectCartData } from "@/src/enities/cart/model/selectors";
-import { BookOrder } from "@/src/features/bookOrder";
-import { RemoveFromCart } from "@/src/features/removeFromCart";
-import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { urlFor } from "@/src/shared/lib/sanity/client";
-import { PriceBlock } from "@/src/shared/ui/priceBlock";
-import { PromotionalCode } from "@/src/shared/ui/promotionalСode/PromotionalСode";
-import { Contacts } from "@/src/widgets/detailedCart/ui/components/Contacts";
-import { PaymentMethods } from "@/src/widgets/detailedCart/ui/components/PaymentMethods";
+import { useAuth } from "@/app/providers/AuthProvider";
+import { selectCartData } from "@/enities/cart/model/selectors";
+import { BookOrder } from "@/features/bookOrder";
+import { RemoveFromCart } from "@/features/removeFromCart";
+import { formatCurrency } from "@/shared/lib/formatCurrency";
+import { useAppSelector } from "@/shared/lib/redux/hooks";
+import { urlFor } from "@/shared/lib/sanity/client";
+import { PriceBlock } from "@/shared/ui/priceBlock";
+import { PromotionalCode } from "@/shared/ui/promotionalСode/PromotionalСode";
+import { Contacts } from "@/widgets/detailedCart/ui/components/Contacts";
+import { PaymentMethods } from "@/widgets/detailedCart/ui/components/PaymentMethods";
 
 import styles from "./styles.module.scss";
 import { formatCountParticipants } from "../lib/formatCountParticipants";

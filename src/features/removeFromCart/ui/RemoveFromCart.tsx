@@ -1,7 +1,7 @@
 "use client";
 
-import { removeCartItem } from "@/src/enities/cart/model/thunks";
-import { useAppDispatch } from "@/src/shared/lib/redux/hooks";
+import { removeCartItem } from "@/enities/cart/model/thunks";
+import { useAppDispatch } from "@/shared/lib/redux/hooks";
 
 import styles from "./styles.module.scss";
 

@@ -1,5 +1,5 @@
-import { client } from "@/src/shared/lib/sanity/client";
-import { ExcursionType } from "@/src/shared/types/excursion";
+import { client } from "@/shared/lib/sanity/client";
+import { ExcursionType } from "@/shared/types/excursion";
 
 interface Props {
   slug: string;

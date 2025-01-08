@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { useFormContext } from "react-hook-form";
 
-import { Button } from "@/src/shared/ui/button";
+import { Button } from "@/shared/ui/button";
 
 import styles from "./styles.module.scss";
 

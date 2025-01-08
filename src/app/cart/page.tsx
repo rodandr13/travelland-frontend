@@ -1,4 +1,4 @@
-import { Cart } from "@/src/pages/cart";
+import { Cart } from "@/pages/cart";
 
 export default function Page() {
   return <Cart />;

@@ -1,5 +1,5 @@
-import { CartItemDto } from "@/src/enities/cart/model/types";
-import { CartItem } from "@/src/shared/types/cart";
+import { CartItemDto } from "@/enities/cart/model/types";
+import { CartItem } from "@/shared/types/cart";
 
 export const mapToDto = (item: CartItem): CartItemDto => ({
   title: item.title,

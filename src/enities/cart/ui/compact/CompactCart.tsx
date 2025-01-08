@@ -7,11 +7,11 @@ import { ru } from "date-fns/locale/ru";
 import Image from "next/image";
 import Link from "next/link";
 
-import { selectCartData } from "@/src/enities/cart/model/selectors";
-import { fetchCart } from "@/src/enities/cart/model/thunks";
-import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppDispatch, useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { urlFor } from "@/src/shared/lib/sanity/client";
+import { selectCartData } from "@/enities/cart/model/selectors";
+import { fetchCart } from "@/enities/cart/model/thunks";
+import { formatCurrency } from "@/shared/lib/formatCurrency";
+import { useAppDispatch, useAppSelector } from "@/shared/lib/redux/hooks";
+import { urlFor } from "@/shared/lib/sanity/client";
 
 import styles from "./styles.module.scss";
 

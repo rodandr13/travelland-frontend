@@ -1,8 +1,8 @@
 import Image from "next/image";
 
-import { urlFor } from "@/src/shared/lib/sanity/client";
-import { Search } from "@/src/widgets/header/ui/search";
-import { getHero } from "@/src/widgets/heroSection/api/getHero";
+import { urlFor } from "@/shared/lib/sanity/client";
+import { Search } from "@/widgets/header/ui/search";
+import { getHero } from "@/widgets/heroSection/api/getHero";
 
 import styles from "./styles.module.scss";
 

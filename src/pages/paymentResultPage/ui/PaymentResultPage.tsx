@@ -1,10 +1,10 @@
-import { apiClient } from "@/src/shared/api";
+import { apiClient } from "@/shared/api";
 import {
   EXTERNAL_API_BASE_URL,
   PAYMENT_ENDPOINTS,
-} from "@/src/shared/lib/constants";
-import { SuccessfulPayment } from "@/src/shared/ui/successfulPayment";
-import { UnsuccessfulPayment } from "@/src/shared/ui/unsuccessfulPayment";
+} from "@/shared/lib/constants";
+import { SuccessfulPayment } from "@/shared/ui/successfulPayment";
+import { UnsuccessfulPayment } from "@/shared/ui/unsuccessfulPayment";
 
 import styles from "./styles.module.scss";
 

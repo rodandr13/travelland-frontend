@@ -1,5 +1,5 @@
-import { Price } from "@/src/shared/types/booking";
-import { AgeCategory, CategoryKey } from "@/src/shared/types/excursion";
+import { Price } from "@/shared/types/booking";
+import { AgeCategory, CategoryKey } from "@/shared/types/excursion";
 
 interface PriceData {
   basePrices: Price[];

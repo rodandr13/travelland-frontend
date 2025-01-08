@@ -1,10 +1,10 @@
-import { Booking } from "@/src/enities/booking";
-import { getExcursionDetail } from "@/src/enities/excursion/api/getExcursionDetail";
-import { PriceSection } from "@/src/enities/excursion/ui/detail/components/priceSection/PriceSection";
-import { findAdultBasePrice } from "@/src/shared/lib/findAdultBasePrice";
-import { generatePriceMap } from "@/src/shared/lib/generatePriceMap";
-import { getMinPrice } from "@/src/shared/lib/getMinPrice";
-import { Price } from "@/src/shared/types/booking";
+import { Booking } from "@/enities/booking";
+import { getExcursionDetail } from "@/enities/excursion/api/getExcursionDetail";
+import { PriceSection } from "@/enities/excursion/ui/detail/components/priceSection/PriceSection";
+import { findAdultBasePrice } from "@/shared/lib/findAdultBasePrice";
+import { generatePriceMap } from "@/shared/lib/generatePriceMap";
+import { getMinPrice } from "@/shared/lib/getMinPrice";
+import { Price } from "@/shared/types/booking";
 
 import { Advantages } from "./components/advantages/Advantages";
 import { AttentionBlock } from "./components/attentionBlock/AttentionBlock";

@@ -1,11 +1,8 @@
-import { CartItemDto } from "@/src/enities/cart/model/types";
-import { apiClient } from "@/src/shared/api";
-import { ApiError } from "@/src/shared/api/apiClient";
-import {
-  CART_ENDPOINTS,
-  EXTERNAL_API_BASE_URL,
-} from "@/src/shared/lib/constants";
-import { Cart, CartItem } from "@/src/shared/types/cart";
+import { CartItemDto } from "@/enities/cart/model/types";
+import { apiClient } from "@/shared/api";
+import { ApiError } from "@/shared/api/apiClient";
+import { CART_ENDPOINTS, EXTERNAL_API_BASE_URL } from "@/shared/lib/constants";
+import { Cart, CartItem } from "@/shared/types/cart";
 
 export const cartApi = {
   getCart: async (): Promise<Cart> => {

@@ -1,4 +1,4 @@
-import { Duration } from "@/src/shared/types/excursion";
+import { Duration } from "@/shared/types/excursion";
 
 export const formatDuration = (
   duration: Duration,

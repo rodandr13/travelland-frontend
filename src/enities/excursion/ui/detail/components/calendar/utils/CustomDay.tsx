@@ -1,7 +1,7 @@
 import clsx from "clsx";
 
-import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { CartItemParticipants } from "@/src/shared/types/cart";
+import { formatCurrency } from "@/shared/lib/formatCurrency";
+import { CartItemParticipants } from "@/shared/types/cart";
 
 interface Props {
   dayNumber: number;

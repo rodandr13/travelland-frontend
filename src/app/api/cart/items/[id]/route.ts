@@ -1,10 +1,7 @@
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
 
-import {
-  CART_ENDPOINTS,
-  EXTERNAL_API_BASE_URL,
-} from "@/src/shared/lib/constants";
+import { CART_ENDPOINTS, EXTERNAL_API_BASE_URL } from "@/shared/lib/constants";
 
 export const DELETE = async (
   request: Request,

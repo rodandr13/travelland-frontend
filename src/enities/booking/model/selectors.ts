@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-import { TypeRootState } from "@/src/app/appStore";
+import { TypeRootState } from "@/app/appStore";
 
 export const selectBookingState = (state: TypeRootState) => state.booking;
 

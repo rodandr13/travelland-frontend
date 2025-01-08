@@ -7,21 +7,21 @@ import { format } from "date-fns";
 import { ru } from "date-fns/locale/ru";
 import Link from "next/link";
 
-import { useScroll } from "@/src/app/providers/ScrollProvider";
-import { selectVisibility } from "@/src/enities/booking";
-import { selectBookingDetailsById } from "@/src/enities/booking/model/selectors";
+import { useScroll } from "@/app/providers/ScrollProvider";
+import { selectVisibility } from "@/enities/booking";
+import { selectBookingDetailsById } from "@/enities/booking/model/selectors";
 import {
   selectIsItemInCart,
   selectItemById,
-} from "@/src/enities/cart/model/selectors";
-import { AddToCart } from "@/src/features/addToCart";
-import { EditExcursion } from "@/src/features/editExcursion";
-import { RemoveFromCart } from "@/src/features/removeFromCart";
-import { formatCurrency } from "@/src/shared/lib/formatCurrency";
-import { useAppSelector } from "@/src/shared/lib/redux/hooks";
-import { CategoryKey } from "@/src/shared/types/excursion";
-import { Button } from "@/src/shared/ui/button";
-import { PriceBlock } from "@/src/shared/ui/priceBlock";
+} from "@/enities/cart/model/selectors";
+import { AddToCart } from "@/features/addToCart";
+import { EditExcursion } from "@/features/editExcursion";
+import { RemoveFromCart } from "@/features/removeFromCart";
+import { formatCurrency } from "@/shared/lib/formatCurrency";
+import { useAppSelector } from "@/shared/lib/redux/hooks";
+import { CategoryKey } from "@/shared/types/excursion";
+import { Button } from "@/shared/ui/button";
+import { PriceBlock } from "@/shared/ui/priceBlock";
 
 import styles from "./styles.module.scss";
 

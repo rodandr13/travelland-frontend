@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 
-import { Account } from "@/src/pages/account";
+import { Account } from "@/pages/account";
 
 export default async function SectionPage(props: {
   params: Promise<{ section: string }>;

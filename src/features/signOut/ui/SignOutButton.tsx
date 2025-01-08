@@ -2,7 +2,7 @@
 
 import { Button } from "@mantine/core";
 
-import { useSignOut } from "@/src/features/signOut/model/signOut";
+import { useSignOut } from "@/features/signOut/model/signOut";
 
 export const SignOutButton = () => {
   const signOut = useSignOut();

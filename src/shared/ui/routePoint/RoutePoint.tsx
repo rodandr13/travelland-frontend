@@ -4,8 +4,8 @@ import { Collapse } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
 import Image from "next/image";
 
-import { urlFor } from "@/src/shared/lib/sanity/client";
-import { RouteItem } from "@/src/shared/types/excursion";
+import { urlFor } from "@/shared/lib/sanity/client";
+import { RouteItem } from "@/shared/types/excursion";
 
 import styles from "./styles.module.scss";
 

@@ -1,10 +1,10 @@
 // thunks.ts
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-import { cartApi } from "@/src/enities/cart";
-import { CartItemDto } from "@/src/enities/cart/model/types";
-import { ApiError } from "@/src/shared/api/apiClient";
-import { Cart, CartItem } from "@/src/shared/types/cart";
+import { cartApi } from "@/enities/cart";
+import { CartItemDto } from "@/enities/cart/model/types";
+import { ApiError } from "@/shared/api/apiClient";
+import { Cart, CartItem } from "@/shared/types/cart";
 
 interface ThunkConfig {
   rejectValue: string;

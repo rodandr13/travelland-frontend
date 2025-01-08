@@ -1,4 +1,4 @@
-import { client } from "@/src/shared/lib/sanity/client";
+import { client } from "@/shared/lib/sanity/client";
 
 export const getHero = async () => {
   const query = `

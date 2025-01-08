@@ -1,5 +1,5 @@
-import { ExcursionCatalog } from "@/src/widgets/excursionCatalog";
-import { HeroSection } from "@/src/widgets/heroSection";
+import { ExcursionCatalog } from "@/widgets/excursionCatalog";
+import { HeroSection } from "@/widgets/heroSection";
 
 import styles from "./styles.module.scss";
 

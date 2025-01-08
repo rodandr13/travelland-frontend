@@ -5,9 +5,9 @@ import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-import { useAuth } from "@/src/app/providers/AuthProvider";
-import { CompactCart } from "@/src/enities/cart";
-import { AccountButton } from "@/src/shared/ui/accountButton/AccountButton";
+import { useAuth } from "@/app/providers/AuthProvider";
+import { CompactCart } from "@/enities/cart";
+import { AccountButton } from "@/shared/ui/accountButton/AccountButton";
 
 import styles from "./styles.module.scss";
 

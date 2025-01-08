@@ -2,13 +2,10 @@
 
 import { useRouter } from "next/navigation";
 
-import { useAuth } from "@/src/app/providers/AuthProvider";
-import { apiClient } from "@/src/shared/api";
-import { ApiError } from "@/src/shared/api/apiClient";
-import {
-  AUTH_ENDPOINTS,
-  EXTERNAL_API_BASE_URL,
-} from "@/src/shared/lib/constants";
+import { useAuth } from "@/app/providers/AuthProvider";
+import { apiClient } from "@/shared/api";
+import { ApiError } from "@/shared/api/apiClient";
+import { AUTH_ENDPOINTS, EXTERNAL_API_BASE_URL } from "@/shared/lib/constants";
 
 export const useSignOut = () => {
   const router = useRouter();

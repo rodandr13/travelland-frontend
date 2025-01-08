@@ -1,4 +1,4 @@
-import { client } from "@/src/shared/lib/sanity/client";
+import { client } from "@/shared/lib/sanity/client";
 
 import { FiltersType } from "../model/types/FiltersType";
 

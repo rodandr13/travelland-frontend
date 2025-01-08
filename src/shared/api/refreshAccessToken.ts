@@ -1,8 +1,5 @@
-import { apiClient, ApiError } from "@/src/shared/api/apiClient";
-import {
-  AUTH_ENDPOINTS,
-  EXTERNAL_API_BASE_URL,
-} from "@/src/shared/lib/constants";
+import { apiClient, ApiError } from "@/shared/api/apiClient";
+import { AUTH_ENDPOINTS, EXTERNAL_API_BASE_URL } from "@/shared/lib/constants";
 
 interface TokenResponse {
   accessToken: string;

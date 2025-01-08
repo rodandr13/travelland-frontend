@@ -5,7 +5,7 @@ import {
   PayloadAction,
 } from "@reduxjs/toolkit";
 
-import { Cart } from "@/src/shared/types/cart";
+import { Cart } from "@/shared/types/cart";
 
 import {
   addCartItem,

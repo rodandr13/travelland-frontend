@@ -5,14 +5,11 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useFormContext } from "react-hook-form";
 
-import { apiClient } from "@/src/shared/api";
-import {
-  EXTERNAL_API_BASE_URL,
-  ORDER_ENDPOINTS,
-} from "@/src/shared/lib/constants";
-import { PaymentMethod } from "@/src/shared/types/orderResponse";
-import { Button } from "@/src/shared/ui/button";
-import { ContactsData } from "@/src/widgets/detailedCart/ui/DetailedCart";
+import { apiClient } from "@/shared/api";
+import { EXTERNAL_API_BASE_URL, ORDER_ENDPOINTS } from "@/shared/lib/constants";
+import { PaymentMethod } from "@/shared/types/orderResponse";
+import { Button } from "@/shared/ui/button";
+import { ContactsData } from "@/widgets/detailedCart/ui/DetailedCart";
 
 interface Props {
   cartId: number;

@@ -1,4 +1,4 @@
-import { Cards } from "@/src/enities/excursion";
+import { Cards } from "@/enities/excursion";
 
 import { FilterList } from "./filtertList/FilterList";
 import styles from "./styles.module.scss";
